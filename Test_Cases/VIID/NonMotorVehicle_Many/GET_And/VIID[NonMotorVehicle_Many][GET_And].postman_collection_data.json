@@ -1,0 +1,16 @@
+[
+{
+    "需要输入参数":">>",
+	"NonMotorVehicles_Url":"10.85.7.62:8083",
+	"NonMotorVehicles_st":"/VIID/",
+	"Search_Express":"NonMotorVehicles? (NonMotorVehicle.LeftTopX=2) & (NonMotorVehicle.LeftTopY=4) ",
+	
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"Search_Field1":"LeftTopX",
+	"Search_Field2":"LeftTopY",
+	"Value1":2,
+	"Value2":4
+
+}
+]

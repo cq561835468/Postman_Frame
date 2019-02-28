@@ -1,0 +1,14 @@
+[
+{
+	"需要输入参数":">>",
+	"NonMotorVehicles_Url":"10.85.7.62:8081",
+	"NonMotorVehicles_St1":"/VIID/NonMotorVehicles",
+	"NonMotorVehicles_St2":"?IDList=210000000013200000040220180507163630275700227077,210000000013200000040220180507163630275700227078",
+	
+	"需要验证参数":">>",
+	"StatusCode":0,
+	"Re_State":200,
+	"StatusString":""
+}
+]
+

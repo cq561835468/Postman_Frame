@@ -1,0 +1,16 @@
+[
+	{
+		"Port":":10007",
+		"URI":"/subject",
+		"subj_code": "New_Subject", 
+		"subj_name": "New_Subject地理选考",
+		"---Discipline---":"",
+		"URI_G": "/discipline?t=0",
+		"area_code":"a6741cecdd1b4a879a3512hekedakeda",
+		"order_by": "disc_name", 
+		"sort": "asc",
+		"---Result---":"",
+		"success":"true",
+		"Re_State":200
+	}
+]

@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "7e804714-6dbe-43ce-925a-8cfe3b334a02",
+		"name": "VIID[NonMotorVehicle_Many][GET_Or]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[NonMotorVehicles_Many][GET_Or]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "49fb419b-3ca7-44de-974d-ddfe4f1e49de",
+						"type": "text/javascript",
+						"exec": [
+							"var x=pm.response.json()",
+							"//状态码检查",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"//循环判断",
+							"var xx=x.NonMotorVehicleListObject.NonMotorVehicleObject",
+							"for(var key in xx){",
+							"    for(var keyy in xx[key])",
+							"    {",
+							"        if(keyy==data.Search_Field1)",
+							"        {",
+							"            var data1=xx[key][keyy]",
+							"        }",
+							"        else if(keyy==data.Search_Field2)",
+							"        {",
+							"            var data2=xx[key][keyy]",
+							"        }",
+							"        ",
+							"    }",
+							"    pm.test(\"当前数值1为：\"+data1+\" 返回的验证值应为: \"+data.Value1+\"当前数值2为: \"+data2+\" 返回的验证值应为: \"+data.Value2,function(){",
+							"        var m=(data1==data.Value1||data2==data.Value2)",
+							"        pm.expect(m).to.eql(true)",
+							"    })",
+							"}             ",
+							"    ",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{NonMotorVehicles_Url}}{{NonMotorVehicles_st}}{{Search_Express}}",
+					"host": [
+						"{{NonMotorVehicles_Url}}{{NonMotorVehicles_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

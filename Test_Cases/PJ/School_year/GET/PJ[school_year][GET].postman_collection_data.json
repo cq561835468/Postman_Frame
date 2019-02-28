@@ -1,0 +1,17 @@
+[
+	{
+		"Port":":10007",
+		"URI_Area":"/area",
+		"URI_Building":"/building/",
+		"URI_school_year":"/school_year",
+		"scye_state":0,
+		"scye_stage":2,
+		"scye_stage_1":1,
+		"scye_code":"李强2019级学级编号",
+		"scye_code_1":"李强2019级学级编号1",
+		"scye_name":"李强2019级",
+		"Create_Building需要验证参数":">>",
+		"Re_State":200,
+		"success":"true"
+	}
+]

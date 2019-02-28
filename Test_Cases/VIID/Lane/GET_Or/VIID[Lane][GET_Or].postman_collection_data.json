@@ -1,0 +1,14 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8083",
+	"Interface_st":"/VIID/Lanes",
+	"Search_Express":"?((Lane.LaneId=5)OR(Lane.LaneNo=8))",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"Search_Field1":"LaneId",
+	"Search_Field2":"LaneNo",
+	"Value1":5,
+	"Value2":8
+}
+]

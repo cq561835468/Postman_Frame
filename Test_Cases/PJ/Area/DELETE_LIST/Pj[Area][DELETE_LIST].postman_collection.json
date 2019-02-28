@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "ee3688b0-addd-4ba2-99b2-0621d06a815a",
+		"name": "Pj-Area-DELETE_LIST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Create_Area",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\"area_code\": \"{{area_code}}\", \n\"area_name\": \"test1\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Create_Area Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\"area_code\": \"{{area_code2}}\", \n\"area_name\": \"test2\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_Area",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e84be747-062d-43c4-8526-a232d74e8fdb",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code_list\": [\r\n    \"{{area_code}}\",\r\n    \"{{area_code2}}\"\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

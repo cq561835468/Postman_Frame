@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "605c7fb8-1730-4a5b-969b-74f2221049f4",
+		"name": "VIID[File_Many][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "批量文件数据增加",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c09715b-a772-4833-a448-a0629efa869a",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"// 状态码检查点",
+							"console.log(pm.response.code)",
+							"console.log(data.Re_State)",
+							"console.log(data.FileID2)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State",
+							"// 长度检查点",
+							"//var JsPer = jsonData.PersonListObject.PersonObject",
+							"//var lang = jsonData.PersonListObject.PersonObject.length",
+							"//tests[\"当前返回数量为: \"+lang] = lang;",
+							"//console.log(jsonData.ResponseStatusListObject.ResponseStatusObject)",
+							"for (var key in datas){",
+							"    console.log(key)",
+							"    for (var keyy in datas[key]){",
+							"        if (keyy == \"Id\"){",
+							"            pm.test(\"当前ID为: \"+datas[key][keyy], function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.be.oneOf([data.FileID1,data.FileID2,data.FileID3,data.FileID4])",
+							"            });",
+							"        }",
+							"        else if (keyy == \"RequestURL\"){",
+							"            pm.test(\"当前RequestURL为: \"+datas[key][keyy]+\"应当为:\"+data.Interface_st, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.Interface_st)",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusCode\"){",
+							"            pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\"应当为:\"+data.StatusCode, function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode)",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusString\"){",
+							"            pm.test(\"当前StatusString为: \"+datas[key][keyy], function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.eql(\"\")",
+							"            });",
+							"        }",
+							"    }",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"FileListObject\": {\n        \"File\": [{\n        \t\"FileInfo\": {\n                        \"FileID\":\"{{FileID1}}\", \n                        \"InfoKind\":\"{{InfoKind}}\", \n                        \"Source\":\"{{Source}}\",  \n                        \"FileName\":\"{{FileName}}\",  \n                        \"FileHash\":\"{{FileHash}}\", \n                        \"FileFormat\":\"{{FileFormat}}\", \n                        \"Title\":\"{{Title}}\"},  \n                    \n            \"FaceList\":{\n\t\t\t        \t\"FaceObject\":[{\n\t\t\t\t    \t\"FaceID\":\"{{FileID1}}\",\n\t\t\t\t    \t\"InfoKind\":{{FList_FObj_InfoKind}},\n    \t\t\t\t\t\"SourceID\":\"{{FileID1}}\",\n    \t\t\t\t\t\"DeviceID\":\"{{DeviceID}}\",\n    \t\t\t\t\t\"LeftTopX\":{{FList_FObj_LeftTopX}},\n    \t\t\t\t\t\"LeftTopY\":{{FList_FObj_LeftTopY}},\n    \t\t\t\t\t\"RightBtmX\":{{FList_FObj_RightBtmX}},\n    \t\t\t\t\t\"RightBtmY\":{{FList_FObj_RightBtmY}},\n    \t\t\t\t\t\"LocationMarkTime\":\"{{FList_FObj_LocationMarkTime}}\",\n    \t\t\t\t\t\"FaceAppearTime\":\"{{FList_FObj_FaceAppearTime}}\",\n    \t\t\t\t\t\"FaceDisAppearTime\":\"{{FList_FObj_FaceDisAppearTime}}\",\n    \t\t\t\t\t\"IDTyoe\":{{FList_FObj_IDTyoe}},\n    \t\t\t\t\t\"IDNumber\":\"{{FList_FObj_IDNumber}}\",\n    \t\t\t\t\t\"Name\":\"{{FList_FObj_Name}}\",\n    \t\t\t\t\t\"UsedName\":\"{{FList_FObj_UsedName}}\",\n    \t\t\t\t\t\"Alias\":\"{{FList_FObj_Alias}}\",\n    \t\t\t\t\t\"GenderCode\":\"{{FList_FObj_GenderCode}}\",\n    \t\t\t\t\t\"AgeUpLimit\":\"{{FList_FObj_AgeUpLimit}}\",\n    \t\t\t\t\t\"AgeLowerLimit\":\"{{FList_FObj_AgeLowerLimit}}\",\n    \t\t\t\t\t\"EthicCode\":\"{{FList_FObj_EthicCode}}\",\n    \t\t\t\t\t\"NationalityCodeType\":\"{{FList_FObj_NationalityCodeType}}\",\n    \t\t\t\t\t\"IsDriver\":{{FList_FObj_IsDriver}},\n    \t\t\t\t\t\"IsForeigner\":{{FList_FObj_IsForeigner}},\n    \t\t\t\t\t\"IsSuspectedTerrorist\":{{FList_FObj_IsSuspectedTerrorist}},\n    \t\t\t\t\t\"IsCriminalInvolved\":{{FList_FObj_IsCriminalInvolved}},\n    \t\t\t\t\t\"IsDetainees\":{{FList_FObj_IsDetainees}},\n    \t\t\t\t\t\"IsVictim\":{{FList_FObj_IsVictim}},\n    \t\t\t\t\t\"IsSuspiciousPerson\":{{FList_FObj_IsSuspiciousPerson}}\n\t\t\t        \t}]},\n\t\t\t\"ThingList\": {\"ThingObject\": [{\n\t\t\t\t\"ThingID\": \"{{FileID1}}\", \n\t\t\t\t\"InfoKind\": {{TD_InfoKind}}, \n\t\t\t\t\"SourceID\": \"{{FileID1}}\", \n\t\t\t\t\"DeviceID\": \"{{FileID1}}\", \n\t\t\t\t\"LeftTopX\": {{FList_FObj_LeftTopX}}, \n\t\t\t\t\"LeftTopY\": {{FList_FObj_LeftTopY}}, \n\t\t\t\t\"RightBtmX\": {{FList_FObj_RightBtmX}}, \n\t\t\t\t\"RightBtmY\": {{FList_FObj_RightBtmY}}, \n\t\t\t\t\"LocationMarkTime\": {{NMVL_HasPlate}}, \n\t\t\t\t\"AppearTime\": \"{{TL_AppearTime}}\", \n\t\t\t\t\"DisappearTime\": \"{{TL_DisappearTime}}\", \n\t\t\t\t\"Name\": \"{{TL_Name}}\",\n\t\t\t\t\"Shape\":\"{{TL_Shape}\",\n\t\t\t\t\"Color\":\"{{TL_Color}}\"\n\t\t\t}]\n\t\t},\n\t\t\t\"SceneList\": {\"SceneObject\": [{\n\t\t\t\t\t\"SceneID\": \"{{FileID1}}\", \n\t\t\t\t\t\"InfoKind\": {{SL_InfoKind}}, \n\t\t\t\t\t\"SourceID\": \"{{DeviceID}}\", \n\t\t\t\t\t\"DeviceID\": \"{{DeviceID}}\"\n\t\t\t\t}]\n\t\t\t},\n            \"Data\":\"{{data}}\"\n        },\n         {\n        \t\t\"FileInfo\": {\n                        \"FileID\":\"{{FileID2}}\", \n                        \"InfoKind\":\"{{InfoKind}}\", \n                        \"Source\":\"{{Source}}\",  \n                        \"FileName\":\"{{FileName}}\",  \n                        \"FileHash\":\"{{FileHash}}\", \n                        \"FileFormat\":\"{{FileFormat}}\", \n                        \"Title\":\"{{Title}}\"},\n            \"PersonList\":{\n            \t\"PersonID\":\"{{PL_PersonID}}\",\n            \t\"InfoKind\":{{InfoKind}},\n            \t\"SourceID\":\"{{PL_SourceID}}\",\n            \t\"DeviceID\":\"{{PL_DeviceID}}\",\n            \t\"LeftTopX\":{{PL_RightBtmX}},\n    \t\t\t\"LeftTopY\":{{PL_RightBtmY}},\n    \t\t\t\"RightBtmX\":{{PL_IsForeigner}},\n    \t\t\t\"RightBtmY\":{{PL_IsCriminalInvolved}},\n    \t\t\t\"IsForeigner\":{{PL_IsForeigner}},\n    \t\t\t\"IsCriminalInvolved\":{{PL_IsCriminalInvolved}},\n    \t\t\t\"IsDetainees\":{{PL_IsDetainees}},\n    \t\t\t\"IsSuspiciousPerson\":{{PL_IsSuspiciousPerson}}\n            },\n\t\t\t\"ThingList\": {\"ThingObject\": [{\n\t\t\t\t\"ThingID\": \"{{FileID2}}\", \n\t\t\t\t\"InfoKind\": {{TD_InfoKind}}, \n\t\t\t\t\"SourceID\": \"{{DeviceID}}\", \n\t\t\t\t\"DeviceID\": \"{{DeviceID}}\", \n\t\t\t\t\"LeftTopX\": {{FList_FObj_LeftTopX}}, \n\t\t\t\t\"LeftTopY\": {{FList_FObj_LeftTopY}}, \n\t\t\t\t\"RightBtmX\": {{FList_FObj_RightBtmX}}, \n\t\t\t\t\"RightBtmY\": {{FList_FObj_RightBtmY}}, \n\t\t\t\t\"LocationMarkTime\": {{NMVL_HasPlate}}, \n\t\t\t\t\"AppearTime\": \"{{TL_AppearTime}}\", \n\t\t\t\t\"DisappearTime\": \"{{TL_DisappearTime}}\", \n\t\t\t\t\"Name\": \"{{TL_Name}}\",\n\t\t\t\t\"Shape\":\"{{TL_Shape}\",\n\t\t\t\t\"Color\":\"{{TL_Color}}\"\n\t\t\t}]\n\t\t},\n\t\t\t\"SceneList\": {\"SceneObject\": [{\n\t\t\t\t\t\"SceneID\": \"{{FileID2}}\", \n\t\t\t\t\t\"InfoKind\": {{SL_InfoKind}}, \n\t\t\t\t\t\"SourceID\": \"{{DeviceID}}\", \n\t\t\t\t\t\"DeviceID\": \"{{DeviceID}}\"\n\t\t\t\t}]\n\t\t\t},\n            \"Data\":\"{{data}}\"\n        },\n        {\n        \t\"FileInfo\": {\n                        \"FileID\":\"{{FileID3}}\", \n                        \"InfoKind\":\"{{InfoKind}}\", \n                        \"Source\":\"{{Source}}\",  \n                        \"FileName\":\"{{FileName}}\",  \n                        \"FileHash\":\"{{FileHash}}\", \n                        \"FileFormat\":\"{{FileFormat}}\", \n                        \"Title\":\"{{Title}}\"},\n            \"MotorVehicleList\": {\"MotorVehicleObject\": [{\n\t\t\t\t\"MotorVehicleID\": \"{{FileID3}}\", \n\t\t\t\t\"InfoKind\": {{MVL_InfoKind}}, \n\t\t\t\t\"SourceID\": \"{{MVL_SourceID}}\", \n\t\t\t\t\"TollgateID\": \"{{FileID3}}\", \n\t\t\t\t\"DeviceID\": \"{{DeviceID}}\", \n\t\t\t\t\"StorageUrl1\": \"{{MVL_StorageUrl1}}\", \n\t\t\t\t\"StorageUrl2\": \"{{MVL_StorageUrl2}}\", \n\t\t\t\t\"StorageUrl3\": \"{{MVL_StorageUrl3}}\", \n\t\t\t\t\"StorageUrl4\": \"{{MVL_StorageUrl4}}\", \n\t\t\t\t\"StorageUrl5\": \"{{MVL_StorageUrl5}}\", \n\t\t\t\t\"LeftTopX\": {{FList_FObj_LeftTopX}}, \n\t\t\t\t\"LeftTopY\": {{FList_FObj_LeftTopY}}, \n\t\t\t\t\"RightBtmX\": {{FList_FObj_RightBtmX}}, \n\t\t\t\t\"RightBtmY\": {{FList_FObj_RightBtmY}}, \n\t\t\t\t\"HasPlate\": {{MVL_HasPlate}}, \n\t\t\t\t\"PlateClass\": \"{{MVL_PlateClass}}\", \n\t\t\t\t\"PlateColor\": \"{{MVL_PlateColor}}\", \n\t\t\t\t\"PlateNo\": \"{{MVL_PlateNo}}\", \n\t\t\t\t\"SubImageList\":{\n\t\t\t\t\"SubImageInfoObject\":[{\n\t\t\t\t\t\"ImageID\":\"{{FileID3}}\",\n\t\t\t\t\t\"EventSort\":\"{{EventSort}}\",\n\t\t\t\t\t\"DeviceID\":\"{{DeviceID}}\",\n\t\t\t\t\t\"StoragePath\":\"{{StoragePath}}\",\n\t\t\t\t\t\"Type\":\"{{InfoKind}}\",\n\t\t\t\t\t\"FileFormat\":\"{{FileFormat}}\",\n\t\t\t\t\t\"ShotTime\":\"{{ShotTime}}\",\n\t\t\t\t\t\"Width\":{{Width}},\n\t\t\t\t\t\"Height\":{{Height}},\n\t\t\t\t\t\"Data\":\"{{Data}}\"\n\t\t\t\t\t}]\n\t\t\t\t}\n\t\t\t}]\n\t\t},\n\t\t\t\"ThingList\": {\"ThingObject\": [{\n\t\t\t\t\"ThingID\": \"{{FileID3}}\", \n\t\t\t\t\"InfoKind\": {{TD_InfoKind}}, \n\t\t\t\t\"SourceID\": \"{{DeviceID}}\", \n\t\t\t\t\"DeviceID\": \"{{DeviceID}}\", \n\t\t\t\t\"LeftTopX\": {{FList_FObj_LeftTopX}}, \n\t\t\t\t\"LeftTopY\": {{FList_FObj_LeftTopY}}, \n\t\t\t\t\"RightBtmX\": {{FList_FObj_RightBtmX}}, \n\t\t\t\t\"RightBtmY\": {{FList_FObj_RightBtmY}}, \n\t\t\t\t\"LocationMarkTime\": {{NMVL_HasPlate}}, \n\t\t\t\t\"AppearTime\": \"{{TL_AppearTime}}\", \n\t\t\t\t\"DisappearTime\": \"{{TL_DisappearTime}}\", \n\t\t\t\t\"Name\": \"{{TL_Name}}\",\n\t\t\t\t\"Shape\":\"{{TL_Shape}\",\n\t\t\t\t\"Color\":\"{{TL_Color}}\"\n\t\t\t}]\n\t\t},\n\t\t\t\"SceneList\": {\"SceneObject\": [{\n\t\t\t\t\t\"SceneID\": \"{{FileID3}}\", \n\t\t\t\t\t\"InfoKind\": {{SL_InfoKind}}, \n\t\t\t\t\t\"SourceID\": \"{{DeviceID}}\", \n\t\t\t\t\t\"DeviceID\": \"{{DeviceID}}\"\n\t\t\t\t}]\n\t\t\t},\n            \"Data\":\"{{data}}\"\n        },\n        {\n        \t\"FileInfo\": {\n                        \"FileID\":\"{{FileID4}}\", \n                        \"InfoKind\":\"{{InfoKind}}\", \n                        \"Source\":\"{{Source}}\",  \n                        \"FileName\":\"{{FileName}}\",  \n                        \"FileHash\":\"{{FileHash}}\", \n                        \"FileFormat\":\"{{FileFormat}}\", \n                        \"Title\":\"{{Title}}\"},\n\t\t\t\"NonMotorVehicleList\": {\"NonMotorVehicleObject\": [{\n\t\t\t\t\"NonMotorVehicleID\": \"{{FileID4}}\", \n\t\t\t\t\"InfoKind\": {{NMVL_InfoKind}}, \n\t\t\t\t\"SourceID\": \"{{DeviceID}}\", \n\t\t\t\t\"DeviceID\": \"{{DeviceID}}\", \n\t\t\t\t\"LeftTopX\": {{FList_FObj_LeftTopX}}, \n\t\t\t\t\"LeftTopY\": {{FList_FObj_LeftTopY}}, \n\t\t\t\t\"RightBtmX\": {{FList_FObj_RightBtmX}}, \n\t\t\t\t\"RightBtmY\": {{FList_FObj_RightBtmY}}, \n\t\t\t\t\"HasPlate\": {{NMVL_HasPlate}}, \n\t\t\t\t\"PlateClass\": \"{{NMVL_PlateClass}}\", \n\t\t\t\t\"PlateColor\": \"{{NMVL_PlateColor}}\", \n\t\t\t\t\"PlateNo\": \"{{NMVL_PlateNo}}\",\n\t\t\t\t\"VehicleColor\":\"{{NMVL_VehicleColor}}\"\n\t\t\t}]\n\t\t},\n\t\t\t\"ThingList\": {\"ThingObject\": [{\n\t\t\t\t\"ThingID\": \"{{FileID4}}\", \n\t\t\t\t\"InfoKind\": {{TD_InfoKind}}, \n\t\t\t\t\"SourceID\": \"{{DeviceID}}\", \n\t\t\t\t\"DeviceID\": \"{{DeviceID}}\", \n\t\t\t\t\"LeftTopX\": {{FList_FObj_LeftTopX}}, \n\t\t\t\t\"LeftTopY\": {{FList_FObj_LeftTopY}}, \n\t\t\t\t\"RightBtmX\": {{FList_FObj_RightBtmX}}, \n\t\t\t\t\"RightBtmY\": {{FList_FObj_RightBtmY}}, \n\t\t\t\t\"LocationMarkTime\": {{NMVL_HasPlate}}, \n\t\t\t\t\"AppearTime\": \"{{TL_AppearTime}}\", \n\t\t\t\t\"DisappearTime\": \"{{TL_DisappearTime}}\", \n\t\t\t\t\"Name\": \"{{TL_Name}}\",\n\t\t\t\t\"Shape\":\"{{TL_Shape}\",\n\t\t\t\t\"Color\":\"{{TL_Color}}\"\n\t\t\t}]\n\t\t},\n\t\t\t\"SceneList\": {\"SceneObject\": [{\n\t\t\t\t\t\"SceneID\": \"{{FileID4}}\", \n\t\t\t\t\t\"InfoKind\": {{SL_InfoKind}}, \n\t\t\t\t\t\"SourceID\": \"{{DeviceID}}\", \n\t\t\t\t\t\"DeviceID\": \"{{DeviceID}}\"\n\t\t\t\t}]\n\t\t\t},\n            \"Data\":\"{{data}}\"\n        }]\n        \n                \n    }\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

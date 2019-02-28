@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "ccf89117-0010-4edb-a7ba-4b6cbf7fcba1",
+		"name": "VIID[AnalysisRule_Many][DEL]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[AnalysisRules_Many][DEL]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ec7b861a-45f1-439c-8b0b-96e37aaeb6e0",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\" 状态码应为: \"+data.Re_State] = responseCode.code == data.Re_State",
+							"",
+							"for (var key in datas){",
+							"\tconsole.log(key)",
+							"\tfor (var keyy in datas[key]){",
+							"\t\tif (keyy == \"RequestURL\"){",
+							"\t\t\tpm.test(\"当前RequestURL为: \"+datas[key][keyy]+ \"应当为: \"+data.AnalysisRule_st1, function () {",
+							"\t\t\t    pm.expect(datas[key][keyy]).to.eql(data.AnalysisRule_st1)",
+							"\t\t\t\t\t\t",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusCode\"){",
+							"\t\t    pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusCode, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode)",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusString\"){",
+							"\t\t\tpm.test(\"当前StatusString为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusString, function () {",
+							"\t\t\t\tpm.expect(datas[key][keyy]).to.eql(data.StatusString)",
+							"\t\t\t })",
+							"\t\t}",
+							"\t}",
+							"}",
+							"\t"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "10.85.7.62:8081/VIID/AnalysisRules?IDList=123456789,234567890",
+					"host": [
+						"10",
+						"85",
+						"7",
+						"62"
+					],
+					"port": "8081",
+					"path": [
+						"VIID",
+						"AnalysisRules"
+					],
+					"query": [
+						{
+							"key": "IDList",
+							"value": "123456789,234567890"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,32 @@
+[{
+    "需要输入参数":">>",
+	"NonMotorVehicle_Url":"10.85.7.62:8081",
+	"NonMotorVehicle_st":"/VIID/NonMotorVehicles",
+	"NonMotorVehicleID1": "210000000013200000040220180507163630275700227077",
+	"NonMotorVehicleID2": "210000000013200000040220180507163630275700227078",
+    "SourceID1": "21000000001320000004022018050716363027570",
+	"SourceID2": "21000000001320000004022018050716363027571",
+	"InfoKind": 1,
+	"LeftTopX":2,
+	"LeftTopY":4,
+	"RightBtmX1":50,
+	"RightBtmX2":60,
+	"RightBtmY":80,
+	"MarkTime":"20180508164026",
+	"AppearTime":"20180508164024",
+	"DisappearTime":"20180508164027",
+	"HasPlate":1,
+	"PlateClass":"",
+	"PlateColor":"02",
+	"PlateNo1":"苏A0000",
+	"PlateNo2":"苏A0001",
+	"VehicleColor1":"03",
+	"VehicleColor2":"05",
+	
+	"需要验证参数":">>",
+	"StatusCode":0,
+	"Re_State":200,
+	"StatusString":""
+					
+}
+]

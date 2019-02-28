@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "5ea1f0fe-ebcf-4480-95f0-7613f31f2fef",
+		"name": "获取服务地址",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "强制登录[服务地址]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "749c8ba2-fffb-4fba-9132-3c0583e168c4",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"console.log(jsonData.Code)",
+							"tests[\"resultCode: \"+jsonData.resultCode+\"|resultCode应为:\"+data.resultCode] = jsonData.resultCode == data.resultCode;",
+							"tests[\"resultMsg: \"+jsonData.resultMsg+\"|resultMsg应为:\"+data.resultMsg] = jsonData.resultMsg == data.resultMsg;",
+							"tests[\"sessionId: \"+jsonData.sessionId] = jsonData.sessionId;",
+							"pm.environment.set(\"sessionId\", jsonData.sessionId);",
+							"tests[\"ip: \"+jsonData.ip+\"|ip应为:\"+data.ip] = jsonData.ip == data.ip;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userCode\": \"{{userCode}}\",\r\n    \"userPassword\": \"{{userPassword}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{Url1}}{{Url_st1}}",
+					"host": [
+						"{{Url1}}{{Url_st1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取服务地址",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "811925b8-1962-463d-a557-e2f7ad49c177",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+ data.Re_State]=responseCode.code==data.Re_State",
+							"tests[\"resultCode为：\"+jsonData.resultCode+\"resultCode应为：\"+ data.resultCode]=jsonData.resultCode==data.resultCode",
+							"tests[\"resultMsg为：\"+jsonData.resultMsg+\"resultMsg应为：\"+data.resultMsg]=jsonData.resultMsg==data.resultMsg",
+							"tests[\"updateTime为\"+jsonData.updateTime]=jsonData.updateTime",
+							"var lang=jsonData.data.length",
+							"tests[\"返回记录条数：\"+lang]= lang",
+							"for(var key in jsonData.data)",
+							"{",
+							"    for(var keyy in jsonData.data[key])",
+							"    {",
+							"        if(keyy==\"stype\")",
+							"        {",
+							"            tests[\"stype：\"+jsonData.data[key][keyy]]= jsonData.data[key][keyy]",
+							"        }",
+							"        if(keyy=\"slist\")",
+							"        {",
+							"            for(kkey in jsonData.data[key][keyy]){",
+							"                 tests[\"ip：\"+jsonData.data[key][keyy][kkey].ip+\" ip应为：\"+data.ip+",
+							"                 \"|port：\"+jsonData.data[key][keyy][kkey].port+",
+							"                 \"|serverUserName：\"+jsonData.data[key][keyy][kkey].serverUserName+",
+							"                 \"|serverPassword：\"+jsonData.data[key][keyy][kkey].serverPassword]=",
+							"                 jsonData.data[key][keyy][kkey].ip==data.ip&&",
+							"                 jsonData.data[key][keyy][kkey].port&&",
+							"                 jsonData.data[key][keyy][kkey].serverUserName&&",
+							"                 jsonData.data[key][keyy][kkey].serverPassword",
+							"            }",
+							"        }",
+							"    }",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Url}}{{Port}}{{Url_st}}{{sessionId}}",
+					"host": [
+						"{{Url}}{{Port}}{{Url_st}}{{sessionId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

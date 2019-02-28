@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "c4bf701f-69d5-4a9f-9601-4318cf7116fe",
+		"name": "城管移动执法文件压缩包请求",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "城管移动执法文件压缩包请求",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a5af717-7189-4d36-88b4-a68488b87c68",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; ",
+							"//tests[\"resultMsg: \"+jsonData.resultMsg+\"resultMsg应为:\"+\"成功\"] = jsonData.resultMsg == \"成功\";",
+							"//tests[\"resultCode: \"+jsonData.resultCode+\"resultCode应为:\"+200] = jsonData.resultCode == 200;",
+							"//tests[\"updateTime: \"+jsonData.updateTime] = jsonData.updateTime;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

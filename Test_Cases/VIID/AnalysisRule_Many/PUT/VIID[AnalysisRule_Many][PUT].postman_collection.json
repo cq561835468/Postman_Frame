@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "63fb01a8-5339-4daa-944d-cd6f00240ed4",
+		"name": "VIID[AnalysisRule_Many][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[AnalysisRules_Many][PUT]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "20303e85-b452-4329-97d6-9d33c7f2e863",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\" 状态码应为: \"+data.Re_State] = responseCode.code == data.Re_State",
+							"",
+							"for (var key in datas){",
+							"\tconsole.log(key)",
+							"\tfor (var keyy in datas[key]){",
+							"\t\tif (keyy == \"Id\"){",
+							"\t\t    pm.test(\"当前ID为: \"+datas[key][keyy]+ \"应当为: \"+[data.AnalysisRuleID1,data.AnalysisRuleID2], function () {",
+							"\t\t\t    pm.expect(datas[key][keyy]).to.be.oneOf([data.AnalysisRuleID1,data.AnalysisRuleID2])",
+							"\t\t\t })",
+							"\t\t}",
+							"\t\telse if (keyy == \"RequestURL\"){",
+							"\t\t\tpm.test(\"当前RequestURL为: \"+datas[key][keyy]+ \"应当为: \"+data.AnalysisRule_st, function () {",
+							"\t\t\t    pm.expect(datas[key][keyy]).to.eql(data.AnalysisRule_st)",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusCode\"){",
+							"\t\t    pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusCode, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode)",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusString\"){",
+							"\t\t\tpm.test(\"当前StatusString为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusString, function () {",
+							"\t\t\t\tpm.expect(datas[key][keyy]).to.eql(data.StatusString)",
+							"\t\t\t })",
+							"\t\t}",
+							"\t}",
+							"}",
+							"\t",
+							"\t\t\t\t",
+							"\t",
+							"\t\t\t\t"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"AnalysisRuleListObject\":{\n\t\t\"AnalysisRuleObject\":[\n\t\t\t{\n\t\t\t\"AnalysisRuleID\": \"{{AnalysisRuleID1}}\",\n\t\t\t\"Width\":{{Width}},\n\t\t\t\"Height\":{{Height}},\n\t\t\t\"MinDuration\":{{MinDuration}},\n\t\t\t\"LineMinDuration\":{{LineMinDuration}},\n\t\t\t\"LineMaxDuration\": {{LineMaxDuration}}, \n            \"MaxDuration\":{{MaxDuration1}},\n            \"LineNum\":{{LineNum}},\n            \"PointNum\":{{PointNum}},\n            \"PointID\": {{PointID}},\n            \"Direction\":{{Direction}}, \n            \"ActionType\":{{ActionType}}, \n            \"BeginPointX\":{{BeginPointX}}, \n            \"BeginPointY\":{{BeginPointY}},\n            \"EndPointX\":{{EndPointX1}},\n            \"EndPointY\":{{EndPointY}},\n            \"DirectionNum\":{{DirectionNum}},\n\t        \"DensityUnit\" :{{DensityUnit}}\n\n\t\t},\n\t\t{\n\t\t\t\"AnalysisRuleID\": \"{{AnalysisRuleID2}}\",\n\t\t\t\"Width\":{{Width}},\n\t\t\t\"Height\":{{Height}},\n\t\t\t\"MinDuration\":{{MinDuration}},\n\t\t\t\"LineMinDuration\":{{LineMinDuration}},\n\t\t\t\"LineMaxDuration\": {{LineMaxDuration}}, \n            \"MaxDuration\":{{MaxDuration2}},\n            \"LineNum\":{{LineNum}},\n            \"PointNum\":{{PointNum}},\n            \"PointID\": {{PointID}},\n            \"Direction\":{{Direction}}, \n            \"ActionType\":{{ActionType}}, \n            \"BeginPointX\":{{BeginPointX}}, \n            \"BeginPointY\":{{BeginPointY}},\n            \"EndPointX\":{{EndPointX2}},\n            \"EndPointY\":{{EndPointY}},\n            \"DirectionNum\":{{DirectionNum}},\n\t        \"DensityUnit\" :{{DensityUnit}}\n\t\t}\n\t\t\n\t\t]\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{AnalysisRule_Url}}{{AnalysisRule_st}}",
+					"host": [
+						"{{AnalysisRule_Url}}{{AnalysisRule_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

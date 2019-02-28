@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "bf72e4c0-6dca-443d-acd8-70b299e41ff2",
+		"name": "VIID[MotorVehicles_Many][DEL]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "5d7c7f9c-5230-404a-a942-e25b26df3b4d",
+			"name": "VIID[MotorVehicles_Many][DEL]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "60f0e60e-29a5-4a31-bd1b-ecc2d3c43a54",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// StatusCode检查点",
+							"",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL+\"|RequestURL应为:\"+data.Interface_st1] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL == data.Interface_st1;",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode == data.StatusCode; ",
+							"tests[\"StatusString: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString == data.StatusString; ",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st2}}{{MotorVehicleID1}}{{MotorVehicleID2}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st2}}{{MotorVehicleID1}}{{MotorVehicleID2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

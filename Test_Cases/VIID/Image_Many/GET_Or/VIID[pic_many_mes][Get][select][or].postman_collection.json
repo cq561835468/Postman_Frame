@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "e8c45469-2d4d-47f5-bfd1-d65c7dd9afca",
+		"name": "VIID[pic_many_mes][get][select][or]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "批量图像-多条件查询OR",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62457e56-a35f-40cb-9581-467fac49a4d3",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// 长度检查点",
+							"var JsPer = jsonData.ImageListObject.Image",
+							"var lang = jsonData.ImageListObject.Image.length",
+							"tests[\"当前返回数量为: \"+lang] = lang;",
+							"",
+							"",
+							"//循环判断key",
+							"for (var key in JsPer){",
+							"    //console.log(key)",
+							"    for(var keyy in JsPer[key]){",
+							"        //console.log(keyy)",
+							"        for(var keyyy in JsPer[key][keyy]){",
+							"            ",
+							"           //console.log(keyyy)",
+							"         ",
+							"        if (keyyy == data.Search_Field){",
+							"             //console.log(keyyy)",
+							"           ",
+							"            var data1 = JsPer[key][keyy][keyyy]",
+							"             //console.log(data1)",
+							"            ",
+							"        }",
+							"        else if (keyyy == data.Search_Field2){",
+							"            var data2 = JsPer[key][keyy][keyyy]",
+							"             //console.log(data2)",
+							"            ",
+							"        }",
+							"    }",
+							"     pm.test(\"当前数值1为: \"+data1 +\"返回验证值1应为: \"+data.Value+\"|||当前数值2为: \"+data2 +\"返回验证值2应为: \"+data.Value2, function () {",
+							"        var x = (data1 == data.Value || data2 == data.Value2)",
+							"        console.log(x)",
+							"        pm.expect(x).to.eql(true)",
+							"    });",
+							"    }",
+							"    ",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

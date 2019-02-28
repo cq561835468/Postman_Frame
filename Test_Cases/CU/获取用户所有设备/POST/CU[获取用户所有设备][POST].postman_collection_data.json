@@ -1,0 +1,24 @@
+[
+{
+    "需要输入的参数":"<<",
+	"Interface_Url":"172.16.120.33",
+	"Interface_st":"/cui/cui.fcgi",
+	"userName":"admin@kadacom",
+	"password":"kedacom123",
+	"cusdkVersion":"2.0",
+	"clientType":"cuver",
+	"isSupportNA":"false",
+
+	"userId":"59e298b385fa4c2893cc097608ea55a1@kadacom",
+	"beginIndex":0,
+	"num":20,
+
+	"domainId":"59e298b385fa4c2893cc097608ea55a1",
+
+    "需要验证的参数":"<<",
+    "deviceType":"cusdk:DevTypeEncoder",
+    "manufacturer":"kedacom",
+	"errorCode":"0",
+	"Re_State":200
+}
+]

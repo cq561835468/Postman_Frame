@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "7dca6db9-379b-4181-ad6d-677e06b798d8",
+		"name": "CU[录像回放及控制][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login[录像回放及控制]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "715d5c3a-17e5-408d-80bf-f96abb17962e",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+ data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"    });",
+							"",
+							"tests[\"cmsVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"];",
+							"tests[\"cuVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"];",
+							"tests[\"cuUpdateUrl: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"];",
+							"tests[\"serverDataVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"];",
+							"tests[\"ip: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"];",
+							"tests[\"port: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"];",
+							"tests[\"session: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+ data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							"",
+							"pm.environment.set(\"session1\", jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:Login>\r\n\t\t\t<cusdk:loginReq>\r\n\t\t\t\t<cusdk:userName>{{userName}}</cusdk:userName>\r\n\t\t\t\t<cusdk:password>{{password}}</cusdk:password>\r\n\t\t\t\t<cusdk:cusdkVersion>{{cusdkVersion}}</cusdk:cusdkVersion>\r\n\t\t\t\t<cusdk:clientType>{{clientType}}</cusdk:clientType>\r\n\t\t\t\t<cusdk:isSupportNA>{{isSupportNA}}</cusdk:isSupportNA>\r\n\t\t\t\t<cusdk:webCUClientAddr>{{webCUClientAddr}}\r\n\t\t\t\t</cusdk:webCUClientAddr>\r\n\t\t\t</cusdk:loginReq>\r\n\t\t</cusdk:Login>\r\n\t</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SetupPlayRecord",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "65319246-46dc-4b8e-b49f-7eb9c6c1ac89",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"console.log(jsonData)",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+ data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"});",
+							"",
+							"var datas=jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:SetupPlayRecordRsp\"]",
+							"",
+							"tests[\"recordPlaySession：\"+datas[\"cusdk:recordPlaySession\"]]=datas[\"cusdk:recordPlaySession\"]",
+							"for(var key in datas){",
+							"    if(key==\"cusdk:mediaDescriptionList\"){",
+							"        for(var keyy in datas[key]){",
+							"            for(var kkey in datas[key][keyy]){",
+							"                if(kkey==\"cusdk:transChannelList\"){",
+							"                    for(var kkeyy in datas[key][keyy][kkey]){",
+							"                        for(var k in datas[key][keyy][kkey][kkeyy]){",
+							"                            if(k==\"cusdk:netAddrList\"){",
+							"                              var x=datas[key][keyy][kkey][kkeyy][k]",
+							"                              pm.test(\"ip：\"+x[\"cusdk:ip\"],function(){",
+							"                                  pm.expect(x[\"cusdk:ip\"]!=\"\").to.eql(true)",
+							"                              })",
+							"                              pm.test(\"port：\"+x[\"cusdk:port\"],function(){",
+							"                                  pm.expect(x[\"cusdk:port\"]!=\"\").to.eql(true)",
+							"                              })",
+							"                            }",
+							"                        }",
+							"                    }",
+							"                }",
+							"            }",
+							"            ",
+							"        }",
+							"    }",
+							"    if(key==\"cusdk:mediaExtInfo\"){",
+							"        for(var keyy in datas[key]){",
+							"            for(var kkey in datas[key][keyy]){",
+							"                pm.test(\"extInfoName：\"+datas[key][keyy][\"cusdk:extInfoName\"],function(){",
+							"                    pm.expect(datas[key][keyy][\"cusdk:extInfoName\"]!=\"\").to.eql(true)",
+							"                })",
+							"                pm.test(\"extInfoValue：\"+datas[key][keyy][\"cusdk:extInfoValue\"],function(){",
+							"                    pm.expect(datas[key][keyy][\"cusdk:extInfoValue\"]!=\"\").to.eql(true)",
+							"                })",
+							"            }",
+							"        }",
+							"    }",
+							"}",
+							"tests[\"session: \"+datas[\"cusdk:session\"]] = datas[\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+datas[\"cusdk:errorCode\"]+\"|errorCode应该为\"+ data.errorCode] = datas[\"cusdk:errorCode\"] == data.errorCode;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:SetupPlayRecord>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:SetupPlayRecordReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:playId>{{playId}}</cusdk:playId>\r\n\t\t\t\t<cusdk:recordPlayDuration>\r\n\t\t\t\t\t<cusdk:recordDurationId>{{recordDurationId}}</cusdk:recordDurationId>\r\n\t\t\t\t\t<cusdk:recordType>{{recordType}}</cusdk:recordType>\r\n\t\t\t\t\t<cusdk:durationTimeRange>\r\n\t\t\t\t\t\t<cusdk:startTime>{{startTime}}</cusdk:startTime>\r\n\t\t\t\t\t\t<cusdk:endTime>{{endTime}}</cusdk:endTime>\r\n\t\t\t\t\t</cusdk:durationTimeRange>\r\n\t\t\t\t\t<cusdk:recordDomainName>{{recordDomainName}}</cusdk:recordDomainName>\r\n\t\t\t\t\t<cusdk:encoderChn>\r\n\t\t\t\t\t\t<cusdk:deviceId>{{deviceId}}</cusdk:deviceId>\r\n\t\t\t\t\t\t<cusdk:channelId>{{channelId}}</cusdk:channelId>\r\n\t\t\t\t\t</cusdk:encoderChn>\r\n\t\t\t\t</cusdk:recordPlayDuration>\r\n\t\t\t\t\r\n\t\t\t\t<cusdk:directTrans>{{directTrans}}</cusdk:directTrans>\r\n\t\t\t\t<cusdk:directTransFromDeviceDomain>{{directTransFromDeviceDomain}}</cusdk:directTransFromDeviceDomain>\r\n\t\t\t\t<cusdk:mediaDescriptionList>\r\n\t\t\t\t\t<cusdk:transMode>{{transMode}}</cusdk:transMode>\r\n\t\t\t\t\t<cusdk:mediaType>{{mediaType}}</cusdk:mediaType>\r\n\t\t\t\t\t<cusdk:transChannelList>\r\n\t\t\t\t\t\t<cusdk:transChannelType>{{transChannelType}}</cusdk:transChannelType>\r\n\t\t\t\t\t\t<cusdk:natData>{{natData}}</cusdk:natData>\r\n\t\t\t\t\t\t<cusdk:netAddrList>\r\n\t\t\t\t\t\t\t<cusdk:ip>{{ip}}</cusdk:ip>\r\n\t\t\t\t\t\t\t<cusdk:port>{{port0}}</cusdk:port>\r\n\t\t\t\t\t\t</cusdk:netAddrList>\r\n\t\t\t\t\t</cusdk:transChannelList>\r\n\t\t\t\t\t<cusdk:transChannelList>\r\n\t\t\t\t\t\t<cusdk:transChannelType>{{transChannelType}}</cusdk:transChannelType>\r\n\t\t\t\t\t\t<cusdk:natData>{{natData}}</cusdk:natData>\r\n\t\t\t\t\t\t<cusdk:netAddrList>\r\n\t\t\t\t\t\t\t<cusdk:ip>{{ip}}</cusdk:ip>\r\n\t\t\t\t\t\t\t<cusdk:port>{{port1}}</cusdk:port>\r\n\t\t\t\t\t\t</cusdk:netAddrList>\r\n\t\t\t\t\t</cusdk:transChannelList>\r\n\t\t\t\t</cusdk:mediaDescriptionList>\r\n\t\t\t\t\r\n\t\t\t\t<cusdk:mediaDescriptionList>\r\n\t\t\t\t\t<cusdk:transMode>{{transMode}}</cusdk:transMode>\r\n\t\t\t\t\t<cusdk:mediaType>{{mediaType}}</cusdk:mediaType>\r\n\t\t\t\t\t<cusdk:transChannelList>\r\n\t\t\t\t\t\t<cusdk:transChannelType>{{transChannelType}}</cusdk:transChannelType>\r\n\t\t\t\t\t\t<cusdk:natData>{{natData}}</cusdk:natData>\r\n\t\t\t\t\t\t<cusdk:netAddrList>\r\n\t\t\t\t\t\t\t<cusdk:ip>{{ip}}</cusdk:ip>\r\n\t\t\t\t\t\t\t<cusdk:port>{{port2}}</cusdk:port>\r\n\t\t\t\t\t\t</cusdk:netAddrList>\r\n\t\t\t\t\t</cusdk:transChannelList>\r\n\t\t\t\t\t<cusdk:transChannelList>\r\n\t\t\t\t\t\t<cusdk:transChannelType>{{transChannelType}}</cusdk:transChannelType>\r\n\t\t\t\t\t\t<cusdk:natData>{{natData}}</cusdk:natData>\r\n\t\t\t\t\t\t<cusdk:netAddrList>\r\n\t\t\t\t\t\t\t<cusdk:ip>{{ip}}</cusdk:ip>\r\n\t\t\t\t\t\t\t<cusdk:port>{{port3}}</cusdk:port>\r\n\t\t\t\t\t\t</cusdk:netAddrList>\r\n\t\t\t\t\t</cusdk:transChannelList>\r\n\t\t\t\t</cusdk:mediaDescriptionList>\r\n\t\t\t\t\r\n\t\t\t\t<cusdk:transcodeMeidaFormat>\r\n\t\t\t\t\t<cusdk:needTranscode>{{needTranscode}}</cusdk:needTranscode>\r\n\t\t\t\t\t<cusdk:dstVideoFormat>{{dstVideoFormat}}</cusdk:dstVideoFormat>\r\n\t\t\t\t\t<cusdk:dstSolution>{{dstSolution}}</cusdk:dstSolution>\r\n\t\t\t\t\t<cusdk:dstFrameRate>{{dstFrameRate}}</cusdk:dstFrameRate>\r\n\t\t\t\t\t<cusdk:dstBitRate>{{dstBitRate}}</cusdk:dstBitRate>\r\n\t\t\t\t\t<cusdk:dstAudioFormat>{{dstAudioFormat}}</cusdk:dstAudioFormat>\r\n\t\t\t\t</cusdk:transcodeMeidaFormat>\r\n\t\t\t</cusdk:req>\r\n\t\t</cusdk:SetupPlayRecord>\r\n\t</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PlayRecord",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "842a58f8-f3ae-44cb-a61f-097bdabdf960",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+ data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"});",
+							"var datas=jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:PlayRecordRsp\"]",
+							"tests[\"session: \"+datas[\"cusdk:session\"]] = datas[\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+datas[\"cusdk:errorCode\"]+\"|errorCode应该为\"+ data.errorCode] = datas[\"cusdk:errorCode\"] == data.errorCode;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:PlayRecord>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:PlayRecordReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:playId>{{playId}}</cusdk:playId>\r\n\t\t\t</cusdk:req>\r\n\t\t</cusdk:PlayRecord>\r\n\t</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCurRecordPlayPosition",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "30c9fadf-befe-47a5-ae87-8a6ac736836a",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+ data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"});",
+							"",
+							"var datas=jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetCurRecordPlayPositionRsp\"]",
+							"tests[\"playId: \"+datas[\"cusdk:playId\"]+\"|playId应为：\"+data.playId] = datas[\"cusdk:playId\"]==data.playId;",
+							"tests[\"curTime: \"+datas[\"cusdk:curTime\"]] = datas[\"cusdk:curTime\"];",
+							"tests[\"startTime: \"+datas[\"cusdk:recordTimeRange\"][\"cusdk:startTime\"]] = datas[\"cusdk:recordTimeRange\"][\"cusdk:startTime\"];",
+							"tests[\"endTime: \"+datas[\"cusdk:recordTimeRange\"][\"cusdk:endTime\"]] = datas[\"cusdk:recordTimeRange\"][\"cusdk:endTime\"];",
+							"tests[\"session: \"+datas[\"cusdk:session\"]] = datas[\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+datas[\"cusdk:errorCode\"]+\"|errorCode应该为\"+ data.errorCode] = datas[\"cusdk:errorCode\"] == data.errorCode;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:GetCurRecordPlayPosition>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:GetCurRecordPlayPositionReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:playId>{{playId}}</cusdk:playId>\r\n\t\t\t</cusdk:req>\r\n\t\t</cusdk:GetCurRecordPlayPosition>\r\n\t</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VcrCtrl",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bfe5c79f-175c-436b-aee8-d17d2c3e8116",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+ data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"});",
+							"var datas=jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:VcrCtrlRsp\"]",
+							"tests[\"session: \"+datas[\"cusdk:session\"]] = datas[\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+datas[\"cusdk:errorCode\"]+\"|errorCode应该为\"+ data.errorCode] = datas[\"cusdk:errorCode\"] == data.errorCode;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:VcrCtrl>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:VcrCtrlReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:playId>{{playId}}</cusdk:playId>\r\n\t\t\t\t<cusdk:vcrCmd>{{vcrCmd}}</cusdk:vcrCmd>\r\n\t\t\t\t<cusdk:seekTime>{{seekTime}}</cusdk:seekTime>\r\n\t\t\t\t<cusdk:playSpeed>{{playSpeed}}</cusdk:playSpeed>\r\n\t\t\t</cusdk:req>\r\n\t\t</cusdk:VcrCtrl>\r\n\t</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StopPlayRecord",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7489d3a7-aec8-4afc-845d-0e5fc6e01be7",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+ data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"});",
+							"var datas=jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:StopPlayRecordRsp\"]",
+							"tests[\"session: \"+datas[\"cusdk:session\"]] = datas[\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+datas[\"cusdk:errorCode\"]+\"|errorCode应该为\"+ data.errorCode] = datas[\"cusdk:errorCode\"] == data.errorCode;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:StopPlayRecord>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:StopPlayRecordReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:playId>{{playId}}</cusdk:playId>\r\n\t\t\t</cusdk:req>\r\n\t\t</cusdk:StopPlayRecord>\r\n\t</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "8a15de0a-215e-43b8-9954-ffd7f1a2a6f3",
+		"name": "VIID[pic_one][RUD][get]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "单个图像数据查询",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e9451f8b-38a7-4b1e-8902-e0103c657347",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"// ImageID检查点",
+							"//tests[\"ImageID: \"+jsonData.ImageObject.ImageInfo.ImageID+\"|ImageIDL应为:\"+data.ImageID] = jsonData.ImageObject.ImageInfo.ImageID == data.ImageID; ",
+							"// InfoKind检查点",
+							"",
+							"var InfoKind_sp = data.InfoKind.split('|')",
+							"tests[\"InfoKind: \"+jsonData.ImageObject.ImageInfo.InfoKind+\"|InfoKind应为:\"+data.InfoKind] = InfoKind_sp.indexOf(jsonData.ImageObject.ImageInfo.InfoKind+\"\") != -1",
+							"// ImageSource检查点",
+							"var ImageSource_sp = data.ImageSource.split('|')",
+							"tests[\"ImageSource: \"+jsonData.ImageObject.ImageInfo.ImageSource+\"|ImageSource应为:\"+data.ImageSource] = ImageSource_sp.indexOf(jsonData.ImageObject.ImageInfo.ImageSource+\"\") != -1",
+							"// EventSort检查点",
+							"var EventSort_sp = data.EventSort.split('|')",
+							"tests[\"EventSort: \"+jsonData.ImageObject.ImageInfo.EventSort+\"|EventSort应为:\"+data.EventSort] = EventSort_sp.indexOf(jsonData.ImageObject.ImageInfo.EventSort+\"\") != -1",
+							"// FileFormat检查点",
+							"tests[\"FileFormat: \"+jsonData.ImageObject.ImageInfo.FileFormat] = jsonData.ImageObject.ImageInfo.FileFormat",
+							"// ShotTime检查点",
+							"tests[\"ShotTime: \"+jsonData.ImageObject.ImageInfo.ShotTime] = jsonData.ImageObject.ImageInfo.ShotTime",
+							"// Title检查点",
+							"tests[\"Title: \"+jsonData.ImageObject.ImageInfo.Title] = jsonData.ImageObject.ImageInfo.Title",
+							"tests[\"KDExpiredDate: \"+jsonData.ImageObject.ImageInfo.KDExpiredDate] = jsonData.ImageObject.ImageInfo.KDExpiredDate",
+							"// ContentDescription检查点",
+							"tests[\"ContentDescription: \"+jsonData.ImageObject.ImageInfo.ContentDescription] = jsonData.ImageObject.ImageInfo.ContentDescription",
+							"",
+							"// ShotPlaceFullAdress检查点",
+							"tests[\"ShotPlaceFullAdress: \"+jsonData.ImageObject.ImageInfo.ShotPlaceFullAdress] = jsonData.ImageObject.ImageInfo.ShotPlaceFullAdress",
+							"// EventSort检查点",
+							"var SecretLevelType_sp = data.SecretLevelType.split('|')",
+							"tests[\"SecretLevelType: \"+jsonData.ImageObject.ImageInfo.SecretLevelType+\"|SecretLevelType应为:\"+data.SecretLevelType] = SecretLevelType_sp.indexOf(jsonData.ImageObject.ImageInfo.SecretLevelType+\"\") != -1",
+							"// Width检查点",
+							"tests[\"Width为: \"+jsonData.ImageObject.ImageInfo.Width] = jsonData.ImageObject.ImageInfo.Width > 0;",
+							"// Height检查点",
+							"tests[\"Height: \"+jsonData.ImageObject.ImageInfo.Height] = jsonData.ImageObject.ImageInfo.Height > 0;",
+							"//CollectorName、CollectorOrg、EntryClerk、EntryClerkOrg检查点",
+							"if (jsonData.ImageObject.ImageInfo.InfoKind == 2) {",
+							"    // ShotPlaceCode检查点",
+							"    tests[\"ShotPlaceCode: \"+jsonData.ImageObject.ImageInfo.ShotPlaceCode] = jsonData.ImageObject.ImageInfo.ShotPlaceFullAdress",
+							"    tests[\"CollectorName: \"+jsonData.ImageObject.ImageInfo.CollectorName] = jsonData.ImageObject.ImageInfo.CollectorName",
+							"    tests[\"CollectorOrg: \"+jsonData.ImageObject.ImageInfo.CollectorOrg] = jsonData.ImageObject.ImageInfo.CollectorOrg",
+							"    tests[\"EntryClerk: \"+jsonData.ImageObject.ImageInfo.EntryClerk] = jsonData.ImageObject.ImageInfo.EntryClerk",
+							"    tests[\"EntryClerkOrg: \"+jsonData.ImageObject.ImageInfo.EntryClerkOrg] = jsonData.ImageObject.ImageInfo.EntryClerkOrg",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<complexType name=\"ImageList\">\r\n<sequence>\r\n    <element name=\"Image\" minOccurs=\"1\">\r\n<complexType>\r\n<sequence>\r\n    <element name=\"ImageInfo\" type=\"ImageInfo\" minOccurs=\"1\" maxOccrus=\"1\">\r\n   <element name=\"PersonList\" minOccurs=\"0\" maxOccurs=\"1\"/>\r\n   <element name=\"FaceList\" minOccurs=\"0\" maxOccurs=\"1\"/>\r\n                <element name=\"MotorVehicleList\" minOccurs=\"0\" maxOccurs=\"1\"/>\r\n<element name=\"NonMotorVehicleList\" minOccurs=\"0\" maxOccurs=\"1\"/>\r\n   <element name=\"ThingList\" minOccurs=\"0\" maxOccurs=\"1\"/>\r\n<element name=\"SceneList\" minOccurs=\"0\" maxOccurs=\"1\"/>\r\n<element name=\"Data\" type=\"base64Binary\" minOccurs=\"0\" maxOccrus=\"1\"/>\r\n</sequence>\r\n</complexType>\r\n</sequence>\r\n</complexType>\r\n"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{ImageID}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{ImageID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "4893b586-0e77-45b5-a5d9-899a30c7edae",
+		"name": "获取ZIP压缩包MD5码",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "获取ZIP压缩包MD5码",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a7b45404-0480-4039-9905-bf2032282746",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Url}}{{fileType}}{{catalog}}{{fileName}}{{type}}",
+					"host": [
+						"{{Url}}{{fileType}}{{catalog}}{{fileName}}{{type}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

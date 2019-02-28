@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "fce8e8b2-908d-4f57-bdd6-9416be9bfbb1",
+		"name": "VIID[pic_one][POST]_Data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "VIID[pic_one][POST]_Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bdd0e03c-74a2-4707-bf25-e01bd2b1d161",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// StatusCode检查点",
+							"var a =data.Interface_st+data.ImageID+data.Data;",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL+\"|RequestURL应为:\"+a] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL == a; ",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode == data.StatusCode; ",
+							"tests[\"StatusString: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString == data.StatusString; ",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Image\": [{\n        \"Data\":\"{{data}}\"\n    }]\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{ImageID}}{{Data}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{ImageID}}{{Data}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,21 @@
+[
+{  
+    "需要输入参数":">>",
+	"Interface_Url":"http://172.16.120.22:3002",
+	"Interface_st1":"/webmedia/livestream",
+	"Interface_st2":"/webmedia/livestream/viewer",
+	"type1": "rtsp",
+	"audioCodec":"pcma",
+    "url": "rtsp://172.16.120.22:554/domain=31010100002000000000&resource=31010100001320000002-0&quality=0&src=0&user=",
+    "codec": "h264",
+    "type2":"webrtc",
+    "video":"recvonly",
+    "audio":"recvonly",
+
+	"需要验证参数":">>",
+	"rs_streamId":"非空即可",
+	"rs_viewerId":"非空即可",
+	"rs_signalingBridge":"非空即可",
+	"Re_State":"200"
+}
+]

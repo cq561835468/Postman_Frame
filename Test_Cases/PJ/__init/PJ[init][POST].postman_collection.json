@@ -1,0 +1,553 @@
+{
+	"info": {
+		"_postman_id": "ccb191d8-68b8-4c5d-920a-eb967d7bfd91",
+		"name": "PJ[init][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create_Area",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"{{area_code}}\", \r\n  \"area_name\": \"{{area_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Area}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Area}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Building",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "803c605b-feb9-476b-a73d-5aa97af0ddb7",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"buil_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"{{area_code}}\", \r\n  \"buil_code\": \"{{buil_code}}\", \r\n  \"buil_name\": \"{{buil_name}}\", \r\n  \"buil_floor_count\": {{buil_floor_count}}, \r\n  \"buil_first_floor_num\": {{buil_first_floor_num}}\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Building}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Building}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Classroom",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e6003e7d-4ec7-49c7-b658-e00894a0a899",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"clro_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"buil_id\": {{buil_id}}, \r\n  \"clro_code\": \"{{clro_code}}\", \r\n  \"clro_name\": \"{{clro_name}}\", \r\n  \"clro_building_floor_num\": {{clro_building_floor_num}}, \r\n  \"clro_seat_count\": {{clro_seat_count}}\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_classroom}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_classroom}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Academic_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "36b58db8-7626-45c8-9009-385d2c098a47",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"acye_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"{{area_code}}\", \r\n  \"acye_begin_year\": {{acye_begin_year}}, \r\n  \"acye_end_year\": {{acye_end_year}}, \r\n  \"acye_code\": \"{{acye_code}}\", \r\n  \"acye_name\": \"{{acye_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_academic_year}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_academic_year}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Academic_Term",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a7452c0-0691-4891-bfad-eb1ef4ef808d",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"acte_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"acye_id\": {{acye_id}}, \r\n  \"acte_term\": {{acte_term}},\r\n  \"acte_code\": \"{{acte_code}}\", \r\n  \"acte_name\": \"{{acte_name}}\", \r\n  \"acte_begin_date\": \"{{acte_begin_date}}\", \r\n  \"acte_end_date\": \"{{acte_end_date}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_academic_term}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_academic_term}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_School_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "19564f5f-660e-422a-aab6-dab67eab46ff",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"scye_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"{{area_code}}\", \r\n  \"scye_begin_year\": {{scye_begin_year}}, \r\n  \"scye_state\": {{scye_state}}, \r\n  \"scye_stage\": {{scye_stage}}, \r\n  \"scye_code\": \"{{scye_code}}\", \r\n  \"scye_name\": \"{{scye_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_school_year}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_school_year}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Student_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f6ef7405-8f2f-431c-87e2-b23630424801",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"stye_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"scye_id\": {{scye_id}}, \r\n  \"stye_begin_year\": {{stye_begin_year}}, \r\n  \"stye_code\": \"{{stye_code}}\", \r\n  \"stye_name\": \"{{stye_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_student_year}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_student_year}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Discipline",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "149f8063-cab4-4aec-a563-c540264de6f7",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"disc_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"{{area_code}}\", \r\n  \"disc_code\": \"{{disc_code}}\", \r\n  \"disc_name\": \"{{disc_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_discipline}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_discipline}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6641223-49b0-4f47-a07a-34221d532bee",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"subj_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"disc_id\": {{disc_id}}, \r\n  \"subj_code\": \"{{subj_code}}\", \r\n  \"subj_name\": \"{{subj_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_subject}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_subject}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Teacher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1c10964d-0065-4222-a040-4524d2b8f119",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"teac_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"{{area_code}}\", \r\n  \"user_open_id\": \"{{user_open_id_T}}\", \r\n  \"user_code\": \"{{user_code_T}}\", \r\n  \"user_email\": \"{{user_email_T}}\", \r\n  \"user_phone_num\": \"{{user_phone_num_T}}\", \r\n  \"user_identifier_num\": \"{{user_identifier_num_T}}\", \r\n  \"user_name\": \"{{user_name_T}}\", \r\n  \"user_gender\": {{user_gender_T}}, \r\n  \"user_birthday\": \"{{user_birthday_T}}\", \r\n  \"teac_in_service_status\": {{teac_in_service_status}}\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_teacher}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_teacher}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fcacc9c4-1c10-432c-8be8-c362d2aafefc",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"stud_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"{{area_code}}\",\r\n  \"user_open_id\": \"{{user_open_id_S}}\", \r\n  \"user_code\": \"{{user_code_S}}\", \r\n  \"user_email\": \"{{user_email_S}}\", \r\n  \"user_phone_num\": \"{{user_phone_num_S}}\", \r\n  \"user_identifier_num\": \"{{user_identifier_num_S}}\", \r\n  \"user_name\": \"{{user_name_S}}\", \r\n  \"user_gender\": {{user_gender_S}}, \r\n  \"user_birthday\": \"{{user_birthday_S}}\", \r\n  \"scye_id\": {{scye_id}}, \r\n  \"stud_registration_status\": {{stud_registration_status}}, \r\n  \"stud_in_school_status\": {{stud_in_school_status}}\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_student}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_student}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Administration_Class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "91364633-038b-4e2e-9dca-605524beac71",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"adcl_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"adcl_code\": \"{{adcl_code}}\", \r\n  \"adcl_name\": \"{{adcl_name}}\", \r\n  \"teac_id\": {{teac_id}}, \r\n  \"stye_id\": {{stye_id}}, \r\n  \"stud_id_list\": [\r\n  {{stud_id}}\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_administration_class}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_administration_class}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Teaching_Class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "956fa5f0-1454-4e69-acfe-016e69943086",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"tecl_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n  \"tecl_code\": \"{{tecl_code}}\", \n  \"tecl_name\": \"{{tecl_name}}\", \n  \"tecl_type\": {{tecl_type}}, \n  \"adcl_id\": {{adcl_id}}, \n  \"stye_id\": {{stye_id}}, \n  \"subj_id\": {{subj_id}}, \n  \"acte_id\": {{acte_id}}, \n  \"teac_id_list\": [\n    {{teac_id}}\n  ], \n  \"stud_id_list\": [\n    {{stud_id}}\n  ]\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_teaching_class}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_teaching_class}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Lesson_Time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b11a8464-4fc8-4f84-9942-a62a62b69540",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"leti_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"{{area_code}}\", \r\n  \"leti_number\": {{leti_number}}, \r\n  \"leti_type\": \"{{leti_type}}\", \r\n  \"leti_begin_time\": \"{{leti_begin_time}}\", \r\n  \"leti_end_time\": \"{{leti_end_time}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_lesson_time}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_lesson_time}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Course",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"clro_id\": {{clro_id}}, \r\n  \"tecl_id\": {{tecl_id}}, \r\n  \"cour_name\": \"{{cour_name}}\", \r\n  \"cour_begin_time\": \"{{cour_begin_time}}\", \r\n  \"cour_end_time\": \"{{cour_end_time}}\", \r\n  \"leti_id\": {{leti_id}}, \r\n  \"cour_description\": \"{{cour_description}}\", \r\n  \"repeat_week\": {{repeat_week}}, \r\n  \"single_or_double_week\": {{single_or_double_week}}\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_course}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_course}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

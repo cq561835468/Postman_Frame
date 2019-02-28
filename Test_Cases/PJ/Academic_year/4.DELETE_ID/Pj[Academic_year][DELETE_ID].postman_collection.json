@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "5497c595-9df5-4981-97cd-a252e0865000",
+		"name": "Pj-Academic_Year-DELETE_ID",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Create_Area",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\"area_code\": \"{{area_code}}\", \n\"area_name\": \"{{area_name}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Create_Academic_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"var regString = /[0-9]+/;",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;",
+							"tests[\"当前ID值为: \"+js.id+\"|ID值应不为空\"] = regString.exec(js.id)[0] != \"undefined\"; //通过正则匹配不为空",
+							"pm.environment.set(\"id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"{{area_code}}\", \r\n  \"acye_begin_year\": {{acye_begin_year}}, \r\n  \"acye_end_year\": {{acye_end_year}}, \r\n  \"acye_code\": \"{{acye_code}}\", \r\n  \"acye_name\": \"{{acye_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_A}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_A}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_ID_Academic_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"var regString = /[0-9]+/;",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_A}}{{id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_A}}{{id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8ea2cc9e-eaad-406e-b6f8-d48c5f7f9121",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1da92719-9008-4fa8-a1cf-512d6d517af0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

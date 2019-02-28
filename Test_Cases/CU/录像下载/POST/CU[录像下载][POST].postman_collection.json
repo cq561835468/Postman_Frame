@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "bee24c9b-51bb-48e6-a407-3aec0716a2d7",
+		"name": "CU[录像下载][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login[录像]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4880b01c-aaf0-4466-8c02-f656e1ff5016",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+ data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"    });",
+							"",
+							"tests[\"cmsVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"];",
+							"tests[\"cuVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"];",
+							"tests[\"cuUpdateUrl: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"];",
+							"tests[\"serverDataVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"];",
+							"tests[\"ip: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"];",
+							"tests[\"port: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"];",
+							"tests[\"session: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+ data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							"",
+							"pm.environment.set(\"session1\", jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:Login>\r\n\t\t\t<cusdk:loginReq>\r\n\t\t\t\t<cusdk:userName>{{username}}</cusdk:userName>\r\n\t\t\t\t<cusdk:password>{{password}}</cusdk:password>\r\n\t\t\t\t<cusdk:cusdkVersion>{{cusdkVersion}}</cusdk:cusdkVersion>\r\n\t\t\t\t<cusdk:clientType>{{clientType}}</cusdk:clientType>\r\n\t\t\t\t<cusdk:isSupportNA>{{isSupportNA}}</cusdk:isSupportNA>\r\n\t\t\t\t<cusdk:webCUClientAddr>{{webCUClientAddr}}</cusdk:webCUClientAddr>\r\n\t\t\t</cusdk:loginReq>\r\n\t\t</cusdk:Login>\r\n\t</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SetupDownloadRecord",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd815a40-8099-4d33-bb64-3674546cb247",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"var datas = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:SetupDownloadRecordRsp\"][\"cusdk:mediaDescriptionList\"]",
+							"console.log(datas)",
+							"for(var key in datas){",
+							"    for(var keyy in datas[key]){",
+							"        console.log(keyy)",
+							"        if(keyy==\"cusdk:transMode\"){",
+							"            pm.test(\"transMode：\"+datas[key][keyy],function(){",
+							"                pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"            })",
+							"        }",
+							"       if(keyy==\"cusdk:mediaType\"){",
+							"            pm.test(\"mediaType：\"+datas[key][keyy],function(){",
+							"                pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"            })",
+							"        }",
+							"        if(keyy==\"cusdk:transChannelList\"){",
+							"            for(var keyyy in datas[key][keyy]){",
+							"                for(var keyyyy in datas[key][keyy][keyyy] ){",
+							"                    if(keyyyy == \"cusdk:transChannelType\"){",
+							"             pm.test(\"transChannelType：\"+datas[key][keyy][keyyy][keyyyy],function(){",
+							"                pm.expect(datas[key][keyy][keyyy][keyyyy]!=\"\").to.eql(true)",
+							"            })  ",
+							"            }",
+							"                    if(keyyyy == \"cusdk:natData\"){",
+							"             pm.test(\"natData：\"+datas[key][keyy][keyyy][keyyyy],function(){",
+							"                pm.expect(datas[key][keyy][keyyy][keyyyy]!=\"\").to.eql(true)",
+							"            })  ",
+							"            }",
+							"                    if(keyyyy == \"cusdk:netAddrList\"){",
+							"                        for(var keyyyyy in datas[key][keyy][keyyy][keyyyy]){",
+							"                            if(keyyyyy == \"cusdk:ip\")",
+							"                    {",
+							"                        pm.test(\"ip：\"+datas[key][keyy][keyyy][keyyyy][keyyyyy]+\"||ip应该为\"+data.Interfac_url,function(){",
+							"                pm.expect(datas[key][keyy][keyyy][keyyyy][keyyyyy]).to.eql(data.Interfac_url)})     ",
+							"                    }",
+							"                             if(keyyyyy == \"cusdk:port\")",
+							"                    {pm.test(\"port：\"+datas[key][keyy][keyyy][keyyyy][keyyyyy],function(){",
+							"                pm.expect(datas[key][keyy][keyyy][keyyyy][keyyyyy]!=\"\").to.eql(true)})     ",
+							"                    }",
+							"                }",
+							"             }",
+							"                }",
+							"            ",
+							"            ",
+							"            } ",
+							"        }",
+							"        ",
+							"    }",
+							"}",
+							"",
+							"tests[\"recordFilePat为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:SetupDownloadRecordRsp\"][\"cusdk:recordFilePath\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:SetupDownloadRecordRsp\"][\"cusdk:recordFilePath\"];",
+							"tests[\"recordFileName: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:SetupDownloadRecordRsp\"][\"cusdk:recordFileName\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:SetupDownloadRecordRsp\"][\"cusdk:recordFileName\"];",
+							"",
+							"var datass=jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:SetupDownloadRecordRsp\"][\"cusdk:mediaExtInfo\"]",
+							"for (hey in datass){",
+							"    for(heyy in datass[hey]){",
+							"        if(heyy == \"cusdk:extInfoName\"){",
+							"          pm.test(\"extInfoName：\"+datass[hey][heyy],function(){",
+							"                pm.expect(datass[hey][heyy]!=\"\").to.eql(true)})    ",
+							"        }",
+							"         if(heyy == \"cusdk:extInfoValue\"){",
+							"          pm.test(\"extInfoValue：\"+datass[hey][heyy],function(){",
+							"                pm.expect(datass[hey][heyy]!=\"\").to.eql(true)})    ",
+							"        }",
+							"    }",
+							"}",
+							"",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:SetupDownloadRecordRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:SetupDownloadRecordRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:SetupDownloadRecordRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:SetupDownloadRecordRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"\r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:SetupDownloadRecord>\r\n\t\t\t<cusdk:req xsi:type=\"SetupDownloadRecordReq\">\r\n\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t<cusdk:playId>{{playId}}</cusdk:playId>\r\n\t\t\t<cusdk:recordPlayDuration>\r\n\t\t\t\t<cusdk:recordDurationId>{{recordDurationId}}</cusdk:recordDurationId>\r\n\t\t\t\t<cusdk:recordType>{{recordType}}</cusdk:recordType>\r\n\t\t\t\t<cusdk:durationTimeRange>\r\n\t\t\t\t\t<cusdk:startTime>{{startTime}}</cusdk:startTime>\r\n\t\t\t\t\t<cusdk:endTime>{{endTime}}</cusdk:endTime>\r\n\t\t\t\t</cusdk:durationTimeRange>\r\n\t\t\t\t<cusdk:recordDomainName>\r\n\t\t\t\t</cusdk:recordDomainName>\r\n\t\t\t\t<cusdk:encoderChn>\r\n\t\t\t\t\t<cusdk:deviceId>{{deviceId}}</cusdk:deviceId>\r\n\t\t\t\t\t<cusdk:channelId>{{channelId}}</cusdk:channelId>\r\n\t\t\t\t</cusdk:encoderChn>\r\n\t\t\t\t</cusdk:recordPlayDuration>\r\n\t\t\t\t <cusdk:directTrans>{{directTrans}}</cusdk:directTrans>\r\n\t\t\t\t <cusdk:directTransFromDeviceDomain>{{directTransFromDeviceDomain}}</cusdk:directTransFromDeviceDomain>\r\n\t\t\t\t <cusdk:mediaDescriptionList>\r\n\t\t\t\t \t<cusdk:transMode>{{transMode}}</cusdk:transMode>\r\n\t\t\t\t \t<cusdk:mediaType>{{mediaType}}</cusdk:mediaType>\r\n\t\t\t\t \t<cusdk:transChannelList>\r\n\t\t\t\t \t\t<cusdk:transChannelType>{{transChannelType}}</cusdk:transChannelType>\r\n\t\t\t\t \t\t<cusdk:natData></cusdk:natData>\r\n\t\t\t\t \t\t<cusdk:netAddrList>\r\n\t\t\t\t \t\t\t<cusdk:ip>{{ip}}</cusdk:ip>\r\n\t\t\t\t \t\t\t<cusdk:port>{{port1}}</cusdk:port>\r\n\t\t\t\t \t\t</cusdk:netAddrList>\r\n\t\t\t\t \t</cusdk:transChannelList>\r\n\t\t\t\t \t<cusdk:transChannelList>\r\n\t\t\t\t \t\t<cusdk:transChannelType>{{transChannelType}}</cusdk:transChannelType>\r\n\t\t\t\t \t\t<cusdk:natData></cusdk:natData>\r\n\t\t\t\t \t\t<cusdk:netAddrList>\r\n\t\t\t\t \t\t\t<cusdk:ip>{{ip}}</cusdk:ip>\r\n\t\t\t\t \t\t\t<cusdk:port>{{port2}}</cusdk:port>\r\n\t\t\t\t \t\t</cusdk:netAddrList>\r\n\t\t\t\t \t</cusdk:transChannelList>\r\n\t\t\t\t </cusdk:mediaDescriptionList>\r\n\t\t\t\t <cusdk:mediaDescriptionList>\r\n\t\t\t\t \t<cusdk:transMode>{{transMode}}</cusdk:transMode>\r\n\t\t\t\t \t<cusdk:mediaType>{{mediaType}}</cusdk:mediaType>\r\n\t\t\t\t \t<cusdk:transChannelList>\r\n\t\t\t\t \t\t<cusdk:transChannelType>{{transChannelType}}</cusdk:transChannelType>\r\n\t\t\t\t \t\t<cusdk:natData></cusdk:natData>\r\n\t\t\t\t \t\t<cusdk:netAddrList>\r\n\t\t\t\t \t\t\t<cusdk:ip>{{ip}}</cusdk:ip>\r\n\t\t\t\t \t\t\t<cusdk:port>{{port3}}</cusdk:port>\r\n\t\t\t\t \t\t</cusdk:netAddrList>\r\n\t\t\t\t \t</cusdk:transChannelList>\r\n\t\t\t\t <cusdk:transChannelList>\r\n\t\t\t\t \t<cusdk:transChannelType>{{transChannelType}}</cusdk:transChannelType>\r\n\t\t\t\t \t<cusdk:natData></cusdk:natData>\r\n\t\t\t\t \t<cusdk:netAddrList>\r\n\t\t\t\t \t\t<cusdk:ip>{{ip}}</cusdk:ip>\r\n\t\t\t\t \t\t<cusdk:port>{{port4}}</cusdk:port>\r\n\t\t\t\t \t</cusdk:netAddrList>\r\n\t\t\t\t </cusdk:transChannelList>\r\n\t\t\t\t</cusdk:mediaDescriptionList>\r\n\t\t\t\t<cusdk:transcodeMeidaFormat>\r\n\t\t\t\t\t<cusdk:needTranscode>{{needTranscode}}</cusdk:needTranscode>\r\n\t\t\t\t\t<cusdk:dstVideoFormat>{{dstVideoFormat}}</cusdk:dstVideoFormat>\r\n\t\t\t\t\t<cusdk:dstSolution>{{dstSolution}}</cusdk:dstSolution>\r\n\t\t\t\t\t<cusdk:dstFrameRate>{{dstFrameRate}}</cusdk:dstFrameRate>\r\n\t\t\t\t\t<cusdk:dstBitRate>{{dstBitRate}}</cusdk:dstBitRate>\r\n\t\t\t\t\t<cusdk:dstAudioFormat>{{dstAudioFormat}}</cusdk:dstAudioFormat>\r\n\t\t\t\t\t</cusdk:transcodeMeidaFormat>\r\n\t\t\t\t</cusdk:req>\r\n\t\t\t</cusdk:SetupDownloadRecord>\r\n\t\t</SOAP-ENV:Body>\r\n\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StartDownloadRecord",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7943e748-58fa-4891-ad59-13b8aa187633",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:StartDownloadRecordRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:StartDownloadRecordRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:StartDownloadRecordRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:StartDownloadRecordRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:StartDownloadRecord>\r\n\t\t\t<cusdk:req xsi:type=\"StartDownloadRecordReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:playId>{{playId}}</cusdk:playId>\r\n\t\t\t\t</cusdk:req>\r\n\t\t\t\t</cusdk:StartDownloadRecord>\r\n\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t</SOAP-ENV:Envelope>\r\n\t\t\t\t"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StopDownloadRecord",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "43f9ab25-14a0-43d0-ba58-f613e113a93a",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:StopDownloadRecordRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:StopDownloadRecordRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:StopDownloadRecordRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:StopDownloadRecordRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:StopDownloadRecord>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:StopDownloadRecordReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:playId>{{playId}}</cusdk:playId>\r\n\t\t\t\t</cusdk:req>\r\n\t\t\t\t</cusdk:StopDownloadRecord>\r\n\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

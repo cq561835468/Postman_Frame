@@ -1,0 +1,50 @@
+{
+	"info": {
+		"_postman_id": "a874069a-b573-414a-9176-8fca78467bed",
+		"name": "VIID[AnalysisRule][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "f8e010fe-3554-4574-99b8-ed35a8697e01",
+			"name": "VIID[AnalysisRule][PUT]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "63b4e192-7d36-4eff-8b99-9dca771dcdeb",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusObject.RequestURL+\" RequestURL应为:\"+data.RequestURL] = jsonData.ResponseStatusObject.RequestURL == data.RequestURL",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusObject.StatusCode+\" StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusObject.StatusCode == data.StatusCode",
+							"tests[\"StatusString: \"+jsonData.ResponseStatusObject.StatusString+\" StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusObject.StatusString == data.StatusString",
+							"tests[\"Id：\"+jsonData.ResponseStatusObject.Id+\" Id应为：\"+data.Value]=jsonData.ResponseStatusObject.Id==data.Value"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"AnalysisRuleObject\":[\n\t\t{\n\t\t\t\"AnalysisRuleID\":\"{{AnalysisRuleID}}\",\n\t\t\t\"VideoImageID\":\"{{VideoImageID}}\",\n\t\t\t\"VideoImageUrl\":\"{{VideoImageUrl}}\",\n\t\t\t\"CameraID\":\"{{CameraID}}\",\n\t\t\t\"Width\":{{Width}},\n\t\t\t\"Height\":{{Height}},\n\t\t\t\"MinDuration\":{{MinDuration}},\n\t\t\t\"LineMinDuration\":{{LineMinDuration}},\n\t\t\t\"LineMaxDuration\":{{LineMaxDuration}},\n\t\t\t\"MaxDuration\":{{MaxDuration}},\n\t\t\t\"LineNum\":{{LineNum}},\n\t\t\t\"LineSet\":{{LineSet}},\n\t\t\t\"PointNum\":{{PointNum}},\n\t\t\t\"PointID\":{{PointID}},\n\t\t\t\"PointSet\":{{PointSet}},\n\t\t\t\"Direction\":{{Direction}},\n\t\t\t\"ActionType\":{{ActionType}},\n\t\t\t\"BeginPointX\":{{BeginPointX}},\n\t\t\t\"BeginPointY\":{{BeginPointY}},\n\t\t\t\"EndPointX\":{{EndPointX}},\n\t\t\t\"EndPointY\":{{EndPointY}},\n\t\t\t\"DirectionNum\":{{DirectionNum}},\n\t\t\t\"DirectionSet\":{{DirectionSet}},\n\t\t\t\"DensityUnit\":{{DensityUnit}}\n\t\t}\n\t\t]\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

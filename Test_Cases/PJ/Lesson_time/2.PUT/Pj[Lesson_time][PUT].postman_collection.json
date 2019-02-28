@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "b9536a24-2c14-4a9f-9af2-4ddb4345ef10",
+		"name": "Pj-Lesson_time_PUT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Create_Lesson_time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc91c978-9cc9-4e5d-a218-289f67f377bb",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"leti_id\",js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\t\"area_code\":\"{{area_code}}\",\n\t\"leti_number\":{{leti_number}},\n\t\"leti_type\":\"{{leti_type}}\",\n\t\"leti_begin_time\":\"{{leti_begin_time}}\",\n\t\"leti_end_time\":\"{{leti_end_time}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Put_Lesson_time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48bb72b0-a783-464f-a7b8-51048812d911",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\t\"area_code\":\"{{area_code}}\",\n\t\"leti_number\":{{leti_number2}},\n\t\"leti_type\":\"{{leti_type}}\",\n\t\"leti_begin_time\":\"{{leti_begin_time2}}\",\n\t\"leti_end_time\":\"{{leti_end_time2}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}{{leti_id}}?_method=PUT",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}{{leti_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "PUT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Get_Id_Lesson_time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1242aa16-be5a-46d8-b9d2-3b98be0a5506",
+						"exec": [
+							"var js=pm.response.json()",
+							"tests[\"节次编号为：\"+js.leti_number+\"|节次编号应为：\"+data.leti_number2]=js.leti_number==data.leti_number2;",
+							"tests[\"课程开始时间为：\"+js.leti_begin_time+\"|课程开始时间应为：\"+data.leti_begin_time2]=js.leti_begin_time==data.leti_begin_time2;",
+							"tests[\"课程结束时间为：\"+js.leti_end_time+\"|课程结束时间应为：\"+data.leti_end_time2]=js.leti_end_time==data.leti_end_time2;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}{{leti_id}}?_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}{{leti_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_Lesson_time",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}{{leti_id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}{{leti_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

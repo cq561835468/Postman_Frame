@@ -1,0 +1,162 @@
+{
+	"info": {
+		"_postman_id": "c98b5f14-1e41-43da-bd4b-948fe64378e5",
+		"name": "Pj-Area_PUT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Create_Area",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\"area_code\": \"{{area_code}}\", \n\"area_name\": \"{{area_name}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Put_Area",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_name\": \"{{area_name}}\",\r\n  \"area_status\":\"{{area_status}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}/{{area_code}}?_method=PUT",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					],
+					"path": [
+						"{{area_code}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "PUT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_Area",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}/{{area_code}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					],
+					"path": [
+						"{{area_code}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f5d4d144-f0e5-445a-8650-a3e1085e86d2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b58c6337-beba-42bf-bf9c-bca9da0708e1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

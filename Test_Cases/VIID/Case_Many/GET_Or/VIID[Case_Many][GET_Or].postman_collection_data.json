@@ -1,0 +1,15 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8083",
+	"Interface_st":"/VIID/",
+	"Search_Express":"Cases?(Cases.State=1)OR(Cases.TimeUpLimit=20180910000000)",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"Search_Field":"State",
+	"Search_Field2":"TimeUpLimit",
+	"Value":1,
+	"Value2":"20180910000000"
+}
+]
+

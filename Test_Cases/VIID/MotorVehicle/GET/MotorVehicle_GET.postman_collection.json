@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "31ec08eb-1733-4720-aeb8-067e4d9b64bc",
+		"name": "MotorVehicle_GET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "380b470d-0dd4-4f4b-86fa-dd3e07474592",
+			"name": "MotorVehicle_GET",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0e568cf0-0453-4959-9770-2f5731958e3b",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"//状态码请求",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"console.log(jsonData)",
+							"//MotorVehicleID检查点",
+							"tests[\"MotorVehicleID: \"+jsonData.MotorVehicleObject.MotorVehicleID+\"|MotorVehicleID应为:\"+data.MotorVehicleID] = jsonData.MotorVehicleObject.MotorVehicleID == data.MotorVehicleID;",
+							"// InfoKind检查点",
+							"var InfoKind_sp = data.InfoKind.split('|')",
+							"tests[\"InfoKind: \"+jsonData.MotorVehicleObject.InfoKind+\"|InfoKind应为:\"+data.InfoKind] = InfoKind_sp.indexOf(jsonData.MotorVehicleObject.InfoKind+\"\") != -1",
+							"//SourceID检查点",
+							"tests[\"SourceID:\"+jsonData.MotorVehicleObject.SourceID] = jsonData.MotorVehicleObject.SourceID ",
+							"//TollgateID检查点",
+							"tests[\"TollgateID:\"+jsonData.MotorVehicleObject.TollgateID] = jsonData.MotorVehicleObject.TollgateID;",
+							"//DeviceID检查点",
+							"tests[\"DeviceID:\"+jsonData.MotorVehicleObject.DeviceID] = jsonData.MotorVehicleObject.DeviceID;",
+							"//StorageUrl1检查点",
+							"tests[\"StorageUrl1:\"+jsonData.MotorVehicleObject.StorageUrl1] = jsonData.MotorVehicleObject.StorageUrl1;",
+							"//LeftTopX检查点",
+							"tests[\"LeftTopX: \"+jsonData.MotorVehicleObject.LeftTopX] = jsonData.MotorVehicleObject.LeftTopX >0;",
+							"//LeftTopY检查点",
+							"tests[\"LeftTopY: \"+jsonData.MotorVehicleObject.LeftTopY] = jsonData.MotorVehicleObject.LeftTopY >0;",
+							"//RightBtmX检查点",
+							"tests[\"RightBtmX: \"+jsonData.MotorVehicleObject.RightBtmX] = jsonData.MotorVehicleObject.RightBtmX >0;",
+							"//RightBtmY检查点",
+							"tests[\"RightBtmY: \"+jsonData.MotorVehicleObject.RightBtmY] = jsonData.MotorVehicleObject.RightBtmY >0;",
+							"//HasPlate检查点",
+							"var HasPlate_sp = data.HasPlate.split('|')",
+							"tests[\"HasPlate: \"+jsonData.MotorVehicleObject.HasPlate+\"|HasPlate应为:\"+data.HasPlate] = HasPlate_sp.indexOf(jsonData.MotorVehicleObject.HasPlate+\"\") != -1",
+							"",
+							"//PlateClass检查点",
+							"var PlateClass_sp = data.PlateClass.split('|')",
+							"tests[\"PlateClass: \"+jsonData.MotorVehicleObject.PlateClass+\"|PlateClass应为:\"+data.PlateClass] = PlateClass_sp.indexOf(jsonData.MotorVehicleObject.PlateClass+\"\") != -1",
+							"",
+							"//PlateColor检查点",
+							"var PlateColor_sp = data.PlateColor.split('|')",
+							"tests[\"PlateColor: \"+jsonData.MotorVehicleObject.PlateColor+\"|PlateColor应为:\"+data.PlateColor] = PlateColor_sp.indexOf(jsonData.MotorVehicleObject.PlateColor+\"\") != -1",
+							"//VehicleColor检查点",
+							"var VehicleColor_sp = data.VehicleColor.split('|')",
+							"tests[\"VehicleColor: \"+jsonData.MotorVehicleObject.VehicleColor+\"|VehicleColor应为:\"+data.VehicleColor] = VehicleColor_sp.indexOf(jsonData.MotorVehicleObject.VehicleColor+\"\") != -1",
+							"//Sunvisor检查点",
+							"var Sunvisor_sp = data.Sunvisor.split('|')",
+							"tests[\"Sunvisor: \"+jsonData.MotorVehicleObject.Sunvisor+\"|Sunvisor应为:\"+data.Sunvisor] = Sunvisor_sp.indexOf(jsonData.MotorVehicleObject.Sunvisor+\"\") != -1",
+							"",
+							"//SafetyBelt检查点",
+							"var SafetyBelt_sp = data.SafetyBelt.split('|')",
+							"tests[\"SafetyBelt: \"+jsonData.MotorVehicleObject.SafetyBelt+\"|SafetyBelt应为:\"+data.SafetyBelt] = SafetyBelt_sp.indexOf(jsonData.MotorVehicleObject.SafetyBelt+\"\") != -1",
+							"//Calling检查点",
+							"var Calling_sp = data.Calling.split('|')",
+							"tests[\"Calling: \"+jsonData.MotorVehicleObject.Calling+\"|Calling应为:\"+data.Calling] = Calling_sp.indexOf(jsonData.MotorVehicleObject.Calling+\"\") != -1",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{MotorVehicleID}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{MotorVehicleID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

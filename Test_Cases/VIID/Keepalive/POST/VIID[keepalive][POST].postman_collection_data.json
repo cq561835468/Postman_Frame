@@ -1,0 +1,15 @@
+[
+{
+	"需要输入参数":">>",
+	"Vcol_Url":"10.85.7.62:8081",
+	"Interface":"/VIID/System/Keepalive",
+	"DeviceID":"31000000001320000004",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"StatusCode":"0",
+	"Request_Url":"/VIID/System/Keepalive",
+	"StatusString":"",
+	"id":"DeviceID"
+}
+]
+

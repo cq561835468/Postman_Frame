@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "e91065db-4ddc-454b-86e1-777db2114b97",
+		"name": "VIID[pic_one][delete]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "单个图像数据删除（Info）",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b596930-e17c-4ceb-af45-89314eb64cfd",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData)",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// StatusCode检查点",
+							"var a =data.Interface_st+data.ImageID+data.Interface_ed;",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusObject.RequestURL+\"|StatusCode应为:\"+a] = jsonData.ResponseStatusObject.RequestURL == a;",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusObject.StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusObject.StatusCode == data.StatusCode; ",
+							"tests[\" StatusString: \"+jsonData.ResponseStatusObject.StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusObject.StatusString == data.StatusString !==0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{ImageID}}{{Interface_ed}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{ImageID}}{{Interface_ed}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "458a20e9-95cc-4228-b224-6971ff52330f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "be7f807a-6ecb-437a-baab-baf7f7134dbb",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

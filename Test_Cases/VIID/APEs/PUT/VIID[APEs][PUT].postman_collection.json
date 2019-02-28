@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "5c12fa8d-daa0-422b-a53e-3f1168bd2287",
+		"name": "VIID[APEs][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "c2337fc9-1336-4a9e-884c-ad0e5c0e2ad6",
+			"name": "VIID[APEs][PUT]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e64faf63-8750-4011-a33e-c8a6791629eb",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// StatusCode检查点",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusListObject.ResponseStatusObject.RequestURL+\"|RequestURL应为:\"+data.Interface_st+data.ApeID] = jsonData.ResponseStatusListObject.ResponseStatusObject.RequestURL == data.Interface_st+data.ApeID; ",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusListObject.ResponseStatusObject.StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusListObject.ResponseStatusObject.StatusCode == data.StatusCode; ",
+							"tests[\" StatusString: \"+jsonData.ResponseStatusListObject.ResponseStatusObject.StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusListObject.ResponseStatusObject.StatusString == data.StatusString !==0;",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"APEListObject\": {\r\n\"APEObject\": [{\t\r\n\t\"ApeID\": \"{{ApeID}}\",\r\n\t\"Name\": \"{{Name}}\",\r\n\t\"Model\": \"{{Model}}\",\r\n\t\"IPAddr\": \"{{IPAddr}}\",\r\n\t\"Port\": \"{{Port}}\",\r\n\t\"Longtitude\": \"{{Longtitude}}\",\r\n\t\"Latitude\": \"{{Latitude}}\",\r\n\t\"PlaceCode\":\"{{PlaceCode}}\",\r\n\t\"IsOnline\":\"{{IsOnline}}\"\r\n}\r\n\t]\r\n}\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

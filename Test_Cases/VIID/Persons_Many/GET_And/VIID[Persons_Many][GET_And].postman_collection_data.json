@@ -1,0 +1,13 @@
+[{
+    "需要输入参数":">>",
+	"url":"10.85.7.62:8083",
+	"url_st":"/VIID/Persons",
+	"Search_Express":"?((Person.LeftTopX=12)AND(Person.LeftTopY=8))",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"Search_Field1":"LeftTopX",
+	"Search_Field2":"LeftTopY",
+	"Value1":12,
+	"Value2":8
+}
+]

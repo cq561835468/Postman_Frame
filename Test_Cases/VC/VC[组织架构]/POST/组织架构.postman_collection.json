@@ -1,0 +1,321 @@
+{
+	"info": {
+		"_postman_id": "853a7067-3d11-413e-9252-356368cae8b6",
+		"name": "组织架构",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "强制登录[组织]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "923d9081-bcba-44a9-874c-e63ce482b44d",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"console.log(jsonData.Code)",
+							"tests[\"resultCode: \"+jsonData.resultCode+\"|resultCode应为:\"+data.resultCode] = jsonData.resultCode == data.resultCode;",
+							"tests[\"resultMsg: \"+jsonData.resultMsg+\"|resultMsg应为:\"+data.resultMsg] = jsonData.resultMsg == data.resultMsg;",
+							"tests[\"sessionId: \"+jsonData.sessionId] = jsonData.sessionId;",
+							"pm.environment.set(\"sessionId\", jsonData.sessionId);",
+							"tests[\"ip: \"+jsonData.ip+\"|ip应为:\"+data.ip] = jsonData.ip == data.ip;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userCode\": \"{{userCode}}\",\n    \"userPassword\": \"{{userPassword}}\"\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取单位用户树(web端专用)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a73f52bd-e1cf-4118-b052-e1c014c9facc",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"console.log(jsonData.Code)",
+							"var datas = jsonData",
+							"var lang = datas.length",
+							"tests[\"当前返回数量为: \"+lang] = lang;",
+							"for (var key in datas){",
+							"    //console.log(key)",
+							"    for (var keyy in datas[key]){",
+							"        ",
+							"        //console.log(keyy)",
+							"        if (keyy == data.Search_Field4){",
+							"            pm.test(\"当前id为: \"+datas[key][keyy], function () {",
+							"                pm.expect((datas[key][keyy]) !== 0).to.eql(true);",
+							"          ",
+							"        });",
+							"        }",
+							"        else if (keyy == data.Search_Field5){",
+							"            pm.test(\"当前name为: \"+datas[key][keyy], function () {",
+							"                pm.expect((datas[key][keyy]) !== 0).to.eql(true);",
+							"          ",
+							"        });",
+							"        }",
+							"        else if (keyy == data.Search_Field3){",
+							"            //pm.test(\"当前nodeType为: \"+datas[key][keyy],function () {",
+							"                //console.log([\"0\",\"2\"].indexOf(\"0\"))",
+							"               //pm.expect(([\"0\",\"2\"].indexOf(\"2\")) !== -1).to.eql(true)  ",
+							"               //console.log(\"0\".indexOf([\"6\",\"2\"]))",
+							"            //});",
+							"            ",
+							"            pm.test(\"当前nodeType为: \"+datas[key][keyy]+\"|nodeType应为\"+data.nodeType, function () {",
+							"                var nodeType_sp = data.nodeType.split('|')",
+							"                console.log(nodeType_sp.indexOf(datas[key][keyy]+\"\"))",
+							"                console.log(nodeType_sp)",
+							"                console.log(datas[key][keyy])",
+							"    pm.expect((nodeType_sp.indexOf(datas[key][keyy]+\"\"))!==-1).to.eql(true) ;",
+							"          ",
+							"        });",
+							"        }",
+							"        else if (jsonData[0].nodeType == 2 && keyy == data.Search_Field2){",
+							"            //pm.test(\"当前nodeType为: \"+datas[key][keyy],function () {",
+							"                //console.log([\"0\",\"2\"].indexOf(\"0\"))",
+							"               //pm.expect(([\"0\",\"2\"].indexOf(\"2\")) !== -1).to.eql(true)  ",
+							"               //console.log(\"0\".indexOf([\"6\",\"2\"]))",
+							"            //});",
+							"            ",
+							"            pm.test(\"当前isOnline为: \"+datas[key][keyy]+\"|isOnline应为\"+data.isOnline, function () {",
+							"                var isOnline_sp = data.isOnline.split('|')",
+							"    pm.expect((isOnline_sp.indexOf(datas[key][keyy]+\"\"))!==-1).to.eql(true) ;",
+							"          ",
+							"        });",
+							"        }",
+							"        else if (keyy == data.Search_Field){",
+							"            //pm.test(\"当前nodeType为: \"+datas[key][keyy],function () {",
+							"                //console.log([\"0\",\"2\"].indexOf(\"0\"))",
+							"               //pm.expect(([\"0\",\"2\"].indexOf(\"2\")) !== -1).to.eql(true)  ",
+							"               //console.log(\"0\".indexOf([\"6\",\"2\"]))",
+							"            //});",
+							"            ",
+							"            pm.test(\"当前parent为: \"+datas[key][keyy]+\"|parent应为:true|false\", function () {",
+							"                var x = (data.true || data.false)",
+							"        console.log(x)",
+							"        pm.expect(x).to.eql(true);",
+							"          ",
+							"        });",
+							"        }",
+							"         else if (keyy == data.Search_Field1){",
+							"            //pm.test(\"当前nodeType为: \"+datas[key][keyy],function () {",
+							"                //console.log([\"0\",\"2\"].indexOf(\"0\"))",
+							"               //pm.expect(([\"0\",\"2\"].indexOf(\"2\")) !== -1).to.eql(true)  ",
+							"               //console.log(\"0\".indexOf([\"6\",\"2\"]))",
+							"            //});",
+							"            ",
+							"            pm.test(\"当前isParent为: \"+datas[key][keyy]+\"|isParent应为:true|false\", function () {",
+							"                var x = (data.true || data.false)",
+							"        console.log(x)",
+							"        pm.expect(x).to.eql(true);",
+							"          ",
+							"        });",
+							"        }",
+							"        ",
+							"        ",
+							"    }",
+							"    ",
+							"}",
+							"pm.environment.set(\"nodeId\",jsonData[0].id );"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st4}}{{sessionId}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st4}}{{sessionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取线路接口（增量）",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1c2af1e-04fb-4022-bc44-8303300a4df9",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"console.log(jsonData.Code)",
+							"tests[\"resultCode: \"+jsonData.resultCode+\"|resultCode应为:\"+data.resultCode] = jsonData.resultCode == data.resultCode;",
+							"tests[\"resultMsg: \"+jsonData.resultMsg+\"|resultMsg应为:\"+data.resultMsg] = jsonData.resultMsg == data.resultMsg;",
+							"tests[\"snapshotStr: \"+jsonData.snapshotStr] = jsonData.snapshotStr;",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st5}}{{sessionId}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st5}}{{sessionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "单位用户树搜索",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d91713db-7733-4899-b002-3e7b36a37967",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"console.log(jsonData.Code)",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st5}}{{sessionId}}{{nodeType1}}{{nodeId}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st5}}{{sessionId}}{{nodeType1}}{{nodeId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "增量获取通讯录群组接口",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fd697676-97da-4739-8e4e-fca6d3837191",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"console.log(jsonData.Code)",
+							"tests[\"resultCode: \"+jsonData.resultCode+\"|resultCode应为:\"+data.resultCode] = jsonData.resultCode == data.resultCode;",
+							"tests[\"resultMsg: \"+jsonData.resultMsg+\"|resultMsg应为:\"+data.resultMsg] = jsonData.resultMsg == data.resultMsg;",
+							"tests[\"snapshotStr: \"+jsonData.snapshotStr] = jsonData.snapshotStr;",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st6}}{{sessionId}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st6}}{{sessionId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "增量获取通讯录单位接口",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c21fd2b4-34e3-448f-b6af-c7e3f4def2f2",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"console.log(jsonData.Code)",
+							"tests[\"resultCode: \"+jsonData.resultCode+\"|resultCode应为:\"+data.resultCode] = jsonData.resultCode == data.resultCode;",
+							"tests[\"resultMsg: \"+jsonData.resultMsg+\"|resultMsg应为:\"+data.resultMsg] = jsonData.resultMsg == data.resultMsg;",
+							"tests[\"snapshotStr: \"+jsonData.snapshotStr] = jsonData.snapshotStr;",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st7}}{{sessionId}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st7}}{{sessionId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

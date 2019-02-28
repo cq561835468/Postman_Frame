@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "2a07b184-86e1-4fde-b25a-c3e91ad5d6dd",
+		"name": "VIID[pic_one][GET]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "单个图像数据查询（Info）",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4a8157ec-61e3-460c-8072-0da4e1bbdded",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"// ImageID检查点",
+							"tests[\"ImageID: \"+jsonData.ImageInfoObject.ImageID+\"|ImageIDL应为:\"+data.ImageID] = jsonData.ImageInfoObject.ImageID == data.ImageID; ",
+							"// InfoKind检查点",
+							"",
+							"var InfoKind_sp = data.InfoKind.split('|')",
+							"tests[\"InfoKind: \"+jsonData.ImageInfoObject.InfoKind+\"|InfoKind应为:\"+data.InfoKind] = InfoKind_sp.indexOf(jsonData.ImageInfoObject.InfoKind+\"\") != -1",
+							"// ImageSource检查点",
+							"var ImageSource_sp = data.ImageSource.split('|')",
+							"tests[\"ImageSource: \"+jsonData.ImageInfoObject.ImageSource+\"|ImageSource应为:\"+data.ImageSource] = ImageSource_sp.indexOf(jsonData.ImageInfoObject.ImageSource+\"\") != -1",
+							"// EventSort检查点",
+							"var EventSort_sp = data.EventSort.split('|')",
+							"tests[\"EventSort: \"+jsonData.ImageInfoObject.EventSort+\"|EventSort应为:\"+data.EventSort] = EventSort_sp.indexOf(jsonData.ImageInfoObject.EventSort+\"\") != -1",
+							"// FileFormat检查点",
+							"tests[\"FileFormat: \"+jsonData.ImageInfoObject.FileFormat] = jsonData.ImageInfoObject.FileFormat",
+							"// ShotTime检查点",
+							"tests[\"ShotTime: \"+jsonData.ImageInfoObject.ShotTime] = jsonData.ImageInfoObject.ShotTime",
+							"// Title检查点",
+							"tests[\"Title: \"+jsonData.ImageInfoObject.Title] = jsonData.ImageInfoObject.Title",
+							"// ContentDescription检查点",
+							"tests[\"ContentDescription: \"+jsonData.ImageInfoObject.ContentDescription] = jsonData.ImageInfoObject.ContentDescription",
+							"",
+							"// ShotPlaceFullAdress检查点",
+							"tests[\"ShotPlaceFullAdress: \"+jsonData.ImageInfoObject.ShotPlaceFullAdress] = jsonData.ImageInfoObject.ShotPlaceFullAdress",
+							"// EventSort检查点",
+							"var SecretLevelType_sp = data.SecretLevelType.split('|')",
+							"tests[\"SecretLevelType: \"+jsonData.ImageInfoObject.SecretLevelType+\"|SecretLevelType应为:\"+data.SecretLevelType] = SecretLevelType_sp.indexOf(jsonData.ImageInfoObject.SecretLevelType+\"\") != -1",
+							"tests[\"KDExpiredDate: \"+jsonData.ImageInfoObject.KDExpiredDate] = jsonData.ImageInfoObject.KDExpiredDate",
+							"// Width检查点",
+							"tests[\"Width为: \"+jsonData.ImageInfoObject.Width] = jsonData.ImageInfoObject.Width > 0;",
+							"// Height检查点",
+							"tests[\"Height: \"+jsonData.ImageInfoObject.Height] = jsonData.ImageInfoObject.Height > 0;",
+							"//CollectorName、CollectorOrg、EntryClerk、EntryClerkOrg检查点",
+							"if (jsonData.ImageInfoObject.InfoKind == 2) {",
+							"    // ShotPlaceCode检查点",
+							"    tests[\"ShotPlaceCode: \"+jsonData.ImageInfoObject.ShotPlaceCode] = jsonData.ImageInfoObject.ShotPlaceCode",
+							"    tests[\"CollectorName: \"+jsonData.ImageInfoObject.CollectorName] = jsonData.ImageInfoObject.CollectorName",
+							"    tests[\"CollectorOrg: \"+jsonData.ImageInfoObject.CollectorOrg] = jsonData.ImageInfoObject.CollectorOrg",
+							"    tests[\"EntryClerk: \"+jsonData.ImageInfoObject.EntryClerk] = jsonData.ImageInfoObject.EntryClerk",
+							"    tests[\"EntryClerkOrg: \"+jsonData.ImageInfoObject.EntryClerkOrg] = jsonData.ImageInfoObject.EntryClerkOrg",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{ImageID}}{{Interface_ed}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{ImageID}}{{Interface_ed}}"
+					]
+				},
+				"description": "/VIID/Images/<ID>/Info\n支持对单个图像对象信息的查询、修改、删除。"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "682ab091-035a-4b97-9444-7e59284299ba",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e7ce01bb-fd49-43af-8514-0ade8150b3da",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

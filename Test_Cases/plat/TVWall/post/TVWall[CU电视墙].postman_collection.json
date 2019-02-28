@@ -1,0 +1,419 @@
+{
+	"info": {
+		"_postman_id": "b3ded27e-0fce-485b-b1e8-b839206ef386",
+		"name": "TVWall[CU电视墙]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "009c035e-3482-422b-b95d-997a5713b67e",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.environment.set(\"session\", jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]);",
+							"",
+							"//获取session，传递给后续的接口使用"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n  <SOAP-ENV:Body>\r\n    <cusdk:Login>\r\n      <cusdk:loginReq>\r\n        <cusdk:userName>{{log_userName}}</cusdk:userName>\r\n        <cusdk:password>{{log_password}}</cusdk:password>\r\n        <cusdk:cusdkVersion>{{cusdkVersion}}</cusdk:cusdkVersion>\r\n        <cusdk:clientType>{{clientType}}</cusdk:clientType>\r\n        <cusdk:isSupportNA>{{isSupportNA}}</cusdk:isSupportNA>\r\n        <cusdk:webCUClientAddr/>\r\n      </cusdk:loginReq>\r\n    </cusdk:Login>\r\n  </SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>\r\n"
+				},
+				"url": {
+					"raw": "{{plat_IP}}{{plat_url}}",
+					"host": [
+						"{{plat_IP}}{{plat_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TVWall_Create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a5eb6afa-e351-4d5f-8e88-9459967abc5a",
+						"exec": [
+							"/*<?xml version=\"1.0\" encoding=\"utf-8\"?>\r",
+							"\r",
+							"<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r",
+							"  <SOAP-ENV:Body>\r",
+							"    <cusdk:CreateTVWallRsp>\r",
+							"      <cusdk:TVWallId>72519f17407641f88542a8ba10fdeb49@ShangHai_Test</cusdk:TVWallId>\r",
+							"      <cusdk:creatTime>2019-02-25T05:54:06Z</cusdk:creatTime>\r",
+							"      <cusdk:session>22fd73eb639346f08f738706a59b5ab0@ShangHai_Test</cusdk:session>\r",
+							"      <cusdk:errorCode>0</cusdk:errorCode>\r",
+							"    </cusdk:CreateTVWallRsp>\r",
+							"  </SOAP-ENV:Body>\r",
+							"</SOAP-ENV:Envelope>*/\r",
+							"\r",
+							"var jsonData = xml2Json(responseBody);\r",
+							"var sessionID = pm.environment.get(\"session\");\r",
+							"/*pm.enviroment.set(\"TVWallId\",jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateTVWallRsp\"][\"cusdk:TVWallId\"]);*/\r",
+							"pm.environment.set(\"TVWallId\",jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateTVWallRsp\"][\"cusdk:TVWallId\"]);\r",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;\r",
+							"tests[\"session为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateTVWallRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateTVWallRsp\"][\"cusdk:session\"] == sessionID;\r",
+							"tests[\"errorCode为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateTVWallRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateTVWallRsp\"][\"cusdk:errorCode\"] == data.errorCode ;\r",
+							"tests[\"TVWallId为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateTVWallRsp\"][\"cusdk:TVWallId\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateTVWallRsp\"][\"cusdk:TVWallId\"];\r",
+							"tests[\"creatTime为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateTVWallRsp\"][\"cusdk:creatTime\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateTVWallRsp\"][\"cusdk:creatTime\"];"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n  <SOAP-ENV:Body>\r\n    <cusdk:CreateTVWall>\r\n      <cusdk:req xsi:type=\"cusdk:CreateTVWallReq\">\r\n        <cusdk:session>{{session}}</cusdk:session>\r\n        <cusdk:TVWallInfo>\r\n          <cusdk:tvwallId/>\r\n          <cusdk:domainId>{{domainId}}</cusdk:domainId>\r\n          <cusdk:name>{{name}}</cusdk:name>\r\n          <cusdk:tvNum>{{tvNum}}</cusdk:tvNum>\r\n          <cusdk:tvwallStyle>{{tvwallStyle}}</cusdk:tvwallStyle>\r\n          <cusdk:tvwallCustomStyleData>&lt;CTransition&gt;&lt;m_rectfs size=\"1\"&gt;&lt;item index=\"0\"&gt;&lt;m_left&gt;0&lt;/m_left&gt;&lt;m_right&gt;1.0018159806295399&lt;/m_right&gt;&lt;m_top&gt;0&lt;/m_top&gt;&lt;m_bottom&gt;1.0040983606557377&lt;/m_bottom&gt;&lt;m_ratio&gt;1&lt;/m_ratio&gt;&lt;/item&gt;&lt;/m_rectfs&gt;&lt;/CTransition&gt;</cusdk:tvwallCustomStyleData>\r\n          <cusdk:desc/>\r\n          <cusdk:createTime>{{createTime}}</cusdk:createTime>\r\n        </cusdk:TVWallInfo>\r\n      </cusdk:req>\r\n    </cusdk:CreateTVWall>\r\n  </SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>\r\n"
+				},
+				"url": {
+					"raw": "{{plat_IP}}{{plat_url}}",
+					"host": [
+						"{{plat_IP}}{{plat_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TVWallQueryScheme",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7df55692-a359-46cd-a91b-6997a0e6f669",
+						"exec": [
+							"/*<?xml version=\"1.0\" encoding=\"utf-8\"?>\r",
+							"\r",
+							"<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r",
+							"  <SOAP-ENV:Body>\r",
+							"    <cusdk:TVWallQuerySchemeRsp>\r",
+							"      <cusdk:session>22fd73eb639346f08f738706a59b5ab0@ShangHai_Test</cusdk:session>\r",
+							"      <cusdk:errorCode>0</cusdk:errorCode>\r",
+							"    </cusdk:TVWallQuerySchemeRsp>\r",
+							"  </SOAP-ENV:Body>\r",
+							"</SOAP-ENV:Envelope>*/\r",
+							"\r",
+							"var jsonData = xml2Json(responseBody);\r",
+							"var sessionID = pm.environment.get(\"session\");\r",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;\r",
+							"tests[\"session为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallQuerySchemeRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallQuerySchemeRsp\"][\"cusdk:session\"] == sessionID;\r",
+							"tests[\"errorCode为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallQuerySchemeRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallQuerySchemeRsp\"][\"cusdk:errorCode\"] == data.errorCode ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n  <SOAP-ENV:Body>\r\n    <cusdk:TVWallQueryScheme>\r\n      <cusdk:req xsi:type=\"cusdk:TVWallQuerySchemeReq\">\r\n        <cusdk:session>{{session}}</cusdk:session>\r\n        <cusdk:tvWallId>{{TVWallId}}</cusdk:tvWallId>\r\n      </cusdk:req>\r\n    </cusdk:TVWallQueryScheme>\r\n  </SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>\r\n"
+				},
+				"url": {
+					"raw": "{{plat_IP}}{{plat_url}}",
+					"host": [
+						"{{plat_IP}}{{plat_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TVWall_AddDecoder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bca6eaf-9379-41ba-a47a-4fb95d6b8a44",
+						"exec": [
+							"/*<?xml version=\"1.0\" encoding=\"utf-8\"?>\r",
+							"\r",
+							"<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r",
+							"  <SOAP-ENV:Body>\r",
+							"    <cusdk:ModifyTVWallRsp>\r",
+							"      <cusdk:session>22fd73eb639346f08f738706a59b5ab0@ShangHai_Test</cusdk:session>\r",
+							"      <cusdk:errorCode>0</cusdk:errorCode>\r",
+							"    </cusdk:ModifyTVWallRsp>\r",
+							"  </SOAP-ENV:Body>\r",
+							"</SOAP-ENV:Envelope>*/\r",
+							"\r",
+							"var jsonData = xml2Json(responseBody);\r",
+							"var sessionID = pm.environment.get(\"session\");\r",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;\r",
+							"tests[\"session为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyTVWallRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyTVWallRsp\"][\"cusdk:session\"] == sessionID;\r",
+							"tests[\"errorCode为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyTVWallRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyTVWallRsp\"][\"cusdk:errorCode\"] == data.errorCode ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n  <SOAP-ENV:Body>\r\n    <cusdk:ModifyTVWall>\r\n      <cusdk:req xsi:type=\"cusdk:ModifyTVWallReq\">\r\n        <cusdk:session>{{session}}</cusdk:session>\r\n        <cusdk:TVWallInfo>\r\n          <cusdk:tvwallId>{{TVWallId}}</cusdk:tvwallId>\r\n          <cusdk:domainId>{{domainId}}</cusdk:domainId>\r\n          <cusdk:name>{{name}}</cusdk:name>\r\n          <cusdk:tvNum>{{tvNum}}</cusdk:tvNum>\r\n          <cusdk:tvwallStyle>{{tvwallStyle}}</cusdk:tvwallStyle>\r\n          <cusdk:tvwallCustomStyleData>&lt;CTransition&gt;&lt;m_rectfs size=\"1\"&gt;&lt;item index=\"0\"&gt;&lt;m_left&gt;0&lt;/m_left&gt;&lt;m_right&gt;1.0018159806295399&lt;/m_right&gt;&lt;m_top&gt;0&lt;/m_top&gt;&lt;m_bottom&gt;1.0040983606557377&lt;/m_bottom&gt;&lt;m_ratio&gt;1&lt;/m_ratio&gt;&lt;/item&gt;&lt;/m_rectfs&gt;&lt;/CTransition&gt;</cusdk:tvwallCustomStyleData>\r\n          <cusdk:desc/>\r\n          <cusdk:createTime>2019-02-25T05:54:06Z</cusdk:createTime>\r\n          <cusdk:tvDecoderBind>\r\n            <cusdk:tvId>{{tvId}}</cusdk:tvId>\r\n            <cusdk:decoderId>{{decoderId}}</cusdk:decoderId>\r\n            <cusdk:decoderOutputId>{{decoderOutputId}}</cusdk:decoderOutputId>\r\n          </cusdk:tvDecoderBind>\r\n        </cusdk:TVWallInfo>\r\n      </cusdk:req>\r\n    </cusdk:ModifyTVWall>\r\n  </SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>\r\n"
+				},
+				"url": {
+					"raw": "{{plat_IP}}{{plat_url}}",
+					"host": [
+						"{{plat_IP}}{{plat_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TVWall_StartPlayer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "203dc533-a8b0-4cd7-b2a0-aac2e065731a",
+						"exec": [
+							"/*<?xml version=\"1.0\" encoding=\"utf-8\"?>\r",
+							"\r",
+							"<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r",
+							"  <SOAP-ENV:Body>\r",
+							"    <cusdk:TVWallStartPlayRsp>\r",
+							"      <cusdk:session>0854a77f76414d9fa93f6b0bcc181cca@ShangHai_Test</cusdk:session>\r",
+							"      <cusdk:errorCode>0</cusdk:errorCode>\r",
+							"    </cusdk:TVWallStartPlayRsp>\r",
+							"  </SOAP-ENV:Body>\r",
+							"</SOAP-ENV:Envelope>*/\r",
+							"\r",
+							"var jsonData = xml2Json(responseBody);\r",
+							"var sessionID = pm.environment.get(\"session\");\r",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;\r",
+							"tests[\"session为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallStartPlayRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallStartPlayRsp\"][\"cusdk:session\"] == sessionID;\r",
+							"tests[\"errorCode为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallStartPlayRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallStartPlayRsp\"][\"cusdk:errorCode\"] == data.errorCode ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n  <SOAP-ENV:Body>\r\n    <cusdk:TVWallStartPlay>\r\n      <cusdk:req xsi:type=\"cusdk:TVWallStartPlayReq\">\r\n        <cusdk:session>{{session}}</cusdk:session>\r\n        <cusdk:TVWallId>{{TVWallId}}</cusdk:TVWallId>\r\n        <cusdk:tvId>{{tvId}}</cusdk:tvId>\r\n        <cusdk:tvDivId>{{tvDivId}}</cusdk:tvDivId>\r\n        <cusdk:encoderChn>\r\n          <cusdk:deviceId>{{deviceId}}</cusdk:deviceId>\r\n          <cusdk:channelId>{{channelId}}</cusdk:channelId>\r\n        </cusdk:encoderChn>\r\n      </cusdk:req>\r\n    </cusdk:TVWallStartPlay>\r\n  </SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>\r\n"
+				},
+				"url": {
+					"raw": "{{plat_IP}}{{plat_url}}",
+					"host": [
+						"{{plat_IP}}{{plat_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TVWall_StopPlayer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "203dc533-a8b0-4cd7-b2a0-aac2e065731a",
+						"exec": [
+							"/*<?xml version=\"1.0\" encoding=\"utf-8\"?>\r",
+							"\r",
+							"<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r",
+							"  <SOAP-ENV:Body>\r",
+							"    <cusdk:TVWallStopPlayRsp>\r",
+							"      <cusdk:session>0854a77f76414d9fa93f6b0bcc181cca@ShangHai_Test</cusdk:session>\r",
+							"      <cusdk:errorCode>0</cusdk:errorCode>\r",
+							"    </cusdk:TVWallStopPlayRsp>\r",
+							"  </SOAP-ENV:Body>\r",
+							"</SOAP-ENV:Envelope>*/\r",
+							"\r",
+							"var jsonData = xml2Json(responseBody);\r",
+							"var sessionID = pm.environment.get(\"session\");\r",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;\r",
+							"tests[\"session为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallStopPlayRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallStopPlayRsp\"][\"cusdk:session\"] == sessionID;\r",
+							"tests[\"errorCode为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallStopPlayRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:TVWallStopPlayRsp\"][\"cusdk:errorCode\"] == data.errorCode ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n  <SOAP-ENV:Body>\r\n    <cusdk:TVWallStopPlay>\r\n      <cusdk:req xsi:type=\"cusdk:TVWallStopPlayReq\">\r\n        <cusdk:session>{{session}}</cusdk:session>\r\n        <cusdk:encoderChn>\r\n          <cusdk:deviceId/>\r\n          <cusdk:channelId>{{channelId}}</cusdk:channelId>\r\n        </cusdk:encoderChn>\r\n        <cusdk:TVWallId>{{TVWallId}}</cusdk:TVWallId>\r\n        <cusdk:tvId>{{tvId}}</cusdk:tvId>\r\n        <cusdk:tvDivId>{{tvDivId}}</cusdk:tvDivId>\r\n      </cusdk:req>\r\n    </cusdk:TVWallStopPlay>\r\n  </SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>\r\n"
+				},
+				"url": {
+					"raw": "{{plat_IP}}{{plat_url}}",
+					"host": [
+						"{{plat_IP}}{{plat_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TVWall_DelDecoder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8bca6eaf-9379-41ba-a47a-4fb95d6b8a44",
+						"exec": [
+							"/*<?xml version=\"1.0\" encoding=\"utf-8\"?>\r",
+							"\r",
+							"<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r",
+							"  <SOAP-ENV:Body>\r",
+							"    <cusdk:ModifyTVWallRsp>\r",
+							"      <cusdk:session>22fd73eb639346f08f738706a59b5ab0@ShangHai_Test</cusdk:session>\r",
+							"      <cusdk:errorCode>0</cusdk:errorCode>\r",
+							"    </cusdk:ModifyTVWallRsp>\r",
+							"  </SOAP-ENV:Body>\r",
+							"</SOAP-ENV:Envelope>*/\r",
+							"\r",
+							"var jsonData = xml2Json(responseBody);\r",
+							"var sessionID = pm.environment.get(\"session\");\r",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;\r",
+							"tests[\"session为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyTVWallRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyTVWallRsp\"][\"cusdk:session\"] == sessionID;\r",
+							"tests[\"errorCode为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyTVWallRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyTVWallRsp\"][\"cusdk:errorCode\"] == data.errorCode ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n  <SOAP-ENV:Body>\r\n    <cusdk:ModifyTVWall>\r\n      <cusdk:req xsi:type=\"cusdk:ModifyTVWallReq\">\r\n        <cusdk:session>{{session}}</cusdk:session>\r\n        <cusdk:TVWallInfo>\r\n          <cusdk:tvwallId>{{TVWallId}}</cusdk:tvwallId>\r\n          <cusdk:domainId>{{domainId}}</cusdk:domainId>\r\n          <cusdk:name>{{name}}</cusdk:name>\r\n          <cusdk:tvNum>{{tvNum}}</cusdk:tvNum>\r\n          <cusdk:tvwallStyle>{{tvwallStyle}}</cusdk:tvwallStyle>\r\n          <cusdk:tvwallCustomStyleData>&lt;CTransition&gt;&lt;m_rectfs size=\"1\"&gt;&lt;item index=\"0\"&gt;&lt;m_left&gt;0&lt;/m_left&gt;&lt;m_right&gt;1.0018159806295399&lt;/m_right&gt;&lt;m_top&gt;0&lt;/m_top&gt;&lt;m_bottom&gt;1.0040983606557377&lt;/m_bottom&gt;&lt;m_ratio&gt;1&lt;/m_ratio&gt;&lt;/item&gt;&lt;/m_rectfs&gt;&lt;/CTransition&gt;</cusdk:tvwallCustomStyleData>\r\n          <cusdk:desc/>\r\n          <cusdk:createTime>{{createTime}}</cusdk:createTime>\r\n        </cusdk:TVWallInfo>\r\n      </cusdk:req>\r\n    </cusdk:ModifyTVWall>\r\n  </SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>\r\n"
+				},
+				"url": {
+					"raw": "{{plat_IP}}{{plat_url}}",
+					"host": [
+						"{{plat_IP}}{{plat_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TVWall_del",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "248ff4fa-a041-4ef8-a073-002672222bfa",
+						"exec": [
+							"/*<?xml version=\"1.0\" encoding=\"utf-8\"?>\r",
+							"\r",
+							"<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r",
+							"  <SOAP-ENV:Body>\r",
+							"    <cusdk:DelTVWallRsp>\r",
+							"      <cusdk:session>22fd73eb639346f08f738706a59b5ab0@ShangHai_Test</cusdk:session>\r",
+							"      <cusdk:errorCode>0</cusdk:errorCode>\r",
+							"    </cusdk:DelTVWallRsp>\r",
+							"  </SOAP-ENV:Body>\r",
+							"</SOAP-ENV:Envelope>*/\r",
+							"\r",
+							"var jsonData = xml2Json(responseBody);\r",
+							"var sessionID = pm.environment.get(\"session\");\r",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;\r",
+							"tests[\"session为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:DelTVWallRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:DelTVWallRsp\"][\"cusdk:session\"] == sessionID;\r",
+							"tests[\"errorCode为：\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:DelTVWallRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:DelTVWallRsp\"][\"cusdk:errorCode\"] == data.errorCode ;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cusdk=\"urn:cusdk\">\r\n  <SOAP-ENV:Body>\r\n    <cusdk:DelTVWall>\r\n      <cusdk:req xsi:type=\"cusdk:DelTVWallReq\">\r\n        <cusdk:session>{{session}}</cusdk:session>\r\n        <cusdk:TVWallId>{{TVWallId}}</cusdk:TVWallId>\r\n      </cusdk:req>\r\n    </cusdk:DelTVWall>\r\n  </SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>\r\n"
+				},
+				"url": {
+					"raw": "{{plat_IP}}{{plat_url}}",
+					"host": [
+						"{{plat_IP}}{{plat_url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

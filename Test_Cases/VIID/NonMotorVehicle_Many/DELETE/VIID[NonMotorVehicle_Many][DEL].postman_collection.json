@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "e3627c61-67eb-46cf-94a2-a4af3ceefd29",
+		"name": "VIID[NonMotorVehicle_Many][DEL]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[NonMotorVehicles_Many][DEL]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a55891ec-6fc1-410d-9076-4825b1cfe467",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\" 状态码应为: \"+data.Re_State] = responseCode.code == data.Re_State",
+							"",
+							"for (var key in datas){",
+							"\tconsole.log(key)",
+							"\tfor (var keyy in datas[key]){",
+							"\t\tif (keyy == \"RequestURL\"){",
+							"\t\t\tpm.test(\"当前RequestURL为: \"+datas[key][keyy]+ \"应当为: \"+data.NonMotorVehicles_St1, function () {",
+							"\t\t\t    pm.expect(datas[key][keyy]).to.eql(data.NonMotorVehicles_St1)",
+							"\t\t\t\t\t\t",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusCode\"){",
+							"\t\t    pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusCode, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode)",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusString\"){",
+							"\t\t\tpm.test(\"当前StatusString为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusString, function () {",
+							"\t\t\t\tpm.expect(datas[key][keyy]).to.eql(data.StatusString)",
+							"\t\t\t })",
+							"\t\t}",
+							"\t}",
+							"}",
+							"\t"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{NonMotorVehicles_Url}}{{NonMotorVehicles_St1}}{{NonMotorVehicles_St2}}",
+					"host": [
+						"{{NonMotorVehicles_Url}}{{NonMotorVehicles_St1}}{{NonMotorVehicles_St2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

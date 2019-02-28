@@ -1,0 +1,29 @@
+[{
+	"需要输入参数":">>",
+	"Interfac_url":"172.16.120.33",
+	"Interface_st":"/cui/cui.fcgi",
+	"username":"admin@kadacom",
+	"password":"kedacom123",
+	"cusdkVersion":"2.0",
+	"clientType":"cuver",
+	"isSupportNA":false,
+	
+	"id":"6cd4d907a52d48f7a6d2e0e6c3ff108d@kadacom",
+	"type":"cusdk:TypeUser",
+	"deviceGroupId":"4630636646d640609f53626d919c6e02@kadacom",
+	"beginIndex":0,
+	"num":500,
+
+
+	"devId":"9dfe252ea9024b8f98eeaa4a4b960a2d@kadacom",
+
+
+	"id1":"43ef173cb3b4480ebdc15458947df0aa@kadacom",
+	"devId1":"7e63be8739c94a48b2f2f0b825554d9d@kadacom",
+	
+
+	"需要检验参数":">>",
+	"Re_State":200,
+	"errorCode":0
+}
+]

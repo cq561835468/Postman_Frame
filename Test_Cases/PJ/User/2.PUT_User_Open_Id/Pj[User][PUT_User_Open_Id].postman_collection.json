@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "bc9bc4a4-52a0-40d6-af2c-e6cd612bcd5b",
+		"name": "Pj-User_PUT_User_Open_Id",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Put_User_Open_Id_Teacher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ac7041c7-70d3-49f0-921b-5bf74bde592f",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\":\"{{area_code}}\",\r\n  \"user_code\": \"{{user_code}}\", \r\n  \"user_name\": \"{{user_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}{{URI_user_open_id}}{{user_open_id}}?_method=PUT",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}{{URI_user_open_id}}{{user_open_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "PUT"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,26 @@
+[
+	{
+		"Port":":10007",
+		"URI_school_year":"/school_year",
+		"URI_teacher":"/teacher",
+		"user_open_id_T":"a6121kedakedakedaliqiangteacher",
+		"user_code_T":"liqiangtea_code_022",
+		"user_email_T":"testtestliqiang@kedacom.com",
+		"user_phone_num_T":"13812344321",
+		"user_identifier_num_T":"340321197003222332",
+		"user_name_T":"张陈琪",
+		"user_gender_T":0,
+		"user_birthday_T":"1970-03-22",
+		"teac_in_service_status":1,
+		"URI_student_year":"/student_year",
+		"URI_administration_class":"/administration_class",
+		"adcl_code":"liqiangtestbanji",
+		"adcl_name":"李强测试班级",
+		"URI_academic_term":"/academic_term",
+		"acte_code":"2019-2020科达keda学年第一学期",
+		"acte_name":"科达keda第一学期",
+		"Re_State":200,
+		"success":"true",
+		"area_code":"a6741cecdd1b4a879a3512hekedakeda"
+	}
+]

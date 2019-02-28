@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "eb5f8d31-e397-424e-bac6-ac957a4ee402",
+		"name": "上传进度",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "上传进度",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c327cd31-09a8-4bb3-81e2-eedf7c51bd91",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+ data.Re_State]=responseCode.code==data.Re_State"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Url}}{{Url_st}}",
+					"host": [
+						"{{Url}}{{Url_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

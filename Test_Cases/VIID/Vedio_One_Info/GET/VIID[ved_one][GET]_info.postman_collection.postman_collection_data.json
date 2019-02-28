@@ -1,0 +1,30 @@
+[
+    {
+        "AudioFlag":"0|1",
+        "BeginTime":"\u975e\u7a7a\u5373\u53ef",
+        "CollectorID":"340023",
+        "DeviceID":"31000000001320000064",
+        "DeviceSNNo":"\u975e\u7a7a\u5373\u53ef",
+        "DeviceType":"DSJ-U2",
+        "EndTime":"\u975e\u7a7a\u5373\u53ef",
+        "EntryTime":"\u975e\u7a7a\u5373\u53ef",
+        "EventSort":"0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|21|22|23|24|25|26|27|28|29|30|31|32|33|34|35|36",
+        "FileFormat":"mp4",
+        "FileHash":"\u975e\u7a7a\u5373\u53ef",
+        "FileSize":">0",
+        "ImeiSn":"\u975e\u7a7a\u5373\u53ef",
+        "InfoKind":"0|1|2",
+        "Interface_Info":"/Info",
+        "Interface_Url":"10.85.7.62:8083",
+        "Interface_st":"/VIID/VideoSlices/",
+        "KDExpiredDate":"\u975e\u7a7a\u5373\u53ef",
+        "Re_State":"200",
+        "ShotPlaceLatitude":"\u975e\u7a7a\u5373\u53ef",
+        "ShotPlaceLongitude":"\u975e\u7a7a\u5373\u53ef",
+        "StoragePath":"http://10.85.7.62:80/video_31000000001320000064_2018061413_c7gd42.mp4",
+        "TimeErr":"\u975e\u7a7a\u5373\u53ef",
+        "Title":"\u975e\u7a7a\u5373\u53ef",
+        "VideoID":"31000000001320000064012018061219030201062",
+        "VideoProcFlag":"0"
+    }
+]

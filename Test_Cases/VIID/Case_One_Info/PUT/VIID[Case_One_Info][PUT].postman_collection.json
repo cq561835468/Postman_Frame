@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "1b985e78-978e-4740-b995-c2d1c12c3499",
+		"name": "VIID[Case_Info][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "单个案件数据修改",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a3b305ab-2253-4a39-b253-bc4f378c8a94",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == 200;",
+							"// StatusCode检查点",
+							"var a =data.Interface_st+data.CaseID;",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL+\"|StatusCode应为:\"+a] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL == a; ",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode == data.StatusCode; ",
+							"tests[\"StatusString: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString == data.StatusString; ",
+							"tests[\"Id: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].Id+\"|Id应为:\"+data.CaseID] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].Id == data.CaseID; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n        \"CaseObject\": [{\n        \t\"CaseInfo\": {\n                        \"CaseID\":\"{{CaseID}}\", \n                        \"CaseName\":\"{{CaseName}}\", \n                        \"CaseAbstract\":\"{{CaseAbstract}}\",  \n                        \"ClueID\":\"{{ClueID}}\",  \n                        \"TimeUpLimit\":\"{{TimeUpLimit}}\", \n                        \"TimeLowLimit\":\"{{TimeLowLimit}}\",\n                        \"CreateTime\":\"{{CreateTime}}\",\n                        \"PlaceCode\":\"{{PlaceCode}}\",\n                        \"PlaceFullAddress\":\"{{PlaceFullAddress}}\",\n                        \"State\":\"{{State}}\"}\n        }]}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{CaseID}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{CaseID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

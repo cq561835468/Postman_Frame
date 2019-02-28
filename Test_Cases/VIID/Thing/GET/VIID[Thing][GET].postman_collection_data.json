@@ -1,0 +1,13 @@
+[
+{
+	"需要输入参数":">>",
+	"Inter_Url":"10.85.7.62:8083",
+	"Inter_st1":"/VIID/Things/123456789",
+	
+	"需要验证参数":">>",
+	"StatusCode":0,
+	"Re_State":200,
+	"StatusString":""
+}
+]
+

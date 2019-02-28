@@ -1,0 +1,26 @@
+[
+	{
+		"Port":":10007",
+		"---Area_Creat[post]---":"",
+		"URI":"/area",
+		"area_code":"a6741cecdd1b4a879a351245b7bdchenqiqi234",
+		"area_name":"XXX第一小学_XN",
+		"---Academic_year[POST_PUT]---":"",
+		"URI_A":"/academic_year/",
+		"acye_begin_year":2017,
+		"acye_end_year":2018,
+		"acye_code":"2017-2018学年编号chenqi234",
+		"acye_name":"2017-2018学年chenqi234",
+		"---Academic_year---":"",
+		"URI_AY":"/academic_term",
+		"---Create_Academic_Term[post]---":"",
+		"acte_term":1,
+		"acte_code":"2017-2018学年第一学期编号",
+		"acte_name":"第一学期",
+		"acte_begin_date":"2017-09-01",
+		"acte_end_date":"2018-01-19",
+		"---Academic_year[post][Check]---":"",
+		"success":"true",
+		"Re_State":200
+	}
+]

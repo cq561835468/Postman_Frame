@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "42d7e083-d836-4751-b6dd-6bdfc1725c84",
+		"name": "VIID[ved_one][GET]_info.postman_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "单个视频数据查询（Info）",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "51359fae-7148-4d33-a0a7-feb1712ca0ee",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"//状态码请求",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"console.log(jsonData)",
+							"//DeviceID检查点",
+							"tests[\"DeviceID: \"+jsonData.VideoSliceInfoObject.DeviceID+\"|DeviceID应为:\"+data.DeviceID] = jsonData.VideoSliceInfoObject.DeviceID == data.DeviceID;",
+							"//VideoID检查点",
+							"tests[\"VideoID: \"+jsonData.VideoSliceInfoObject.VideoID+\"|VideoID应为:\"+data.VideoID] = jsonData.VideoSliceInfoObject.VideoID == data.VideoID;",
+							"//CollectorID检查点",
+							"tests[\"CollectorID:\"+jsonData.VideoSliceInfoObject.CollectorID+\"|CollectorID应为:\"+data.CollectorID] = jsonData.VideoSliceInfoObject.CollectorID == data.CollectorID;",
+							"//StoragePath检查点",
+							"tests[\"StoragePath:\"+jsonData.VideoSliceInfoObject.StoragePath+\"|StoragePath应为:\"+data.StoragePath] = jsonData.VideoSliceInfoObject.StoragePath == data.StoragePath;",
+							"//FileHash检查点（非空即可）",
+							"tests[\"FileHash: \"+jsonData.VideoSliceInfoObject.FileHash] = jsonData.VideoSliceInfoObject.FileHash",
+							"//FileFormat检查点",
+							"tests[\"FileFormat:\"+jsonData.VideoSliceInfoObject.FileFormat+\"|FileFormat应为:\"+data.FileFormat] = jsonData.VideoSliceInfoObject.FileFormat == data.FileFormat;",
+							"//Title检查点",
+							"tests[\"Title:\"+jsonData.VideoSliceInfoObject.Title] = jsonData.VideoSliceInfoObject.Title",
+							"//BeginTime检查点",
+							"tests[\"BeginTime:\"+jsonData.VideoSliceInfoObject.BeginTime] = jsonData.VideoSliceInfoObject.BeginTime ",
+							"//EndTime检查点",
+							"tests[\"EndTime:\"+jsonData.VideoSliceInfoObject.EndTime] = jsonData.VideoSliceInfoObject.EndTime ",
+							"//EntryTime检查点",
+							"tests[\"EntryTime:\"+jsonData.VideoSliceInfoObject.EntryTime] = jsonData.VideoSliceInfoObject.EntryTime ",
+							"//InfoKind检查点",
+							"var InfoKind_sp = data.InfoKind.split('|')",
+							"tests[\"InfoKind: \"+jsonData.VideoSliceInfoObject.InfoKind+\"|InfoKind应为:\"+data.InfoKind] = InfoKind_sp.indexOf(jsonData.VideoSliceInfoObject.InfoKind+\"\") != -1",
+							"console.log(InfoKind_sp)",
+							"console.log(data.InfoKind)",
+							"//IsAbstractVideo检查点",
+							"//tests[\"IsAbstractVideo:\"+jsonData.VideoSliceInfoObject.IsAbstractVideo+\"|IsAbstractVideo应为:\"+data.IsAbstractVideo] = jsonData.VideoSliceInfoObject.IsAbstractVideo == data.IsAbstractVideo;",
+							"//EventSort检查点",
+							"var EventSort_sp = data.EventSort.split('|')",
+							"tests[\"EventSort: \"+jsonData.VideoSliceInfoObject.EventSort+\"|EventSort应为:\"+data.EventSort] = EventSort_sp.indexOf(jsonData.VideoSliceInfoObject.EventSort)",
+							"//AudioFlag检查点",
+							"var AudioFlag_sp = data.AudioFlag.split('|')",
+							"tests[\"AudioFlag: \"+jsonData.VideoSliceInfoObject.AudioFlag+\"|AudioFlag应为:\"+data.AudioFlag] = InfoKind_sp.indexOf(jsonData.VideoSliceInfoObject.AudioFlag)",
+							"//VideoLen检查点",
+							"tests[\"VideoLen:\"+jsonData.VideoSliceInfoObject.VideoLen] = jsonData.VideoSliceInfoObject.VideoLen >0;",
+							"//FileSize检查点",
+							"tests[\"FileSize:\"+jsonData.VideoSliceInfoObject.FileSize] = jsonData.VideoSliceInfoObject.FileSize >0;",
+							"// TimeErr检查点",
+							"tests[\"TimeErr: \"+jsonData.VideoSliceInfoObject.TimeErr] = jsonData.VideoSliceInfoObject.TimeErr",
+							"//Width检查点",
+							"tests[\"Width为: \"+jsonData.VideoSliceInfoObject.Width] = jsonData.VideoSliceInfoObject.Width > 0;",
+							"// Height检查点",
+							"tests[\"Height: \"+jsonData.VideoSliceInfoObject.Height] = jsonData.VideoSliceInfoObject.Height > 0;",
+							"//VideoProcFlag检查点（可选）",
+							"tests[\"VideoProcFlag:\"+jsonData.VideoSliceInfoObject.VideoProcFlag+\"|VideoProcFlag应为:\"+data.VideoProcFlag] = jsonData.VideoSliceInfoObject.VideoProcFlag == data.VideoProcFlag;",
+							"tests[\"KDExpiredDate:\"+jsonData.VideoSliceInfoObject.KDExpiredDate] = jsonData.VideoSliceInfoObject.KDExpiredDate ",
+							"tests[\"DeviceType: \"+jsonData.VideoSliceInfoObject.DeviceType+\"|DeviceType应为:\"+data.DeviceType] = jsonData.VideoSliceInfoObject.DeviceType == data.DeviceType;",
+							"tests[\"DeviceSNNo:\"+jsonData.VideoSliceInfoObject.DeviceSNNo] = jsonData.VideoSliceInfoObject.DeviceSNNo",
+							"tests[\"ImeiSn:\"+jsonData.VideoSliceInfoObject.ImeiSn] = jsonData.VideoSliceInfoObject.ImeiSn",
+							"tests[\"ShotPlaceLongitude:\"+jsonData.VideoSliceInfoObject.ShotPlaceLongitude] = jsonData.VideoSliceInfoObject.ShotPlaceLongitude",
+							"tests[\"ShotPlaceLatitude:\"+jsonData.VideoSliceInfoObject.ShotPlaceLatitude] = jsonData.VideoSliceInfoObject.ShotPlaceLatitude ",
+							"if (jsonData.VideoSliceInfoObject.InfoKind == 2) {",
+							"    // ShotPlaceCode检查点",
+							"    tests[\"ShotPlaceCode: \"+jsonData.VideoSliceInfoObject.ShotPlaceCode] = jsonData.VideoSliceInfoObject.ShotPlaceFullAdress",
+							"    tests[\"CollectorName: \"+jsonData.VideoSliceInfoObject.CollectorName] = jsonData.VideoSliceInfoObject.CollectorName",
+							"    tests[\"CollectorOrg: \"+jsonData.VideoSliceInfoObject.CollectorOrg] = jsonData.VideoSliceInfoObject.CollectorOrg",
+							"    tests[\"EntryClerk: \"+jsonData.VideoSliceInfoObject.EntryClerk] = jsonData.VideoSliceInfoObject.EntryClerk",
+							"    tests[\"EntryClerkOrg: \"+jsonData.VideoSliceInfoObject.EntryClerkOrg] = jsonData.VideoSliceInfoObject.EntryClerkOrg",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{VideoID}}{{Interface_Info}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{VideoID}}{{Interface_Info}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

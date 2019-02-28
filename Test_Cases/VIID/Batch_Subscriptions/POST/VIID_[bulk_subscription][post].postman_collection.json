@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "29b8a893-6d96-47eb-9247-d49842740b18",
+		"name": "VIID_[bulk_subscription][post]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "批量订阅",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "71e48a42-03a7-4ced-abe4-1587f21749eb",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"console.log(jsonData.ResponseStatusListObject.ResponseStatusObject[0])//添加的打印去查找body的request包含在什么目录下",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL+\"|RequestURL应为:\"+data.Request_Url] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL == data.Request_Url;",
+							"tests[\" StatusCode: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode == data.StatusCode;",
+							"tests[\" StatusString: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString == data.StatusString !==0;",
+							"//校验id时，非空即可",
+							"tests[\"Id: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].Id] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].Id",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"SubscribeListObject\":{\r\n\t    \"SubscribeObject\":[\r\n\t    \t{\r\n\t\t    \"SubscribeID\": \"{{SubscribeID}}\",\r\n\t\t    \"Title\":\"{{Title}}\",\r\n\t\t    \"SubscribeDetail\":\"{{SubscribeDetail}}\",\r\n\t\t    \"ResourceURI\":\"{{ResourceURI}}\",\r\n\t\t    \"ApplicantName\":\"{{ApplicantName}}\",\r\n\t\t    \"ApplicantOrg\":\"{{ApplicantOrg}}\",\r\n\t\t    \"BeginTime\":\"{{BeginTime}}\",\r\n\t\t    \"EndTime\":\"{{EndTime}}\",\r\n\t\t    \"OperateType\":\"{{OperateType}}\",\r\n\t\t    \"ReceiveAddr\":\"{{ReceiveAddr}}\",\r\n\t\t    \"Reason\":\"{{Reason}}\"\r\n\t    \t}\r\n\t     ]\r\n\t}\r\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,20 @@
+[
+    {
+        
+        "Interface_Url":"10.85.7.62:8083",
+        "Interface_st":"/VIID/VideoLabels/",
+        "VideoLabelID":"310000000013200000040220180507164508276070227607",
+        "EventSort":"01|02|03|04|05|06|07|08|09",
+        "IVADeviceID":"非空即可",
+        "CreateTimeAbs":"非空即可",
+        "CreateTimeRlt":">0",
+        "TargetColor":"01|02|03|04|05|06|07|08|09|10|11|12|13|14",
+        "ColorCount":">0",
+        "AreaPosX":">0",
+        "AreaPosY":">0",
+        "AreaWidth":">0",
+        "AreaHeight":">0",
+        "EventLevel":">0",
+         "Re_State":"200"
+    }
+]

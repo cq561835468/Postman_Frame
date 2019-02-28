@@ -1,0 +1,25 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8081",
+	"Interface_st":"/VIID/MotorVehicles/",
+	"SubscribeID1": "000000000091032018052317211000010",
+	"SubscribeID2": "000000000091032018052317211000043",
+	 "Title":"订阅",
+     "SubscribeDetail":"11,12,13,tp,sp",
+     "ResourceURI":"00000000009110000001",
+	 "ApplicantName":"admin",
+     "ApplicantOrg":"3cc204834c5943ecacaacc9f8e8f41c7",
+	 "BeginTime":"20181101000000",
+	 "EndTime":"20181231000000",
+	 "OperateType":"0",
+	 "ReceiveAddr":"http://10.10.40.186/VIID/Test",
+	 "Reason":"subcribe",
+	
+	"需要验证参数":">>",
+	"StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+}
+]
+

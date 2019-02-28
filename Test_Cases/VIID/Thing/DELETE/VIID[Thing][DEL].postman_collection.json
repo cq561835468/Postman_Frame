@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "0f956b6b-fda3-40fa-8d6a-02dec2168142",
+		"name": "VIID[Thing][DEL]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Thing][DEL]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d0ead87-aa00-4d4f-a4b3-1cc1b1ccb850",
+						"type": "text/javascript",
+						"exec": [
+							"var x = pm.response.json()",
+							"",
+							"tests[\"当前状态码为: \"+pm.response.code+\" 状态码应为: \"+data.Re_State]=responseCode.code==data.Re_State",
+							"",
+							"tests[\"RequestURL: \"+x.ResponseStatusObject.RequestURL+\" RequestURL应为: \"+data.Inter_st1] = x.ResponseStatusObject.RequestURL==data.Inter_st1",
+							"",
+							"tests[\"StatusCode: \"+x.ResponseStatusObject.StatusCode+\" StatusCode应为: \"+data.StatusCode] = x.ResponseStatusObject.StatusCode==data.StatusCode",
+							"",
+							"tests[\"StatusString: \"+x.ResponseStatusObject.StatusString+\" StatusString应为: \"+data.StatusString] = x.ResponseStatusObject.StatusString==data.StatusString"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Inter_Url}}{{Inter_st1}}{{Inter_st2}}",
+					"host": [
+						"{{Inter_Url}}{{Inter_st1}}{{Inter_st2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "aa114566-a660-4ae0-8bd6-d4c03d6a4b4b",
+		"name": "PJ[building][DELETE_List]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create_Area",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\"area_code\": \"{{area_code}}\", \n\"area_name\": \"{{area_name}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Area}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Area}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Building",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5171e444-b6ea-48f6-ac6c-70cda601aca6",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"id1\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n  \"area_code\": \"{{area_code}}\", \n  \"buil_code\": \"{{buil_code}}\", \n  \"buil_name\": \"{{buil_name}}\", \n  \"buil_floor_count\":{{buil_floor_count}}, \n  \"buil_first_floor_num\":{{buil_first_floor_num}}\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Building}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Building}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Building",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bb819d9e-1b01-4a6c-8aff-197afa3996c8",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"id2\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n  \"area_code\": \"{{area_code}}\", \n  \"buil_code\": \"{{buil_code_1}}\", \n  \"buil_name\": \"{{buil_name_1}}\", \n  \"buil_floor_count\":{{buil_floor_count_1}}, \n  \"buil_first_floor_num\":{{buil_first_floor_num_1}}\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Building}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Building}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Building_ID_List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c81b0705-fd91-4198-ac46-14ba2fc27755",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"id_list\": [\r\n    {{id1}}, \r\n    {{id2}}\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Building}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Building}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,19 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8081",
+	"Interface_st":"/VIID/MotorVehicles/",
+	"MotorVehicleID":"310000000013200000040220180507163828275780227578",
+	"InfoKind": 0,
+	"SourceID": "21",
+	"HasPlate": 1,
+	"PlateClass": "89",
+	"PlateColor": "85",
+	"VehicleColor": "3",
+	
+	"需要验证参数":">>",
+	"StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+}
+]

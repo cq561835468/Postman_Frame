@@ -1,0 +1,455 @@
+{
+	"info": {
+		"_postman_id": "27036b30-21db-4ceb-98e5-f7b56fe0da66",
+		"name": "pmc_user_management[PMC用户管理]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pmcsLogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "505653d5-c728-4de4-a7db-87eadcb4e865",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"pm.test(\"当前状态码为: \" + responseCode.code, function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// 设置session，targetUri为环境变量",
+							"var loginRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var targetUri = jsonData[\"CPmcSMsg\"][\"targetUri\"]",
+							"var CData = xml2Json(loginRsp)",
+							"var session = CData[\"CPmcSLoginRsp\"][\"session\"]",
+							"",
+							"pm.environment.set(\"session\", session);",
+							"pm.environment.set(\"targetUri\", targetUri);",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSLoginRsp\"][\"errorCode\"]] = CData[\"CPmcSLoginRsp\"][\"errorCode\"] == \"0\"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<CPmcSMsg>\r\n  <event>PMCS_LOGIN_REQ</event>\r\n  <seqNum>1</seqNum>\r\n  <msg>&lt;CPmcSLoginReq&gt;&lt;event&gt;PMCS_LOGIN_REQ&lt;/event&gt;&lt;seqNum&gt;1&lt;/seqNum&gt;&lt;userName&gt;admin&lt;/userName&gt;&lt;password&gt;{{userpwd}}&lt;/password&gt;&lt;isDecrypt&gt;0&lt;/isDecrypt&gt;&lt;ipaddr&gt;INVALID_IP&lt;/ipaddr&gt;&lt;/CPmcSLoginReq&gt;</msg>\r\n</CPmcSMsg>"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGIN_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGIN_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmsUserAdd",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "22b19dc5-ba23-4b6e-8168-7bf133984d8a",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var pmsUserAddRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(pmsUserAddRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmsUserAddRsp\"][\"errorCode\"]] = CData[\"CPmsUserAddRsp\"][\"errorCode\"] == \"0\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMS_USER_ADD_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>70</seqNum>\r\n  <msg>&lt;CPmsUserAddReq&gt;&lt;event&gt;PMS_USER_ADD_REQ&lt;/event&gt;&lt;seqNum&gt;70&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;info&gt;&lt;name&gt;test&lt;/name&gt;&lt;password&gt;e2534f99fcf0bf2f1b5d0936fc49b62f&lt;/password&gt;&lt;type&gt;2&lt;/type&gt;&lt;desc&gt;测试&lt;/desc&gt;&lt;pwdExpireEnabledFlag&gt;1&lt;/pwdExpireEnabledFlag&gt;&lt;pwdExpireTime&gt;89&lt;/pwdExpireTime&gt;&lt;loginIpList&gt;10.20.20.76&lt;/loginIpList&gt;&lt;ipListEnabledFlag&gt;1&lt;/ipListEnabledFlag&gt;&lt;isDecrypt&gt;1&lt;/isDecrypt&gt;&lt;/info&gt;&lt;/CPmsUserAddReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMS_USER_ADD_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMS_USER_ADD_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsUserQry_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62627a48-076c-41f4-bd90-331f355e9409",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var pmcSUserQryRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(pmcSUserQryRsp)",
+							"",
+							"// 用户总数",
+							"var totalNum = CData[\"CPmcSUserQryRsp\"][\"totalEntryNum\"]",
+							"var num = totalNum-1",
+							"",
+							"// 添加用户id至环境变量中",
+							"pm.environment.set(\"userid\", CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"id\"]); ",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSUserQryRsp\"][\"errorCode\"]] = CData[\"CPmcSUserQryRsp\"][\"errorCode\"] == \"0\"",
+							"tests[\"用户名: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"name\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"name\"] == \"test\"",
+							"tests[\"用户描述: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"desc\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"desc\"] == \"测试\"",
+							"tests[\"有效期: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"pwdExpireTime\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"pwdExpireTime\"] == 89",
+							"tests[\"是否启用有效期: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"pwdExpireEnabledFlag\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"pwdExpireEnabledFlag\"] == 1",
+							"tests[\"有效ip: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"loginIpList\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"loginIpList\"] == \"10.20.20.76\"",
+							"tests[\"是否启用ip: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"ipListEnabledFlag\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"ipListEnabledFlag\"] == 1",
+							"",
+							"// 检查用户中是否包含新建的test用户",
+							"pm.test(\"新建成功\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"test\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_USER_QRY_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>230</seqNum>\r\n  <msg>&lt;CPmsUserQryReq&gt;&lt;event&gt;PMS_USER_QRY_REQ&lt;/event&gt;&lt;startEntryIndex&gt;0&lt;/startEntryIndex&gt;&lt;expectEntryNum&gt;10&lt;/expectEntryNum&gt;&lt;queryTag&gt;0&lt;/queryTag&gt;&lt;seqNum&gt;230&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CPmsUserQryReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_USER_QRY_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_USER_QRY_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmsUserMod",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7dd7a4ec-1ce3-4bf2-88de-98a4275911a1",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var pmsUserModRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(pmsUserModRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmsUserModRsp\"][\"errorCode\"]] = CData[\"CPmsUserModRsp\"][\"errorCode\"] == \"0\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMS_USER_MOD_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>226</seqNum>\r\n  <msg>&lt;CPmsUserModReq&gt;&lt;event&gt;PMS_USER_MOD_REQ&lt;/event&gt;&lt;seqNum&gt;226&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;info&gt;&lt;name&gt;test&lt;/name&gt;&lt;password&gt;cd3505a02558effa8df28deb6c87d4a8&lt;/password&gt;&lt;type&gt;2&lt;/type&gt;&lt;desc&gt;测试_test&lt;/desc&gt;&lt;pwdExpireEnabledFlag&gt;0&lt;/pwdExpireEnabledFlag&gt;&lt;pwdExpireTime&gt;90&lt;/pwdExpireTime&gt;&lt;loginIpList&gt;10.20.20.76&lt;/loginIpList&gt;&lt;ipListEnabledFlag&gt;0&lt;/ipListEnabledFlag&gt;&lt;id&gt;{{userid}}&lt;/id&gt;&lt;isDecrypt&gt;1&lt;/isDecrypt&gt;&lt;/info&gt;&lt;/CPmsUserModReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMS_USER_MOD_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMS_USER_MOD_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsUserQry_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "62627a48-076c-41f4-bd90-331f355e9409",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var pmcSUserQryRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(pmcSUserQryRsp)",
+							"",
+							"// 用户总数",
+							"var totalNum = CData[\"CPmcSUserQryRsp\"][\"totalEntryNum\"]",
+							"var num = totalNum-1",
+							"",
+							"// 添加用户id至环境变量中",
+							"pm.environment.set(\"userid\", CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"id\"]); ",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSUserQryRsp\"][\"errorCode\"]] = CData[\"CPmcSUserQryRsp\"][\"errorCode\"] == \"0\"",
+							"tests[\"用户名: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"name\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"name\"] == \"test\"",
+							"tests[\"用户描述: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"desc\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"desc\"] == \"测试_test\"",
+							"tests[\"有效期: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"pwdExpireTime\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"pwdExpireTime\"] == 90",
+							"tests[\"是否启用有效期: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"pwdExpireEnabledFlag\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"pwdExpireEnabledFlag\"] == \"0\"",
+							"tests[\"有效ip: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"loginIpList\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"loginIpList\"] == \"10.20.20.76\"",
+							"tests[\"是否启用ip: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"ipListEnabledFlag\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"ipListEnabledFlag\"] == \"0\"",
+							"tests[\"密码: \" + CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"password\"]] = CData[\"CPmcSUserQryRsp\"][\"results\"][\"item\"][num][\"password\"] == \"f7c1b1559c3b6ee8faa364f9a205cdc5\"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_USER_QRY_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>230</seqNum>\r\n  <msg>&lt;CPmsUserQryReq&gt;&lt;event&gt;PMS_USER_QRY_REQ&lt;/event&gt;&lt;startEntryIndex&gt;0&lt;/startEntryIndex&gt;&lt;expectEntryNum&gt;10&lt;/expectEntryNum&gt;&lt;queryTag&gt;0&lt;/queryTag&gt;&lt;seqNum&gt;230&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CPmsUserQryReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_USER_QRY_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_USER_QRY_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmsUserDel",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "23c401ad-51b8-4f2d-ad01-8a88a86802a9",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var pmsUserDelRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(pmsUserDelRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmsUserDelRsp\"][\"errorCode\"]] = CData[\"CPmsUserDelRsp\"][\"errorCode\"] == \"0\"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMS_USER_DEL_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>73</seqNum>\r\n  <msg>&lt;CPmsUserDelReq&gt;&lt;event&gt;PMS_USER_DEL_REQ&lt;/event&gt;&lt;seqNum&gt;73&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;key&gt;&lt;id&gt;{{userid}}&lt;/id&gt;&lt;/key&gt;&lt;/CPmsUserDelReq&gt;</msg>\r\n</CPmcSMsg>"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMS_USER_DEL_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMS_USER_DEL_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsLogout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "643179bd-aa28-4fd6-8b36-aa133ec61702",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var logoutRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(logoutRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSLogoutRsp\"][\"errorCode\"]] = CData[\"CPmcSLogoutRsp\"][\"errorCode\"] == \"0\"",
+							"",
+							"// 删除本用例新增的环境变量",
+							"pm.environment.unset(\"userid\");",
+							"pm.environment.unset(\"session\");",
+							"pm.environment.unset(\"targetUri\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_LOGOUT_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>36</seqNum>\r\n  <msg>&lt;CPmcSLogoutReq&gt;&lt;event&gt;PMCS_LOGOUT_REQ&lt;/event&gt;&lt;seqNum&gt;36&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CPmcSLogoutReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGOUT_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGOUT_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

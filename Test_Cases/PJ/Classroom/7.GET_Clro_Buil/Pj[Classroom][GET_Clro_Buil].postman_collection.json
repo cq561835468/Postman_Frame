@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "ebbd68c5-2d44-4ab6-800c-26d289c3a9b9",
+		"name": "Pj-Classroom_GET_Clro&Buil",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Create_Building",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8c214c8a-6ece-4b1a-a587-803e551e1362",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"buil_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n  \"area_code\": \"{{area_code}}\", \n  \"buil_code\": \"{{buil_code}}\", \n  \"buil_name\": \"{{buil_name}}\", \n  \"buil_floor_count\":{{buil_floor_count}}, \n  \"buil_first_floor_num\":{{buil_first_floor_num}}\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Building}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Building}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Create_Classroom",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ac82ba7-71cb-4454-ad3f-2a4b0ec7d940",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\t\"buil_id\":\"{{buil_id}}\",\n\t\"clro_code\":\"{{clro_code}}\",\n\t\"clro_name\":\"{{clro_name}}\",\n\t\"clro_building_floor_num\":\"{{clro_building_floor_num}}\",\n\t\"clro_seat_count\":\"{{clro_seat_count}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Create_Classroom Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ac82ba7-71cb-4454-ad3f-2a4b0ec7d940",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"id2\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\t\"buil_id\":\"{{buil_id}}\",\n\t\"clro_code\":\"{{clro_code2}}\",\n\t\"clro_name\":\"{{clro_name}}\",\n\t\"clro_building_floor_num\":\"{{clro_building_floor_num}}\",\n\t\"clro_seat_count\":\"{{clro_seat_count}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Get_Clro&Buil_Classroom",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abfe72d2-2f6e-4460-97ba-3c4145e36f28",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前所在页数为：\"+js.page.page_index+\"|所在页数应为：\"+data.page_index] =js.page.page_index==data.page_index;",
+							"var jsdata=js.list",
+							"// tests[\"当前区域为：\"+jsdata.area_code+\"|所在区域应为：\"+data.area_code]=jsdata.area_code==data.area_code;",
+							"for (var key in jsdata){",
+							"        pm.test(\"当前区域编号为: \"+jsdata[key].area_code +\"区域编号应为: \"+data.area_code, function () {",
+							"            pm.expect(jsdata[key].area_code).to.eql(data.area_code);",
+							"        });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": {{page_index}}, \r\n    \"page_size\": {{page_size}}\r\n  }, \r\n  \"area_code\": \"{{area_code}}\", \r\n  \"buil_name\": \"{{buil_name}}\", \r\n  \"clro_name\": \"{{clro_name}}\", \r\n  \"clro_id_list\": [{{id}},{{id2}}], \r\n  \"order_by\": \"{{order_by}}\", \r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}?t=2&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "2"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_Id_Classroom",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}{{id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}{{id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_Id_Classroom Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}{{id2}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}{{id2}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_Building_ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e740ecd9-a539-4fc5-8cf4-fb5a79a03ff2",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Building}}{{buil_id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Building}}{{buil_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

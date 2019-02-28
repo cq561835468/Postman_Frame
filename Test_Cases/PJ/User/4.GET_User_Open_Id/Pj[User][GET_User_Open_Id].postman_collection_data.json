@@ -1,0 +1,15 @@
+[
+	{
+		"Port":":10007",
+	"---Search Student---":"",
+		"URI":"/user/",
+		"URI_user_open_id":"/user_open_id/",
+		"area_code":"a6741cecdd1b4a879a3512hekedakeda",
+		"user_open_id":"a6121kedakedakedakedakedakedastu",
+		"user_code":"kedastu_code_022",
+		"user_name": "王科达",
+	"---checking---":"",
+		"success":"true",
+		"Re_State":200
+	}
+]

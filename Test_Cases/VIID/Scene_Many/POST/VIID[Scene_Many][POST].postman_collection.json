@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "980d1c9a-5d66-4e55-b9e2-19ca95e45110",
+		"name": "VIID[Scene_Many][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "34d5d7ca-bae7-4244-bd85-e1de218515b3",
+			"name": "VIID[Scene_Many][POST]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b1ab2498-b6de-4a84-8169-74d0eebb4c14",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"var datas=jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"for(var key in datas){",
+							"    for(var keyy in datas[key]){",
+							"        if(keyy==\"RequestURL\")",
+							"        {",
+							"           pm.test(\"当前RequestURL值为：\"+datas[key][keyy]+\" RequestURL应为：\"+data.RequestURL,function(){",
+							"                pm.expect(datas[key][keyy]).to.eql(data.RequestURL)",
+							"           })",
+							"        }",
+							"         if(keyy==\"StatusCode\")",
+							"         {",
+							"            pm.test(\"当前StatusCode值为：\"+datas[key][keyy]+\" StatusCode应为：\"+data.StatusCode,function(){",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode)",
+							"           })",
+							"         }",
+							"         if(keyy==\"StatusString\")",
+							"         {",
+							"            pm.test(\"当前StatusString值为：\"+datas[key][keyy]+\" StatusString应为：\"+data.StatusString,function(){",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusString)",
+							"           })",
+							"         }",
+							"          if (keyy == \"Id\"){",
+							"            pm.test(\"当前ID为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy]).to.be.oneOf([data.Value1,data.Value2]);",
+							"            })",
+							"          }",
+							"    }",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"SceneListObject\":{\n\t\"SceneObject\":[\n\t\t{\n\t\t\"SceneID\":\"{{SceneID1}}\",\n\t\t\"InfoKind\":{{InfoKind}},\n\t\t\"SourceID\":\"{{SourceID}}\",\n\t\t\"DeviceID\":\"{{DeviceID}}\",\n\t\t\"BeginTime\":\"{{BeginTime}}\",\n\t\t\"PlaceType\":{{PlaceType}},\n\t\t\"WeatherType\":{{WeatherType}},\n\t\t\"SceneDescribe\":\"{{SceneDescribe}}\",\n\t\t\"SceneType\":{{SceneType}},\n\t\t\"RoadAlignmentType\":{{RoadAlignmentType}},\n\t\t\"RoadTerraintype\":{{RoadTerraintype}},\n\t\t\"RoadSurfaceType\":{{RoadSurfaceType}},\n\t\t\"RoadCoditionType\":{{RoadCoditionType}},\n\t\t\"RoadJunctionSectionType\":{{RoadJunctionSectionType}}, \n\t\t\"RoadLightingType\":{{RoadLightingType}},\n\t\t\"Illustration\":\"{{Illustration}}\",\n\t\t\"WindDirection\":\"{{WindDirection}}\", \n\t\t\"Illumination\":\"{{Illumination}}\",\n\t\t\"FieldCondition\":\"{{FieldCondition}}\",\n\t\t\"Temperature\":{{Temperature}}, \n\t\t\"Humidity\":{{Humidity}},\n\t\t\"PopulationDensity\":{{PopulationDensity}},\n\t\t\"DenseDegree\":{{DenseDegree}},\n\t\t\"Importance\":{{Importance}}, \n\t\t\"SubImageList\":\"{{SubImageList}}\"\n\t\t},\n\t\t{\n\t\t\"SceneID\":\"{{SceneID2}}\",\n\t\t\"InfoKind\":{{InfoKind}},\n\t\t\"SourceID\":\"{{SourceID}}\",\n\t\t\"DeviceID\":\"{{DeviceID}}\",\n\t\t\"BeginTime\":\"{{BeginTime}}\",\n\t\t\"PlaceType\":{{PlaceType}},\n\t\t\"WeatherType\":{{WeatherType}},\n\t\t\"SceneDescribe\":\"{{SceneDescribe}}\",\n\t\t\"SceneType\":{{SceneType}},\n\t\t\"RoadAlignmentType\":{{RoadAlignmentType}},\n\t\t\"RoadTerraintype\":{{RoadTerraintype}},\n\t\t\"RoadSurfaceType\":{{RoadSurfaceType}},\n\t\t\"RoadCoditionType\":{{RoadCoditionType}},\n\t\t\"RoadJunctionSectionType\":{{RoadJunctionSectionType}}, \n\t\t\"RoadLightingType\":{{RoadLightingType}},\n\t\t\"Illustration\":\"{{Illustration}}\",\n\t\t\"WindDirection\":\"{{WindDirection}}\", \n\t\t\"Illumination\":\"{{Illumination}}\",\n\t\t\"FieldCondition\":\"{{FieldCondition}}\",\n\t\t\"Temperature\":{{Temperature}}, \n\t\t\"Humidity\":{{Humidity}},\n\t\t\"PopulationDensity\":{{PopulationDensity}},\n\t\t\"DenseDegree\":{{DenseDegree}},\n\t\t\"Importance\":{{Importance}}, \n\t\t\"SubImageList\":\"{{SubImageList}}\"\n\t\t}\n\t\t]\t\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				},
+				"description": "\t"
+			},
+			"response": []
+		}
+	]
+}

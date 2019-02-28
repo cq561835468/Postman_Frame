@@ -1,0 +1,30 @@
+[
+{  
+    "需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8081",
+	"Interface_st":"/VIID/Faces",
+	"FL_FaceID":"31010101001350001401221901051124725100200600015",
+	"FL_InfoKind":1,
+	"FL_SourceID":"fghjkl",
+	"FL_LeftTopX":209,
+	"FL_LeftTopY":275,
+	"FL_RightBtmX":471,
+	"FL_RightBtmY":537,
+	"FL_LocationMarkTime":"20180511214721",
+	"FL_FaceAppearTime":"20180511214721",
+	"FL_FaceDisAppearTime":"20180511214721",
+	"FL_IsDriver":2,
+	"FL_IsForeigner":2,
+	"FL_IsSuspectedTerrorist":2,
+	"FL_IsCriminalInvolved":2,
+	"FL_IsDetainees":2,
+	"FL_IsVictim":2,
+	"FL_IsSuspiciousPerson":2,
+	"需要验证参数":">>",
+	"StatusCode":0,
+	"Re_State":"200",
+	"RequestURL":"/VIID/Faces",
+	"StatusString":"",
+	"Value":"31010101001350001401221901051124725100200600015"
+}
+]

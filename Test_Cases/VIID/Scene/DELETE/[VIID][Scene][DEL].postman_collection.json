@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "5d26d6f1-da71-4e41-bdc8-1c9c50334174",
+		"name": "[VIID][Scene][DEL]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "895a8c01-abda-49c9-843b-6be011cf4907",
+			"name": "[VIID][Scene][DEL]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13fc6fe9-f56e-4766-80ae-9eadcb2fae99",
+						"type": "text/javascript",
+						"exec": [
+							"var x=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"",
+							"tests[\"当前StatusCode为：\"+x.ResponseStatusListObject.ResponseStatusObject[0].StatusCode+\" StatusCode应为：\"+data.StatusCode]=x.ResponseStatusListObject.ResponseStatusObject[0].StatusCode==data.StatusCode",
+							"tests[\"当前RequestURL为：\"+x.ResponseStatusListObject.ResponseStatusObject[0].RequestURL+\" RequestURL应为：\"+data.RequestURL]=x.ResponseStatusListObject.ResponseStatusObject[0].RequestURL==data.RequestURL",
+							"tests[\"当前StatusString为：\"+x.ResponseStatusListObject.ResponseStatusObject[0].StatusString+\" StatusString应为：\"+data.StatusString]=x.ResponseStatusListObject.ResponseStatusObject[0].StatusString==data.StatusString"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

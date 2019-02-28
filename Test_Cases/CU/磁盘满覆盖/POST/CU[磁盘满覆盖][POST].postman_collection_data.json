@@ -1,0 +1,17 @@
+[{
+	"需要输入参数":">>",
+	"Interfac_url":"172.16.120.33",
+	"Interface_st":"/cui/cui.fcgi",
+	"username":"admin@kadacom",
+	"password":"kedacom123",
+	"cusdkVersion":"2.0",
+	"clientType":"cuver",
+	"isSupportNA":false,
+	
+	"coverPolicy":"cusdk:RS-COVERPOLICY-COVERALL",
+	
+	"需要检验参数":">>",
+	"Re_State":200,
+	"errorCode":0
+}
+]

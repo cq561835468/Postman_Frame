@@ -1,0 +1,18 @@
+[
+	{
+		"Port":":10007",
+	"---Create Lesson_time---":"",
+		"URI":"/lesson_time/",
+		"page_index":1,
+		"page_size":5,
+		"area_code": "a6741cecdd1b4a879a3512hekedakeda",
+		"leti_number": 2, 
+  		"leti_type": "默认", 
+  		"leti_begin_time": "07:00:00", 
+  		"leti_end_time": "07:45:00",
+  		"order_by":"leti_number",
+	"---checking---":"",
+		"success":"true",
+		"Re_State":200
+	}
+]

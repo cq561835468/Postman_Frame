@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "2d1c083d-4a5c-4c2d-8dd3-58c9a3395a21",
+		"name": "VIID[NonMotorVehicle_Many][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[NonMotorVehicles_Many][POST]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1f43a76-60b0-4771-ad9b-e2b62ffa1951",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\" 状态码应为: \"+data.Re_State] = responseCode.code == data.Re_State",
+							"",
+							"for (var key in datas){",
+							"\tconsole.log(key)",
+							"\tfor (var keyy in datas[key]){",
+							"\t\tif (keyy == \"Id\"){",
+							"\t\t    pm.test(\"当前ID为: \"+datas[key][keyy]+ \"应当为: \"+[data.NonMotorVehicleID1,data.NonMotorVehicleID2], function () {",
+							"\t\t\t    pm.expect(datas[key][keyy]).to.be.oneOf([data.NonMotorVehicleID1,data.NonMotorVehicleID2])",
+							"\t\t\t })",
+							"\t\t}",
+							"\t\telse if (keyy == \"RequestURL\"){",
+							"\t\t\tpm.test(\"当前RequestURL为: \"+datas[key][keyy]+ \"应当为: \"+data.NonMotorVehicle_st, function () {",
+							"\t\t\t    pm.expect(datas[key][keyy]).to.eql(data.NonMotorVehicle_st)",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusCode\"){",
+							"\t\t    pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusCode, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode)",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusString\"){",
+							"\t\t\tpm.test(\"当前StatusString为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusString, function () {",
+							"\t\t\t\tpm.expect(datas[key][keyy]).to.eql(data.StatusString)",
+							"\t\t\t })",
+							"\t\t}",
+							"\t}",
+							"}",
+							"\t",
+							"\t\t\t\t",
+							"\t",
+							"\t\t\t\t"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"NonMotorVehicleListObject\":{\n\t\t\"NonMotorVehicleObject\":[\n\t\t\t{\n\t\t\t\"NonMotorVehicleID\": \"{{NonMotorVehicleID1}}\",\n\t\t\t\"InfoKind\": {{InfoKind}},\n\t\t\t\"SourceID\": \"{{SourceID1}}\",\n\t\t\t\"LeftTopX\":{{LeftTopX}},\n\t\t\t\"LeftTopY\":{{LeftTopY}},\n\t\t\t\"RightBtmX\":{{RightBtmX1}},\n\t\t\t\"RightBtmY\":{{RightBtmY}},\n\t\t\t\"MarkTime\":\"{{MarkTime}}\",\n\t\t\t\"AppearTime\":\"{{AppearTime}}\",\n\t\t\t\"DisappearTime\":\"{{DisappearTime}}\",\n\t\t\t\"HasPlate\":{{HasPlate}},\n\t\t\t\"PlateClass\":\"{{PlateClass}}\",\n\t\t\t\"PlateColor\":\"{{PlateColor}}\",\n\t\t\t\"PlateNo\":\"{{PlateNo1}}\",\n\t\t\t\"VehicleColor\":\"{{VehicleColor1}}\"\n\t\t},\n\t\t{\n\t\t\t\"NonMotorVehicleID\": \"{{NonMotorVehicleID2}}\",\n\t\t\t\"InfoKind\": {{InfoKind}},\n\t\t\t\"SourceID\": \"{{SourceID2}}\",\n\t\t\t\"LeftTopX\":{{LeftTopX}},\n\t\t\t\"LeftTopY\":{{LeftTopY}},\n\t\t\t\"RightBtmX\":{{RightBtmX2}},\n\t\t\t\"RightBtmY\":{{RightBtmY}},\n\t\t\t\"MarkTime\":\"{{MarkTime}}\",\n\t\t\t\"AppearTime\":\"{{AppearTime}}\",\n\t\t\t\"DisappearTime\":\"{{DisappearTime}}\",\n\t\t\t\"HasPlate\":{{HasPlate}},\n\t\t\t\"PlateClass\":\"{{PlateClass}}\",\n\t\t\t\"PlateColor\":\"{{PlateColor}}\",\n\t\t\t\"PlateNo\":\"{{PlateNo2}}\",\n\t\t\t\"VehicleColor\":\"{{VehicleColor2}}\"\n\t\t}\n\t\t\n\t\t]\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{NonMotorVehicle_Url}}{{NonMotorVehicle_st}}",
+					"host": [
+						"{{NonMotorVehicle_Url}}{{NonMotorVehicle_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

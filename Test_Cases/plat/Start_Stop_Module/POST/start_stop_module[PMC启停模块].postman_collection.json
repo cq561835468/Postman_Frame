@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "21900661-743e-4cdf-ae6a-35ca95dc9e5d",
+		"name": "start_stop_module[PMC启停模块]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pmcsLogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "505653d5-c728-4de4-a7db-87eadcb4e865",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"",
+							"// 设置session，targetUri为环境变量",
+							"var loginRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var targetUri = jsonData[\"CPmcSMsg\"][\"targetUri\"]",
+							"var CData = xml2Json(loginRsp)",
+							"var session = CData[\"CPmcSLoginRsp\"][\"session\"]",
+							"",
+							"pm.environment.set(\"session\", session);",
+							"pm.environment.set(\"targetUri\", targetUri);",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSLoginRsp\"][\"errorCode\"]] = CData[\"CPmcSLoginRsp\"][\"errorCode\"] == \"0\"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<CPmcSMsg>\r\n  <event>PMCS_LOGIN_REQ</event>\r\n  <seqNum>1</seqNum>\r\n  <msg>&lt;CPmcSLoginReq&gt;&lt;event&gt;PMCS_LOGIN_REQ&lt;/event&gt;&lt;seqNum&gt;1&lt;/seqNum&gt;&lt;userName&gt;{{userName}}&lt;/userName&gt;&lt;password&gt;{{userpwd}}&lt;/password&gt;&lt;isDecrypt&gt;0&lt;/isDecrypt&gt;&lt;ipaddr&gt;INVALID_IP&lt;/ipaddr&gt;&lt;/CPmcSLoginReq&gt;</msg>\r\n</CPmcSMsg>"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGIN_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGIN_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stopModule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b8b01096-ad57-4197-a6d6-e8cab80e079f",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var eventRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(eventRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CEventRsp\"][\"errorCode\"]] = CData[\"CEventRsp\"][\"errorCode\"] == \"0\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMS_PLATFORM_MODULEINFO_MOD_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>40</seqNum>\r\n  <msg>&lt;CPlatformModuleInfoModReq&gt;&lt;event&gt;PMS_PLATFORM_MODULEINFO_MOD_REQ&lt;/event&gt;&lt;seqNum&gt;40&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;infos size=\"1\"&gt;&lt;item index=\"0\"&gt;&lt;name&gt;nru&lt;/name&gt;&lt;enabled&gt;0&lt;/enabled&gt;&lt;status&gt;1&lt;/status&gt;&lt;/item&gt;&lt;/infos&gt;&lt;/CPlatformModuleInfoModReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMS_PLATFORM_MODULEINFO_MOD_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMS_PLATFORM_MODULEINFO_MOD_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "startModule",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bb75106a-96b2-4d0a-861e-08a9582655e7",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var eventRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(eventRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CEventRsp\"][\"errorCode\"]] = CData[\"CEventRsp\"][\"errorCode\"] == \"0\" "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMS_PLATFORM_MODULEINFO_MOD_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>40</seqNum>\r\n  <msg>&lt;CPlatformModuleInfoModReq&gt;&lt;event&gt;PMS_PLATFORM_MODULEINFO_MOD_REQ&lt;/event&gt;&lt;seqNum&gt;40&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;infos size=\"1\"&gt;&lt;item index=\"0\"&gt;&lt;name&gt;nru&lt;/name&gt;&lt;enabled&gt;1&lt;/enabled&gt;&lt;status&gt;1&lt;/status&gt;&lt;/item&gt;&lt;/infos&gt;&lt;/CPlatformModuleInfoModReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMS_PLATFORM_MODULEINFO_MOD_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMS_PLATFORM_MODULEINFO_MOD_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsLogout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "643179bd-aa28-4fd6-8b36-aa133ec61702",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var logoutRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(logoutRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSLogoutRsp\"][\"errorCode\"]] = CData[\"CPmcSLogoutRsp\"][\"errorCode\"] == \"0\"",
+							"",
+							"// 删除本用例新增的环境变量",
+							"pm.environment.unset(\"session\");",
+							"pm.environment.unset(\"targetUri\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_LOGOUT_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>36</seqNum>\r\n  <msg>&lt;CPmcSLogoutReq&gt;&lt;event&gt;PMCS_LOGOUT_REQ&lt;/event&gt;&lt;seqNum&gt;36&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CPmcSLogoutReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGOUT_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGOUT_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

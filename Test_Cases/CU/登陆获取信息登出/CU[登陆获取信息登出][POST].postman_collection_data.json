@@ -1,0 +1,44 @@
+[
+{
+    "需要输入的参数":"<<",
+	"Interface_Url":"172.16.120.33",
+	"Interface_st":"/cui/cui.fcgi",
+	"userName":"admin@kadacom",
+	"password":"kedacom123",
+	"cusdkVersion":"2.0",
+	"clientType":"cuver",
+	"isSupportNA":"false",
+	"timeoutMSec":"1",
+    "需要验证的参数":"<<",
+	"cmsVersion":"非空即可",
+	"cuVersion":"非空即可",
+	"cuUpdateUrl":"非空即可",
+	"serverDataVersion":"非空即可",
+	"stunInfo":"非空即可",
+	"session":"非空即可",
+	"errorCode":"0",
+	"Re_State":200
+},
+{
+    "需要输入的参数":"<<",
+	"Interface_Url":"172.16.120.33",
+	"Interface_st":"/cui/cui.fcgi",
+    "userName":"yuhui@kedacom",
+	"password":"kedacom123",
+	"cusdkVersion":"2.0",
+	"clientType":"cuver",
+	"isSupportNA":"false",
+	"timeoutMSec":"1",
+	"需要验证的参数":"<<",
+	"cmsVersion":"非空即可",
+	"cuVersion":"非空即可",
+	"cuUpdateUrl":"非空即可",
+	"serverDataVersion":"非空即可",
+	"ip":"非空即可",
+	"port":"非空即可",
+	"session":"非空即可",
+	"errorCode":"0",
+    "Re_State":400
+	}
+]
+	

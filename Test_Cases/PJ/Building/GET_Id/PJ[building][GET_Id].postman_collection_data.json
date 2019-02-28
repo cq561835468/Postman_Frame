@@ -1,0 +1,21 @@
+[
+	{
+		"Port":":10007",
+		"URI_Area":"/area",
+		"URI_Building":"/building/",
+		"area_code":"a6741cecdd1b4a879a351245b7lili22",
+		"area_name":"李强测试第五小学",
+		"buil_code":"jiaoxueloulq5",
+		"buil_name":"李强第五教学楼",
+		"buil_floor_count":9, 
+		"buil_first_floor_num":3,
+		"修改教学楼":">>",
+		"buil_code_1":"jiaoxueloulq6",
+		"buil_name_1":"李强第六教学楼",
+		"buil_floor_count_1":15, 
+		"buil_first_floor_num_1":2,
+		"Create_Building需要验证参数":">>",
+		"Re_State":200,
+		"success":"true"
+	}
+]

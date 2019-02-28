@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "ccdfeb8d-0a76-4fa1-bda3-1810a9c988a1",
+		"name": "VIID[MotorVehicles_Many][GET][OR]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "8731b0f0-4266-456e-a870-20dfbad64ec2",
+			"name": "VIID[MotorVehicles_Many][GET][OR]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c148fc19-4726-49df-89ea-714f9167f938",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// 长度检查点",
+							"var JsPer = jsonData.MotorVehicleListObject.MotorVehicleObject",
+							"var lang = jsonData.MotorVehicleListObject.MotorVehicleObject.length",
+							"tests[\"当前返回数量为: \"+lang] = lang;",
+							"",
+							"",
+							"//循环判断key",
+							"for (var key in JsPer){",
+							"    for(var keyy in JsPer[key]){",
+							"        if (keyy == data.Search_Field){",
+							"            var data1 = JsPer[key][keyy]",
+							"        }",
+							"        else if (keyy == data.Search_Field2){",
+							"            var data2 = JsPer[key][keyy]",
+							"        }",
+							"     ",
+							"     ",
+							"    }",
+							"   ",
+							"   pm.test(\"当前数值1为: \"+data1 +\"返回验证值1应为: \"+data.Value+\"|||当前数值2为: \"+data2 +\"返回验证值2应为: \"+data.Value2, function () {",
+							"        var x = (data1 == data.Value || data2 == data.Value2)",
+							"        console.log(x)",
+							"        pm.expect(x).to.eql(true)  ",
+							"     });     ",
+							"       ",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

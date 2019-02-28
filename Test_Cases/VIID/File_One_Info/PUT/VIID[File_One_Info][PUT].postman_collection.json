@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "25fd1d5c-d44c-408a-9feb-313aecd75253",
+		"name": "VIID[File_Info][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "单个文件数据修改info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5a493291-531d-4353-a18b-a873c8a85522",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// StatusCode检查点",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL+\"|RequestURL应为:\"+data.Interface_st+data.FileID+data.Interface_end] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL == data.Interface_st+data.FileID+data.Interface_end; ",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode == data.StatusCode; ",
+							"tests[\" StatusString: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString == data.StatusString !==0;",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"FileObject\":[\r\n\t\t{\"FileInfo\":{\r\n                        \"FileID\":\"{{FileID}}\", \r\n                        \"InfoKind\":\"{{InfoKind}}\", \r\n                        \"Source\":\"{{Source}}\",  \r\n                        \"FileName\":\"{{FileNam}}\",  \r\n                        \"FileHash\":\"{{FileHash}}\", \r\n                        \"FileFormat\":\"{{FileFormat}}\", \r\n                        \"Title\":\"{{Title}}\"}\r\n\t\t}]\r\n          \r\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{FileID}}{{Interface_end}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{FileID}}{{Interface_end}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

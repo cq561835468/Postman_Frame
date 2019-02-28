@@ -1,0 +1,32 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"http://172.16.249.130:9900",
+	"Interface_st":"/ptt/pttLogin/pttForcedLogin",
+	"userCode": "admin",
+    "userPassword": "admin",
+	"Interface_st4":"/ptt/searchTree/tree/user?access_token=",
+	"Interface_st5":"/ptt/line/queryLines?access_token=",
+	"Interface_st6":"/ptt/addressList/queryGroups?access_token=",
+	"Interface_st7":"/ptt/addressList/queryOrgs?access_token=",
+	"Search_Field":"parent",
+	"Search_Field1":"isParent",
+	"Search_Field3":"nodeType",
+	"Search_Field2":"isOnline",
+	"Search_Field4":"id",
+	"Search_Field5":"name",
+	"nodeType":"0|1|2",
+	"isOnline":"0|1",
+	"nodeType1":"&nodeType=1",
+	"true":"true",
+	"false":"false",
+	"需要验证参数":">>",
+	"Re_State":"200",
+    "resultMsg": "成功",
+    "updateTime": "非空即可",
+    "ip": "172.16.249.130",
+    "resultCode": 200
+	
+}
+]
+

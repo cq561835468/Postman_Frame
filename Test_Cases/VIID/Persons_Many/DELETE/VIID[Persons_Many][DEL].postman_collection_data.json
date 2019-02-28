@@ -1,0 +1,16 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8081",
+	"Interface_st1":"/VIID/Persons",
+	"Interface_st2":"/VIID/Persons?IDList=",
+	"PersonID1":"31000000001320000006022009155654243350124345",
+	"PersonID2":"31000000001320000006022019050654243350124345",
+	
+	"需要验证参数":">>",
+	"StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+}
+]
+

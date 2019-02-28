@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "ebc3b792-1c46-4cba-ae4e-ac97846b1144",
+		"name": "Pj-Lesson_time_GET_Leti_Type",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Create_Lesson_time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc91c978-9cc9-4e5d-a218-289f67f377bb",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"leti_id\",js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\t\"area_code\":\"{{area_code}}\",\n\t\"leti_number\":{{leti_number}},\n\t\"leti_type\":\"{{leti_type}}\",\n\t\"leti_begin_time\":\"{{leti_begin_time}}\",\n\t\"leti_end_time\":\"{{leti_end_time}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Get_Leti_Type_Lesson_time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f15e0e6a-f842-4f76-9900-8ba654deb18b",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"/*var jsdata=js.list",
+							"for(var key in jsdata)",
+							"    {",
+							"        pm.test(\"当前区域编号为：\"+jsdata[key].area_code+\"区域编号应为：\"+data.area_code,function(){",
+							"            pm.expect(jsdata[key].area_code).to.eql(data.area_code);",
+							"        });",
+							"    }*/",
+							"var jsdata=js.list",
+							"for(var key in jsdata)",
+							"{",
+							"    pm.test(\"节次课程时间类型为：\"+jsdata[key].leti_type+\"|节次课程时间类型应为：\"+data.leti_type),function(){",
+							"        pm.expect(jsdata[key].leti_type).to.eql(data.leti_type);",
+							"    };",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\t\"area_code\":\"{{area_code}}\" \n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}?t=1&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "1"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_Lesson_time",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}{{leti_id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}{{leti_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

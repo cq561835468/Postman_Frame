@@ -1,0 +1,47 @@
+[
+	{
+		"需要输入参数：":">>",
+		"Interface_Url":"172.16.120.33",
+		"Interface_st":"/cui/cui.fcgi",
+		"userName":"admin@kadacom",
+		"password":"kedacom123",
+		"cusdkVersion":"2.0",
+		"clientType":"cuver",
+		"isSupportNA":false,
+		"webCUClientAddr":"",
+
+		"playId":"126145881",
+		"recordDurationId":"timely 0  ......IPC51",
+		"recordType":"cusdk:ERecordTypePURecord",
+		"startTime":"2018-09-12T16:00:00Z",
+		"endTime":"2018-09-12T16:00:06Z",
+		"recordDomainName":"",
+		"deviceId":"15ff4473414e439f834e7ff740b405da@kadacom",
+		"channelId":"0",
+		"directTrans":false,
+		"directTransFromDeviceDomain":false,
+		"transMode":"cusdk:TransModeUDP",
+		"mediaType":"cusdk:MediaTypeAudio",
+		"transChannelType":"cusdk:TransChannelTypeRTP",
+		"natData":"",
+		"ip":"10.82.1.78",
+		"port0":"51140",
+		"port1":"51141",
+		"port2":"51142",
+		"port3":"51143",
+		"needTranscode":false,
+		"dstVideoFormat":"cusdk:VF-Invalid",
+		"dstSolution":"cusdk:VS-Invalid",
+		"dstFrameRate":0,
+		"dstBitRate":0,
+		"dstAudioFormat":"cusdk:AF-Invalid",
+
+		"vcrCmd":"cusdk:VCRCMD-PAUSE",
+		"seekTime":0,
+		"playSpeed":0,
+
+		"需要检验参数：":">>",
+		"Re_State":200,
+		"errorCode":"0"
+	}
+]

@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "fc6f6b51-b246-46b0-a82a-203ff8b412dc",
+		"name": "WMS[LiveStream&Viewer]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "888bb437-a82d-46e9-b181-52b3b201643a",
+			"name": "WMS[LiveStream][POST]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e1181062-a926-48a5-a4f2-e8aa2a1fdff0",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData.streamId)",
+							"pm.environment.set(\"Id\", jsonData.streamId)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"streamId:\"+jsonData.streamId] = jsonData.streamId;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "scharset",
+						"value": "UTF-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"source\": {\r\n        \"type\": \"{{type1}}\",\r\n        \"options\": {\r\n            \"rtsp\": {\r\n                \"audioCodec\":\"{{audioCodec}}\",\r\n                \"url\": \"{{url}}\",\r\n                \"codec\": \"{{codec}}\"\r\n                }\r\n            }\r\n        }\r\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st1}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "87130b7a-14a4-4328-92a7-6a9093213392",
+			"name": "WMS[Viewer][POST]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9475710f-07de-4d9a-8d2f-c6bdd6f557cc",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData.streamId)",
+							"pm.environment.set(\"viewerId\", jsonData.viewerId)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"viewerId: \"+jsonData.viewerId] = jsonData.viewerId;",
+							"tests[\"signalingBridge: \"+jsonData.signalingBridge] = jsonData.signalingBridge;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "scharset",
+						"value": "UTF-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\":\"{{type2}}\",\r\n    \"Id\":\"{{Id}}\",\r\n    \"video\":\"{{video}}\",\r\n    \"audio\":\"{{audio}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st2}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "c229791c-cacc-402b-aed4-2433588caf09",
+			"name": "WMS[Viewer][DEL]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5ca615f8-a969-47ec-9782-641b6368bee4",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"pm.test(\"返回 OK\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "scharset",
+						"value": "UTF-8"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n    \t\"viewerId\":\"{{viewerId}}\",\r\n        \"streamId\":\"{{Id}}\"\r\n    \t\r\n    }\r\n"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st2}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

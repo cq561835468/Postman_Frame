@@ -1,0 +1,420 @@
+{
+	"info": {
+		"_postman_id": "c2e184aa-4d70-4ddf-bb58-be17447b792b",
+		"name": "CU[用户管理][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login[用户]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "adf333a7-0f04-472e-9b38-7293530f5e6c",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+ data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"    });",
+							"",
+							"tests[\"cmsVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"];",
+							"tests[\"cuVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"];",
+							"tests[\"cuUpdateUrl: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"];",
+							"tests[\"serverDataVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"];",
+							"tests[\"ip: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"];",
+							"tests[\"port: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"];",
+							"tests[\"session: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+ data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							"",
+							"pm.environment.set(\"session1\", jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:Login>\r\n\t\t\t<cusdk:loginReq>\r\n\t\t\t\t<cusdk:userName>{{username}}</cusdk:userName>\r\n\t\t\t\t<cusdk:password>{{password}}</cusdk:password>\r\n\t\t\t\t<cusdk:cusdkVersion>{{cusdkVersion}}</cusdk:cusdkVersion>\r\n\t\t\t\t<cusdk:clientType>{{clientType}}</cusdk:clientType>\r\n\t\t\t\t<cusdk:isSupportNA>{{isSupportNA}}</cusdk:isSupportNA>\r\n\t\t\t\t<cusdk:webCUClientAddr>{{webCUClientAddr}}</cusdk:webCUClientAddr>\r\n\t\t\t</cusdk:loginReq>\r\n\t\t</cusdk:Login>\r\n\t</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e522663d-76cf-437d-b230-9dbeeacd8c7b",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"var datas=jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserListRsp\"][\"cusdk:userInfoList\"]",
+							"var lang = datas.length",
+							"//console.log(datas)",
+							"for(var key in datas){",
+							"    for(var keyy in datas[key]){",
+							"    if(keyy==\"cusdk:uuid\"){",
+							"        pm.test(\"uuid：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:userName\"){",
+							"        pm.test(\"userName：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:userPassword\"){",
+							"        pm.test(\"userPassword：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:domainID\"){",
+							"        pm.test(\"domainID：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:userType\"){",
+							"        pm.test(\"userType：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:creator\"){",
+							"        pm.test(\"creator：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:userGroup\"){",
+							"        pm.test(\"userGroup：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:description\"){",
+							"        pm.test(\"description：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:accountOverdueTime\"){",
+							"        pm.test(\"accountOverdueTime：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:passwordOverdueTime\"){",
+							"        pm.test(\"passwordOverdueTime：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:enable\"){",
+							"        pm.test(\"enable：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]).to.be.oneOf([\"true\",\"false\"])",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:allowMultilogin\"){",
+							"        pm.test(\"allowMultilogin：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]).to.be.oneOf([\"true\",\"false\"])",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:passwordExpireEnable\"){",
+							"        pm.test(\"passwordExpireEnable：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]).to.be.oneOf([\"true\",\"false\"])",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:passwordExpire\"){",
+							"        pm.test(\"passwordExpire：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:bindIPEnable\"){",
+							"        pm.test(\"bindIPEnable：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]).to.be.oneOf([\"true\",\"false\"])",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:bindingAddress\"){",
+							"        pm.test(\"bindingAddress：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:IsIPAppliedToMobileEnd\"){",
+							"         pm.test(\"IsIPAppliedToMobileEnd：\"+datas[key][keyy],function(){",
+							"                pm.expect(datas[key][keyy]).to.be.oneOf([\"true\",\"false\"])",
+							"            })",
+							"    }",
+							"    if(keyy==\"cusdk:maxStreamNumEnable\"){",
+							"         pm.test(\"maxStreamNumEnable：\"+datas[key][keyy],function(){",
+							"                pm.expect(datas[key][keyy]).to.be.oneOf([\"true\",\"false\"])",
+							"            })",
+							"    }",
+							"    if(keyy==\"cusdk:maxStreamNum\"){",
+							"        pm.test(\"maxStreamNum：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:waterMarkSupported\"){",
+							"        pm.test(\"waterMarkSupported：\"+datas[key][keyy],function(){",
+							"             pm.expect(datas[key][keyy]).to.be.oneOf([\"true\",\"false\"])",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:waterMarkEnabled\"){",
+							"        pm.test(\"waterMarkEnabled：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]).to.be.oneOf([\"true\",\"false\"])",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:waterMarkFont\"){",
+							"        pm.test(\"waterMarkFont：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:waterMarkFontSize\"){",
+							"        pm.test(\"waterMarkFontSize：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:waterMarkRotationAngle\"){",
+							"        pm.test(\"waterMarkRotationAngle：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:waterMarkColor\"){",
+							"        pm.test(\"waterMarkColor：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:waterMarkTransparent\"){",
+							"        pm.test(\"waterMarkTransparent：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]!=\"\").to.eql(true)",
+							"        })",
+							"    }",
+							"    if(keyy==\"cusdk:waterMarkTiled\"){",
+							"        pm.test(\"waterMarkTiled：\"+datas[key][keyy],function(){",
+							"            pm.expect(datas[key][keyy]).to.be.oneOf([\"true\",\"false\"])",
+							"        })",
+							"    }",
+							"    }",
+							"}",
+							"",
+							"tests[\"totalNum为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserListRsp\"][\"cusdk:totalNum\"]+\"|totalNum应该为\"+ lang] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserListRsp\"][\"cusdk:totalNum\"] == lang;",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserListRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserListRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserListRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserListRsp\"][\"cusdk:errorCode\"]== data.errorCode;",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:GetUserList>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:GetUserListReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:userId>{{userId}}</cusdk:userId>\r\n\t\t\t\t<cusdk:beginIndex>{{beginIndex}}</cusdk:beginIndex>\r\n\t\t\t\t<cusdk:num>{{num}}</cusdk:num>\r\n\t\t\t\t</cusdk:req>\r\n\t\t\t\t</cusdk:GetUserList>\r\n\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc3a71e3-30b9-4113-bb81-1b0204930730",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"//console.log(jsonData)",
+							"tests[\"userId为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateUserRsp\"][\"cusdk:userId\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateUserRsp\"][\"cusdk:userId\"] ;",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateUserRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateUserRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateUserRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateUserRsp\"][\"cusdk:errorCode\"]== data.errorCode;",
+							"",
+							"pm.environment.set(\"userId1\", jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:CreateUserRsp\"][\"cusdk:userId\"]);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:CreateUser>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:CreateUserReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:userInfo>\r\n\t\t\t\t\t<cusdk:uuid></cusdk:uuid>\r\n\t\t\t\t\t<cusdk:userName>{{userName1}}</cusdk:userName>\r\n\t\t\t\t\t<cusdk:userPassword>{{userPassword}}</cusdk:userPassword>\r\n\t\t\t\t\t<cusdk:domainID>{{domainID}}</cusdk:domainID>\r\n\t\t\t\t\t<cusdk:creator>{{creator}}</cusdk:creator>\r\n\t\t\t\t\t<cusdk:userType>{{userType1}}</cusdk:userType>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri1}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri2}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri3}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri4}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri5}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri6}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri7}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:creator>{{creator}}</cusdk:creator>\r\n\t\t\t\t\t<cusdk:userGroup></cusdk:userGroup>\r\n\t\t\t\t\t<cusdk:description></cusdk:description>\r\n\t\t\t\t\t<cusdk:accountOverdueTime>{{accountOverdueTime}}</cusdk:accountOverdueTime>\r\n\t\t\t\t\t<cusdk:passwordOverdueTime>{{passwordOverdueTime}}</cusdk:passwordOverdueTime>\r\n\t\t\t\t\t<cusdk:enable>{{enable}}</cusdk:enable>\r\n\t\t\t\t\t<cusdk:allowMultilogin>{{allowMultilogin}}</cusdk:allowMultilogin>\r\n\t\t\t\t\t<cusdk:passwordExpireEnable>{{passwordExpireEnable}}</cusdk:passwordExpireEnable>\r\n\t\t\t\t\t<cusdk:passwordExpire>{{passwordExpire}}</cusdk:passwordExpire>\r\n\t\t\t\t\t<cusdk:bindIPEnable>{{bindIPEnable}}</cusdk:bindIPEnable>\r\n\t\t\t\t\t<cusdk:bindingAddress></cusdk:bindingAddress>\r\n\t\t\t\t\t<cusdk:IsIPAppliedToMobileEnd>{{IsIPAppliedToMobileEnd}}</cusdk:IsIPAppliedToMobileEnd>\r\n\t\t\t\t\t<cusdk:maxStreamNumEnable>{{maxStreamNumEnable}}</cusdk:maxStreamNumEnable>\r\n\t\t\t\t\t<cusdk:maxStreamNum>{{maxStreamNum}}</cusdk:maxStreamNum>\r\n\t\t\t\t\t<cusdk:waterMarkSupported>{{waterMarkSupported}}</cusdk:waterMarkSupported>\r\n\t\t\t\t\t<cusdk:waterMarkEnabled>{{waterMarkEnabled}}</cusdk:waterMarkEnabled>\r\n\t\t\t\t\t<cusdk:waterMarkFont>{{waterMarkFont}}</cusdk:waterMarkFont>\r\n\t\t\t\t\t<cusdk:waterMarkFontSize>{{waterMarkFontSize}}</cusdk:waterMarkFontSize>\r\n\t\t\t\t\t<cusdk:waterMarkRotationAngle>{{waterMarkRotationAngle}}</cusdk:waterMarkRotationAngle>\r\n\t\t\t\t\t<cusdk:waterMarkColor>{{waterMarkColor}}</cusdk:waterMarkColor>\r\n\t\t\t\t\t<cusdk:waterMarkTransparent>{{waterMarkTransparent}}</cusdk:waterMarkTransparent>\r\n\t\t\t\t\t<cusdk:waterMarkTiled>{{waterMarkTiled}}</cusdk:waterMarkTiled>\r\n\t\t\t\t\t</cusdk:userInfo>\r\n\t\t\t\t\t</cusdk:req></cusdk:CreateUser></SOAP-ENV:Body></SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ModifyUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bac50811-bc8d-4488-ae93-4f041e37ad38",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"console.log(jsonData)",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyUserRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyUserRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyUserRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ModifyUserRsp\"][\"cusdk:errorCode\"]== data.errorCode;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:ModifyUser><cusdk:req xsi:type=\"cusdk:ModifyUserReq\">\r\n\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t<cusdk:userInfo>\r\n\t\t\t\t<cusdk:uuid>{{uuid}}</cusdk:uuid>\r\n\t\t\t\t<cusdk:userName>{{userName2}}</cusdk:userName>\r\n\t\t\t\t<cusdk:userPassword></cusdk:userPassword>\r\n\t\t\t\t<cusdk:domainID>{{domainID}}</cusdk:domainID>\r\n\t\t\t\t\t<cusdk:creator>{{creator}}</cusdk:creator>\r\n\t\t\t\t\t<cusdk:userType>{{userType2}}</cusdk:userType>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri1}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri2}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri3}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri4}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri5}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri6}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:userPri>{{userPri7}}</cusdk:userPri>\r\n\t\t\t\t\t<cusdk:creator>{{creator}}</cusdk:creator>\r\n\t\t\t\t<cusdk:userGroup></cusdk:userGroup>\r\n\t\t\t\t<cusdk:description></cusdk:description>\r\n\t\t\t\t<cusdk:accountOverdueTime>{{accountOverdueTime}}</cusdk:accountOverdueTime>\r\n\t\t\t\t<cusdk:passwordOverdueTime>{{passwordOverdueTime}}</cusdk:passwordOverdueTime>\r\n\t\t\t\t<cusdk:enable>{{enable}}</cusdk:enable>\r\n\t\t\t\t\t<cusdk:allowMultilogin>{{allowMultilogin}}</cusdk:allowMultilogin>\r\n\t\t\t\t\t<cusdk:passwordExpireEnable>{{passwordExpireEnable}}</cusdk:passwordExpireEnable>\r\n\t\t\t\t\t<cusdk:passwordExpire>{{passwordExpire}}</cusdk:passwordExpire>\r\n\t\t\t\t\t<cusdk:bindIPEnable>{{bindIPEnable}}</cusdk:bindIPEnable>\r\n\t\t\t\t\t<cusdk:bindingAddress></cusdk:bindingAddress>\r\n\t\t\t\t\t<cusdk:IsIPAppliedToMobileEnd>{{IsIPAppliedToMobileEnd}}</cusdk:IsIPAppliedToMobileEnd>\r\n\t\t\t\t\t<cusdk:maxStreamNumEnable>{{maxStreamNumEnable}}</cusdk:maxStreamNumEnable>\r\n\t\t\t\t\t<cusdk:maxStreamNum>{{maxStreamNum}}</cusdk:maxStreamNum>\r\n\t\t\t\t\t<cusdk:waterMarkSupported>{{waterMarkSupported}}</cusdk:waterMarkSupported>\r\n\t\t\t\t\t<cusdk:waterMarkEnabled>{{waterMarkEnabled}}</cusdk:waterMarkEnabled>\r\n\t\t\t\t\t<cusdk:waterMarkFont>{{waterMarkFont}}</cusdk:waterMarkFont>\r\n\t\t\t\t\t<cusdk:waterMarkFontSize>{{waterMarkFontSize}}</cusdk:waterMarkFontSize>\r\n\t\t\t\t\t<cusdk:waterMarkRotationAngle>{{waterMarkRotationAngle}}</cusdk:waterMarkRotationAngle>\r\n\t\t\t\t\t<cusdk:waterMarkColor>{{waterMarkColor}}</cusdk:waterMarkColor>\r\n\t\t\t\t\t<cusdk:waterMarkTransparent>{{waterMarkTransparent}}</cusdk:waterMarkTransparent>\r\n\t\t\t\t\t<cusdk:waterMarkTiled>{{waterMarkTiled}}</cusdk:waterMarkTiled>\r\n\t\t\t\t</cusdk:userInfo>\r\n\t\t\t\t</cusdk:req>\r\n\t\t\t\t</cusdk:ModifyUser>\r\n\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DelUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "08602e25-c0fe-4a50-a8fe-5561cb59f4af",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"tests[\"operationId为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:DelUserRsp\"][\"cusdk:operationId\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:DelUserRsp\"][\"cusdk:operationId\"] ;",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:DelUserRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:DelUserRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:DelUserRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:DelUserRsp\"][\"cusdk:errorCode\"]== data.errorCode;",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:DelUser>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:DelUserReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:userId>{{userId1}}</cusdk:userId>\r\n\t\t\t\t\t</cusdk:req>\r\n\t\t\t\t\t</cusdk:DelUser>\r\n\t\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ChangePassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e5cdf6b2-2130-40fd-be6c-7a670a5146ea",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ChangePasswordRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ChangePasswordRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ChangePasswordRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:ChangePasswordRsp\"][\"cusdk:errorCode\"]== data.errorCode;",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:ChangePassword>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:ChangePasswordReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t<cusdk:oldPassword>{{oldPassword}}</cusdk:oldPassword>\r\n\t\t\t<cusdk:newPassword>{{newPassword}}</cusdk:newPassword>\r\n\t\t\t<cusdk:passwordOverdueTime>{{passwordOverdueTime}}</cusdk:passwordOverdueTime>\r\n\t\t\t\t\t</cusdk:req>\r\n\t\t\t\t\t</cusdk:ChangePassword>\r\n\t\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

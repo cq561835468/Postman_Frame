@@ -1,0 +1,34 @@
+{
+	"Vedio_Many_GET_One_Out": [
+		{
+			"Re_State":"200",
+	"Search_Field":"FileSize",
+	"Value":"44567649"
+	}],
+	"Vedio_Many_GET_And_Out": [
+		{
+			"Re_State":"200",
+	"Search_Field":"FileFormat",
+	"Search_Field2":"DeviceID",
+	"Value":"mp4",
+	"Value2":"31000000001320000064"
+	}],
+	"Vedio_Many_GET_Or_Out": [
+		{
+			"Re_State":"200",
+	"Search_Field":"FileFormat",
+	"Search_Field2":"DeviceID",
+	"Value":"mp4",
+	"Value2":"31000000001320000064"
+	}],
+	"Vedio_Many_Post_Out": [
+		{
+			"StatusCode":"0"
+	}]
+
+
+
+
+
+
+}

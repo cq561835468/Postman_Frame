@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "38e6cebe-3893-4734-b513-971734d0ca61",
+		"name": "WebCu[WebCU登录搜索]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3da5fd7-3b84-4198-b9a0-7e52a9b629b6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var js = pm.response.json();",
+							"tests[\"errorcode为: \"+js.errorcode+\"|errorcode应为:\"+\"0\"] = js.errorcode == 0;",
+							"tests[\"passwordRemainTime为: \"+js.passwordRemainTime+\"|passwordRemainTime应为:\"+\"2147483647\"] = js.passwordRemainTime == 2147483647;",
+							"var regString = /[0-9]+/;",
+							"tests[\"session值为: \"+js.session+\"|session应不为空\"] = regString.exec(js.session)[0] != \"undefined\";",
+							"tests[\"result为: \"+js.result+\"|result应为:\"+\"1\"] = js.result == 1;",
+							"",
+							"pm.environment.set(\"session\", js.session);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"method\":\"login\",\n\t\"ip\":\"{{ip}}\",\n\t\"user\":\"{{user}}\",\n\t\"password\":\"{{password}}\"\n}"
+				},
+				"url": {
+					"raw": "{{plat_IP}}/playweb/bin/getdev_fcgi",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"playweb",
+						"bin",
+						"getdev_fcgi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchDevice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aaed612d-d832-4762-a604-46dd32022b41",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var js = pm.response.json();",
+							"tests[\"errorcode为: \"+js.errorcode+\"|errorcode应为:\"+\"0\"] = js.errorcode == 0;",
+							"var regString = /[0-9]+/;",
+							"tests[\"taskid值为: \"+js.session+\"|taskid应不为空\"] = regString.exec(js.taskid)[0] != \"undefined\";",
+							"tests[\"result为: \"+js.result+\"|result应为:\"+\"1\"] = js.result == 1;",
+							"pm.environment.set(\"taskid\", js.taskid);",
+							"",
+							"setTimeout(function(){}, 10000)",
+							"//查询出结果较慢，要加个延时。否则下一步查询不到结果，有报错"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"method\":\"startsearch\",\n\t\"session\":\"{{session}}\",\n\t\"visionid\":\"\",\n\t\"keyword\":\"{{keyword}}\"\n}"
+				},
+				"url": {
+					"raw": "{{plat_IP}}/playweb/bin/getdev_fcgi",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"playweb",
+						"bin",
+						"getdev_fcgi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSearchResult",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "caedb230-6459-4396-a12e-6e96d90e4ebd",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"var js = pm.response.json();",
+							"tests[\"errorcode为: \"+js.errorcode+\"|errorcode应为:\"+\"0\"] = js.errorcode == 0;",
+							"tests[\"result为: \"+js.result+\"|result应为:\"+\"1\"] = js.result == 1;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"method\":\"getsearchresult\",\n\t\"session\":\"{{session}}\",\n\t\"visionid\":\"\",\n\t\"taskid\":\"{{taskid}}\",\n\t\"groupid\":\"\",\n\t\"startindex\":0,\n\t\"num\":20\n}"
+				},
+				"url": {
+					"raw": "{{plat_IP}}/playweb/bin/getdev_fcgi",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"playweb",
+						"bin",
+						"getdev_fcgi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "36d3f418-921e-4d71-8fcb-4d44e169e720",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"var js = pm.response.json();",
+							"tests[\"errorcode为: \"+js.errorcode+\"|errorcode应为:\"+\"0\"] = js.errorcode == 0;",
+							"tests[\"result为: \"+js.result+\"|result应为:\"+\"1\"] = js.result == 1;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"method\":\"logout\",\n\t\"session\":\"{{session}}\"\n}"
+				},
+				"url": {
+					"raw": "{{plat_IP}}/playweb/bin/getdev_fcgi",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"playweb",
+						"bin",
+						"getdev_fcgi"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "2b9c266b-bafe-4430-bdbd-dc834a9aa520",
+		"name": "PJ[building][POST_Create]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create_Area",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\"area_code\": \"{{area_code}}\", \n\"area_name\": \"{{area_name}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Area}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Area}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Create_Building",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "884610fa-cbe3-478b-bd5e-45a53cf2b474",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;",
+							"var regString = /[0-9]+/;",
+							"tests[\"当前区域值为: \"+js.id+\"|区域值应不为空\"] = regString.exec(js.id)[0] != \"undefined\"; //通过正则匹配不为空",
+							"pm.environment.set(\"id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n  \"area_code\": \"{{area_code}}\", \n  \"buil_code\": \"{{buil_code}}\", \n  \"buil_name\": \"{{buil_name}}\", \n  \"buil_floor_count\":{{buil_floor_count}}, \n  \"buil_first_floor_num\":{{buil_first_floor_num}}\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Building}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Building}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Building_ID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Building}}{{id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Building}}{{id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

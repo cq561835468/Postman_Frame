@@ -1,0 +1,60 @@
+[{
+	"需要输入参数":">>",
+	"Interfac_url":"172.16.120.33",
+	"Interface_st":"/cui/cui.fcgi",
+	"username":"admin@kadacom",
+	"password":"kedacom123",
+	"cusdkVersion":"2.0",
+	"clientType":"cuver",
+	"isSupportNA":false,
+	
+	"userId":"59e298b385fa4c2893cc097608ea55a1@kadacom",
+	"beginIndex":0,
+	"num":20,
+
+	"userName1":"ceshi2",
+	"userPassword":"kedacom123",
+	"domainID":"59e298b385fa4c2893cc097608ea55a1",
+	"creator":"59e298b385fa4c2893cc097608ea55a1@kadacom",
+	"userType1":"cusdk:Operator",
+	"userPri1":"cusdk:PriUserCMSRecStart",
+	"userPri2":"cusdk:PriUserCMSRecPlay",
+	"userPri3":"cusdk:PriUserCMSRecDownload",
+	"userPri4":"cusdk:PriUserLocalRec",
+	"userPri5":"cusdk:PriUserPUCall",
+	"userPri6":"cusdk:PriUserAlarmLog",
+	"userPri7":"10",
+	"accountOverdueTime":"2037-12-30T16:00:00Z",
+	"passwordOverdueTime":"2037-12-30T16:00:00Z",
+	"enable":"true",
+	"allowMultilogin":"false",
+	"passwordExpireEnable":"true",
+	"passwordExpire":90,
+	"bindIPEnable":"true",
+	"IsIPAppliedToMobileEnd":"false",
+	"maxStreamNumEnable":"true",
+	"maxStreamNum":0,
+	"waterMarkSupported":"true",
+	"waterMarkEnabled":"true",
+	"waterMarkFont":"......#C:\\WINDOWS\\Fonts\\simhei.ttf",
+	"waterMarkFontSize":3,
+	"waterMarkRotationAngle":30,
+	"waterMarkColor":16711680,
+	"waterMarkTransparent":30,
+	"waterMarkTiled":"true",
+
+
+	"uuid":"bf1f639a628349d89f3d9d3c67027c75@kadacom",
+	"userName2":"keda@kadacom",
+	"userType2":"cusdk:Admin",
+	
+	"oldPassword":"kedacom1234",
+	"newPassword":"kedacom123",
+	
+
+
+	"需要检验参数":">>",
+	"Re_State":200,
+	"errorCode":0
+}
+]

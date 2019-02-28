@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "2caa849d-bc74-4060-aa3c-642b15cc81b3",
+		"name": "Pj-Academic_Term_GET-ID",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Create_Area",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\"area_code\": \"{{area_code}}\", \n\"area_name\": \"{{area_name}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Create_Academic_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"{{area_code}}\", \r\n  \"acye_begin_year\": {{acye_begin_year}}, \r\n  \"acye_end_year\": {{acye_end_year}}, \r\n  \"acye_code\": \"{{acye_code}}\", \r\n  \"acye_name\": \"{{acye_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_A}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_A}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Create_Academic_Term",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"var regString = /[0-9]+/;",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;",
+							"pm.environment.set(\"AT_ID\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"acye_id\": {{id}}, \r\n  \"acte_term\": {{acte_term}}, \r\n  \"acte_code\": \"{{acte_code}}\", \r\n  \"acte_name\": \"{{acte_name}}\", \r\n  \"acte_begin_date\": \"{{acte_begin_date}}\", \r\n  \"acte_end_date\": \"{{acte_end_date}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_AY}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_AY}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Get_Academic_Term",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"var regString = /[0-9]+/;",
+							"var AT_ID = pm.environment.get(\"AT_ID\");",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前area_code为: \"+js.area_code+\"|area_code值应为:\"+data.area_code] = js.area_code == data.area_code;",
+							"tests[\"当前acye_id为: \"+js.id+\"|acye_id值应为:\"+AT_ID] = js.id == AT_ID;",
+							"tests[\"当前acte_term为: \"+js.acte_term+\"|acte_term值应为:\"+data.acte_term] = js.acte_term == data.acte_term;",
+							"tests[\"当前acte_code为: \"+js.acte_code+\"|acte_code功值应为:\"+data.acte_code] = js.acte_code == data.acte_code;",
+							"tests[\"当前acte_name为: \"+js.acte_name+\"|acte_name值应为:\"+data.acte_name] = js.acte_name == data.acte_name;",
+							"tests[\"当前acte_begin_date为: \"+js.acte_begin_date+\"|acte_begin_date值应为:\"+data.acte_begin_date] = js.acte_begin_date == data.acte_begin_date;",
+							"tests[\"当前acte_end_date为: \"+js.acte_end_date+\"|acte_end_date值应为:\"+data.acte_end_date] = js.acte_end_date == data.acte_end_date;           "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_AY}}/{{AT_ID}}?_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_AY}}"
+					],
+					"path": [
+						"{{AT_ID}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_Academic_Term",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"var regString = /[0-9]+/;",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_AY}}/{{AT_ID}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_AY}}"
+					],
+					"path": [
+						"{{AT_ID}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f5d4d144-f0e5-445a-8650-a3e1085e86d2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b58c6337-beba-42bf-bf9c-bca9da0708e1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

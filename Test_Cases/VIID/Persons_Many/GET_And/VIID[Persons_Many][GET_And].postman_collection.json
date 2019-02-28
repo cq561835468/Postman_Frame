@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "a1f283a5-f65a-4cf9-8870-484dd3ea532a",
+		"name": "VIID[Persons_Many][GET_And]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "6157f6af-e9f5-46e3-8b99-2c00c8551643",
+			"name": "persons_many_get_and",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "57a670f5-f533-4bdb-a156-fe79973f50e9",
+						"type": "text/javascript",
+						"exec": [
+							"var x=pm.response.json()",
+							"//状态码检查",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"//循环判断",
+							"var xx=x.PersonListObject.PersonObject",
+							"for(var key in xx){",
+							"    for(var keyy in xx[key])",
+							"    {",
+							"        if(keyy==data.Search_Field1)",
+							"        {",
+							"            var data1=xx[key][keyy]",
+							"        }",
+							"        else if(keyy==data.Search_Field2)",
+							"        {",
+							"            var data2=xx[key][keyy]",
+							"        }",
+							"    }",
+							"    pm.test(\"当前数值1为：\"+data1+\" 返回的验证值应为:\"+data.Value1+\"当前数值2为\"+data2+\" 返回的验证值为\"+data.Value2,function(){",
+							"        pm.expect(data1).to.eql(data.Value1)&&pm.expect(data2).to.eql(data.Value2)",
+							"    })",
+							"}             "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{url}}{{url_st}}{{Search_Express}}",
+					"host": [
+						"{{url}}{{url_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

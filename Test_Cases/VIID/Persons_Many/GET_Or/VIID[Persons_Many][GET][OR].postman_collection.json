@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "aa41edd4-b322-400d-b7f4-e80f115686d1",
+		"name": "VIID[Persons_Many][GET][OR]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "b5b1558e-4585-43e2-b826-b123be925741",
+			"name": "VIID[Persons_Many][GET][OR]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4b2c6c33-3458-4815-8725-65051340ad61",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// 长度检查点",
+							"var JsPer = jsonData.PersonListObject.PersonObject",
+							"var lang = jsonData.PersonListObject.PersonObject.length",
+							"tests[\"当前返回数量为: \"+lang] = lang;",
+							"",
+							"",
+							"//循环判断key",
+							"for (var key in JsPer){",
+							"    for(var keyy in JsPer[key]){",
+							"        if (keyy == data.Search_Field){",
+							"            var data1 = JsPer[key][keyy]",
+							"        }",
+							"        else if (keyy == data.Search_Field2){",
+							"            var data2 = JsPer[key][keyy]",
+							"        }",
+							"     ",
+							"     ",
+							"    }",
+							"   ",
+							"   pm.test(\"当前数值1为: \"+data1 +\"返回验证值1应为: \"+data.Value+\"|||当前数值2为: \"+data2 +\"返回验证值2应为: \"+data.Value2, function () {",
+							"        var x = (data1 == data.Value || data2 == data.Value2)",
+							"        console.log(x)",
+							"        pm.expect(x).to.eql(true)  ",
+							"     });     ",
+							"       ",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

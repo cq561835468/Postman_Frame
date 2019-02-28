@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "e785b162-1cb6-45ca-98db-5bfefc6dd895",
+		"name": "PJ[Course][GET_t=2]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Query_Course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7a0dc02-1689-47a4-8b0d-dfb2236ec01f",
+						"exec": [
+							"var js = pm.response.json()\r",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;\r",
+							"tests[\"当前page_index为: \"+js.page.page_index+\"|状态码应为:1\"] = js.page.page_index == 1;\r",
+							"tests[\"当前page_size为: \"+js.page.page_size+\"|状态码应为:5\"] = js.page.page_size == 5;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"area_code\": \"a6741cecdd1b4a879a3512hekedakeda\", \r\n  \"user_open_id\": \"{{user_open_id_S}}\",\r\n  \"order_by\": \"cour_name\", \r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_course}}?t=2&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_course}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "2"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

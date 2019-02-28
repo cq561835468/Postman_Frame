@@ -1,0 +1,28 @@
+[
+	{
+		"需要输入参数：":">>",
+		"Interface_url":"172.16.120.33",
+		"Interface_st":"/cui/cui.fcgi",
+		"username":"admin@kadacom",
+		"password1":"kedacom123",
+		"cusdkVersion":"2.0",
+		"clientType":"cuver",
+		"isSupportNA":false,
+		"webCUClientAddr":"",
+
+		"devId":"15ff4473414e439f834e7ff740b405da@kadacom",
+		"videoSrcId":"0",
+		"ptzCmd":"cusdk:PtzMoveStop",
+		"ptzParam":"7",
+
+		"beginTime":"2018-09-07T06:30:37Z",
+		"endTime":"2018-09-07T07:30:37Z",
+		"password2":"123456",
+
+		"password3":"",
+
+		"需要检验参数：":">>",
+		"Re_State":200,
+		"errorCode":0
+	}
+]

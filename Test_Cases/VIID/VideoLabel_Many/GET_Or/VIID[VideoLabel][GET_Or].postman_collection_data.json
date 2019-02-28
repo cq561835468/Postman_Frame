@@ -1,0 +1,14 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8083",
+	"Interface_st":"/VIID/VideoLabels",
+	"Search_Express":"?((VideoLabel.TargetNum=5)OR(VideoLabel.FaceNum=6))",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"Search_Field1":"TargetNum",
+	"Search_Field2":"FaceNum",
+	"Value1":5,
+	"Value2":6
+}
+]

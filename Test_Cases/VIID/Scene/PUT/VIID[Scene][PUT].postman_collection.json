@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "436b6d6f-86cf-4b94-9e59-15e4d17b79e5",
+		"name": "VIID[Scene][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "b3a9e7ae-4f39-407c-bd78-875e25830781",
+			"name": "VIID[Scene][PUT]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a60f6c0-78a9-4ebe-8595-41ed8e7f74e5",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"var datas=jsonData.ResponseStatusListObject.ResponseStatusObject[0]",
+							"for(var key in datas)",
+							"    {",
+							"        if(key==\"RequestURL\")",
+							"        {",
+							"           pm.test(\"当前RequestURL值为：\"+datas[key]+\" RequestURL应为：\"+data.RequestURL,function(){",
+							"                pm.expect(datas[key]).to.eql(data.RequestURL)",
+							"           })",
+							"        }",
+							"         if(key==\"StatusCode\")",
+							"         {",
+							"            pm.test(\"当前StatusCode值为：\"+datas[key]+\" StatusCode应为：\"+data.StatusCode,function(){",
+							"                pm.expect(datas[key]).to.eql(data.StatusCode)",
+							"           })",
+							"         }",
+							"         if(key==\"StatusString\")",
+							"         {",
+							"            pm.test(\"当前StatusString值为：\"+datas[key]+\" StatusString应为：\"+data.StatusString,function(){",
+							"                pm.expect(datas[key]).to.eql(data.StatusString)",
+							"           })",
+							"         }",
+							"         if(key==\"Id\")",
+							"         {",
+							"             pm.test(\"当前Id值为：\"+datas[key]+\" Id应为：\"+data.Value,function(){",
+							"                 pm.expect(datas[key]).to.eql(data.Value)",
+							"             })",
+							"         }",
+							"    }"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"SceneListObject\":{\n\t\"SceneObject\":[\n\t\t{\n\t\t\"SceneID\":\"{{SceneID}}\",\n\t\t\"InfoKind\":{{InfoKind}},\n\t\t\"SourceID\":\"{{SourceID}}\",\n\t\t\"DeviceID\":\"{{DeviceID}}\",\n\t\t\"BeginTime\":\"{{BeginTime}}\",\n\t\t\"PlaceType\":{{PlaceType}},\n\t\t\"WeatherType\":{{WeatherType}},\n\t\t\"SceneDescribe\":\"{{SceneDescribe}}\",\n\t\t\"SceneType\":{{SceneType}},\n\t\t\"RoadAlignmentType\":{{RoadAlignmentType}},\n\t\t\"RoadTerraintype\":{{RoadTerraintype}},\n\t\t\"RoadSurfaceType\":{{RoadSurfaceType}},\n\t\t\"RoadCoditionType\":{{RoadCoditionType}},\n\t\t\"RoadJunctionSectionType\":{{RoadJunctionSectionType}}, \n\t\t\"RoadLightingType\":{{RoadLightingType}},\n\t\t\"Illustration\":\"{{Illustration}}\",\n\t\t\"WindDirection\":\"{{WindDirection}}\", \n\t\t\"Illumination\":\"{{Illumination}}\",\n\t\t\"FieldCondition\":\"{{FieldCondition}}\",\n\t\t\"Temperature\":{{Temperature}}, \n\t\t\"Humidity\":{{Humidity}},\n\t\t\"PopulationDensity\":{{PopulationDensity}},\n\t\t\"DenseDegree\":{{DenseDegree}},\n\t\t\"Importance\":{{Importance}}, \n\t\t\"SubImageList\":\"{{SubImageList}}\"\n\t\t}]\t\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

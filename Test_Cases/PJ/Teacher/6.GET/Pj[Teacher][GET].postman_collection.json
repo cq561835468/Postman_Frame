@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "2038a362-d151-4f07-b189-380372568c7d",
+		"name": "Pj-Teacher_GET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Create_Teacher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0bd3dc7-2aa9-49cd-82f9-9584a9c85f1e",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"teac_id\",js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\t\"area_code\":\"{{area_code}}\",\n\t\"user_open_id\":\"{{user_open_id}}\",\n\t\"user_code\":\"{{user_code}}\",\n\t\"user_name\":\"{{user_name}}\",\n\t\"teac_in_service_status\":{{teac_in_service_status}}\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Get_Teacher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bc6f1a73-8a6d-471f-af26-8bb4c38072e5",
+						"exec": [
+							"var js=pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前所在页数为：\"+js.page.page_index+\"|所在页数应为：\"+data.page_index]=js.page.page_index==data.page_index;",
+							"var jsdata=js.list",
+							"for(var key in jsdata)",
+							"    {",
+							"        pm.test(\"当前区域编号为：\"+jsdata[key].area_code+\"区域编号应为：\"+data.area_code,function(){",
+							"            pm.expect(jsdata[key].area_code).to.eql(data.area_code);",
+							"        });",
+							"    }"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": {{page_index}}, \r\n    \"page_size\": {{page_size}}\r\n  }, \r\n  \"area_code\": \"{{area_code}}\", \r\n  \"user_code\": \"{{user_code}}\", \r\n  \"user_name\": \"{{user_name}}\", \r\n  \"teac_in_service_status\": {{teac_in_service_status}}, \r\n  \"order_by\": \"{{order_by}}\", \r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}?t=0&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_Id_Teacher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "177f160e-3658-441f-a811-cf3250c1cf78",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}/{{teac_id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					],
+					"path": [
+						"{{teac_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

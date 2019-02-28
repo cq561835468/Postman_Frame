@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "b93b2c13-bc3b-4ba3-846d-eda747800fe6",
+		"name": "VIID[MotorVehicles_Many][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "afa44a73-4ddc-4f00-92f4-9bd59c585bce",
+			"name": "VIID[MotorVehicles_Many][PUT]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "81ebc129-a2fc-4e27-90f0-7edb144a0e01",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"// 状态码检查点",
+							"",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State",
+							"// 长度检查点",
+							"//var JsPer = jsonData.PersonListObject.PersonObject",
+							"//var lang = jsonData.PersonListObject.PersonObject.length",
+							"//tests[\"当前返回数量为: \"+lang] = lang;",
+							"//console.log(jsonData.ResponseStatusListObject.ResponseStatusObject)",
+							"for (var key in datas){",
+							"    console.log(key)",
+							"    for (var keyy in datas[key]){",
+							"        if (keyy == \"Id\"){",
+							"            pm.test(\"当前ID为: \"+datas[key][keyy], function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.be.oneOf([data.MotorVehicleID1,data.MotorVehicleID2]);",
+							"            });",
+							"        }",
+							"        else if (keyy == \"RequestURL\"){",
+							"            pm.test(\"当前RequestURL为: \"+datas[key][keyy]+\"应当为:\"+data.Interface_st, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.Interface_st);",
+							"                ",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusCode\"){",
+							"            pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\"应当为:\"+data.StatusCode, function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode);",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusString\"){",
+							"            pm.test(\"当前StatusString为: \"+datas[key][keyy]+\"应当为:\"+data.StatusString, function () {",
+							"                //pm.response.to.have.status(200);",
+							"               pm.expect(datas[key][keyy]).to.eql(data.StatusString);",
+							"            });",
+							"        }",
+							"    }",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"MotorVehicleListObject\": {\r\n\"MotorVehicleObject\": [{\r\n\t\"MotorVehicleID\": \"{{MotorVehicleID1}}\",\r\n\t\"InfoKind\": {{InfoKind}},\r\n\t\"SourceID\": \"{{SourceID}}\",\r\n\t\"HasPlate\": {{HasPlate}},\r\n\t\"PlateClass\": \"{{PlateClass}}\",\r\n\t\"PlateColor\": \"{{PlateColor}}\",\r\n\t\"VehicleColor\": \"{{VehicleColor}}\"},\r\n\t{\r\n\t\"MotorVehicleID\": \"{{MotorVehicleID2}}\",\r\n\t\"InfoKind\": {{InfoKind}},\r\n\t\"SourceID\": \"{{SourceID}}\",\r\n\t\"HasPlate\": {{HasPlate}},\r\n\t\"PlateClass\": \"{{PlateClass}}\",\r\n\t\"PlateColor\": \"{{PlateColor}}\",\r\n\t\"VehicleColor\": \"{{VehicleColor}}\"\t\r\n\t}\r\n\t]\r\n}\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

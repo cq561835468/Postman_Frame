@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "3198494f-c604-49fe-ba49-e241afd907bb",
+		"name": "VIID[AnalysisRule_Many][GET_And]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[AnalysisRules_Many][GET_And]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d5969b5a-9b4c-4019-b883-86a2f9f68f54",
+						"type": "text/javascript",
+						"exec": [
+							"var x=pm.response.json()",
+							"//状态码检查",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"//循环判断",
+							"var xx=x.AnalysisRuleListObject.AnalysisRuleObject",
+							"for(var key in xx){",
+							"    for(var keyy in xx[key])",
+							"    {",
+							"        if(keyy==data.Search_Field1)",
+							"        {",
+							"            var data1=xx[key][keyy]",
+							"        }",
+							"        else if(keyy==data.Search_Field2)",
+							"        {",
+							"            var data2=xx[key][keyy]",
+							"        }",
+							"    }",
+							"    pm.test(\"当前数值1为：\"+data1+\" 返回的验证值应为:\"+data.Value1+\"当前数值2为\"+data2+\" 返回的验证值为\"+data.Value2,function(){",
+							"        pm.expect(data1).to.eql(data.Value1)&&pm.expect(data2).to.eql(data.Value2)",
+							"    })",
+							"}             ",
+							"    ",
+							"    ",
+							"   "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{AnalysisRule_Url}}{{AnalysisRule_st}}{{Search_Express}}",
+					"host": [
+						"{{AnalysisRule_Url}}{{AnalysisRule_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "7e1f57f3-a44d-4610-bcb7-0aff0fe9c036",
+		"name": "Pj-Subject-GET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]GetCode_Discipline",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"ID\", js.list[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"area_code\": \"{{area_code}}\", \r\n  \"disc_code\": \"{{disc_code}}\", \r\n  \"disc_name\": \"{{disc_name}}\", \r\n  \"order_by\": \"{{order_by2}}\", \r\n  \"sort\": \"{{sort}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_G}}&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_G}}&_method=GET"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Get_Subject",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"var id = pm.environment.get(\"ID\"); ",
+							"for (var x in js.list){",
+							"    pm.test(\"当前数值为: \"+js.list[x].area_code +\"返回验证值应为: \"+data.area_code, function () {",
+							"                pm.expect(js.list[x].area_code).to.eql(data.area_code);",
+							"            });",
+							"    pm.test(\"当前id为: \"+js.list[x].disc_id +\"返回id值应为: \"+id, function () {",
+							"                pm.expect(js.list[x].disc_id).to.eql(id);",
+							"            });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"area_code\": \"{{area_code}}\", \r\n  \"disc_id\": {{ID}}, \r\n  \"order_by\": \"{{order_by}}\", \r\n  \"sort\": \"{{sort}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_A}}&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_A}}&_method=GET"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8ea2cc9e-eaad-406e-b6f8-d48c5f7f9121",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1da92719-9008-4fa8-a1cf-512d6d517af0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

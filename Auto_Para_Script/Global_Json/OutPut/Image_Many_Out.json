@@ -1,0 +1,32 @@
+{
+	"Image_Many_GET_One_Out": [
+		{
+			"Re_State":"200",
+			"Search_Field":"RightBtmX",
+			"Value":"115"
+	}],
+	"Image_Many_GET_And_Out": [
+		{
+			"Re_State":"200",
+			"Search_Field":"RightBtmX",
+			"Search_Field2":"DeviceID",
+			"Value":"115",
+			"Value2":"31000000001320000004"
+	}],
+	"Image_Many_GET_Or_Out": [
+		{
+			"Re_State":"200",
+			"Search_Field":"RightBtmX",
+			"Search_Field2":"PersonID",
+			"Value":"115",
+			"Value2":"310000000013200000060220180509154256242590124259"
+	}],
+	"Image_Many_POST_Out": [
+		{
+			"StatusCode":"0"
+		}]
+
+
+
+
+}

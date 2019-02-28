@@ -1,0 +1,11 @@
+[
+    {
+        "DeviceID":3.402e+19,
+        "Interface":"/VIID/System/Register",
+        "Re_State":"200",
+        "Request_Url":"/VIID/System/Register",
+        "StatusCode":"0",
+        "StatusString":"",
+        "Vcol_Url":"10.85.7.62:8081"
+    }
+]

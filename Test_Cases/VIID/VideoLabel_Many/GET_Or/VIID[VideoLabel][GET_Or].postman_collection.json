@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "b0a41afc-3d02-47cd-8f1c-0db0daa16d5d",
+		"name": "VIID[VideoLabel][GET_Or]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "205da1e4-b1a6-475d-b703-fc47e6b38378",
+			"name": "VIID[VideoLabel][GET_Or]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5e7187fd-a037-4503-9eeb-94b3d85ca1a8",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"var datas=jsonData.VideoLabelListObject.VideoLabelObject",
+							"for(var key in datas){",
+							"    for(var keyy in datas[key]){",
+							"        if(keyy==data.Search_Field1)",
+							"        {",
+							"            var data1=datas[key][keyy]",
+							"        }",
+							"        if(keyy==data.Search_Field2)",
+							"        {",
+							"            var data2=datas[key][keyy]",
+							"        }",
+							"    }",
+							"    pm.test(\"当前数值1为：\"+data1+\" 返回的验证值应为:\"+data.Value1+\" 当前数值1为：\"+data2+\" 返回的验证值应为:\"+data.Value2,function(){",
+							"        var x=((data1==data.Value1)||(data2==data.Value2))",
+							"        pm.expect(x).to.eql(true)",
+							"    })",
+							"}             "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

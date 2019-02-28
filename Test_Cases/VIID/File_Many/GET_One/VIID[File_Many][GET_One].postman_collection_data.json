@@ -1,0 +1,12 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8083",
+	"Interface_st":"/VIID/",
+	"Search_Express":"Files?(File.FileFormat=192)",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"Search_Field":"FileFormat",
+	"Value":192
+}
+]

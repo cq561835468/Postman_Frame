@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "43b85104-ea2e-4b22-852f-289d0cf25c55",
+		"name": "VIID[Persons_Many][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "af60a3cf-eee8-4146-a237-052eb2548cd6",
+			"name": "VIID[Persons_Many][POST]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7da9b547-4a02-4f66-8990-1f5cf16b980e",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"// 状态码检查点",
+							"",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State",
+							"// 长度检查点",
+							"//var JsPer = jsonData.PersonListObject.PersonObject",
+							"//var lang = jsonData.PersonListObject.PersonObject.length",
+							"//tests[\"当前返回数量为: \"+lang] = lang;",
+							"//console.log(jsonData.ResponseStatusListObject.ResponseStatusObject)",
+							"for (var key in datas){",
+							"    console.log(key)",
+							"    for (var keyy in datas[key]){",
+							"        if (keyy == \"Id\"){",
+							"            pm.test(\"当前ID为: \"+datas[key][keyy], function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.be.oneOf([data.PersonID1,data.PersonID2]);",
+							"            });",
+							"        }",
+							"        else if (keyy == \"RequestURL\"){",
+							"            pm.test(\"当前RequestURL为: \"+datas[key][keyy]+\"应当为:\"+data.Interface_st, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.Interface_st);",
+							"                ",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusCode\"){",
+							"            pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\"应当为:\"+data.StatusCode, function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode);",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusString\"){",
+							"            pm.test(\"当前StatusString为: \"+datas[key][keyy]+\"应当为:\"+data.StatusString, function () {",
+							"                //pm.response.to.have.status(200);",
+							"               pm.expect(datas[key][keyy]).to.eql(data.StatusString);",
+							"            });",
+							"        }",
+							"    }",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"PersonListObject\":{\r\n\t\"PersonObject\":[\r\n\t\t{\r\n\t\t\"PersonID\": \"{{PersonID1}}\",\r\n\t\t\"InfoKind\": {{InfoKind}},\r\n\t\t\"SourceID\": \"{{SourceID}}\",\r\n\t\t\"DeviceID\": \"{{DeviceID}}\",\r\n\t\t\"LeftTopX\": {{LeftTopX}},\r\n\t\t\"LeftTopY\": {{LeftTopY}},\r\n\t\t\"RightBtmX\": {{RightBtmX}},\r\n\t\t\"RightBtmY\": {{RightBtmY}},\r\n\t\t\"LocationMarkTime\": \"{{LocationMarkTime}}\",\r\n\t\t\"PersonAppearTime\": \"{{PersonAppearTime}}\",\r\n\t\t\"PersonDisAppearTime\": \"{{PersonDisAppearTime}}\",\r\n\t\t\"IsDriver\": {{IsDriver}}, \r\n\t\t\"IsForeigner\": {{IsForeigner}}, \r\n\t\t\"IsSuspectedTerrorist\": {{IsSuspectedTerrorist}}, \r\n\t\t\"IsCriminalInvolved\": {{IsCriminalInvolved}}, \r\n\t\t\"IsDetainees\": {{IsDetainees}}, \r\n\t\t\"IsVictim\": {{IsVictim}}, \r\n\t\t\"IsSuspiciousPerson\": {{IsSuspiciousPerson}}\r\n\t\t\t\t},\r\n\t\t\t\r\n\t{\r\n\t\t\"PersonID\": \"{{PersonID2}}\",\r\n\t\t\"InfoKind\": {{InfoKind}},\r\n\t\t\"SourceID\": \"{{SourceID}}\",\r\n\t\t\"DeviceID\": \"{{DeviceID}}\",\r\n\t\t\"LeftTopX\": {{LeftTopX}},\r\n\t\t\"LeftTopY\": {{LeftTopY}},\r\n\t\t\"RightBtmX\": {{RightBtmX}},\r\n\t\t\"RightBtmY\": {{RightBtmY}},\r\n\t\t\"LocationMarkTime\": \"{{LocationMarkTime}}\",\r\n\t\t\"PersonAppearTime\": \"{{PersonAppearTime}}\",\r\n\t\t\"PersonDisAppearTime\": \"{{PersonDisAppearTime}}\",\r\n\t\t\"IsDriver\": {{IsDriver}}, \r\n\t\t\"IsForeigner\": {{IsForeigner}}, \r\n\t\t\"IsSuspectedTerrorist\": {{IsSuspectedTerrorist}}, \r\n\t\t\"IsCriminalInvolved\": {{IsCriminalInvolved}}, \r\n\t\t\"IsDetainees\": {{IsDetainees}}, \r\n\t\t\"IsVictim\": {{IsVictim}}, \r\n\t\t\"IsSuspiciousPerson\": {{IsSuspiciousPerson}}\r\n\t\t\t\t}\r\n\t\t\t\t\r\n\t\t        ]\r\n\t\r\n   }\r\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

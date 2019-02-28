@@ -1,0 +1,13 @@
+[
+	{
+		"Port":":10007",
+		"URI_school_year":"/school_year",
+		"URI_student_year":"/student_year",
+		"stye_begin_year":2019,
+		"stye_code":"2019学年高二年级编号李强",
+		"stye_name":"高三李强",
+		"scye_name":"科达keda2018级",
+		"Re_State":200,
+		"success":"true"
+	}
+]

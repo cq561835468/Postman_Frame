@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "8c06064c-2795-420a-a08c-0f26996bda27",
+		"name": "VIID[Persons_Many][GET_One]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "4e1ca951-c97e-46ae-ad30-691518487a7c",
+			"name": "persons_many_get_one",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72ca76eb-5ab5-4f9a-ab48-e86a2d04d7bd",
+						"type": "text/javascript",
+						"exec": [
+							"var x=pm.response.json()",
+							"//状态码检查",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"//循环判断",
+							"var xx=x.PersonListObject.PersonObject",
+							"for(var key in xx){",
+							"    for(var keyy in xx[key])",
+							"    {",
+							"        if(keyy==data.Search_Field)",
+							"        {",
+							"            var data1=xx[key][keyy]",
+							"        }",
+							"    }",
+							"    pm.test(\"当前数值为：\"+data1+\" 返回的验证值应为:\"+data.Value,function(){",
+							"        pm.expect(data1).to.eql(data.Value)",
+							"    })",
+							"}             "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{url}}{{url_st}}{{Search_Express}}",
+					"host": [
+						"{{url}}{{url_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

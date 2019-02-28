@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "13e3bf94-1868-46c4-aae0-d5b68e19d466",
+		"name": "VIID[ved_one][DEL].postman_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "单个视频数据删除",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bd856941-c89a-47ba-a30a-b54284da4a1e",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// StatusCode检查点",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusObject.RequestURL+\"|RequestURL应为:\"+data.Interface_st+data.VideoID] = jsonData.ResponseStatusObject.RequestURL == data.Interface_st+data.VideoID;",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusObject.StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusObject.StatusCode == data.StatusCode; ",
+							"//tests[\" StatusString: \"+jsonData.ResponseStatusObject.StatusString]",
+							"tests[\"StatusString: \"+jsonData.ResponseStatusObject.StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusObject.StatusString == data.StatusString; ",
+							"//tests[\" StatusString: \"+jsonData.ResponseStatusObject.StatusString]",
+							"//pm.test(\" StatusString: \"+jsonData.ResponseStatusObject.StatusString, function () {",
+							"    ",
+							"//});//StatusString另外一种验证方式"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{VideoID}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{VideoID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

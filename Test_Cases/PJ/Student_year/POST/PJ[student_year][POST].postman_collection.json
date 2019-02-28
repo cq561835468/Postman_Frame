@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "4bb4c6f1-4d89-4324-b42b-1029a969a925",
+		"name": "PJ[student_year][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create_Student_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "78475f00-fcfa-41ca-851f-d5adf0281364",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;",
+							"var regString = /[0-9]+/;",
+							"tests[\"当前区域值为: \"+js.id+\"|区域值应不为空\"] = regString.exec(js.id)[0] != \"undefined\"; //通过正则匹配不为空",
+							"pm.environment.set(\"id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"scye_id\":86, \r\n  \"stye_begin_year\": {{stye_begin_year}}, \r\n  \"stye_code\": \"{{stye_code}}\", \r\n  \"stye_name\": \"{{stye_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_student_year}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_student_year}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Student_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "97242750-fd3e-4efd-a826-c0c552b6c4c6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_student_year}}/{{id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_student_year}}"
+					],
+					"path": [
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

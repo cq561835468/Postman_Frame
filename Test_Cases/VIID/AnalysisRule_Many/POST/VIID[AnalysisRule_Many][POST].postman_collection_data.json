@@ -1,0 +1,34 @@
+[{
+    "需要输入参数":">>",
+	"AnalysisRule_Url":"10.85.7.62:8081",
+	"AnalysisRule_st":"/VIID/AnalysisRules",
+	"AnalysisRuleID1":"123456789",
+	"AnalysisRuleID2":"234567890",
+	"Width":20,
+	"Height":30,
+	"MinDuration":5,
+	"LineMinDuration":8,
+	"LineMaxDuration": 16, 
+    "MaxDuration1":10,
+	"MaxDuration2":14,
+    "LineNum":3,
+    "PointNum":6,
+    "PointID": 9,
+    "Direction":2, 
+    "ActionType":4, 
+    "BeginPointX":3, 
+    "BeginPointY":5,
+    "EndPointX1":9,
+	"EndPointX2":10,
+    "EndPointY":15,
+    "DirectionNum":7,
+    "DensityUnit" :13,
+
+	
+	"需要验证参数":">>",
+	"StatusCode":0,
+	"Re_State":200,
+	"StatusString":""
+ }
+]
+			 

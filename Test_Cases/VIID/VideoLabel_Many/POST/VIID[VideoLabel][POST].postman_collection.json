@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "15dfca54-6907-4b2b-bd7e-5e5ee680b0d7",
+		"name": "VIID[VideoLabel][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "c0eee799-9718-40da-8545-875d8d09894c",
+			"name": "VIID[VideoLabel][POST]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d7f21452-c095-4dfd-8b38-6cc3d7d9dc64",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"var datas=jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"for(var key in datas){",
+							"    for(var keyy in datas[key]){",
+							"        if(keyy==\"RequestURL\")",
+							"        {",
+							"           pm.test(\"当前RequestURL值为：\"+datas[key][keyy]+\" RequestURL应为：\"+data.RequestURL,function(){",
+							"                pm.expect(datas[key][keyy]).to.eql(data.RequestURL)",
+							"           })",
+							"        }",
+							"         if(keyy==\"StatusCode\")",
+							"         {",
+							"            pm.test(\"当前StatusCode值为：\"+datas[key][keyy]+\" StatusCode应为：\"+data.StatusCode,function(){",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode)",
+							"           })",
+							"         }",
+							"         if(keyy==\"StatusString\")",
+							"         {",
+							"            pm.test(\"当前StatusString值为：\"+datas[key][keyy]+\" StatusString应为：\"+data.StatusString,function(){",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusString)",
+							"           })",
+							"         }",
+							"          if (keyy == \"Id\"){",
+							"            pm.test(\"当前ID为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy]).to.be.oneOf([data.Value1,data.Value2]);",
+							"            })",
+							"          }",
+							"    }",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"VideoLabelListObject\":{\n\t\t\"VideoLabelObject\":[\n\t\t\t{\n\t\t\t\"VideoLabelID\":\"{{VideoLabelID1}}\",\n            \"EventSort\":\"{{EventSort}}\",\n            \"EventRuleID\":\"{{EventRuleID}}\",\n            \"VideoImageUrl\":\"{{VideoImageUrl}}\",            \n            \"CameraID\":\"{{CameraID}}\",             \n            \"IVADeviceID\":\"{{IVADeviceID}}\",            \n            \"CreateTimeAbs\":\"{{CreateTimeAbs}}\",             \n            \"CreateTimeRlt\":{{CreateTimeRlt}},           \n            \"PersonID\":\"{{PersonID}}\",      \n            \"FaceID\":\"{{FaceID}}\",             \n            \"MotorVehicleID\":\"{{MotorVehicleID}}\",            \n            \"NonMotorVehicleID\":\"{{NonMotorVehicleID}}\",            \n            \"ThingID\":\"{{ThingID}}\",             \n            \"SceneID\":\"{{SceneID}}\",\n            \"ColorCount\":{{ColorCount}},            \n            \"MoveObjectNum\":{{MoveObjectNum}},              \n            \"ImagePath\":\"{{ImagePath}}\",           \n            \"Desc\":\"{{Desc}}\",         \n            \"TargetNum\":{{TargetNum}},\n            \"PersonNum\":{{PersonNum}},\n            \"FaceNum\":{{FaceNum}},\n            \"VehicleNum\":{{VehicleNum}},\n            \"ThingNum\":{{ThingNum}},\n            \"TargetDensityAbs\":{{TargetDensityAbs}},\n            \"PersonDensityAbs\":{{PersonDensityAbs}},\n            \"FacenDensityAbs\":{{FacenDensityAbs}},\n            \"VehicleDensityAbs\":{{VehicleDensityAbs}},\n            \"ThingDensityAbs\":{{ThingDensityAbs}},\n            \"TargetDensityRlt\":{{TargetDensityRlt}},\n            \"PersonDensityRlt\":{{PersonDensityRlt}},\n            \"FacenDensityRlt\":{{FacenDensityRlt}},\n            \"VehicleDensitRlt\":{{VehicleDensitRlt}},\n            \"ThingDensityRlt\":{{ThingDensityRlt}},\n            \"TotalTargetFlowRate\":{{TotalTargetFlowRate}},\n            \"PersonFlowRate\":{{PersonFlowRate}},\n            \"VehicleFlowRate\":{{VehicleFlowRate}},\n            \"FlowDirection\":{{FlowDirection}}\n\t\t\t},\n\t\t\t{\n\t\t\t\"VideoLabelID\":\"{{VideoLabelID2}}\",\n            \"EventSort\":\"{{EventSort}}\",\n            \"EventRuleID\":\"{{EventRuleID}}\",\n            \"VideoImageUrl\":\"{{VideoImageUrl}}\",            \n            \"CameraID\":\"{{CameraID}}\",             \n            \"IVADeviceID\":\"{{IVADeviceID}}\",            \n            \"CreateTimeAbs\":\"{{CreateTimeAbs}}\",             \n            \"CreateTimeRlt\":{{CreateTimeRlt}},           \n            \"PersonID\":\"{{PersonID}}\",      \n            \"FaceID\":\"{{FaceID}}\",             \n            \"MotorVehicleID\":\"{{MotorVehicleID}}\",            \n            \"NonMotorVehicleID\":\"{{NonMotorVehicleID}}\",            \n            \"ThingID\":\"{{ThingID}}\",             \n            \"SceneID\":\"{{SceneID}}\",\n            \"ColorCount\":{{ColorCount}},            \n            \"MoveObjectNum\":{{MoveObjectNum}},              \n            \"ImagePath\":\"{{ImagePath}}\",           \n            \"Desc\":\"{{Desc}}\",         \n            \"TargetNum\":{{TargetNum}},\n            \"PersonNum\":{{PersonNum}},\n            \"FaceNum\":{{FaceNum}},\n            \"VehicleNum\":{{VehicleNum}},\n            \"ThingNum\":{{ThingNum}},\n            \"TargetDensityAbs\":{{TargetDensityAbs}},\n            \"PersonDensityAbs\":{{PersonDensityAbs}},\n            \"FacenDensityAbs\":{{FacenDensityAbs}},\n            \"VehicleDensityAbs\":{{VehicleDensityAbs}},\n            \"ThingDensityAbs\":{{ThingDensityAbs}},\n            \"TargetDensityRlt\":{{TargetDensityRlt}},\n            \"PersonDensityRlt\":{{PersonDensityRlt}},\n            \"FacenDensityRlt\":{{FacenDensityRlt}},\n            \"VehicleDensitRlt\":{{VehicleDensitRlt}},\n            \"ThingDensityRlt\":{{ThingDensityRlt}},\n            \"TotalTargetFlowRate\":{{TotalTargetFlowRate}},\n            \"PersonFlowRate\":{{PersonFlowRate}},\n            \"VehicleFlowRate\":{{VehicleFlowRate}},\n            \"FlowDirection\":{{FlowDirection}}\n\t\t\t}\n\t\t\t]\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

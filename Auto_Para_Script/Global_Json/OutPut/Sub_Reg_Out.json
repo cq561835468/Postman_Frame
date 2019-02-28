@@ -1,0 +1,19 @@
+{
+    "Bulk_Sub_Post_Out":[
+        {
+            "Id":"非空即可",
+            "Re_State":"200",
+            "Request_Url":"/VIID/Subscribe",
+            "StatusCode":"0",
+            "StatusString":""
+        }
+    ],
+    "Reg_Post_Out":[
+        {
+            "Re_State":"200",
+            "Request_Url":"/VIID/System/Register",
+            "StatusCode":"0",
+            "StatusString":""
+        }
+    ]
+}

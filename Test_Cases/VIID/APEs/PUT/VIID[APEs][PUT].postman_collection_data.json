@@ -1,0 +1,22 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8081",
+	"Interface_st":"/VIID/APEs",
+	"ApeID": "310000000013200000040220180507164508276070227617",
+	"Name": "zhangsan",
+	"Model": "30",
+	"IPAddr": "172.16.121.21",
+	"Port": "80",
+	"Longtitude": "20°W",
+	"Latitude": "10°N",
+	"PlaceCode":"30",
+	"IsOnline":"9",
+	
+	"需要验证参数":">>",
+	"StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+}
+]
+

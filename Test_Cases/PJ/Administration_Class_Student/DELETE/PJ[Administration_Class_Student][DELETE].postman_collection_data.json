@@ -1,0 +1,28 @@
+[
+	{
+		"Port":":10007",
+		"area_code":"a6741cecdd1b4a879a3512hekedakeda",
+		"URI_school_year":"/school_year",
+		"URI_administration_class":"/administration_class",
+		"URI_administration_class_student":"/administration_class_student",
+		"adcl_code":"kedagaoyi111ban",
+		"adcl_name":"科达keda高一111班",
+		"scye_code":"科达kedacom2018级编号111",
+		"scye_name":"科达keda2018级",
+		"学生参数":">>",
+		"URI_student":"/student",
+		"user_open_id_S":"liqiangliqiangliqiangstudent1",
+		"user_code_S":"liqiangstu_code_01",
+		"user_email_S":"listu@stu.com",
+		"user_phone_num_S":"13812111111",
+		"user_identifier_num_S":"340321199909092111",
+		"user_name_S":"王测试",
+		"user_gender_S":"0",
+		"user_birthday_S":"1999-09-09",
+		"stud_registration_status":1,
+		"stud_in_school_status":1,
+		"检查点":">>",
+		"Re_State":200,
+		"success":"true"
+	}
+]

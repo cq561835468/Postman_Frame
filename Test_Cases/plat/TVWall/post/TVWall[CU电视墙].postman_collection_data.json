@@ -1,0 +1,25 @@
+[
+	{
+		"需要输入参数":">>",
+		"plat_url":"/cui/cui.fcgi",
+		"log_userName":"admin@ShangHai_Test",
+		"log_password":"kedacom#123",
+		"cusdkVersion":2.0,
+		"clientType":"cuver",
+		"isSupportNA":"false",
+		"domainId":"73f080d76a24442c98697475965d9d37",
+		"name":"李强测试电视墙1",
+		"tvNum":1,
+		"tvwallStyle":1,
+		"createTime":"1970-01-01T00:00:00Z",
+		"tvId":0,
+		"decoderId":"37e426404690495b8b36c882da01ac17@ShangHai_Test",
+		"decoderOutputId":0,
+		"tvDivId":0,
+		"deviceId":"28db632dec254997855da03ff3e156d4@ShangHai_Test",
+		"channelId":0,
+		"需要检验参数":">>",
+		"Re_State":200,
+		"errorCode":0
+	}
+]

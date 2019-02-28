@@ -1,0 +1,56 @@
+{
+	"info": {
+		"_postman_id": "005779a3-617b-40be-8d23-a08a3759dbb3",
+		"name": "VIID[NonMotorVehicle][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[NonMotorVehicle][PUT]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b7389ee-ae7c-496b-b43d-e91e8775050f",
+						"type": "text/javascript",
+						"exec": [
+							"var x = pm.response.json()",
+							"",
+							"tests[\"当前状态码为: \"+pm.response.code+\" 状态码应为: \"+data.Re_State]=responseCode.code==data.Re_State",
+							"",
+							"tests[\"RequestURL: \"+x.ResponseStatusObject.RequestURL+\" RequestURL应为: \"+data.Inter_st1] = x.ResponseStatusObject.RequestURL==data.Inter_st1",
+							"",
+							"tests[\"StatusCode: \"+x.ResponseStatusObject.StatusCode+\" StatusCode应为: \"+data.StatusCode] = x.ResponseStatusObject.StatusCode==data.StatusCode",
+							"",
+							"tests[\"StatusString: \"+x.ResponseStatusObject.StatusString+\" StatusString应为: \"+data.StatusString] = x.ResponseStatusObject.StatusString==data.StatusString",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\"NonMotorVehicleObject\":\n\t\t{\n\t\t\t\"NonMotorVehicleID\": \"{{NonMotorVehicleID}}\",\n\t\t\t\"InfoKind\": {{InfoKind}},\n\t\t\t\"SourceID\": \"{{SourceID}}\",\n\t\t\t\"LeftTopX\":{{LeftTopX}},\n\t\t\t\"LeftTopY\":{{LeftTopY}},\n\t\t\t\"RightBtmX\":{{RightBtmX1}},\n\t\t\t\"RightBtmY\":{{RightBtmY}},\n\t\t\t\"MarkTime\":\"{{MarkTime}}\",\n\t\t\t\"AppearTime\":\"{{AppearTime}}\",\n\t\t\t\"DisappearTime\":\"{{DisappearTime}}\",\n\t\t\t\"HasPlate\":{{HasPlate}},\n\t\t\t\"PlateClass\":\"{{PlateClass}}\",\n\t\t\t\"PlateColor\":\"{{PlateColor}}\",\n\t\t\t\"PlateNo\":\"{{PlateNo}}\",\n\t\t\t\"VehicleColor\":\"{{VehicleColor}}\"\n\t\t}\n\t   \n}"
+				},
+				"url": {
+					"raw": "{{Inter_Url}}{{Inter_st1}}{{Inter_st2}}",
+					"host": [
+						"{{Inter_Url}}{{Inter_st1}}{{Inter_st2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

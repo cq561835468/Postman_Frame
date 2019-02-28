@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "01ec5aa6-b8b7-49aa-a9e2-461036387c75",
+		"name": "pmc_plat_status[PMC模块状态]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pmcsLogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "505653d5-c728-4de4-a7db-87eadcb4e865",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"",
+							"// 设置session，targetUri为环境变量",
+							"var loginRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var targetUri = jsonData[\"CPmcSMsg\"][\"targetUri\"]",
+							"var CData = xml2Json(loginRsp)",
+							"var session = CData[\"CPmcSLoginRsp\"][\"session\"]",
+							"",
+							"pm.environment.set(\"session\", session);",
+							"pm.environment.set(\"targetUri\", targetUri);",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSLoginRsp\"][\"errorCode\"]] = CData[\"CPmcSLoginRsp\"][\"errorCode\"] == \"0\"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<CPmcSMsg>\r\n  <event>PMCS_LOGIN_REQ</event>\r\n  <seqNum>1</seqNum>\r\n  <msg>&lt;CPmcSLoginReq&gt;&lt;event&gt;PMCS_LOGIN_REQ&lt;/event&gt;&lt;seqNum&gt;1&lt;/seqNum&gt;&lt;userName&gt;{{userName}}&lt;/userName&gt;&lt;password&gt;{{userpwd}}&lt;/password&gt;&lt;isDecrypt&gt;0&lt;/isDecrypt&gt;&lt;ipaddr&gt;INVALID_IP&lt;/ipaddr&gt;&lt;/CPmcSLoginReq&gt;</msg>\r\n</CPmcSMsg>"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGIN_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGIN_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmsPlatformSoftwarinfoQry",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3dd7fcdc-cc46-4bd9-a374-b153fe3e5be3",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var platformSoftwareInfoQryRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(platformSoftwareInfoQryRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPlatformSoftwareInfoQryRsp\"][\"errorCode\"]] = CData[\"CPlatformSoftwareInfoQryRsp\"][\"errorCode\"] == \"0\"",
+							"tests[\"version: \" + CData[\"CPlatformSoftwareInfoQryRsp\"][\"info\"][\"version\"]] = CData[\"CPlatformSoftwareInfoQryRsp\"][\"info\"][\"version\"]",
+							"tests[\"ip: \" + CData[\"CPlatformSoftwareInfoQryRsp\"][\"info\"][\"proxyAddr\"][\"ip\"]] = CData[\"CPlatformSoftwareInfoQryRsp\"][\"info\"][\"proxyAddr\"][\"ip\"] == pm.variables.get(\"plat_IP\"); ",
+							"tests[\"port: \" + CData[\"CPlatformSoftwareInfoQryRsp\"][\"info\"][\"proxyAddr\"][\"port\"]] = CData[\"CPlatformSoftwareInfoQryRsp\"][\"info\"][\"proxyAddr\"][\"port\"] == \"5060\"",
+							"",
+							"var num = CData[\"CPlatformSoftwareInfoQryRsp\"][\"info\"][\"moduleStatus\"][\"$\"][\"size\"]",
+							"var i = 0",
+							"while (i < num) {",
+							"    tests[\"模块名为: \" + CData[\"CPlatformSoftwareInfoQryRsp\"][\"info\"][\"moduleStatus\"][\"item\"][i][\"name\"] + \" 的状态为: \" + CData[\"CPlatformSoftwareInfoQryRsp\"][\"info\"][\"moduleStatus\"][\"item\"][i][\"status\"]] = CData[\"CPlatformSoftwareInfoQryRsp\"][\"info\"][\"moduleStatus\"][\"item\"][i][\"status\"]",
+							"    i++",
+							"}",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMS_PLATFORM_SOFTWAREINFO_QRY_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>28</seqNum>\r\n  <msg>&lt;CPlatformSoftwareInfoQryReq&gt;&lt;event&gt;PMS_PLATFORM_SOFTWAREINFO_QRY_REQ&lt;/event&gt;&lt;seqNum&gt;28&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CPlatformSoftwareInfoQryReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMS_PLATFORM_SOFTWAREINFO_QRY_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMS_PLATFORM_SOFTWAREINFO_QRY_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmsPlatformHardwareinfoQry",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMS_PLATFORM_HARDWAREINFO_QRY_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>30</seqNum>\r\n  <msg>&lt;CPlatformHardwareInfoQryReq&gt;&lt;event&gt;PMS_PLATFORM_HARDWAREINFO_QRY_REQ&lt;/event&gt;&lt;seqNum&gt;30&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CPlatformHardwareInfoQryReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMS_PLATFORM_HARDWAREINFO_QRY_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMS_PLATFORM_HARDWAREINFO_QRY_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsLogout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "643179bd-aa28-4fd6-8b36-aa133ec61702",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var logoutRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(logoutRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSLogoutRsp\"][\"errorCode\"]] = CData[\"CPmcSLogoutRsp\"][\"errorCode\"] == \"0\"",
+							"",
+							"// 删除本用例新增的环境变量",
+							"pm.environment.unset(\"session\");",
+							"pm.environment.unset(\"targetUri\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_LOGOUT_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>36</seqNum>\r\n  <msg>&lt;CPmcSLogoutReq&gt;&lt;event&gt;PMCS_LOGOUT_REQ&lt;/event&gt;&lt;seqNum&gt;36&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CPmcSLogoutReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGOUT_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGOUT_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

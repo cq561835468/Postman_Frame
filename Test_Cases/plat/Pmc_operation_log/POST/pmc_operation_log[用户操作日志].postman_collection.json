@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "d567d5e8-44ff-4313-b09c-256567c196a4",
+		"name": "pmc_operation_log[用户操作日志]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pmcsLogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "505653d5-c728-4de4-a7db-87eadcb4e865",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"",
+							"// 设置session，targetUri为环境变量",
+							"var loginRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var targetUri = jsonData[\"CPmcSMsg\"][\"targetUri\"]",
+							"var CData = xml2Json(loginRsp)",
+							"var session = CData[\"CPmcSLoginRsp\"][\"session\"]",
+							"",
+							"pm.environment.set(\"session\", session);",
+							"pm.environment.set(\"targetUri\", targetUri);",
+							"pm.environment.set(\"startTime\", new Date(new Date()-14400000));",
+							"pm.environment.set(\"endTime\", new Date());",
+							"tests[\"errorCode: \" + CData[\"CPmcSLoginRsp\"][\"errorCode\"]] = CData[\"CPmcSLoginRsp\"][\"errorCode\"] == \"0\"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<CPmcSMsg>\r\n  <event>PMCS_LOGIN_REQ</event>\r\n  <seqNum>1</seqNum>\r\n  <msg>&lt;CPmcSLoginReq&gt;&lt;event&gt;PMCS_LOGIN_REQ&lt;/event&gt;&lt;seqNum&gt;1&lt;/seqNum&gt;&lt;userName&gt;{{userName}}&lt;/userName&gt;&lt;password&gt;{{userpwd}}&lt;/password&gt;&lt;isDecrypt&gt;0&lt;/isDecrypt&gt;&lt;ipaddr&gt;INVALID_IP&lt;/ipaddr&gt;&lt;/CPmcSLoginReq&gt;</msg>\r\n</CPmcSMsg>"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGIN_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGIN_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsUserOperationLog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5228c737-28af-4e04-93c3-1a875c57a94c",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var pmcSUserOperationLogQryRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(pmcSUserOperationLogQryRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSUserOperationLogQryRsp\"][\"errorCode\"]] = CData[\"CPmcSUserOperationLogQryRsp\"][\"errorCode\"] == \"0\"",
+							"/*tests[\"userName: \" + CData[\"CPmcSUserOperationLogQryRsp\"][\"infos\"][\"item\"][0][\"userName\"]] = CData[\"CPmcSUserOperationLogQryRsp\"][\"infos\"][\"item\"][0][\"userName\"] == pm.environment.get(\"userName\")",
+							"tests[\"operation: \" + CData[\"CPmcSUserOperationLogQryRsp\"][\"infos\"][\"item\"][0][\"operation\"]] = CData[\"CPmcSUserOperationLogQryRsp\"][\"infos\"][\"item\"][0][\"operation\"] == \"登录成功\" */"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_USER_OPERATION_LOG_QRY_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <!--<session>{{session}}</session>-->\r\n  <seqNum>208</seqNum>\r\n  <msg>&lt;CUserOperationLogQryReq&gt;&lt;event&gt;PMS_USER_OPERATION_LOG_QRY_REQ&lt;/event&gt;&lt;startEntryIndex&gt;0&lt;/startEntryIndex&gt;&lt;expectEntryNum&gt;10&lt;/expectEntryNum&gt;&lt;queryTag&gt;0&lt;/queryTag&gt;&lt;condition&gt;&lt;startTime&gt;{{startTime}}&lt;/startTime&gt;&lt;endTime&gt;{{endTime}}&lt;/endTime&gt;&lt;optionField&gt;&lt;fields size=\"2\"&gt;&lt;item index=\"0\"&gt;startTime&lt;/item&gt;&lt;item index=\"1\"&gt;endTime&lt;/item&gt;&lt;/fields&gt;&lt;/optionField&gt;&lt;/condition&gt;&lt;seqNum&gt;208&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CUserOperationLogQryReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_USER_OPERATION_LOG_QRY_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_USER_OPERATION_LOG_QRY_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "oprlogExport",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>FILE_EXPORT_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>212</seqNum>\r\n  <msg>&lt;CFileExportReq&gt;&lt;event&gt;FILE_EXPORT_REQ&lt;/event&gt;&lt;seqNum&gt;212&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;srvName&gt;ExportPmcuserOperateLog&lt;/srvName&gt;&lt;fileTimeZone&gt;8&lt;/fileTimeZone&gt;&lt;fileToken&gt;&amp;lt;CUserOperationLogQryCondition&amp;gt;&amp;lt;startTime&amp;gt;{{startTime}}&amp;lt;/startTime&amp;gt;&amp;lt;endTime&amp;gt;{{endTime}}&amp;lt;/endTime&amp;gt;&amp;lt;optionField&amp;gt;&amp;lt;fields size=&amp;quot;2&amp;quot;&amp;gt;&amp;lt;item index=&amp;quot;0&amp;quot;&amp;gt;startTime&amp;lt;/item&amp;gt;&amp;lt;item index=&amp;quot;1&amp;quot;&amp;gt;endTime&amp;lt;/item&amp;gt;&amp;lt;/fields&amp;gt;&amp;lt;/optionField&amp;gt;&amp;lt;/CUserOperationLogQryCondition&amp;gt;&lt;/fileToken&gt;&lt;fileCharacterset&gt;GBK&lt;/fileCharacterset&gt;&lt;/CFileExportReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_FILE_EXPORT_END_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_FILE_EXPORT_END_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsLogout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "643179bd-aa28-4fd6-8b36-aa133ec61702",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var logoutRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(logoutRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSLogoutRsp\"][\"errorCode\"]] = CData[\"CPmcSLogoutRsp\"][\"errorCode\"] == \"0\"",
+							"",
+							"// 删除本用例新增的环境变量",
+							"pm.environment.unset(\"session\");",
+							"pm.environment.unset(\"targetUri\");",
+							"pm.environment.unset(\"startTime\");",
+							"pm.environment.unset(\"endTime\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_LOGOUT_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>36</seqNum>\r\n  <msg>&lt;CPmcSLogoutReq&gt;&lt;event&gt;PMCS_LOGOUT_REQ&lt;/event&gt;&lt;seqNum&gt;36&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CPmcSLogoutReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGOUT_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGOUT_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

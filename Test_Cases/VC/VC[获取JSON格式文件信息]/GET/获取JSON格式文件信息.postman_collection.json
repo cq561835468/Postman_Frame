@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "705db377-f5bf-4944-be41-91513e6ceace",
+		"name": "获取JSON格式文件信息",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "获取JSON格式文件信息",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "80f662e3-952f-4115-b154-cc2c9604e3a9",
+						"type": "text/javascript",
+						"exec": [
+							"var datas = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\" 状态码应为: \"+ data.Re_State] = responseCode.code == data.Re_State",
+							"",
+							"for (var key in datas){",
+							"\tfor (var keyy in datas[key]){",
+							"\t\tif (keyy == \"fileName\"){",
+							"\t\t    if(datas[key][keyy]==null){",
+							"\t\t        tests[\"fileName为空\"]=0",
+							"\t\t    }",
+							"\t\t    else",
+							"\t\t    tests[\"fileName：\"+datas[key][keyy]+\" 非空\"]=1",
+							"\t\t}",
+							"\t\tif (keyy == \"lastModifiedTime\"){",
+							"\t\t    if(datas[key][keyy]==0){",
+							"\t\t        tests[\"lastModifiedTime为空\"]=0",
+							"\t\t    }",
+							"\t\t    else",
+							"\t\t    tests[\"lastModifiedTime：\"+datas[key][keyy]+\" 非空\"]=1",
+							"\t\t}",
+							"\t\tif (keyy == \"filesize\"){",
+							"\t\t    if(datas[key][keyy]==null){",
+							"\t\t        tests[\"filesize为空\"]=0",
+							"\t\t    }",
+							"\t\t    else",
+							"\t\t    tests[\"filesize：\"+datas[key][keyy]+\" 非空\"]=1",
+							"\t\t}",
+							"\t}",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

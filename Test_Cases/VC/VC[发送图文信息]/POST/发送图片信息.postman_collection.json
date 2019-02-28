@@ -1,0 +1,50 @@
+{
+	"info": {
+		"_postman_id": "2fc3ed54-2fb7-4ad8-9d0f-22069940bf78",
+		"name": "发送图片信息",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "发送图片信息",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e28c4860-2d94-4aa3-94eb-a0dc8247a7ea",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"console.log(jsonData.Code)",
+							"tests[\"resultCode: \"+jsonData.resultCode+\"|resultCode应为:\"+data.resultCode] = jsonData.resultCode == data.resultCode;",
+							"tests[\"resultMsg: \"+jsonData.resultMsg+\"|resultMsg应为:\"+data.resultMsg] = jsonData.resultMsg == data.resultMsg;",
+							"tests[\"updateTime: \"+jsonData.updateTime] = jsonData.updateTime;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"resource\": {\r\n    \"recrs\": [\r\n        {\"receiverType\":\"{{receiverType}}\",\r\n\t\t \"receiverId\":\"{{receiverId}}\"\r\n\t\t}],\r\n\t\"authorCode\":\"{{authorCode}}\",\r\n\t\"authorName\":\"{{authorName}}\",\r\n\t\"templateId\":\"{{templateId}}\",\r\n\t\"title\":\"{{title}}\",\r\n\t\"msgtype\":\"{{msgtype}}\",\r\n\t\"contentSourceUrl\":\"{{contentSourceUrl}}\",\r\n    \"context\": \"{\\\"image\\\": \\\"{{image}}\\\",\\\"detailContext\\\": \\\"{{detailContext}}\\\"}\"\r\n  }\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{access_token}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{access_token}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

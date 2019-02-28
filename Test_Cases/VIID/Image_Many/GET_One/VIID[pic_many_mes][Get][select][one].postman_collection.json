@@ -1,0 +1,95 @@
+{
+	"info": {
+		"_postman_id": "c7d6cd89-cfb5-42d2-bc78-c32dd5d0c27b",
+		"name": "VIID[pic_many_mes][get][select][one]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "批量图像-单条件查询",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "08e7ddba-1d96-4593-9b59-23aeadbcdf65",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// 长度检查点",
+							"var JsPer = jsonData.ImageListObject.Image",
+							"var lang = jsonData.ImageListObject.Image.length",
+							"tests[\"当前返回数量为: \"+lang] = lang;",
+							"",
+							"//循环判断key",
+							"for (var key in JsPer){",
+							"    //console.log(key)",
+							"    for(var keyy in JsPer[key]){",
+							"        //console.log(keyy)",
+							"        for(var keyyy in JsPer[key][keyy]){",
+							"            ",
+							"           //console.log(keyyy)",
+							"         ",
+							"        if (keyyy == data.Search_Field){",
+							"             //console.log(keyyy)",
+							"           ",
+							"            var data1 = JsPer[key][keyy][keyyy]",
+							"            pm.test(\"当前数值1为: \"+data1+\"|返回验证值应为:\"+data.Value, function () {",
+							"                      pm.expect(data1).to.eql(data.Value);",
+							"",
+							"                         });",
+							"             ",
+							"        }",
+							"        ",
+							"    }",
+							"    }",
+							"}",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "499183e7-9dcc-45ba-be6f-10dabb70c46e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a7a4626b-d6f0-423c-8987-a2ea3235daae",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

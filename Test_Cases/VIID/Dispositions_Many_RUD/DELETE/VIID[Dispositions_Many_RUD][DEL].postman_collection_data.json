@@ -1,0 +1,16 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8084",
+	"Interface_st1":"/VIID/Dispositions",
+	"Interface_st2":"/VIID/Dispositions?IDList=",
+	"DispositionID1":"000000000091012018062610595400038,",
+	"DispositionID2":"000000000091012018062516013900022",
+	
+	"需要验证参数":">>",
+	"StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+}
+]
+

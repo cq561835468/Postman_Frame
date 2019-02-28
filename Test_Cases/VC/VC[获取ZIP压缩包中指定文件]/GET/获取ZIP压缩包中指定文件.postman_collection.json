@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "e771c059-4bb6-44b6-b8d3-71d0db255170",
+		"name": "获取ZIP压缩包中指定文件",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "获取ZIP压缩包中指定文件",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "158f5255-7935-42e1-a2a5-3ce8fc3fd9d7",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Url}}{{fileType}}{{catalog}}{{fileName}}",
+					"host": [
+						"{{Url}}{{fileType}}{{catalog}}{{fileName}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

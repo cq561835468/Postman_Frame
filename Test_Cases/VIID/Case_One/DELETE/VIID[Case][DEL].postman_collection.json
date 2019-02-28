@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "f7d9cbc8-4f7e-4c57-843e-cc04ac0e5e1b",
+		"name": "VIID[Case][DEL]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "单个案件数据删除",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2f9e5b9f-9c9a-4860-95f7-ed94f7f40bbd",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// StatusCode检查点",
+							"var a =data.Interface_st+data.CaseID;",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusObject.RequestURL+\"|StatusCode应为:\"+a] = jsonData.ResponseStatusObject.RequestURL == a;",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusObject.StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusObject.StatusCode == data.StatusCode; ",
+							"tests[\"StatusString: \"+jsonData.ResponseStatusObject.StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusObject.StatusString == data.StatusString; ",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}

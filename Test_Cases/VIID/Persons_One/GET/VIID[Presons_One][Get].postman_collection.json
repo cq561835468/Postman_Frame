@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "9ff12b03-4586-4d06-9295-83fa5c1183f8",
+		"name": "VIID[Presons_One][Get]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "3fd371de-4502-4b80-a4e2-a34366908e14",
+			"name": "Presons_One_Get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e51a64e8-8964-4153-b153-af5699c3e383",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"var InfoKind_sp = data.InfoKind.split('|')",
+							"tests[\"InfoKind: \"+jsonData.PersonObject.InfoKind+\"|InfoKind应为:\"+data.InfoKind] = InfoKind_sp.indexOf(jsonData.PersonObject.InfoKind+\"\") != -1",
+							"tests[\"SourceID: \"+jsonData.PersonObject.SourceID+\"|SourceID应为:\"+data.SourceID] = jsonData.PersonObject.SourceID == data.SourceID;",
+							"//DeviceID检查点",
+							"tests[\"DeviceID: \"+jsonData.PersonObject.DeviceID+\"|DeviceID应为:\"+data.DeviceID] = jsonData.PersonObject.DeviceID == data.DeviceID;",
+							"tests[\"LeftTopX:\"+jsonData.PersonObject.LeftTopX] = jsonData.PersonObject.LeftTopX >0;",
+							"//LeftTopY检查点",
+							"tests[\"LeftTopY:\"+jsonData.PersonObject.LeftTopY] = jsonData.PersonObject.LeftTopY >0;",
+							"// RightBtmX检查点",
+							"tests[\"RightBtmX: \"+jsonData.PersonObject.RightBtmX] = jsonData.PersonObject.RightBtmX",
+							"//RightBtmY检查点",
+							"tests[\"RightBtmY为: \"+jsonData.PersonObject.RightBtmY] = jsonData.PersonObject.RightBtmY > 0;",
+							"tests[\"PersonDisAppearTime: \"+jsonData.PersonObject.PersonDisAppearTime] = jsonData.PersonObject.PersonDisAppearTime",
+							"tests[\"AgeLowerLimit:\"+jsonData.PersonObject.AgeLowerLimit] = jsonData.PersonObject.AgeLowerLimit >=0;",
+							"var IsDriver_sp = data.IsDriver.split('|')",
+							"tests[\"IsDriver: \"+jsonData.PersonObject.IsDriver+\"|IsDriver应为:\"+data.IsDriver] = IsDriver_sp.indexOf(jsonData.PersonObject.IsDriver)",
+							"//IsForeigner检查点",
+							"var IsForeigner_sp = data.IsForeigner.split('|')",
+							"tests[\"IsForeigner: \"+jsonData.PersonObject.IsForeigner+\"|IsForeigner应为:\"+data.IsForeigner] = InfoKind_sp.indexOf(jsonData.PersonObject.IsForeigner)",
+							"var IsSuspectedTerrorist_sp = data.IsSuspectedTerrorist.split('|')",
+							"tests[\"IsSuspectedTerrorist: \"+jsonData.PersonObject.IsSuspectedTerrorist+\"|IsSuspectedTerrorist应为:\"+data.IsSuspectedTerrorist] = IsSuspectedTerrorist_sp.indexOf(jsonData.PersonObject.IsSuspectedTerrorist)",
+							"//IsCriminalInvolved检查点",
+							"var IsCriminalInvolved_sp = data.IsCriminalInvolved.split('|')",
+							"tests[\"IsCriminalInvolved: \"+jsonData.PersonObject.IsCriminalInvolved+\"|IsCriminalInvolved应为:\"+data.IsCriminalInvolved] = InfoKind_sp.indexOf(jsonData.PersonObject.IsCriminalInvolved)",
+							"var IsDetainees_sp = data.IsDetainees.split('|')",
+							"tests[\"IsDetainees: \"+jsonData.PersonObject.IsDetainees+\"|IsDetainees应为:\"+data.IsDetainees] = IsDetainees_sp.indexOf(jsonData.PersonObject.IsDetainees)",
+							"//IsVictim检查点",
+							"var IsVictim_sp = data.IsVictim.split('|')",
+							"tests[\"IsVictim: \"+jsonData.PersonObject.IsVictim+\"|IsVictim应为:\"+data.IsVictim] = InfoKind_sp.indexOf(jsonData.PersonObject.IsVictim)",
+							"var IsSuspiciousPerson_sp = data.IsSuspiciousPerson.split('|')",
+							"tests[\"IsSuspiciousPerson: \"+jsonData.PersonObject.IsSuspiciousPerson+\"|IsSuspiciousPerson应为:\"+data.IsSuspiciousPerson] = IsSuspiciousPerson_sp.indexOf(jsonData.PersonObject.IsSuspiciousPerson)",
+							"if (jsonData. PersonObject.InfoKind == 2)",
+							"{",
+							"    // LocationMarkTime检查点",
+							"    tests[\"LocationMarkTime: \"+jsonData.PersonObject.LocationMarkTime] = jsonData.PersonObject.LocationMarkTime",
+							"    tests[\"PersonAppearTime: \"+jsonData.PersonObject.PersonAppearTime] = jsonData.PersonObject.PersonAppearTime",
+							"   ",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{PersonID}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{PersonID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

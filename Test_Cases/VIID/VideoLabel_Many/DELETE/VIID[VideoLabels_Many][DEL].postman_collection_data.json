@@ -1,0 +1,14 @@
+[
+{
+	"需要输入参数":">>",
+	"AnalysisRule_Url":"10.85.7.62:8081",
+	"AnalysisRule_st1":"/VIID/VideoLabels",
+	"AnalysisRule_st2":"?IDList=123,234",
+	
+	"需要验证参数":">>",
+	"StatusCode":0,
+	"Re_State":200,
+	"StatusString":""
+}
+]
+

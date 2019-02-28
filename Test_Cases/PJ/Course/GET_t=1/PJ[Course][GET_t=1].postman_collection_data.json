@@ -1,0 +1,20 @@
+[
+	{
+		"Port":":10007",
+		"URI_classroom":"/classroom",
+		"URI_teaching_class":"/teaching_class",
+		"URI_lesson_time":"/lesson_time",
+		"URI_course":"/course",
+		"cour_name":"理论力学和电磁学",
+		"cour_begin_time":"2019-09-11 08:00:00",
+		"cour_end_time":"2019-09-11 08:45:00",
+		"cour_description":"李强测试课程test1",
+		"cour_name1":"理论力学和电磁学呵呵呵",
+		"cour_description1":"李强测试课程test呵呵呵",
+		"repeat_week":1,
+		"single_or_double_week":1,
+		"Create_Building需要验证参数":">>",
+		"Re_State":200,
+		"success":"true"
+	}
+]

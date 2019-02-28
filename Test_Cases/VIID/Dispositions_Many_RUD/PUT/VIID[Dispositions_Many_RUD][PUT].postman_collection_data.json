@@ -1,0 +1,30 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8084",
+	"Interface_st":"/VIID/Dispositions",
+	"DispositionID1": "000000000091012018062515023300006",
+	"DispositionID2": "000000000091012018062516013400019",
+	"Title": "yuhui",
+	"DispositionCategory": "2",
+	"PriorityLevel": 1,
+	"ApplicatName": "科达",
+	"ApplicatInfo": "021-7525",
+	"ApplicatOrg": "上海科远软件技术",
+	"BeginTime": "20190418080000",
+	"EndTime": "20190418080000",
+	"CreateTime": "",
+	"OperateType": 0,
+	"DisponsitionRange": "1",
+	"TollgateList": "33020000000000000001",
+	"ReceiveAddr": "http://172.16.119.173:30009",
+	"ReceiveMobile": "135000252589",
+	"Reason": "测试布控",
+	
+	"需要验证参数":">>",
+	"StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+}
+]
+

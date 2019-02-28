@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "6debb8d4-d554-4e53-9c7b-b82fa067d165",
+		"name": "VIID[fil_one][RUD][delete]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "4fbf041d-5c55-49cd-9bd5-12ee036863a9",
+			"name": "单个文件数据删除",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ea77b76e-558b-4f01-b764-1fa10f747a9e",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// StatusCode检查点",
+							"var a =data.Interface_st+data.FileID;",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusObject.RequestURL+\"|StatusCode应为:\"+a] = jsonData.ResponseStatusObject.RequestURL == a;",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusObject.StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusObject.StatusCode == data.StatusCode; ",
+							"tests[\"StatusString: \"+jsonData.ResponseStatusObject.StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusObject.StatusString == data.StatusString; "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{FileID}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{FileID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

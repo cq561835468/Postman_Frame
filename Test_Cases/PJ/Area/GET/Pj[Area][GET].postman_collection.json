@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "fa6ed99c-ba7b-4bc4-830c-f8f8849372b2",
+		"name": "Pj-Area_GET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Get_Area",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eb77e44a-3811-4db2-a123-573a9c58cb46",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"for (var x in js.list){",
+							"    pm.test(\"当前数值为: \"+js.list[x].area_name +\"返回验证值应为: \"+data.area_name, function () {",
+							"                pm.expect(js.list[x].area_name).to.eql(data.area_name);",
+							"            });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"area_name\": \"{{area_name}}\", \r\n  \"area_status\": {{area_status}}, \r\n  \"order_by\": \"{{order_by}}\", \r\n  \"sort\": \"{{sort}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}&_method=GET"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

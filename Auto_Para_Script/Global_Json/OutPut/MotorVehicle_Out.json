@@ -1,0 +1,33 @@
+{
+    "MotorVehicle_DEL_Out":[
+        {
+            "Re_State":"200",
+            "RequestURL":"/VIID/MotorVehicles/310000000013200000040220180506082101191700219170",
+            "StatusCode":0,
+            "StatusString":""
+        }
+    ],
+    "MotorVehicle_GET_Out":[
+        {
+            "Calling":"0|1",
+            "DeviceID":"31000000001320001536",
+            "HasPlate":1,
+            "InfoKind":"0|1|2",
+            "LeftTopX":6,
+            "LeftTopY":12,
+            "MotorVehicleID":"310000000013200000473400046141562120967106330624",
+            "PlateClass":"",
+            "PlateColor":"01|02|05|06|09",
+            "Re_State":"200",
+            "RightBtmX":463,
+            "RightBtmY":469,
+            "SafetyBelt":"0|1",
+            "SourceID":"31000000001319999601557796467490775105536",
+            "StorageUrl":"http://10.85.7.62:8081/image/31000000001320000004022018050716450827607.jpg",
+            "Sunvisor":"0|1",
+            "TollgateID":"31000000001320001536",
+            "VehicleBrand":"2",
+            "VehicleColor":"01|02"
+        }
+    ]
+}

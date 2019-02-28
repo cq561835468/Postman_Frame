@@ -1,0 +1,15 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8083",
+	"Interface_st":"/VIID/",
+	"Search_Express":"Subscribes?(Subscribe.SubscribeStatus=0)OR(Subscribe.OperateType=0)",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"Search_Field":"SubscribeStatus",
+	"Search_Field2":"OperateType",
+	"Value":0,
+	"Value2":0
+}
+]
+

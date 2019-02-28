@@ -1,0 +1,14 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8083",
+	"Interface_st":"/VIID/APSs",
+	"Search_Express":"?((APS.Port=8088)AND(APS.IsOnline=1))",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"Search_Field1":"Port",
+	"Search_Field2":"IsOnline",
+	"Value1":"8088",
+	"Value2":1
+}
+]

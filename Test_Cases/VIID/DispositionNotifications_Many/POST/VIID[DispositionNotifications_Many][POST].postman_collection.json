@@ -1,0 +1,33 @@
+{
+	"info": {
+		"_postman_id": "b0c44f9c-1823-4f19-9c9c-eee9e473dc96",
+		"name": "VIID[DispositionNotifications_Many][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "4a9af463-f6b1-43dc-a52e-e9ffc386c24b",
+			"name": "VIID[DispositionNotifications_Many][POST]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"DispositionNotificationListObject\": {\r\n\t\"DispositionNotificationObject\": [{\r\n\t\t\"NotificationID\": \"{{NotificationID}}\",\r\n\t\t\"Title\": \"{{Title}}\",\r\n\t\t\"DispositionID\": \"{{DispositionID}}\",\r\n\t\t\"TriggerTime\": \"{{TriggerTime}}\",\r\n\t\t\"CntObjectID\": \"{{CntObjectID}}\",\r\n\t\t\"MotorVehicleObject\": {\r\n\t\t\"MotorVehicleID\": \"{{MotorVehicleID}}\",\r\n\t\t\"InfoKind\": {{InfoKind}},\r\n\t\t\"SourceID\": \"{{SourceID}}\",\r\n\t\t\"HasPlate\": {{HasPlate}},\r\n\t\t\"PlateClass\": \"{{PlateClass}}\",\r\n\t\t\"PlateColor\": \"{{PlateColor}}\",\r\n\t\t\"VehicleColor\": \"{{VehicleColor}}\"\r\n\t\t}\r\n\t}]\r\n}\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

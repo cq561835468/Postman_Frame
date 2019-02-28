@@ -1,0 +1,32 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8081",
+	"Interface_st":"/VIID/Persons",
+	"PersonID1": "31000000001320000006022009155654243350124345",
+	"PersonID2": "31000000001320000006022019050654243350124345",
+	"InfoKind": 0,
+	"SourceID": "21",
+	"DeviceID": "33010000000000000001",
+	"LeftTopX": 1,
+	"LeftTopY": 2,
+	"RightBtmX": 3,
+	"RightBtmY": 4,
+	"LocationMarkTime": "20180117080000",
+	"PersonAppearTime": "20180117080001",
+	"PersonDisAppearTime": "20180117080005",
+	"IsDriver": 0, 
+	"IsForeigner": 0, 
+	"IsSuspectedTerrorist": 0, 
+	"IsCriminalInvolved": 1, 
+	"IsDetainees": 1, 
+	"IsVictim": 2, 
+	"IsSuspiciousPerson": 2,
+	
+	"需要验证参数":">>",
+	"StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+}
+]
+

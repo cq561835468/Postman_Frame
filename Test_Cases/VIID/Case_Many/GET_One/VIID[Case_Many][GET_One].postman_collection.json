@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "2f10de67-bb8d-4d71-baaa-c504ca0995a2",
+		"name": "VIID[Case_Many][GET_One]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "批量案件-单条件查询",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "54dd9a9d-62f8-4f8d-8935-9a95902f38b8",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// 长度检查点",
+							"var JsPer = jsonData.CaseListObject.Case",
+							"var lang = jsonData.CaseListObject.Case.length",
+							"tests[\"当前返回数量为: \"+lang] = lang;",
+							"",
+							"//循环判断key",
+							"for (var key in JsPer){",
+							"    //console.log(key)",
+							"    for(var keyy in JsPer[key]){",
+							"        //console.log(keyy)",
+							"        for(var keyyy in JsPer[key][keyy]){",
+							"            ",
+							"           //console.log(keyyy)",
+							"         ",
+							"        if (keyyy == data.Search_Field){",
+							"             //console.log(keyyy)",
+							"           ",
+							"            var data1 = JsPer[key][keyy][keyyy]",
+							"            pm.test(\"当前数值1为: \"+data1+\"|返回验证值应为:\"+data.Value, function () {",
+							"                      pm.expect(data1).to.eql(data.Value);",
+							"",
+							"                         });",
+							"             ",
+							"        }",
+							"        ",
+							"    }",
+							"    }",
+							"}",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

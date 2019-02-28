@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "7af45d54-6d8f-4bd4-992e-264960f5170b",
+		"name": "CU[登陆获取信息登出][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login[登陆]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d15c02d1-40ba-4e77-8eec-5fe7eeb83166",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"",
+							"tests[\"cmsVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"];",
+							"tests[\"cuVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"];",
+							"tests[\"cuUpdateUrl: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"];",
+							"tests[\"serverDataVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"];",
+							"tests[\"ip: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"];",
+							"tests[\"port: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"];",
+							"tests[\"session: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"]+\"|errorCode应为：\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							"",
+							"",
+							"",
+							"pm.environment.set(\"session1\", jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]);",
+							"",
+							"",
+							"",
+							"//console.log(pm.response.code)",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"    });",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:Login>\r\n\t\t\t<cusdk:loginReq>\r\n\t\t\t\t<cusdk:userName>{{userName}}</cusdk:userName>\r\n\t\t\t\t<cusdk:password>{{password}}</cusdk:password>\r\n\t\t\t\t<cusdk:cusdkVersion>{{cusdkVersion}}</cusdk:cusdkVersion>\r\n\t\t\t\t<cusdk:clientType>{{clientType}}</cusdk:clientType>\r\n\t\t\t\t<cusdk:isSupportNA>{{isSupportNA}}</cusdk:isSupportNA>\r\n\t\t\t\t<cusdk:webCUClientAddr>\r\n\t\t\t\t</cusdk:webCUClientAddr>\r\n\t\t\t</cusdk:loginReq>\r\n\t\t</cusdk:Login>\r\n\t</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserInfo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6a7f6a25-8a82-4cc4-b76e-a3f977b6f6c2",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"    });",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:errorCode\"]+\"|errorCode应为：\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							"tests[\"session: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:session\"];",
+							"//console.log(jsonData);",
+							"//console.log(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:session\"]);",
+							"//console.log(session1);",
+							"pm.test(\"IsIPAppliedToMobileEnd:\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:IsIPAppliedToMobileEnd\"], function () {",
+							"  pm.expect(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:IsIPAppliedToMobileEnd\"]).to.be.oneOf([\"true\",\"false\"]);",
+							"});",
+							"tests[\"accountOverdueTime: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:accountOverdueTime\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:accountOverdueTime\"];",
+							"pm.test(\"allowMultilogin:\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:allowMultilogin\"], function () {",
+							"  pm.expect(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:allowMultilogin\"]).to.be.oneOf([\"true\",\"false\"]);",
+							"});",
+							"pm.test(\"bindIPEnable:\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:bindIPEnable\"], function () {",
+							"  pm.expect(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:bindIPEnable\"]).to.be.oneOf([\"true\",\"false\"]);",
+							"});",
+							"tests[\"bindingAddress: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:bindingAddress\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:bindingAddress\"];",
+							"tests[\"creator: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:creator\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:creator\"];",
+							"tests[\"description: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:description\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:description\"];",
+							"tests[\"domainID: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:domainID\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:domainID\"];",
+							"pm.test(\"enable:\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:enable\"], function () {",
+							"  pm.expect(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:enable\"]).to.be.oneOf([\"true\",\"false\"]);",
+							"});",
+							"tests[\"maxStreamNum: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:maxStreamNum\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:maxStreamNum\"];",
+							"pm.test(\"maxStreamNumEnable:\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:maxStreamNumEnable\"], function () {",
+							"  pm.expect(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:maxStreamNumEnable\"]).to.be.oneOf([\"true\",\"false\"]);",
+							"});",
+							"tests[\"passwordExpire: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:passwordExpire\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:passwordExpire\"];",
+							"pm.test(\"passwordExpireEnable:\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:passwordExpireEnable\"], function () {",
+							"  pm.expect(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:passwordExpireEnable\"]).to.be.oneOf([\"true\",\"false\"]);",
+							"});",
+							"tests[\"passwordOverdueTime: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:passwordOverdueTime\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:passwordOverdueTime\"];",
+							"tests[\"userGroup: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:userGroup\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:userGroup\"];",
+							"tests[\"userName: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:userName\"]+\"|userName应为：\"+data.userName] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:userName\"] == data.userName;",
+							"tests[\"userPassword: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:userPassword\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:userPassword\"];",
+							"tests[\"userType: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:userType\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:userType\"];",
+							"tests[\"uuid: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:uuid\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:uuid\"];",
+							"tests[\"waterMarkColor: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkColor\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkColor\"];",
+							"pm.test(\"waterMarkEnabled:\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkEnabled\"], function () {",
+							"  pm.expect(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkEnabled\"]).to.be.oneOf([\"true\",\"false\"]);",
+							"});",
+							"tests[\"waterMarkFont: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkFont\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkFont\"];",
+							"tests[\"waterMarkFontSize: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkFontSize\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkFontSize\"];",
+							"tests[\"waterMarkRotationAngle: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkRotationAngle\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkRotationAngle\"];",
+							"pm.test(\"waterMarkSupported:\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkSupported\"], function () {",
+							"  pm.expect(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkSupported\"]).to.be.oneOf([\"true\",\"false\"]);",
+							"});",
+							"pm.test(\"waterMarkTiled:\"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkTiled\"], function () {",
+							"  pm.expect(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkTiled\"]).to.be.oneOf([\"true\",\"false\"]);",
+							"});",
+							"tests[\"waterMarkTransparent: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkTransparent\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserInfoRsp\"][\"cusdk:userInfo\"][\"cusdk:waterMarkTransparent\"];",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \nxmlns:cusdk=\"urn:cusdk\">\n\t<SOAP-ENV:Body>\n\t\t<cusdk:GetUserInfo>\n\t\t\t<cusdk:req xsi:type=\"cusdk:GetUserInfoReq\">\n\t\t\t\t<cusdk:userName>{{userName}}</cusdk:userName>\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\n\t\t\t</cusdk:req>\n\t\t</cusdk:GetUserInfo>\n\t</SOAP-ENV:Body>\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d143ffd-e9db-43b7-8773-32891502609d",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"    });",
+							"    tests[\"session: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LogoutRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LogoutRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LogoutRsp\"][\"cusdk:errorCode\"]+\"|errorCode应为：\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LogoutRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							"//console.log(jsonData)"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"\r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"\r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:Logout>\r\n\t\t\t<cusdk:logoutReq xsi:type=\"cusdk:LogoutReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t</cusdk:logoutReq>\r\n\t\t\t\t</cusdk:Logout>\r\n\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

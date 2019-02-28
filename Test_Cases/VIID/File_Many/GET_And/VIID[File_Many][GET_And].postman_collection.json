@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "c4c20357-b1dd-4610-b238-528769e4cf0a",
+		"name": "VIID[fil_many_mes][get][select][And]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "d5a0007a-1d41-4fbf-adb7-e456e27fdc8c",
+			"name": "批量文件-多条件查询AND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5bd894c9-4515-43ad-a0ad-d0ae6ad219d6",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// 长度检查点",
+							"var JsPer = jsonData.FileListObject.File",
+							"var lang = jsonData.FileListObject.FIle.length",
+							"tests[\"当前返回数量为: \"+lang] = lang",
+							"",
+							"",
+							"//循环判断key",
+							"for (var key in JsPer){",
+							"    //console.log(key)",
+							"    for(var keyy in JsPer[key]){",
+							"        //console.log(keyy)",
+							"        for(var keyyy in JsPer[key][keyy]){",
+							"            ",
+							"           //console.log(keyyy)",
+							"         ",
+							"        if (keyyy == data.Search_Field){",
+							"             //console.log(keyyy)",
+							"           ",
+							"            var data1 = JsPer[key][keyy][keyyy]",
+							"             //console.log(data1)",
+							"            ",
+							"        }",
+							"        else if (keyyy == data.Search_Field2){",
+							"            var data2 = JsPer[key][keyy][keyyy]",
+							"             //console.log(data2)",
+							"            ",
+							"        }",
+							"    }",
+							"      pm.test(\"当前数值1为: \"+data1+\"|返回验证值应为:\"+data.Value+\"当前数值2为: \"+data2+\"|返回验证值应为:\"+data.Value2, function () {",
+							"  pm.expect(data1).to.eql(data.Value);",
+							"  pm.expect(data2).to.eql(data.Value2);",
+							"    });",
+							"    }",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

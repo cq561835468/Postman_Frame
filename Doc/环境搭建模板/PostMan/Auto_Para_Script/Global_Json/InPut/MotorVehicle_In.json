@@ -1,0 +1,15 @@
+{
+    "MotorVehicle_DEL_In":[
+        {
+            "Interface_Url":"10.85.7.62:8081",
+            "Interface_st":"/VIID/MotorVehicles/",
+            "MotorVehicleID":"310000000013200000473400046141562120967106330624"
+        }
+    ],
+    "MotorVehicle_GET_In":[
+        {
+            "Interface_Url":"10.85.7.62:8083",
+            "Interface_st":"/VIID/MotorVehicles/"
+        }
+    ]
+}

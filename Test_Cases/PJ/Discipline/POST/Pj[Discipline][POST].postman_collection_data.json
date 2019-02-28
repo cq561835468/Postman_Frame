@@ -1,0 +1,11 @@
+[
+	{
+		"Port":":10007",
+		"URI":"/discipline",
+		"area_code":"a6741cecdd1b4a879a3512hekedakeda",
+		"disc_code": "dilichenqi", 
+		"disc_name": "地理chenqi",
+		"success":"true",
+		"Re_State":200
+	}
+]

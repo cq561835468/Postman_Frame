@@ -1,0 +1,12 @@
+[{
+	"需要输入参数：":">>",
+	"Url":"http://172.16.249.130:9900/file",
+	"fileType":"/other",
+	"catalog":"/2018-04-12/g1002/abc",
+	"fileName":"/fileName.zip",
+	"type":"?type=checkcode",
+	"需要检验参数：":">>",
+	"Re_State":200,
+	"md5":"2dc5f2b1b6c7beac1943f0c661a7aa91"
+}
+]

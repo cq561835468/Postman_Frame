@@ -1,0 +1,16 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"http://172.16.249.130:9900",
+	"Interface_st":"/ptt/pttLogin",
+	"userCode": "admin",
+    "userPassword": "admin",
+	"需要验证参数":">>",
+	"Re_State":"200",
+    "resultMsg": "成功",
+    "ip": "172.16.249.130",
+    "resultCode": 200
+	
+}
+]
+

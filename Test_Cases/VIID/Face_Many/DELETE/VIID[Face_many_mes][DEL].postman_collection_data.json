@@ -1,0 +1,12 @@
+[
+    {
+        "FaceID1":"310000000013200000010220180517001620000800600080,",
+        "FaceID2":"310000000013200000010220180517230507001000600100",
+        "Interface_Url":"10.85.7.62:8081",
+        "Interface_st1":"/VIID/Faces",
+        "Interface_st2":"/VIID/Faces?IDList=",
+        "Re_State":"200",
+        "StatusCode":"0",
+        "StatusString":""
+    }
+]

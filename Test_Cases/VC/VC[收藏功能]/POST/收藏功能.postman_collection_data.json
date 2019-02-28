@@ -1,0 +1,26 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"http://172.16.249.130:9900",
+	"Interface_st":"/ptt/pttLogin/pttForcedLogin",
+	"userCode": "admin",
+    "userPassword": "admin",
+	"Interface_st2":"/ptt/favorite",
+	"Interface_st3":"/ptt/unfavorite",
+	"Interface_st4":"/ptt/favorite/queryFavorites",
+	"searchWord":"1",
+    "pageNo": 3,
+    "limit": 6,
+    "start": 1,
+	"需要验证参数":">>",
+	"Re_State":"200",
+    "resultMsg": "成功",
+    "updateTime": "非空即可",
+    "resultCode": 200,
+    "data": "非空即可",
+    "total":"非空即可",
+    "totalPage": "非空即可",
+    "ip": "172.16.249.130"
+}
+]
+

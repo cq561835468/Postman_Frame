@@ -1,0 +1,15 @@
+[
+{
+	"需要输入参数":">>",
+	"Vcol_Url":"10.85.7.62:8083",
+	"Interface":"/VIID/System/Time",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"VIIDServerID": "真实ID",
+    "TimeMode": "1|2",
+    "LocalTime": "当地时间",
+    "TimeZone": "UTC+8"
+  
+
+}
+]

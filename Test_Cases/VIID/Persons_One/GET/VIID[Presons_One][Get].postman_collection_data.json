@@ -1,0 +1,57 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8083",
+	"Interface_st":"/VIID/Persons/",
+	"PersonID":"310000000013200000060220180509155828243420124342",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"InfoKind":"0|1|2",
+	"SourceID": "31000000001320000006022018050915582824342",
+	"DeviceID": "31000000001320000006",
+	"LeftTopX": ">0",
+        "LeftTopY": ">0",
+        "RightBtmX": ">0",
+        "RightBtmY": ">0",
+        "LocationMarkTime": "非空即可",
+        "PersonAppearTime": "非空即可",
+        "PersonDisAppearTime": "非空即可",
+        "AgeLowerLimit": ">=0",
+        "IsDriver": "0|1|2",
+        "IsForeigner": "0|1|2",
+        "IsSuspectedTerrorist": "0|1|2",
+        "IsCriminalInvolved": "0|1|2",
+        "IsDetainees":  "0|1|2",
+        "IsVictim":  "0|1|2",
+        "IsSuspiciousPerson": "0|1|2"
+	
+},
+{
+        "需要输入参数":">>",
+        "Interface_Url":"10.85.7.62:8083",
+        "Interface_st":"/VIID/Persons/",
+        "PersonID":"310000000013200000060220180509155828243420124342",
+        "需要验证参数":">>",
+        "Re_State":"404",
+        "InfoKind":"0|1|2",
+        "SourceID": "31000000001320000006022018050915582824342",
+        "DeviceID": "31000000001320000006",
+        "LeftTopX": ">0",
+        "LeftTopY": ">0",
+        "RightBtmX": ">0",
+        "RightBtmY": ">0",
+        "LocationMarkTime": "非空即可",
+        "PersonAppearTime": "非空即可",
+        "PersonDisAppearTime": "非空即可",
+        "AgeLowerLimit": ">=0",
+        "IsDriver": "0|1|2",
+        "IsForeigner": "0|1|2",
+        "IsSuspectedTerrorist": "0|1|2",
+        "IsCriminalInvolved": "0|1|2",
+        "IsDetainees":  "0|1|2",
+        "IsVictim":  "0|1|2",
+        "IsSuspiciousPerson": "0|1|2"
+
+}
+]
+

@@ -1,0 +1,760 @@
+{
+	"info": {
+		"_postman_id": "e586dc39-03e5-40d5-8d26-b4b4af191dab",
+		"name": "nru_iscsi[录像服务和磁盘管理]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pmcsLogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "505653d5-c728-4de4-a7db-87eadcb4e865",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"",
+							"// 设置session，targetUri为环境变量",
+							"var loginRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var targetUri = jsonData[\"CPmcSMsg\"][\"targetUri\"]",
+							"var CData = xml2Json(loginRsp)",
+							"var session = CData[\"CPmcSLoginRsp\"][\"session\"]",
+							"",
+							"pm.environment.set(\"session\", session);",
+							"pm.environment.set(\"targetUri\", targetUri);",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSLoginRsp\"][\"errorCode\"]] = CData[\"CPmcSLoginRsp\"][\"errorCode\"] == \"0\"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<CPmcSMsg>\r\n  <event>PMCS_LOGIN_REQ</event>\r\n  <seqNum>1</seqNum>\r\n  <msg>&lt;CPmcSLoginReq&gt;&lt;event&gt;PMCS_LOGIN_REQ&lt;/event&gt;&lt;seqNum&gt;1&lt;/seqNum&gt;&lt;userName&gt;{{userName}}&lt;/userName&gt;&lt;password&gt;{{userpwd}}&lt;/password&gt;&lt;isDecrypt&gt;0&lt;/isDecrypt&gt;&lt;ipaddr&gt;INVALID_IP&lt;/ipaddr&gt;&lt;/CPmcSLoginReq&gt;</msg>\r\n</CPmcSMsg>"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGIN_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGIN_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getNruid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3dd7fcdc-cc46-4bd9-a374-b153fe3e5be3",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var platformSoftwareInfoQryRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(platformSoftwareInfoQryRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPlatformSoftwareInfoQryRsp\"][\"errorCode\"]] = CData[\"CPlatformSoftwareInfoQryRsp\"][\"errorCode\"] == \"0\"",
+							"",
+							"",
+							"pm.environment.set(\"nruid\", CData[\"CPlatformSoftwareInfoQryRsp\"][\"info\"][\"localNruId\"])"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMS_PLATFORM_SOFTWAREINFO_QRY_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>28</seqNum>\r\n  <msg>&lt;CPlatformSoftwareInfoQryReq&gt;&lt;event&gt;PMS_PLATFORM_SOFTWAREINFO_QRY_REQ&lt;/event&gt;&lt;seqNum&gt;28&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CPlatformSoftwareInfoQryReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMS_PLATFORM_SOFTWAREINFO_QRY_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMS_PLATFORM_SOFTWAREINFO_QRY_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rcsAddNru",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0fa7d111-f024-4299-b77b-aaf9640a40ab",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var rcsAddNruRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(rcsAddNruRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CRcsAddNruRsp\"][\"errorCode\"]] = CData[\"CRcsAddNruRsp\"][\"errorCode\"] == \"0\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>RCS_ADD_NRU_REQ</event>\r\n  <targetUri>rcs@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>689</seqNum>\r\n  <msg>&lt;CRcsAddNruReq&gt;&lt;event&gt;RCS_ADD_NRU_REQ&lt;/event&gt;&lt;seqNum&gt;689&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;nruInfo&gt;&lt;nruBaseInfo&gt;&lt;nruID&gt;{{nruid}}&lt;/nruID&gt;&lt;devName&gt;NRU&lt;/devName&gt;&lt;devType&gt;{{devType}}&lt;/devType&gt;&lt;manuFactory&gt;{{manuFactory}}&lt;/manuFactory&gt;&lt;/nruBaseInfo&gt;&lt;networkInfo&gt;&lt;ifName&gt;eth0&lt;/ifName&gt;&lt;ipAddr&gt;{{plat_IP}}&lt;/ipAddr&gt;&lt;netMask&gt;255.255.255.0&lt;/netMask&gt;&lt;gateWay&gt;10.20.23.255&lt;/gateWay&gt;&lt;/networkInfo&gt;&lt;svrAddr&gt;{{plat_IP}}&lt;/svrAddr&gt;&lt;maxBandWidth&gt;0&lt;/maxBandWidth&gt;&lt;isOnline&gt;1&lt;/isOnline&gt;&lt;isScOnline&gt;1&lt;/isScOnline&gt;&lt;isUsed&gt;1&lt;/isUsed&gt;&lt;/nruInfo&gt;&lt;/CRcsAddNruReq&gt;</msg>\r\n</CPmcSMsg>"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=RCS_ADD_NRU_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "RCS_ADD_NRU_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rcsModNru",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>RCS_MOD_NRU_REQ</event>\r\n  <targetUri>rcs@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>590</seqNum>\r\n  <msg>&lt;CRcsModNruReq&gt;&lt;event&gt;RCS_MOD_NRU_REQ&lt;/event&gt;&lt;nruBaseInfo&gt;&lt;nruID&gt;{{nruid}}&lt;/nruID&gt;&lt;devName&gt;NRU_1&lt;/devName&gt;&lt;manuFactory&gt;{{manuFactory}}&lt;/manuFactory&gt;&lt;devType&gt;{{devType}}&lt;/devType&gt;&lt;/nruBaseInfo&gt;&lt;isUsed&gt;1&lt;/isUsed&gt;&lt;seqNum&gt;590&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CRcsModNruReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=RCS_MOD_NRU_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "RCS_MOD_NRU_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsQryNru",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5cc03773-de19-42c9-9e34-54e27e978452",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var qryNruRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(qryNruRsp)",
+							"console.log(CData[\"CPmcsQueryNruInformationRsp\"][\"results\"][\"item\"][\"nruBaseInfo\"][\"devName\"])",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcsQueryNruInformationRsp\"][\"errorCode\"]] = CData[\"CPmcsQueryNruInformationRsp\"][\"errorCode\"] == \"0\"",
+							"tests[\"isUsed: \" + CData[\"CPmcsQueryNruInformationRsp\"][\"results\"][\"item\"][\"isUsed\"]] = CData[\"CPmcsQueryNruInformationRsp\"][\"results\"][\"item\"][\"isUsed\"] == \"1\"",
+							"tests[\"devName: \" + CData[\"CPmcsQueryNruInformationRsp\"][\"results\"][\"item\"][\"nruBaseInfo\"][\"devName\"]] = CData[\"CPmcsQueryNruInformationRsp\"][\"results\"][\"item\"][\"nruBaseInfo\"][\"devName\"] == \"NRU_1\"",
+							"tests[\"nruid: \" + CData[\"CPmcsQueryNruInformationRsp\"][\"results\"][\"item\"][\"nruBaseInfo\"][\"nruID\"]] = CData[\"CPmcsQueryNruInformationRsp\"][\"results\"][\"item\"][\"nruBaseInfo\"][\"nruID\"] == pm.environment.get(\"nruid\");",
+							"",
+							"setTimeout(function(){}, 35000)",
+							"//执行这一步的时候，要加个延时。因为rcs模块还没有起来，后面的用例会失败"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_QRY_NRU_INFORMATION_REQ</event>\r\n  <targetUri>rcs@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>854</seqNum>\r\n  <msg>&lt;CRcsQueryNruReq&gt;&lt;event&gt;PMCS_QRY_NRU_INFORMATION_REQ&lt;/event&gt;&lt;seqNum&gt;854&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;startEntryIndex&gt;0&lt;/startEntryIndex&gt;&lt;expectEntryNum&gt;10&lt;/expectEntryNum&gt;&lt;taskId&gt;0&lt;/taskId&gt;&lt;/CRcsQueryNruReq&gt;</msg>\r\n</CPmcSMsg>"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_QRY_NRU_INFORMATION_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_QRY_NRU_INFORMATION_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "startIscsi",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "56220ad7-895b-47b3-bf00-1a43f3a558c8",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var rcsCtrlIscsiRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(rcsCtrlIscsiRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CRcsCtrlIscsiRsp\"][\"errorCode\"]] = CData[\"CRcsCtrlIscsiRsp\"][\"errorCode\"] == \"0\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>RCS_CTRL_ISCSI_REQ</event>\r\n  <targetUri>rcs@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>86</seqNum>\r\n  <msg>&lt;CRcsCtrlIscsiReq&gt;&lt;event&gt;RCS_CTRL_ISCSI_REQ&lt;/event&gt;&lt;nruID&gt;{{nruid}}&lt;/nruID&gt;&lt;iscsiCtrl&gt;start&lt;/iscsiCtrl&gt;&lt;seqNum&gt;86&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CRcsCtrlIscsiReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=RCS_CTRL_ISCSI_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "RCS_CTRL_ISCSI_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rcsAddIscsi",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b12820e-7c22-4ea2-bd7b-5483eea2cf65",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var rcsAddIscsiConfRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(rcsAddIscsiConfRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CRcsAddIscsiConfRsp\"][\"errorCode\"]] = CData[\"CRcsAddIscsiConfRsp\"][\"errorCode\"] == \"0\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>RCS_ADD_ISCSI_CONF_REQ</event>\r\n  <targetUri>rcs@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>70</seqNum>\r\n  <msg>&lt;CRcsAddIscsiConfReq&gt;&lt;event&gt;RCS_ADD_ISCSI_CONF_REQ&lt;/event&gt;&lt;nruID&gt;{{nruid}}&lt;/nruID&gt;&lt;iscsiConf&gt;&lt;discoveryAddr&gt;&lt;ip&gt;10.20.20.210&lt;/ip&gt;&lt;port&gt;3260&lt;/port&gt;&lt;/discoveryAddr&gt;&lt;/iscsiConf&gt;&lt;seqNum&gt;70&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CRcsAddIscsiConfReq&gt;</msg>\r\n</CPmcSMsg>"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=RCS_ADD_ISCSI_CONF_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "RCS_ADD_ISCSI_CONF_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsQryDisk",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2766ed21-e8d3-4f1f-937f-0499c56d253d",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var pmcsQueryDiskInformationRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(pmcsQueryDiskInformationRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcsQueryDiskInformationRsp\"][\"errorCode\"]] = CData[\"CPmcsQueryDiskInformationRsp\"][\"errorCode\"] == \"0\"",
+							"",
+							"// 获取磁盘总数，新加的磁盘索引id为num-1",
+							"var num = CData[\"CPmcsQueryDiskInformationRsp\"][\"results\"][\"$\"][\"size\"]",
+							"indexNum = num - 1",
+							"",
+							"// 获取磁盘信息，并设置为环境变量",
+							"// var data = CData[\"CPmcsQueryDiskInformationRsp\"][\"results\"][\"item\"][\"1\"]",
+							"// console.log(data)",
+							"var diskID = CData[\"CPmcsQueryDiskInformationRsp\"][\"results\"][\"item\"][indexNum][\"diskID\"]",
+							"var diskName = CData[\"CPmcsQueryDiskInformationRsp\"][\"results\"][\"item\"][indexNum][\"diskName\"]",
+							"var cylinders = CData[\"CPmcsQueryDiskInformationRsp\"][\"results\"][\"item\"][indexNum][\"cylinders\"]",
+							"pm.environment.set(\"diskID\", diskID);",
+							"pm.environment.set(\"diskName\", diskName);",
+							"pm.environment.set(\"cylinders\", cylinders);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_QRY_DISK_INFORMATION_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>706</seqNum>\r\n  <msg>&lt;CPmcsQueryDiskInformationReq&gt;&lt;event&gt;PMCS_QRY_DISK_INFORMATION_REQ&lt;/event&gt;&lt;seqNum&gt;706&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;nruID&gt;{{nruid}}&lt;/nruID&gt;&lt;startEntryIndex&gt;0&lt;/startEntryIndex&gt;&lt;expectEntryNum&gt;5&lt;/expectEntryNum&gt;&lt;taskId&gt;0&lt;/taskId&gt;&lt;/CPmcsQueryDiskInformationReq&gt;</msg>\r\n</CPmcSMsg>"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_QRY_DISK_INFORMATION_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_QRY_DISK_INFORMATION_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rcsFdisk",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e6dfa8e0-535c-41db-bdd5-7ec5115b6d30",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var rcsFdiskRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(rcsFdiskRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CRcsFdiskRsp\"][\"errorCode\"]] = CData[\"CRcsFdiskRsp\"][\"errorCode\"] == \"0\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>RCS_FDISK_REQ</event>\r\n  <targetUri>rcs@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>342</seqNum>\r\n  <msg>&lt;CRcsFdiskReq&gt;&lt;event&gt;RCS_FDISK_REQ&lt;/event&gt;&lt;nruID&gt;{{nruid}}&lt;/nruID&gt;&lt;diskDev&gt;&lt;diskID&gt;{{diskID}}&lt;/diskID&gt;&lt;devName&gt;{{diskName}}&lt;/devName&gt;&lt;/diskDev&gt;&lt;partCfgLineList size=\"1\"&gt;&lt;item index=\"0\"&gt;&lt;cylinderStart&gt;0&lt;/cylinderStart&gt;&lt;cylinders&gt;{{cylinders}}&lt;/cylinders&gt;&lt;partID&gt;0&lt;/partID&gt;&lt;/item&gt;&lt;/partCfgLineList&gt;&lt;isClearPartHead&gt;0&lt;/isClearPartHead&gt;&lt;seqNum&gt;342&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CRcsFdiskReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=RCS_FDISK_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "RCS_FDISK_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rcsFormatDisk",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6020036b-02d3-40e6-ab37-6357f0183be8",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var rcsFormatDiskRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(rcsFormatDiskRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CRcsFormatDiskRsp\"][\"errorCode\"]] = CData[\"CRcsFormatDiskRsp\"][\"errorCode\"] == \"0\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>RCS_FORMAT_DISK_REQ</event>\r\n  <targetUri>rcs@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>36</seqNum>\r\n  <msg>&lt;CRcsFormatDiskReq&gt;&lt;event&gt;RCS_FORMAT_DISK_REQ&lt;/event&gt;&lt;nruID&gt;{{nruid}}&lt;/nruID&gt;&lt;diskDev&gt;&lt;devName&gt;{{diskName}}1&lt;/devName&gt;&lt;diskID&gt;{{diskID}}&lt;/diskID&gt;&lt;partID&gt;1&lt;/partID&gt;&lt;/diskDev&gt;&lt;fsType&gt;vbfs&lt;/fsType&gt;&lt;seqNum&gt;36&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CRcsFormatDiskReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=RCS_FORMAT_DISK_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "RCS_FORMAT_DISK_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rcsUmountDisk",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2cd31ff2-f92b-490a-8fe9-8f1cda7139f3",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var rcsUnmountDiskRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(rcsUnmountDiskRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CRcsUnmountDiskRsp\"][\"errorCode\"]] = CData[\"CRcsUnmountDiskRsp\"][\"errorCode\"] == \"0\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>RCS_UMOUNT_DISK_REQ</event>\r\n  <targetUri>rcs@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>44</seqNum>\r\n  <msg>&lt;CRcsUnmountDiskReq&gt;&lt;event&gt;RCS_UMOUNT_DISK_REQ&lt;/event&gt;&lt;nruID&gt;{{nruid}}&lt;/nruID&gt;&lt;diskDev&gt;&lt;devName&gt;{{diskName}}1&lt;/devName&gt;&lt;diskID&gt;{{diskID}}&lt;/diskID&gt;&lt;/diskDev&gt;&lt;seqNum&gt;44&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CRcsUnmountDiskReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=RCS_UMOUNT_DISK_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "RCS_UMOUNT_DISK_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rcsDelNru",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a18e294-c057-4e73-a164-5f7aecf3aae4",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var rcsDelNruRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(rcsDelNruRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CRcsDelNruRsp\"][\"errorCode\"]] = CData[\"CRcsDelNruRsp\"][\"errorCode\"] == \"0\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>RCS_DEL_NRU_REQ</event>\r\n  <targetUri>rcs@kedacom</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>150</seqNum>\r\n  <msg>&lt;CRcsDelNruReq&gt;&lt;event&gt;RCS_DEL_NRU_REQ&lt;/event&gt;&lt;nruID&gt;{{nruid}}&lt;/nruID&gt;&lt;seqNum&gt;150&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CRcsDelNruReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=RCS_ADD_NRU_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "RCS_ADD_NRU_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsLogout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "643179bd-aa28-4fd6-8b36-aa133ec61702",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var logoutRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(logoutRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSLogoutRsp\"][\"errorCode\"]] = CData[\"CPmcSLogoutRsp\"][\"errorCode\"] == \"0\"",
+							"",
+							"// 删除本用例新增的环境变量",
+							"pm.environment.unset(\"userid\");",
+							"pm.environment.unset(\"session\");",
+							"pm.environment.unset(\"targetUri\");",
+							"pm.environment.unset(\"nruid\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_LOGOUT_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>36</seqNum>\r\n  <msg>&lt;CPmcSLogoutReq&gt;&lt;event&gt;PMCS_LOGOUT_REQ&lt;/event&gt;&lt;seqNum&gt;36&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CPmcSLogoutReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGOUT_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGOUT_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

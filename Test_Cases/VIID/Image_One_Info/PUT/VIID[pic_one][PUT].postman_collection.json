@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "ce019bc6-3912-47b9-87b5-17b486fdd8de",
+		"name": "VIID[pic_one][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "单个图像数据修改（Info）",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d1ecd0d-c49d-4276-a77e-f17ba8bbee6b",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// StatusCode检查点",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL+\"|RequestURL应为:\"+data.Interface_st+data.ImageID+data.Interface_end] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].RequestURL == data.Interface_st+data.ImageID+data.Interface_end; ",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusCode == data.StatusCode; ",
+							"tests[\" StatusString: \"+jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusListObject.ResponseStatusObject[0].StatusString == data.StatusString !==0;",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"ImageObject\":[\r\n\t\t{\"ImageInfo\":{\r\n\t\t\t\"ImageID\":\"{{ImageID}}\",\r\n\t\t\t\"InfoKind\":{{InfoKind}},\r\n\t\t\t\"ImageSource\":\"{{ImageSource}}\",\r\n\t\t\t\"EventSort\":{{EventSort}},\r\n\t\t\t\"DeviceID\":\"{{DeviceID}}\",\r\n\t\t\t\"StoragePath\":\"{{StoragePath}}\",\r\n\t\t\t\"FileHash\":\"{{FileHash}}\",\r\n\t\t\t\"FileFormat\":\"{{FileFormat}}\",\r\n\t\t\t\"ShotTime\":\"{{ShotTime}}\",\r\n\t\t\t\"Title\":\"{{Title}}\",\r\n\t\t\t\"TitleNote\":\"{{TitleNote}}\",\r\n\t\t\t\"ContentDescription\":\"{{ContentDescription}}\",\r\n\t\t\t\"ShotPlaceCode\":\"{{ShotPlaceCode}}\",\r\n\t\t\t\"ShotPlaceFullAdress\":\"{{ShotPlaceFullAdress}}\",\r\n\t\t\t\"SecurityLevel\":\"{{SecurityLevel}}\",\r\n\t\t\t\"Width\":{{Width}},\r\n\t\t\t\"Height\":{{Height}},\r\n\t\t\t\"QualityGrade\":\"{{QualityGrade}}\",\r\n\t\t\t\"CollectorName\":\"{{CollectorName}}\",\r\n\t\t\t\"CollectorOrg\":\"{{CollectorOrg}}\",\r\n\t\t\t\"ImgProcFlag\":\"{{ImgProcFlag}}\",\r\n\t\t\t\"FileSize\":{{FileSize}}}\r\n\t\t\t\r\n\t\t\t\t}]\r\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{ImageID}}{{Interface_end}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{ImageID}}{{Interface_end}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2b2e9da7-4a26-4d70-a775-ab7ab1c78453",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e8d19987-b12a-480d-b754-2264b978349b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "6bbc99ca-1b78-4522-af47-4e9771d5edf6",
+		"name": "VIID[VideoLabels][GET]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "eba0a03f-049b-47fc-b998-e58defe23412",
+			"name": "VIID[VideoLabels][GET]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "79294d14-5915-4e17-be25-90d31ecce584",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"//状态码请求",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"console.log(jsonData)",
+							"//VideoLabelID检查点",
+							"tests[\"VideoLabelID: \"+jsonData.VideoLabelObject.VideoLabelID+\"|VideoLabelID应为:\"+data.VideoLabelID] = jsonData.VideoLabelObject.VideoLabelID == data.VideoLabelID;",
+							"// EventSort检查点",
+							"var EventSort_sp = data.EventSort.split('|')",
+							"tests[\"EventSort: \"+jsonData.VideoLabelObject.EventSort+\"|EventSort应为:\"+data.EventSort] = EventSort_sp.indexOf(jsonData.VideoLabelObject.EventSort+\"\") != -1",
+							"//IVADeviceID检查点",
+							"tests[\"IVADeviceID:\"+jsonData.VideoLabelObject.IVADeviceID] = jsonData.VideoLabelObject.IVADeviceID ",
+							"//CreateTimeAbs检查点",
+							"tests[\"CreateTimeAbs:\"+jsonData.VideoLabelObject.CreateTimeAbs] = jsonData.VideoLabelObject.CreateTimeAbs;",
+							"//CreateTimeRlt检查点",
+							"tests[\"CreateTimeRlt:\"+jsonData.VideoLabelObject.CreateTimeRlt] = jsonData.VideoLabelObject.CreateTimeRlt>0;",
+							"// TargetColor检查点",
+							"var TargetColor_sp = data. TargetColor.split('|')",
+							"tests[\"TargetColor: \"+jsonData.VideoLabelObject. TargetColor+\"|TargetColor应为:\"+data. TargetColor] = TargetColor_sp.indexOf(jsonData.VideoLabelObject. TargetColor+\"\") != -1",
+							"//ColorCount检查点",
+							"tests[\"ColorCount: \"+jsonData.VideoLabelObject.ColorCount] = jsonData.VideoLabelObject.ColorCount >0;",
+							"//AreaPosX检查点",
+							"tests[\"AreaPosX: \"+jsonData.VideoLabelObject.AreaPosX] = jsonData.VideoLabelObject.AreaPosX >0;",
+							"//AreaPosY检查点",
+							"tests[\"AreaPosY: \"+jsonData.VideoLabelObject.AreaPosY] = jsonData.VideoLabelObject.AreaPosY >0;",
+							"//AreaWidth检查点",
+							"tests[\"AreaWidth: \"+jsonData.VideoLabelObject.AreaWidth] = jsonData.VideoLabelObject.AreaWidth >0;",
+							"//AreaHeight检查点",
+							"tests[\"AreaHeight: \"+jsonData.VideoLabelObject.AreaHeight] = jsonData.VideoLabelObject.AreaHeight >0;",
+							"//EventLevel检查点",
+							"tests[\"EventLevel: \"+jsonData.VideoLabelObject.EventLevel] = jsonData.VideoLabelObject.EventLevel >0;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{VideoLabelID}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{VideoLabelID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

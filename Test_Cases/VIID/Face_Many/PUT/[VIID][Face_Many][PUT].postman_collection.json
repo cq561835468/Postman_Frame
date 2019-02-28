@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "62ab4dc1-a01a-4e23-b1a2-2809c581f65b",
+		"name": "[VIID][Face_Many][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "373cb704-f3cc-444c-af33-0f27e0409043",
+			"name": "faces_many_put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5d1c5692-9327-4b8b-af39-e6b774bcb2a3",
+						"type": "text/javascript",
+						"exec": [
+							"var x=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"var xx=x.ResponseStatusListObject.ResponseStatusObject",
+							"for(var key in xx)",
+							"{",
+							"    for(var keyy in xx[key])",
+							"    {",
+							"        if(keyy==\"RequestURL\")",
+							"        {",
+							"           pm.test(\"当前RequestURL值为：\"+xx[key][keyy]+\"RequestURL应为：\"+data.RURL,function(){",
+							"                pm.expect(xx[key][keyy]).to.eql(data.RURL)",
+							"           })",
+							"        }",
+							"         if(keyy==\"StatusCode\")",
+							"         {",
+							"            pm.test(\"当前StatusCode值为：\"+xx[key][keyy]+\"StatusCode应为：\"+data.StatusCode,function(){",
+							"                pm.expect(xx[key][keyy]).to.eql(data.StatusCode)",
+							"           })",
+							"         }",
+							"         if(keyy==\"StatusString\")",
+							"         {",
+							"            pm.test(\"当前StatusString值为：\"+xx[key][keyy]+\"StatusString应为：\"+data.StatusString,function(){",
+							"                pm.expect(xx[key][keyy]).to.eql(data.StatusString)",
+							"           })",
+							"         }",
+							"         if (keyy == \"Id\"){",
+							"            pm.test(\"当前ID为: \"+xx[key][keyy], function () {",
+							"                pm.expect(xx[key][keyy]).to.be.oneOf([data.FL_FaceID1,data.FL_FaceID2])",
+							"            });",
+							"        }",
+							"    }",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"FaceListObject\":{\n\t\t\"FaceObject\":[\n\t\t{\n\t\t\t\"FaceID\":\"{{FL_FaceID1}}\",\n\t\t\t\"InfoKind\":{{FL_InfoKind}},\n\t\t\t\"SourceID\":\"{{FL_SourceID}}\",\n\t\t\t\"LeftTopX\":{{FL_LeftTopX}},\n\t\t\t\"LeftTopY\":{{FL_LeftTopY}},\n\t\t\t\"RightBtmX\":{{FL_RightBtmX}},\n\t\t\t\"RightBtmY\":{{FL_RightBtmY}},\n\t\t\t\"LocationMarkTime\":\"{{FL_LocationMarkTime}}\",\n\t\t\t\"FaceAppearTime\":\"{{FL_FaceAppearTime}}\",\n\t\t\t\"FaceDisAppearTime\":\"{{FL_FaceDisAppearTime}}\",\n\t\t\t\"IsDriver\":{{FL_IsDriver}},\n\t\t\t\"IsForeigner\":{{FL_IsForeigner}},\n\t\t\t\"IsSuspectedTerrorist\":{{FL_IsSuspectedTerrorist}},\n\t\t\t\"IsCriminalInvolved\":{{FL_IsCriminalInvolved}},\n\t\t\t\"IsDetainees\":{{FL_IsDetainees}},\n\t\t\t\"IsVictim\":{{FL_IsVictim}},\n\t\t\t\"IsSuspiciousPerson\":{{FL_IsSuspiciousPerson}}\n\t\t},\n\t\t{\n\t\t\t\"FaceID\":\"{{FL_FaceID2}}\",\n\t\t\t\"InfoKind\":{{FL_InfoKind}},\n\t\t\t\"SourceID\":\"{{FL_SourceID}}\",\n\t\t\t\"LeftTopX\":{{FL_LeftTopX}},\n\t\t\t\"LeftTopY\":{{FL_LeftTopY}},\n\t\t\t\"RightBtmX\":{{FL_RightBtmX}},\n\t\t\t\"RightBtmY\":{{FL_RightBtmY}},\n\t\t\t\"LocationMarkTime\":\"{{FL_LocationMarkTime}}\",\n\t\t\t\"FaceAppearTime\":\"{{FL_FaceAppearTime}}\",\n\t\t\t\"FaceDisAppearTime\":\"{{FL_FaceDisAppearTime}}\",\n\t\t\t\"IsDriver\":{{FL_IsDriver}},\n\t\t\t\"IsForeigner\":{{FL_IsForeigner}},\n\t\t\t\"IsSuspectedTerrorist\":{{FL_IsSuspectedTerrorist}},\n\t\t\t\"IsCriminalInvolved\":{{FL_IsCriminalInvolved}},\n\t\t\t\"IsDetainees\":{{FL_IsDetainees}},\n\t\t\t\"IsVictim\":{{FL_IsVictim}},\n\t\t\t\"IsSuspiciousPerson\":{{FL_IsSuspiciousPerson}}\n\t\t}\n\t\t]\n\t}\n}"
+				},
+				"url": {
+					"raw": "{{url}}{{url_st}}",
+					"host": [
+						"{{url}}{{url_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

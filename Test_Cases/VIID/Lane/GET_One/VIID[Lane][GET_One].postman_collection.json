@@ -1,0 +1,50 @@
+{
+	"info": {
+		"_postman_id": "0c7ff398-7023-446c-bc7b-2aa70216e3cd",
+		"name": "VIID[Lane][GET_One]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "2498a122-679a-4343-9102-c332a863d6bc",
+			"name": "VIID[Lane][GET_One]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8d2c068e-5334-4425-8be8-8af90ca888f5",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"var datas=jsonData.LaneListObject.LaneObject",
+							"for(var key in datas){",
+							"    for(var keyy in datas[key]){",
+							"        if(keyy==data.Search_Field)",
+							"        {",
+							"            var data1=datas[key][keyy]",
+							"        }",
+							"    }",
+							"    pm.test(\"当前数值为：\"+data1+\" 返回的验证值应为:\"+data.Value,function(){",
+							"        pm.expect(data1).to.eql(data.Value)",
+							"    })",
+							"}            "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

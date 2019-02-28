@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "92be6c5e-194e-4d4f-89a7-7924938c1156",
+		"name": "VIID[TimeCheck][GET]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "413c5987-317f-4c98-b95f-4ff65144a0de",
+			"name": "VIID[TimeCheck][GET]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9494f2a-0ba7-4980-8c6a-e71ca1108ac5",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"//状态码请求",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"console.log(jsonData)",
+							"//VIIDServerID检查点",
+							"tests[\"VIIDServerID: \"+jsonData.SystemTimeObject.VIIDServerID] = jsonData.SystemTimeObject.VIIDServerID;",
+							"// TimeMode检查点",
+							"var TimeMode_sp = data.TimeMode.split('|')",
+							"tests[\"TimeMode: \"+jsonData.SystemTimeObject.TimeMode+\"|TimeMode应为:\"+data.TimeMode] = TimeMode_sp.indexOf(jsonData.SystemTimeObject.TimeMode+\"\") != -1",
+							"//LocalTime检查点",
+							"tests[\"LocalTime:\"+jsonData.SystemTimeObject.LocalTime] = jsonData.SystemTimeObject.LocalTime",
+							"tests[\"TimeZone:\"+jsonData.SystemTimeObject.TimeZone] = jsonData.SystemTimeObject.TimeZone;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Vcol_Url}}{{Interface}}",
+					"host": [
+						"{{Vcol_Url}}{{Interface}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

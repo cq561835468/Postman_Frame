@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "797bb53c-1f33-498a-a54f-5ac76ced044d",
+		"name": "VIID[Subscribes_RUD_Many][GET_One]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "1c5e33d1-d945-495d-872c-690672ce2f70",
+			"name": "VIID[Subscribes_RUD_Many][GET_One]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c1cc22e8-5e2e-4692-83b4-17c17f696b0c",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// 长度检查点",
+							"var JsPer = jsonData.SubscribeListObject.SubscribeObject",
+							"var lang = jsonData.SubscribeListObject.SubscribeObject.length",
+							"tests[\"当前返回数量为: \"+lang] = lang;",
+							"",
+							"//循环判断key",
+							"for (var key in JsPer){",
+							"    for(var keyy in JsPer[key]){",
+							"        if (keyy == data.Search_Field){",
+							"            var data1 = JsPer[key][keyy];",
+							"        }",
+							"        ",
+							"    }",
+							"      pm.test(\"当前数值1为: \"+data1+\"|返回验证值应为:\"+data.Value, function () {",
+							"  pm.expect(data1).to.eql(data.Value);",
+							"",
+							"});",
+							"",
+							"",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

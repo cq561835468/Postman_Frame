@@ -1,0 +1,30 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"http://172.16.249.130:9900",
+	"Interface_st":"/ptt/message/mass/sendMsg?access_token=",
+	"access_token": "1c4daef65c45400f99e222a3b108c409",
+    "receiverType":"0",
+	"receiverId":"3123333152100",
+	"authorCode":"消息发送人id",
+	"authorName":"消息发送人Name",
+	"templateId":"模板id",
+	"title":"标题",
+	"msgtype":"ALARM_PERSONNEL_CONTROL",
+	"contentSourceUrl":"详细页面路径(原文路径)",
+	"AlarmID":"alarm1",
+	"DevName":"adfsd",
+	"AlarmTime":"2015-12-25T17:07:00.000",
+	"AlaType":0,
+	"Deal":0,
+	"Ack":0,
+	"AlarmLevel":1,
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"resultMsg":"成功",
+	"updateTime":"非空即可",
+	"resultCode":200
+	
+}
+]
+

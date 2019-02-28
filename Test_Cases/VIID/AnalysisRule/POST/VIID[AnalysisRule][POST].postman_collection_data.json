@@ -1,0 +1,38 @@
+[
+	{
+    "需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8081",
+	"Interface_st":"/VIID/AnalysisRules",
+	"AnalysisRuleID":"123456789",
+	"VideoImageID":"789456123",
+	"VideoImageUrl":"456123789",
+	"CameraID":"987654321",
+	"Width":5,
+	"Height":4,
+	"MinDuration":4,
+	"LineMinDuration":1,
+	"LineMaxDuration":9,
+	"MaxDuration":9,
+	"LineNum":2,
+	"LineSet":5,
+	"PointNum":1,
+	"PointID":22,
+	"PointSet":5,
+	"Direction":2,
+	"ActionType":2,
+	"BeginPointX":2,
+	"BeginPointY":2,
+	"EndPointX":5,
+	"EndPointY":5,
+	"DirectionNum":4,
+	"DirectionSet":4,
+	"DensityUnit":5,
+	"需要验证参数":">>",
+	"StatusCode":0,
+	"Re_State":"200",
+	"RequestURL":"/VIID/AnalysisRules",
+	"StatusString":"",
+	"Value":"123456789"
+	}
+]
+    

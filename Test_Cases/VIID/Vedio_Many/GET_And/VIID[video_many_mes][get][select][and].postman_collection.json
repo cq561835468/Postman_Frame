@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "1c81a6ed-5395-4051-a155-2ea43e03e75c",
+		"name": "VIID[video_many_mes][get][select][and]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "批量视频-多条件查询AND",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1c34b223-9b31-417a-b94e-e07cf5609a55",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// 长度检查点",
+							"var JsPer = jsonData.VideoSliceListObject.VideoSlice",
+							"var lang = jsonData.VideoSliceListObject.VideoSlice.length",
+							"tests[\"当前返回数量为: \"+lang] = lang;",
+							"console.log(data.Search_Field)",
+							"",
+							"//循环判断key",
+							"for (var key in JsPer){",
+							"    ",
+							"    for(var keyy in JsPer[key]){",
+							"        ",
+							"        ",
+							"        for(var keyyy in JsPer[key][keyy]){",
+							"            console.log(JsPer[key][keyy][keyyy])",
+							"            if (keyyy == data.Search_Field){",
+							"            var data1 = JsPer[key][keyy][keyyy]",
+							"            }",
+							"            else if (keyyy == data.Search_Field2){",
+							"            var data2 = JsPer[key][keyy][keyyy]",
+							"            ",
+							"            }",
+							"        ",
+							"            ",
+							"        }",
+							"     pm.test(\"当前数值1为: \"+data1+\"|返回验证值应为:\"+data.Value+\"当前数值2为: \"+data2+\"|返回验证值应为:\"+data.Value2, function () {",
+							"                  pm.expect(data1).to.eql(data.Value);",
+							"                  pm.expect(data2).to.eql(data.Value2);",
+							"                });   ",
+							"    }",
+							"    //tests[\"当前数值1为: \"+data1+\"|返回验证值应为:\"+data.Value+\"当前数值2为: \"+data2+\"|返回验证值应为:\"+data.Value2] = data1 == data.Value && data2 == data.Value2;",
+							"    ",
+							"}",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

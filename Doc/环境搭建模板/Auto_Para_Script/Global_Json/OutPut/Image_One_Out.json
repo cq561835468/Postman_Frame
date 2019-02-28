@@ -1,0 +1,18 @@
+{
+	
+	"Image_One_Delete_Out": [
+    {
+      "StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+
+    }],
+	
+	"Image_One_Put_Out": [
+    {
+    	"StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+    }]
+
+}

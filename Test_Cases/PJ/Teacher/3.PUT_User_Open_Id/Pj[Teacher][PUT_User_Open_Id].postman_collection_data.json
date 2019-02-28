@@ -1,0 +1,16 @@
+[
+	{
+		"Port":":10007",
+	"---Create Teacher---":"",
+		"URI":"/teacher/",
+		"URI_user_open_id":"user_open_id/",
+		"area_code": "a6741cecdd1b4a879a3512hekedakeda",
+		"user_open_id":"a6121234534ecda879a3512188174717",
+		"user_code":"test2_user_code_001",
+		"user_name": "老师一",
+		"teac_in_service_status": 1,
+	"---checking---":"",
+		"success":"true",
+		"Re_State":200
+	}
+]

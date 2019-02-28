@@ -1,0 +1,22 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8081",
+	"Interface_st":"/VIID/Files/",
+	"CaseID":"31000000001320000068022018070506333100168",
+	"CaseName":"堡垒之夜", 
+    "CaseAbstract":"时间地点人物事件",  
+    "ClueID":"线索1;线索2",  
+    "TimeUpLimit":"20180910000000", 
+    "TimeLowLimit":"20180809000000",
+    "CreateTime":"20180808000000",
+    "PlaceCode":"沪A1234",
+    "PlaceFullAddress":"上海某区某街某号",
+    "State":1,
+	"需要验证参数":">>",
+	"StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+}
+]
+

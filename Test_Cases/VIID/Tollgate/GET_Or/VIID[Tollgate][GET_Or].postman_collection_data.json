@@ -1,0 +1,14 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8083",
+	"Interface_st":"/VIID/Tollgates",
+	"Search_Express":"?((Tollgate.OrgCode=1)OR(Tollgate.ActiveTime=201808211615))",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"Search_Field1":"OrgCode",
+	"Search_Field2":"ActiveTime",
+	"Value1":1,
+	"Value2":"201808211615"
+}
+]

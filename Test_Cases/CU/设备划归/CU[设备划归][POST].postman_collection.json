@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "2cbd5004-63b9-4395-b8d8-6f26dff1d6c4",
+		"name": "CU[设备划归][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login[设备]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4880b01c-aaf0-4466-8c02-f656e1ff5016",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+ data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"    });",
+							"",
+							"tests[\"cmsVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"];",
+							"tests[\"cuVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"];",
+							"tests[\"cuUpdateUrl: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"];",
+							"tests[\"serverDataVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"];",
+							"tests[\"ip: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"];",
+							"tests[\"port: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"];",
+							"tests[\"session: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+ data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							"",
+							"pm.environment.set(\"session1\", jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:Login>\r\n\t\t\t<cusdk:loginReq>\r\n\t\t\t\t<cusdk:userName>{{username}}</cusdk:userName>\r\n\t\t\t\t<cusdk:password>{{password}}</cusdk:password>\r\n\t\t\t\t<cusdk:cusdkVersion>{{cusdkVersion}}</cusdk:cusdkVersion>\r\n\t\t\t\t<cusdk:clientType>{{clientType}}</cusdk:clientType>\r\n\t\t\t\t<cusdk:isSupportNA>{{isSupportNA}}</cusdk:isSupportNA>\r\n\t\t\t\t<cusdk:webCUClientAddr>{{webCUClientAddr}}</cusdk:webCUClientAddr>\r\n\t\t\t</cusdk:loginReq>\r\n\t\t</cusdk:Login>\r\n\t</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserGetDeviceByGroup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2243fa43-af83-4031-b731-51c9073caa56",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"tests[\"devId为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserGetDeviceByGroupRsp\"][\"cusdk:deviceList\"][\"cusdk:devId\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserGetDeviceByGroupRsp\"][\"cusdk:deviceList\"][\"cusdk:devId\"];",
+							"console.log(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserGetDeviceByGroupRsp\"][\"cusdk:devId\"])",
+							"tests[\"totalNum为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserGetDeviceByGroupRsp\"][\"cusdk:totalNum\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserGetDeviceByGroupRsp\"][\"cusdk:totalNum\"];",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserGetDeviceByGroupRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserGetDeviceByGroupRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserGetDeviceByGroupRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserGetDeviceByGroupRsp\"][\"cusdk:errorCode\"]== data.errorCode;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:UserGetDeviceByGroup><cusdk:req xsi:type=\"cusdk:UserGetDeviceByGroupReq\">\r\n\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t<cusdk:id>{{id}}</cusdk:id>\r\n\t\t\t<cusdk:type>{{type}}</cusdk:type>\r\n\t\t\t<cusdk:deviceGroupId>{{deviceGroupId}}</cusdk:deviceGroupId>\r\n\t\t\t<cusdk:beginIndex>{{beginIndex}}</cusdk:beginIndex>\r\n\t\t\t<cusdk:num>{{num}}</cusdk:num>\r\n\t\t\t</cusdk:req>\r\n\t\t\t</cusdk:UserGetDeviceByGroup>\r\n\t\t\t</SOAP-ENV:Body>\r\n\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserAddDevice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9893bb4-0b4d-4378-bd47-0ed7f9f3e2b2",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserAddDeviceRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserAddDeviceRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserAddDeviceRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserAddDeviceRsp\"][\"cusdk:errorCode\"]== data.errorCode;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:UserAddDevice>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:UserAddDeviceReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:id>{{id}}</cusdk:id>\r\n\t\t\t\t<cusdk:type>{{type}}</cusdk:type>\r\n\t\t\t\t<cusdk:deviceList>\r\n\t\t\t\t\t<cusdk:devId>{{devId}}</cusdk:devId>\r\n\t\t\t\t\t<cusdk:devPriSet>1</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>2</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>4</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>5</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>7</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>8</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>9</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>10</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:videoSrcIdList>\r\n\t\t\t\t\t\t<cusdk:vieoSrcId>0</cusdk:vieoSrcId>\r\n\t\t\t\t\t\t<cusdk:devPriSet>8</cusdk:devPriSet>\r\n\t\t\t\t\t\t<cusdk:devPriSet>9</cusdk:devPriSet>\r\n\t\t\t\t\t\t<cusdk:devPriSet>10</cusdk:devPriSet>\r\n\t\t\t\t\t\t<cusdk:ptzLevel>10</cusdk:ptzLevel>\r\n\t\t\t\t\t\t</cusdk:videoSrcIdList>\r\n\t\t\t\t\t\t</cusdk:deviceList>\r\n\t\t\t\t\t\t</cusdk:req>\r\n\t\t\t\t\t\t</cusdk:UserAddDevice>\r\n\t\t\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserModifyDevice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4885bb3e-3486-4383-a67c-45da5916ba7b",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserModifyDeviceRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserModifyDeviceRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserModifyDeviceRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserModifyDeviceRsp\"][\"cusdk:errorCode\"]== data.errorCode;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"\r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body><cusdk:UserModifyDevice><cusdk:req xsi:type=\"cusdk:UserModifyDeviceReq\">\r\n\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t<cusdk:id>{{id1}}</cusdk:id>\r\n\t\t<cusdk:type>{{type}}</cusdk:type>\r\n\t\t<cusdk:deviceList>\r\n\t\t\t<cusdk:devId>{{devId}}</cusdk:devId>\r\n\t\t\t<cusdk:devPriSet>1</cusdk:devPriSet>\r\n\t\t\t<cusdk:devPriSet>2</cusdk:devPriSet>\r\n\t\t\t<cusdk:devPriSet>4</cusdk:devPriSet>\r\n\t\t\t<cusdk:devPriSet>5</cusdk:devPriSet>\r\n\t\t\t<cusdk:devPriSet>7</cusdk:devPriSet>\r\n\t\t\t<cusdk:devPriSet>8</cusdk:devPriSet>\r\n\t\t\t<cusdk:devPriSet>9</cusdk:devPriSet>\r\n\t\t\t<cusdk:devPriSet>10</cusdk:devPriSet>\r\n\t\t\t<cusdk:videoSrcIdList>\r\n\t\t\t\t<cusdk:vieoSrcId>0</cusdk:vieoSrcId>\r\n\t\t\t\t<cusdk:devPriSet>8</cusdk:devPriSet>\r\n\t\t\t\t<cusdk:devPriSet>9</cusdk:devPriSet>\r\n\t\t\t\t<cusdk:devPriSet>10</cusdk:devPriSet>\r\n\t\t\t\t<cusdk:ptzLevel>10</cusdk:ptzLevel>\r\n\t\t\t\t</cusdk:videoSrcIdList>\r\n\t\t\t\t</cusdk:deviceList>\r\n\t\t\t\t</cusdk:req>\r\n\t\t\t\t</cusdk:UserModifyDevice>\r\n\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserDelDevice",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ce77d852-74a0-4d99-9789-8e9cfe7b6102",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserDelDeviceRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserDelDeviceRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserDelDeviceRsp\"][\"cusdk:errorCode\"]+\"||errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:UserDelDeviceRsp\"][\"cusdk:errorCode\"]== data.errorCode;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope \r\nxmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\"\r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:UserDelDevice>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:UserDelDeviceReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:id>{{id1}}</cusdk:id>\r\n\t\t\t\t<cusdk:type>{{type}}</cusdk:type>\r\n\t\t\t\t<cusdk:deviceList>\r\n\t\t\t\t\t<cusdk:devId>{{devId}}</cusdk:devId>\r\n\t\t\t\t\t<cusdk:devPriSet>1</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>2</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>4</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>5</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>7</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>8</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>9</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:devPriSet>10</cusdk:devPriSet>\r\n\t\t\t\t\t<cusdk:videoSrcIdList>\r\n\t\t\t\t\t\t<cusdk:vieoSrcId>0</cusdk:vieoSrcId>\r\n\t\t\t\t\t\t<cusdk:devPriSet>8</cusdk:devPriSet>\r\n\t\t\t\t\t\t<cusdk:devPriSet>9</cusdk:devPriSet>\r\n\t\t\t\t\t\t<cusdk:devPriSet>10</cusdk:devPriSet>\r\n\t\t\t\t\t\t<cusdk:ptzLevel>10</cusdk:ptzLevel>\r\n\t\t\t\t\t\t</cusdk:videoSrcIdList>\r\n\t\t\t\t\t\t</cusdk:deviceList>\r\n\t\t\t\t\t\t</cusdk:req>\r\n\t\t\t\t\t\t</cusdk:UserDelDevice>\r\n\t\t\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interfac_url}}{{Interface_st}}",
+					"host": [
+						"{{Interfac_url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

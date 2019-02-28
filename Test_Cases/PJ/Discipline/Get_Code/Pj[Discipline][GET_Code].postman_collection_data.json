@@ -1,0 +1,14 @@
+[
+	{
+		"Port":":10007",
+		"URI":"/discipline",
+		"URI_G":"/discipline?t=0",
+		"area_code":"a6741cecdd1b4a879a3512hekedakeda",
+		"disc_code": "kedazswuli", 
+		"disc_name": "科达keda神经物理学",
+		"order_by": "disc_name", 
+		"sort": "asc",
+		"success":"true",
+		"Re_State":200
+	}
+]

@@ -1,0 +1,46 @@
+{
+	"info": {
+		"_postman_id": "9aa224e2-aa6f-4821-9944-5fcea5138570",
+		"name": "VIID[fil_one][RUD][get]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "464df621-1047-4208-af6f-b76467d9a8ef",
+			"name": "单个文件数据查询",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d43048e9-c738-4358-8285-22ef1cd46649",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"var InfoKind_sp = data.InfoKind.split('|')",
+							"tests[\"InfoKind: \"+jsonData.FileObject.FileInfo.InfoKind+\"|InfoKind应为:\"+data.InfoKind] = InfoKind_sp.indexOf(jsonData.FileObject.FileInfo.InfoKind+\"\") != -1",
+							"var FileSource_sp = data.Source.split('|')",
+							"tests[\"Source: \"+jsonData.FileObject.FileInfo.Source+\"|Source应为:\"+data.Source] = FileSource_sp.indexOf(jsonData.FileObject.FileInfo.Source+\"\") != -1",
+							"tests[\"Title: \"+jsonData.FileObject.FileInfo.Title] = jsonData.FileObject.FileInfo.Title",
+							"tests[\"FileName: \"+jsonData.FileObject.FileInfo.FileName] = jsonData.FileObject.FileInfo.FileName",
+							"tests[\"FileHash: \"+jsonData.FileObject.FileInfo.FileHash] = jsonData.FileObject.FileInfo.FileHash",
+							"tests[\"FileFormat: \"+jsonData.FileObject.FileInfo.FileFormat] = jsonData.FileObject.FileInfo.FileFormat"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{FileID}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{FileID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

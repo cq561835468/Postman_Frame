@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "40979a3d-12f3-4019-86e0-0ae8fad11a7a",
+		"name": "VIID[Face][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "baddc849-7a3f-4bad-8a09-d892c2756f6d",
+			"name": "VIID[Face][PUT]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eb25cd52-376f-4a94-9ba5-6ad268d3d053",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusObject.RequestURL+\" RequestURL应为:\"+data.RequestURL] = jsonData.ResponseStatusObject.RequestURL == data.RequestURL",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusObject.StatusCode+\" StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusObject.StatusCode == data.StatusCode",
+							"tests[\"StatusString: \"+jsonData.ResponseStatusObject.StatusString+\" StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusObject.StatusString == data.StatusString"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\"FaceObject\":[\n\t\t{\n\t\t\t\"FaceID\":\"{{FL_FaceID}}\",\n\t\t\t\"InfoKind\":{{FL_InfoKind}},\n\t\t\t\"SourceID\":\"{{FL_SourceID}}\",\n\t\t\t\"LeftTopX\":{{FL_LeftTopX}},\n\t\t\t\"LeftTopY\":{{FL_LeftTopY}},\n\t\t\t\"RightBtmX\":{{FL_RightBtmX}},\n\t\t\t\"RightBtmY\":{{FL_RightBtmY}},\n\t\t\t\"LocationMarkTime\":\"{{FL_LocationMarkTime}}\",\n\t\t\t\"FaceAppearTime\":\"{{FL_FaceAppearTime}}\",\n\t\t\t\"FaceDisAppearTime\":\"{{FL_FaceDisAppearTime}}\",\n\t\t\t\"IsDriver\":{{FL_IsDriver}},\n\t\t\t\"IsForeigner\":{{FL_IsForeigner}},\n\t\t\t\"IsSuspectedTerrorist\":{{FL_IsSuspectedTerrorist}},\n\t\t\t\"IsCriminalInvolved\":{{FL_IsCriminalInvolved}},\n\t\t\t\"IsDetainees\":{{FL_IsDetainees}},\n\t\t\t\"IsVictim\":{{FL_IsVictim}},\n\t\t\t\"IsSuspiciousPerson\":{{FL_IsSuspiciousPerson}}\n\t\t}]\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

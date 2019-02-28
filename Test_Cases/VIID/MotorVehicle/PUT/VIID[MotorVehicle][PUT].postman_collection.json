@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "cdb924e2-3d85-4a8a-b5c0-2e860a6130a8",
+		"name": "VIID[MotorVehicle][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "82705a87-c68a-4227-9a9a-195d3ceb4253",
+			"name": "MotorVehicle_PUT",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6884ff23-32a5-407a-b84a-910deb1d21b4",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// StatusCode检查点",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusObject.RequestURL+\"|RequestURL应为:\"+data.Interface_st+data.MotorVehicleID] = jsonData.ResponseStatusObject.RequestURL == data.Interface_st+data.MotorVehicleID; ",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusObject.StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusObject.StatusCode == data.StatusCode; ",
+							"tests[\" StatusString: \"+jsonData.ResponseStatusObject.StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusObject.StatusString == data.StatusString !==0;",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"MotorVehicleObject\": [{\r\n\"MotorVehicleID\": \"{{MotorVehicleID}}\",\r\n\t\"InfoKind\": {{InfoKind}},\r\n\t\"SourceID\": \"{{SourceID}}\",\r\n\t\"HasPlate\": {{HasPlate}},\r\n\t\"PlateClass\": \"{{PlateClass}}\",\r\n\t\"PlateColor\": \"{{PlateColor}}\",\r\n\t\"VehicleColor\": \"{{VehicleColor}}\"\r\n\r\n}]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{MotorVehicleID}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{MotorVehicleID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

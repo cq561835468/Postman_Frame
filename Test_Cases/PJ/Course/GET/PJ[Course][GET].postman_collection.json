@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "a1c48884-1537-4f40-bbd3-fab593bdd594",
+		"name": "PJ[Course][GET]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Query_Classroom",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a6c3cc0-eee8-47a3-949f-1efe948ccd31",
+						"exec": [
+							"var js = pm.response.json();",
+							"for(var x in js.list){",
+							"    var listid =js.list[x].id;",
+							"}",
+							"pm.environment.set(\"clro_id\", listid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  },\r\n  \"clro_code\": \"keda00111\", \r\n  \"clro_name\": \"科达中心教室keda\", \r\n  \"order_by\": \"clro_name\", \r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_classroom}}?t=0&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_classroom}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query_Teaching_class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a6c3cc0-eee8-47a3-949f-1efe948ccd31",
+						"exec": [
+							"var js = pm.response.json();",
+							"for(var x in js.list){",
+							"    var listid =js.list[x].id;",
+							"}",
+							"pm.environment.set(\"tecl_id\", listid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"tecl_code\": \"2018-gao1-kedaenglish-111ban\", \r\n  \"tecl_name\": \"2018级高一科达keda英语1班\", \r\n  \"order_by\": \"tecl_name\", \r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_teaching_class}}?t=0&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_teaching_class}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query_Lesson_time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a6c3cc0-eee8-47a3-949f-1efe948ccd31",
+						"exec": [
+							"var js = pm.response.json();",
+							"for(var x in js.list){",
+							"    var listid =js.list[x].id;",
+							"}",
+							"pm.environment.set(\"leti_id\", listid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"leti_number\": 22,\r\n  \"order_by\": \"leti_number\", \r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_lesson_time}}?t=0&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_lesson_time}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8e79c76c-84b9-45d4-9422-c791b9dc69d8",
+						"exec": [
+							"var js = pm.response.json()\r",
+							"pm.environment.set(\"cour_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"clro_id\": {{clro_id}}, \r\n  \"tecl_id\": {{tecl_id}}, \r\n  \"cour_name\": \"{{cour_name}}\", \r\n  \"cour_begin_time\": \"{{cour_begin_time}}\", \r\n  \"cour_end_time\": \"{{cour_end_time}}\", \r\n  \"leti_id\": {{leti_id}}, \r\n  \"cour_description\": \"{{cour_description}}\", \r\n  \"repeat_week\": {{repeat_week}}, \r\n  \"single_or_double_week\":{{single_or_double_week}}\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_course}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_course}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query_Course_t=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7a0dc02-1689-47a4-8b0d-dfb2236ec01f",
+						"exec": [
+							"var js = pm.response.json()\r",
+							"pm.environment.set(\"cour_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"a6741cecdd1b4a879a3512hekedakeda\", \r\n  \"clro_id\": {{clro_id}}, \r\n  \"one_time\": \"{{cour_begin_time}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_course}}?t=1&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_course}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "1"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query_Course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7a0dc02-1689-47a4-8b0d-dfb2236ec01f",
+						"exec": [
+							"var js = pm.response.json()\r",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;\r",
+							"tests[\"当前cour_name为: \"+js.cour_name+\"|成功值应为:\"+data.cour_name] = js.cour_name== data.cour_name;\r",
+							"tests[\"当前cour_begin_time为: \"+js.cour_begin_time+\"|成功值应为:\"+data.cour_begin_time] = js.cour_begin_time== data.cour_begin_time;\r",
+							"tests[\"当前cour_end_time为: \"+js.cour_end_time+\"|成功值应为:\"+data.cour_end_time] = js.cour_end_time== data.cour_end_time;\r",
+							"tests[\"当前cour_description为: \"+js.cour_end_time+\"|成功值应为:\"+data.cour_description] = js.cour_description== data.cour_description;\r",
+							"var a = pm.environment.get(\"clro_id\");\r",
+							"tests[\"当前clro_id为: \"+js.clro_id+\"|成功值应为:\"+a] = js.clro_id== a;\r",
+							"\r",
+							"var b = pm.environment.get(\"tecl_id\");\r",
+							"tests[\"当前tecl_id为: \"+js.tecl_id+\"|成功值应为:\"+b] = js.tecl_id== b;\r",
+							"\r",
+							"var c = pm.environment.get(\"leti_id\");\r",
+							"tests[\"当前leti_id为: \"+js.leti_id+\"|成功值应为:\"+c] = js.leti_id== c;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_course}}/{{cour_id}}?_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_course}}"
+					],
+					"path": [
+						"{{cour_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b7a0dc02-1689-47a4-8b0d-dfb2236ec01f",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_course}}/{{cour_id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_course}}"
+					],
+					"path": [
+						"{{cour_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

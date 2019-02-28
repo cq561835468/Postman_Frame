@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "f7735b8c-12ee-47fd-9ec6-9c02569f54f9",
+		"name": "登录",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "登录",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a7f8b9d8-2a95-471e-8ad8-5d4f31e808e6",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"console.log(jsonData.Code)",
+							"tests[\"resultCode: \"+jsonData.resultCode+\"|resultCode应为:\"+data.resultCode] = jsonData.resultCode == data.resultCode;",
+							"tests[\"resultMsg: \"+jsonData.resultMsg+\"|resultMsg应为:\"+data.resultMsg] = jsonData.resultMsg == data.resultMsg;",
+							"tests[\"sessionId: \"+jsonData.sessionId] = jsonData.sessionId;",
+							"tests[\"ip: \"+jsonData.ip+\"|ip应为:\"+data.ip] = jsonData.ip == data.ip;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userCode\": \"{{userCode}}\",\r\n    \"userPassword\": \"{{userPassword}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

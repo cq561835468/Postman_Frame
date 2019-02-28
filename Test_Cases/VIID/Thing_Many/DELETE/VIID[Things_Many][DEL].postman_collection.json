@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "5882685b-837c-4e13-8979-0d0f2c8bb2e3",
+		"name": "VIID[Things_Many][DEL]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Things_Many][DEL]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d953b2f5-ec29-43e3-aaf5-92029ac9fecb",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\" 状态码应为: \"+data.Re_State] = responseCode.code == data.Re_State",
+							"",
+							"for (var key in datas){",
+							"\tfor (var keyy in datas[key]){",
+							"\t\tif (keyy == \"RequestURL\"){",
+							"\t\t\tpm.test(\"当前RequestURL为: \"+datas[key][keyy]+ \"应当为: \"+data.Inter_st1, function () {",
+							"\t\t\t    pm.expect(datas[key][keyy]).to.eql(data.Inter_st1)",
+							"\t\t\t\t\t\t",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusCode\"){",
+							"\t\t    pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusCode, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode)",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusString\"){",
+							"\t\t\tpm.test(\"当前StatusString为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusString, function () {",
+							"\t\t\t\tpm.expect(datas[key][keyy]).to.eql(data.StatusString)",
+							"\t\t\t })",
+							"\t\t}",
+							"\t}",
+							"}",
+							"\t",
+							"\t\t\t\t",
+							"\t",
+							"\t\t\t\t"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Inter_Url}}{{Inter_st1}}{{Inter_st2}}",
+					"host": [
+						"{{Inter_Url}}{{Inter_st1}}{{Inter_st2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

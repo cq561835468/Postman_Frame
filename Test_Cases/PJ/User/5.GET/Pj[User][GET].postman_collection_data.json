@@ -1,0 +1,16 @@
+[
+	{
+		"Port":":10007",
+	"---Search Student---":"",
+		"URI":"/user/",
+		"page_index":1,
+		"page_size":5,
+		"area_code":"a6741cecdd1b4a879a3512hekedakeda",
+		"user_code":"kedastu_code_022",
+		"user_name": "王科达",
+		"order_by":"user_name",
+	"---checking---":"",
+		"success":"true",
+		"Re_State":200
+	}
+]

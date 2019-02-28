@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "42f3a764-297b-4794-b561-cbf3b2f56e50",
+		"name": "Pj-Teacher_PUT_Id",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Create_Teacher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0bd3dc7-2aa9-49cd-82f9-9584a9c85f1e",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"teac_id\",js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\t\"area_code\":\"{{area_code}}\",\n\t\"user_open_id\":\"{{user_open_id}}\",\n\t\"user_code\":\"{{user_code}}\",\n\t\"user_name\":\"{{user_name}}\",\n\t\"teac_in_service_status\":{{teac_in_service_status}}\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Put_Id_Teacher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b23cab0-b4c6-458b-a840-ccc402f101bb",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;",
+							"/*Teacher表里面没有user_code这一项，但是有area_code这一项，需要加上不然跑不通*/ "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"user_code\": \"{{user_code}}\",\r\n  \"area_code\":\"{{area_code}}\",\r\n  \"user_name\": \"{{user_name}}\", \r\n  \"teac_in_service_status\": {{teac_in_service_status}}\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}{{teac_id}}?_method=PUT",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}{{teac_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "PUT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_Id_Teacher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "177f160e-3658-441f-a811-cf3250c1cf78",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}{{teac_id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}{{teac_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

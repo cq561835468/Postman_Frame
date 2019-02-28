@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "2ce18709-a5ad-4740-ba4a-d23b0732ef05",
+		"name": "PJ[Administration_Class_Student][DELETE]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Query_Administration_Class",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a6c3cc0-eee8-47a3-949f-1efe948ccd31",
+						"exec": [
+							"var js = pm.response.json();",
+							"for(var x in js.list){",
+							"    var listid =js.list[x].id;",
+							"}",
+							"pm.environment.set(\"adcl_id\", listid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"adcl_code\": \"{{adcl_code}}\",\r\n  \"adcl_name\": \"{{adcl_name}}\",\r\n  \"order_by\": \"adcl_name\",\r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_administration_class}}?t=0&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_administration_class}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query_School_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "af28e414-3398-4cde-8ee6-b13205653ec9",
+						"exec": [
+							"var js = pm.response.json();",
+							"for(var x in js.list){",
+							"    var listid =js.list[x].id;",
+							"}",
+							"pm.environment.set(\"scye_id\", listid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"scye_code\": \"{{scye_code}}\", \r\n  \"scye_name\": \"{{scye_name}}\", \r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_school_year}}?t=0&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_school_year}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Student1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fcacc9c4-1c10-432c-8be8-c362d2aafefc",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"stud_id1\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"{{area_code}}\",\r\n  \"user_open_id\": \"{{user_open_id_S}}\", \r\n  \"user_code\": \"{{user_code_S}}\", \r\n  \"user_email\": \"{{user_email_S}}\", \r\n  \"user_phone_num\": \"{{user_phone_num_S}}\", \r\n  \"user_identifier_num\": \"{{user_identifier_num_S}}\", \r\n  \"user_name\": \"{{user_name_S}}\", \r\n  \"user_gender\": {{user_gender_S}}, \r\n  \"user_birthday\": \"{{user_birthday_S}}\", \r\n  \"scye_id\": {{scye_id}}, \r\n  \"stud_registration_status\": {{stud_registration_status}}, \r\n  \"stud_in_school_status\": {{stud_in_school_status}}\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_student}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_student}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add_Administration_Class_Student_t=0",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "42e5309d-391e-48b5-be14-f6863eef1200",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"adclst_id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"adcl_id\": {{adcl_id}}, \r\n  \"stud_id\": {{stud_id1}}\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_administration_class_student}}?t=0",
+					"host": [
+						"{{IP}}{{Port}}{{URI_administration_class_student}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_administration_class_student_t=0",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c9649004-0721-46d9-853e-f9d3c5047d03",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_administration_class_student}}/{{adclst_id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_administration_class_student}}"
+					],
+					"path": [
+						"{{adclst_id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Student1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_student}}/{{stud_id1}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_student}}"
+					],
+					"path": [
+						"{{stud_id1}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

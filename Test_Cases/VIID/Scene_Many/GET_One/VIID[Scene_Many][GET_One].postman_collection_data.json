@@ -1,0 +1,13 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8083",
+	"Interface_st":"/VIID/Scenes",
+	"Search_Express":"?(Scene.SceneID=123456789)",
+	"需要验证参数":">>",
+	"Re_State":"200",
+	"Search_Field":"SceneID",
+	"Value":"123456789"
+}
+]
+

@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "c8bee24c-24b7-48c3-adee-2aa1c78864ed",
+		"name": "PJ[school_year][DELETE_ID_List]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create_School_Year1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fe5f4383-96c6-4a25-993b-d413d6a9b632",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"id1\", js.id);",
+							"// tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;",
+							"// var regString = /[0-9]+/;",
+							"// tests[\"当前区域值为: \"+js.id+\"|区域值应不为空\"] = regString.exec(js.id)[0] != \"undefined\"; //通过正则匹配不为空"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"a6741cecdd1b4a879a3512hekedakeda\", \r\n  \"scye_begin_year\": 2018, \r\n  \"scye_state\":{{scye_state}}, \r\n  \"scye_stage\":{{scye_stage}}, \r\n  \"scye_code\":\"{{scye_code}}\", \r\n  \"scye_name\":\"{{scye_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_school_year}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_school_year}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_School_Year2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fe5f4383-96c6-4a25-993b-d413d6a9b632",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"id2\", js.id);",
+							"// tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;",
+							"// var regString = /[0-9]+/;",
+							"// tests[\"当前区域值为: \"+js.id+\"|区域值应不为空\"] = regString.exec(js.id)[0] != \"undefined\"; //通过正则匹配不为空"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"area_code\": \"a6741cecdd1b4a879a3512hekedakeda\", \r\n  \"scye_begin_year\": 2018, \r\n  \"scye_state\":{{scye_state}}, \r\n  \"scye_stage\":{{scye_stage_1}}, \r\n  \"scye_code\":\"{{scye_code_1}}\", \r\n  \"scye_name\":\"{{scye_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_school_year}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_school_year}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE_School_Year_Id_List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ca0ac21c-b2be-409a-a55d-da4b90cfde26",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\"== data.success;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"id_list\": [\r\n    {{id1}},\r\n    {{id2}}\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_school_year}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_school_year}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query_School_Year_Id1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72afef9e-b176-41ae-8b42-51b225cc720e",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"var idid = pm.environment.get(\"id1\");",
+							"tests[\"当前error_description为: \"+js.error_description+\"|error_description应为:未找到[id=\"+idid+\"]对应的学级\"] = js.error_description== \"未找到[id=\"+idid+\"]对应的学级\";"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_school_year}}/{{id1}}?_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_school_year}}"
+					],
+					"path": [
+						"{{id1}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query_School_Year_Id2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "72afef9e-b176-41ae-8b42-51b225cc720e",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"var idid = pm.environment.get(\"id2\");",
+							"tests[\"当前error_description为: \"+js.error_description+\"|error_description应为:未找到[id=\"+idid+\"]对应的学级\"] = js.error_description== \"未找到[id=\"+idid+\"]对应的学级\";"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_school_year}}/{{id2}}?_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_school_year}}"
+					],
+					"path": [
+						"{{id2}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

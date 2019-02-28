@@ -1,0 +1,22 @@
+[
+	{
+		"Port":":10007",
+	"---Create Student---":"",
+		"URI":"/student/",
+		"URI_school_year":"/school_year",
+		"URI_user_open_id":"user_open_id/",
+		"page_index":1,
+		"page_size":5,
+		"scye_code":"科达kedacom2018级编号111",
+		"scye_name":"科达keda2018级",
+		"area_code":"a6741cecdd1b4a879a3512hekedakeda",
+		"user_open_id":"a6121234534ecda879a3512188174717",
+		"user_code":"test1_user_code_001",
+		"user_name": "学生一",
+		"stud_registration_status":1,
+		"stud_in_school_status": 1,
+	"---checking---":"",
+		"success":"true",
+		"Re_State":200
+	}
+]

@@ -1,0 +1,50 @@
+{
+	"info": {
+		"_postman_id": "b8587540-5258-4eb2-b286-647d3f60bd8b",
+		"name": "VIID[Tollgate][GET_One]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "822268df-dc22-4359-a70c-f8a40f327fb4",
+			"name": "VIID[Tollgate][GET_One]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0eb8179d-29d4-409d-9ce2-69127d024ee8",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"var datas=jsonData.TollgateListObject.TollgateObject",
+							"for(var key in datas){",
+							"    for(var keyy in datas[key]){",
+							"        if(keyy==data.Search_Field)",
+							"        {",
+							"            var data1=datas[key][keyy]",
+							"        }",
+							"    }",
+							"    pm.test(\"当前数值为：\"+data1+\" 返回的验证值应为:\"+data.Value,function(){",
+							"        pm.expect(data1).to.eql(data.Value)",
+							"    })",
+							"}             "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

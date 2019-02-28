@@ -1,0 +1,31 @@
+[
+	{
+		"需要输入参数：":">>",
+		"Interface_Url":"172.16.120.33",
+		"Interface_st":"/cui/cui.fcgi",
+		"userName":"admin@kadacom",
+		"password":"kedacom123",
+		"cusdkVersion":"2.0",
+		"clientType":"cuver",
+		"isSupportNA":false,
+		"webCUClientAddr":"",
+
+		"deviceId":"15ff4473414e439f834e7ff740b405da@kadacom",
+		"channelId":"0",
+		"recordType":"cusdk:ERecordTypePlatformRecord",
+		"startTime1":"2018-08-31T16:00:00Z",
+		"endTime1":"2018-09-30T16:00:00Z",
+		"recordDomainName":"kadacom",
+
+		"recEventType":"cusdk:RS-RECTYPE-ALL",
+		"startTime2":"2018-09-11T16:00:00Z",
+		"endTime2":"2018-09-13T16:00:00Z",
+		"queryHandle":"",
+		"useVSIPTimeAsGMTTime":false,
+
+		"需要检验参数：":">>",
+		"Re_State":200,
+		"errorCode":"0"
+
+	}
+]

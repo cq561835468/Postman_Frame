@@ -1,0 +1,22 @@
+[{
+	"需要输入参数":">>",
+	"Url":"http://172.16.249.130:9900",
+	"Url_st1":"/ptt/pttLogin/pttForcedLogin",
+	"Url_st2":"/ptt/userRelation/searchUsers",
+	"Url_st3":"/ptt/userRelation/modifyUserInfo",
+	"userCode": "admin",
+    "userPassword": "admin",
+	"start":1,
+	"limit":4,
+	"searchName":"userCode|userName",
+	"searchWord":"cjy",
+	"orgCode":"001",
+	"roleName": "员工",
+
+	"需要检验参数":">>",
+	"Re_State":200,
+	"resultCode":200,
+	"resultMsg":"成功",
+	"ip": "172.16.249.130"
+}
+]

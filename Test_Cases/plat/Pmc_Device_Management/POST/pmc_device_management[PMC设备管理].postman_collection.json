@@ -1,0 +1,409 @@
+{
+	"info": {
+		"_postman_id": "8307543e-daf4-42a4-84a8-7a534045d80f",
+		"name": "pmc_device_management[PMC设备管理]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pmcsLogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d69aef5c-7da7-4a0c-b8da-6a8138ed5331",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"pm.test(\"当前状态码为: \" + responseCode.code, function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// 设置session，targetUri为环境变量",
+							"var loginRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var targetUri = jsonData[\"CPmcSMsg\"][\"targetUri\"]",
+							"var CData = xml2Json(loginRsp)",
+							"var session = CData[\"CPmcSLoginRsp\"][\"session\"]",
+							"",
+							"pm.environment.set(\"session\", session);",
+							"pm.environment.set(\"targetUri\", targetUri);",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSLoginRsp\"][\"errorCode\"]] = CData[\"CPmcSLoginRsp\"][\"errorCode\"] == \"0\"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<CPmcSMsg>\r\n  <event>PMCS_LOGIN_REQ</event>\r\n  <seqNum>1</seqNum>\r\n  <msg>&lt;CPmcSLoginReq&gt;&lt;event&gt;PMCS_LOGIN_REQ&lt;/event&gt;&lt;seqNum&gt;1&lt;/seqNum&gt;&lt;userName&gt;{{userName}}&lt;/userName&gt;&lt;password&gt;{{userpwd}}&lt;/password&gt;&lt;isDecrypt&gt;0&lt;/isDecrypt&gt;&lt;ipaddr&gt;INVALID_IP&lt;/ipaddr&gt;&lt;/CPmcSLoginReq&gt;</msg>\r\n</CPmcSMsg>"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGIN_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGIN_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tasDeviceAdd",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f1ba7d3-9691-429b-a90f-4c9b2573d7a4",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"pm.test(\"当前状态码为: \" + responseCode.code, function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"// 保存设备id",
+							"var deviceAddRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(deviceAddRsp)",
+							"var deviceId = CData[\"CDeviceAddRsp\"][\"deviceId\"]",
+							"pm.environment.set(\"deviceId\", deviceId);",
+							"",
+							"tests[\"errorCode: \" + CData[\"CDeviceAddRsp\"][\"errorCode\"]] = CData[\"CDeviceAddRsp\"][\"errorCode\"] == \"0\"",
+							"tests[\"deviceId: \" + CData[\"CDeviceAddRsp\"][\"deviceId\"]] = CData[\"CDeviceAddRsp\"][\"deviceId\"] != \" \""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<CPmcSMsg>\r\n  <event>TAS_DEVICE_ADD_REQ</event>\r\n  <targetUri>3as@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>21</seqNum>\r\n  <!--modelId为设备型号id-->\r\n  <msg>&lt;CDeviceAddReq&gt;&lt;event&gt;TAS_DEVICE_ADD_REQ&lt;/event&gt;&lt;seqNum&gt;21&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;info&gt;&lt;name&gt;{{device_name}}&lt;/name&gt;&lt;type&gt;1&lt;/type&gt;&lt;modelId&gt;597a9fd3e8654663889cdd409a2b43f6&lt;/modelId&gt;&lt;usedFlag&gt;1&lt;/usedFlag&gt;&lt;netAddress&gt;{{device_ip}}&lt;/netAddress&gt;&lt;expireDate&gt;2037-12-31T00:00:00+08:00&lt;/expireDate&gt;&lt;GBSDevStreamType&gt;UDP&lt;/GBSDevStreamType&gt;&lt;GBSTypeCode&gt;112&lt;/GBSTypeCode&gt;&lt;platIP&gt;{{plat_IP}}&lt;/platIP&gt;&lt;RegplatPort&gt;5510&lt;/RegplatPort&gt;&lt;oldNetAddress&gt;{{device_ip}}&lt;/oldNetAddress&gt;&lt;netType&gt;0&lt;/netType&gt;&lt;devData&gt;&lt;extData size=\"1\"&gt;&lt;item index=\"0\"&gt;&lt;key&gt;fixAddr&lt;/key&gt;&lt;value&gt;&lt;/value&gt;&lt;/item&gt;&lt;/extData&gt;&lt;/devData&gt;&lt;/info&gt;&lt;/CDeviceAddReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=TAS_DEVICE_ADD_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "TAS_DEVICE_ADD_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tasDeviceMod",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6744e61c-9ed4-4288-ae2e-e75e856fc2c1",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"pm.test(\"当前状态码为: \" + responseCode.code, function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var deviceModRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(deviceModRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CDeviceModRsp\"][\"errorCode\"]] = CData[\"CDeviceModRsp\"][\"errorCode\"] == \"0\"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>TAS_DEVICE_MOD_REQ</event>\r\n  <targetUri>3as@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>158</seqNum>\r\n  <msg>&lt;CDeviceModReq&gt;&lt;expireDate&gt;{{expireDate}}&lt;/expireDate&gt;&lt;devData&gt;&lt;extData size=\"1\"&gt;&lt;item index=\"0\"&gt;&lt;key&gt;fixAddr&lt;/key&gt;&lt;value&gt;&lt;/value&gt;&lt;/item&gt;&lt;/extData&gt;&lt;/devData&gt;&lt;GBSDevStreamType&gt;UDP&lt;/GBSDevStreamType&gt;&lt;GBSDevPassword&gt;888888&lt;/GBSDevPassword&gt;&lt;RegplatPort&gt;5510&lt;/RegplatPort&gt;&lt;oldNetAddress&gt;1.2.3.4&lt;/oldNetAddress&gt;&lt;deviceId&gt;{{deviceId}}&lt;/deviceId&gt;&lt;optionField&gt;&lt;fields size=\"9\"&gt;&lt;item index=\"0\"&gt;modelName&lt;/item&gt;&lt;item index=\"1\"&gt;expireDate&lt;/item&gt;&lt;item index=\"2\"&gt;creater&lt;/item&gt;&lt;item index=\"3\"&gt;devData&lt;/item&gt;&lt;item index=\"4\"&gt;GBSDevStreamType&lt;/item&gt;&lt;item index=\"5\"&gt;GBSDevPassword&lt;/item&gt;&lt;item index=\"6\"&gt;RegplatPort&lt;/item&gt;&lt;item index=\"7\"&gt;oldNetAddress&lt;/item&gt;&lt;item index=\"8\"&gt;DevInstallPath&lt;/item&gt;&lt;/fields&gt;&lt;/optionField&gt;&lt;event&gt;TAS_DEVICE_MOD_REQ&lt;/event&gt;&lt;seqNum&gt;158&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CDeviceModReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=TAS_DEVICE_MOD_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "TAS_DEVICE_MOD_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsDevicesQry",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "61b3bda3-0534-41b4-909a-a8bc14194eaa",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"pm.test(\"当前状态码为: \" + responseCode.code, function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var deviceQryRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(deviceQryRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSDeviceQryRsp\"][\"errorCode\"]] = CData[\"CPmcSDeviceQryRsp\"][\"errorCode\"] == \"0\"",
+							"tests[\"deviceId: \" + CData[\"CPmcSDeviceQryRsp\"][\"results\"][\"item\"][\"deviceId\"]] = CData[\"CPmcSDeviceQryRsp\"][\"results\"][\"item\"][\"deviceId\"] == pm.environment.get(\"deviceId\")",
+							"/*tests[\"expireDate: \" + CData[\"CPmcSDeviceQryRsp\"][\"results\"][\"item\"][\"expireDate\"]] = CData[\"CPmcSDeviceQryRsp\"][\"results\"][\"item\"][\"expireDate\"] == pm.environment.get(\"expireDate\")*/",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_DEVICES_QRY_REQ</event>\r\n  <targetUri>3as@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>149</seqNum>\r\n  <msg>&lt;CDeviceQryReq&gt;&lt;event&gt;TAS_DEVICE_QRY_REQ&lt;/event&gt;&lt;startEntryIndex&gt;0&lt;/startEntryIndex&gt;&lt;expectEntryNum&gt;1&lt;/expectEntryNum&gt;&lt;queryTag&gt;0&lt;/queryTag&gt;&lt;condition&gt;&lt;id&gt;{{deviceId}}&lt;/id&gt;&lt;optionField&gt;&lt;fields size=\"1\"&gt;&lt;item index=\"0\"&gt;id&lt;/item&gt;&lt;/fields&gt;&lt;/optionField&gt;&lt;/condition&gt;&lt;seqNum&gt;149&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CDeviceQryReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_DEVICES_QRY_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_DEVICES_QRY_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tasDeviceDel",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e00596bb-fc46-49a3-9fb6-374f3e868b26",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"pm.test(\"当前状态码为: \" + responseCode.code, function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var delRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(delRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CDeviceDelRsp\"][\"errorCode\"]] = CData[\"CDeviceDelRsp\"][\"errorCode\"] == \"0\"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<CPmcSMsg>\r\n  <event>TAS_DEVICE_DEL_REQ</event>\r\n  <targetUri>3as@ShangHai_Test</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>31</seqNum>\r\n  <msg>&lt;CDeviceDelReq&gt;&lt;event&gt;TAS_DEVICE_DEL_REQ&lt;/event&gt;&lt;seqNum&gt;31&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;deviceId&gt;{{deviceId}}&lt;/deviceId&gt;&lt;/CDeviceDelReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=TAS_DEVICE_DEL_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "TAS_DEVICE_DEL_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pmcsLogout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "354876b5-d6ac-4850-87c4-8bb03fbf7d68",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"pm.test(\"当前状态码为: \" + responseCode.code, function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var logoutRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(logoutRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CPmcSLogoutRsp\"][\"errorCode\"]] = CData[\"CPmcSLogoutRsp\"][\"errorCode\"] == \"0\""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>PMCS_LOGOUT_REQ</event>\r\n  <targetUri>{{targetUri}}</targetUri>\r\n  <session>{{session}}</session>\r\n  <seqNum>36</seqNum>\r\n  <msg>&lt;CPmcSLogoutReq&gt;&lt;event&gt;PMCS_LOGOUT_REQ&lt;/event&gt;&lt;seqNum&gt;36&lt;/seqNum&gt;&lt;session&gt;{{session}}&lt;/session&gt;&lt;/CPmcSLogoutReq&gt;</msg>\r\n</CPmcSMsg>\r\n"
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=PMCS_LOGOUT_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "PMCS_LOGOUT_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b1cefe13-7a5d-4ea1-a07c-adc40d546e72",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "7c4503fe-5d2b-4424-ba70-b2f273503694",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,28 @@
+[
+{
+	"需要输入参数":">>",
+	"Interface_Url":"10.85.7.62:8084",
+	"Interface_st":"/VIID/Dispositions",
+	"DispositionID": "000000000091012018062516000200014",
+	"Title": "嫌疑人比对",
+	"DispositionCategory": "1",
+	"PriorityLevel": 2,
+	"ApplicatName": "cm1",
+	"ApplicatInfo": "12345678901",
+	"ApplicatOrg": "kedacom1",
+	"BeginTime": "2018-06-10 15:30:25",
+	"EndTime": "2018-08-20 18:00:00",
+	"CreateTime": "",
+	"OperateType": 1,
+	"DisponsitionRange": "1",
+	"TollgateList": "00000000000000000127",
+	"ReceiveAddr": "http://10.10.40.122:8888",
+	"ReceiveMobile": "11111111111,22222222222",
+	"Reason": "有在逃人员潜伏该地区",
+	
+	"需要验证参数":">>",
+	"StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+}
+]

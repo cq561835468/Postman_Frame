@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "18ee9338-d7e6-4411-aa7f-64796972ed11",
+		"name": "VIID[pic_one][GET]_Data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "单个图像数据Data查询",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ac4fcad2-ce23-494f-8335-241bb09bbc27",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State; // 状态码",
+							"// ImageID检查点",
+							"//tests[\"ImageID: \"+jsonData.ImageObject.ImageInfo.ImageID+\"|ImageIDL应为:\"+data.ImageID] = jsonData.ImageObject.ImageInfo.ImageID == data.ImageID; ",
+							"// InfoKind检查点",
+							"",
+							"var InfoKind_sp = data.InfoKind.split('|')",
+							"tests[\"InfoKind: \"+jsonData.ImageObject.ImageInfo.InfoKind+\"|InfoKind应为:\"+data.InfoKind] = InfoKind_sp.indexOf(jsonData.ImageObject.ImageInfo.InfoKind+\"\") != -1",
+							"// ImageSource检查点",
+							"var ImageSource_sp = data.ImageSource.split('|')",
+							"tests[\"ImageSource: \"+jsonData.ImageObject.ImageInfo.ImageSource+\"|ImageSource应为:\"+data.ImageSource] = ImageSource_sp.indexOf(jsonData.ImageObject.ImageInfo.ImageSource+\"\") != -1",
+							"// EventSort检查点",
+							"var EventSort_sp = data.EventSort.split('|')",
+							"tests[\"EventSort: \"+jsonData.ImageObject.ImageInfo.EventSort+\"|EventSort应为:\"+data.EventSort] = EventSort_sp.indexOf(jsonData.ImageObject.ImageInfo.EventSort+\"\") != -1",
+							"// FileFormat检查点",
+							"tests[\"FileFormat: \"+jsonData.ImageObject.ImageInfo.FileFormat] = jsonData.ImageObject.ImageInfo.FileFormat",
+							"// ShotTime检查点",
+							"tests[\"ShotTime: \"+jsonData.ImageObject.ImageInfo.ShotTime] = jsonData.ImageObject.ImageInfo.ShotTime",
+							"// Title检查点",
+							"tests[\"Title: \"+jsonData.ImageObject.ImageInfo.Title] = jsonData.ImageObject.ImageInfo.Title",
+							"tests[\"KDExpiredDate: \"+jsonData.ImageObject.ImageInfo.KDExpiredDate] = jsonData.ImageObject.ImageInfo.KDExpiredDate",
+							"// ContentDescription检查点",
+							"tests[\"ContentDescription: \"+jsonData.ImageObject.ImageInfo.ContentDescription] = jsonData.ImageObject.ImageInfo.ContentDescription",
+							"",
+							"// ShotPlaceFullAdress检查点",
+							"tests[\"ShotPlaceFullAdress: \"+jsonData.ImageObject.ImageInfo.ShotPlaceFullAdress] = jsonData.ImageObject.ImageInfo.ShotPlaceFullAdress",
+							"// EventSort检查点",
+							"var SecretLevelType_sp = data.SecretLevelType.split('|')",
+							"tests[\"SecretLevelType: \"+jsonData.ImageObject.ImageInfo.SecretLevelType+\"|SecretLevelType应为:\"+data.SecretLevelType] = SecretLevelType_sp.indexOf(jsonData.ImageObject.ImageInfo.SecretLevelType+\"\") != -1",
+							"// Width检查点",
+							"tests[\"Width为: \"+jsonData.ImageObject.ImageInfo.Width] = jsonData.ImageObject.ImageInfo.Width > 0;",
+							"// Height检查点",
+							"tests[\"Height: \"+jsonData.ImageObject.ImageInfo.Height] = jsonData.ImageObject.ImageInfo.Height > 0;",
+							"//CollectorName、CollectorOrg、EntryClerk、EntryClerkOrg检查点",
+							"if (jsonData.ImageObject.ImageInfo.InfoKind == 2) {",
+							"    // ShotPlaceCode检查点",
+							"    tests[\"ShotPlaceCode: \"+jsonData.ImageObject.ImageInfo.ShotPlaceCode] = jsonData.ImageObject.ImageInfo.ShotPlaceCode",
+							"    tests[\"CollectorName: \"+jsonData.ImageObject.ImageInfo.CollectorName] = jsonData.ImageObject.ImageInfo.CollectorName",
+							"    tests[\"CollectorOrg: \"+jsonData.ImageObject.ImageInfo.CollectorOrg] = jsonData.ImageObject.ImageInfo.CollectorOrg",
+							"    tests[\"EntryClerk: \"+jsonData.ImageObject.ImageInfo.EntryClerk] = jsonData.ImageObject.ImageInfo.EntryClerk",
+							"    tests[\"EntryClerkOrg: \"+jsonData.ImageObject.ImageInfo.EntryClerkOrg] = jsonData.ImageObject.ImageInfo.EntryClerkOrg",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{ImageID}}{{Data}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{ImageID}}{{Data}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

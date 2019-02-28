@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "b0b7df4d-6355-4746-bf0f-3c80e08ac123",
+		"name": "Pj-Area_GET_Code",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Get_Area",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前area_code为: \"+js.area_code+\"|area_code应为:\"+data.area_code] = js.area_code+\"\" == data.area_code;",
+							"tests[\"当前area_name为: \"+js.area_name+\"|area_name应为:\"+data.area_name] = js.area_name+\"\" == data.area_name;",
+							"tests[\"当前area_status为: \"+js.area_status+\"|area_status应为\"+data.area_status] = js.area_status == data.area_status; "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}/{{area_code}}?_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					],
+					"path": [
+						"{{area_code}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f5d4d144-f0e5-445a-8650-a3e1085e86d2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b58c6337-beba-42bf-bf9c-bca9da0708e1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,0 +1,1 @@
+下载PostMan.tar文件，在jenkins的工作目录下解压即可，注意要使用非root用户

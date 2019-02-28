@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "37dc22e4-3d69-426d-be1f-563f083de986",
+		"name": "VIID[cekong_Dispositions][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "7e7739e6-4282-406b-9555-0c392fb46877",
+			"name": "VIID[cekong_Dispositions][PUT]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fdb07c3c-35bd-4986-ac98-ff353f958f72",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusObject",
+							"// 状态码检查点",
+							"",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State",
+							"// 长度检查点",
+							"//var JsPer = jsonData.PersonListObject.PersonObject",
+							"//var lang = jsonData.PersonListObject.PersonObject.length",
+							"//tests[\"当前返回数量为: \"+lang] = lang;",
+							"//console.log(jsonData.ResponseStatusListObject.ResponseStatusObject)",
+							"for (var key in datas){",
+							"    console.log(key)",
+							"    for (var keyy in datas[key]){",
+							"        if (keyy == \"Id\"){",
+							"            pm.test(\"当前ID为: \"+datas[key][keyy], function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.be.oneOf([data.DispositionID]);",
+							"            });",
+							"        }",
+							"        else if (keyy == \"RequestURL\"){",
+							"            pm.test(\"当前RequestURL为: \"+datas[key][keyy]+\"应当为:\"+data.Interface_st, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.Interface_st);",
+							"                ",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusCode\"){",
+							"            pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\"应当为:\"+data.StatusCode, function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode);",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusString\"){",
+							"            pm.test(\"当前StatusString为: \"+datas[key][keyy]+\"应当为:\"+data.StatusString, function () {",
+							"                //pm.response.to.have.status(200);",
+							"               pm.expect(datas[key][keyy]).to.eql(data.StatusString);",
+							"            });",
+							"        }",
+							"    }",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"DispositionObject\": [{\r\n\t\t\"DispositionID\": \"{{DispositionID}}\",\r\n\t\t\"Title\": \"{{Title}}\",\r\n\t\t\"DispositionCategory\": \"{{DispositionCategory}}\",\r\n\t\t\"PriorityLevel\": {{PriorityLevel}},\r\n\t\t\"ApplicatName\": \"{{ApplicatName}}\",\r\n\t\t\"ApplicatInfo\": \"{{ApplicatInfo}}\",\r\n\t\t\"ApplicatOrg\": \"{{ApplicatOrg}}\",\r\n\t\t\"BeginTime\": \"{{BeginTime}}\",\r\n\t\t\"EndTime\": \"{{EndTime}}\",\r\n\t\t\"CreateTime\": \"{{CreateTime}}\",\r\n\t\t\"OperateType\": {{OperateType}},\r\n\t\t\"DisponsitionRange\": \"{{DisponsitionRange}}\",\r\n\t\t\"TollgateList\": \"{{TollgateList}}\",\r\n\t\t\"ReceiveAddr\": \"{{ReceiveAddr}}\",\r\n\t\t\"ReceiveMobile\": \"{{ReceiveMobile}}\",\r\n\t\t\"Reason\": \"{{Reason}}\"}\r\n\t\r\n]\r\n\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

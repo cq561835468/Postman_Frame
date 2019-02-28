@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "9579392c-9e12-4651-9087-f09c70fd4b06",
+		"name": "VIID[Subscribes_RUD_Many][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "86f2b7ad-b3f7-4b6a-b462-130b96080ba8",
+			"name": "VIID[Subscribes_RUD_Many][PUT]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eb5bb081-994a-4dda-95dd-e6922911e2c7",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"// 状态码检查点",
+							"",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State",
+							"// 长度检查点",
+							"//var JsPer = jsonData.PersonListObject.PersonObject",
+							"//var lang = jsonData.PersonListObject.PersonObject.length",
+							"//tests[\"当前返回数量为: \"+lang] = lang;",
+							"//console.log(jsonData.ResponseStatusListObject.ResponseStatusObject)",
+							"for (var key in datas){",
+							"    console.log(key)",
+							"    for (var keyy in datas[key]){",
+							"        if (keyy == \"Id\"){",
+							"            pm.test(\"当前ID为: \"+datas[key][keyy], function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.be.oneOf([data.SubscribeID1,data.SubscribeID2]);",
+							"            });",
+							"        }",
+							"        else if (keyy == \"RequestURL\"){",
+							"            pm.test(\"当前RequestURL为: \"+datas[key][keyy]+\"应当为:\"+data.Interface_st, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.Interface_st);",
+							"                ",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusCode\"){",
+							"            pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\"应当为:\"+data.StatusCode, function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode);",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusString\"){",
+							"            pm.test(\"当前StatusString为: \"+datas[key][keyy]+\"应当为:\"+data.StatusString, function () {",
+							"                //pm.response.to.have.status(200);",
+							"               pm.expect(datas[key][keyy]).to.eql(data.StatusString);",
+							"            });",
+							"        }",
+							"    }",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"SubscribeListObject\":{\r\n\t    \"SubscribeObject\":[\r\n\t    \t{\r\n\t\t    \"SubscribeID\": \"{{SubscribeID1}}\",\r\n\t\t    \"Title\":\"{{Title}}\",\r\n\t\t    \"SubscribeDetail\":\"{{SubscribeDetail}}\",\r\n\t\t    \"ResourceURI\":\"{{ResourceURI}}\",\r\n\t\t    \"ApplicantName\":\"{{ApplicantName}}\",\r\n\t\t    \"ApplicantOrg\":\"{{ApplicantOrg}}\",\r\n\t\t    \"BeginTime\":\"{{BeginTime}}\",\r\n\t\t    \"EndTime\":\"{{EndTime}}\",\r\n\t\t    \"OperateType\":\"{{OperateType}}\",\r\n\t\t    \"ReceiveAddr\":\"{{ReceiveAddr}}\",\r\n\t\t    \"Reason\":\"{{Reason}}\"\r\n\t    \t},{\r\n\t    \t\"SubscribeID\": \"{{SubscribeID2}}\",\r\n\t\t    \"Title\":\"{{Title}}\",\r\n\t\t    \"SubscribeDetail\":\"{{SubscribeDetail}}\",\r\n\t\t    \"ResourceURI\":\"{{ResourceURI}}\",\r\n\t\t    \"ApplicantName\":\"{{ApplicantName}}\",\r\n\t\t    \"ApplicantOrg\":\"{{ApplicantOrg}}\",\r\n\t\t    \"BeginTime\":\"{{BeginTime}}\",\r\n\t\t    \"EndTime\":\"{{EndTime}}\",\r\n\t\t    \"OperateType\":\"{{OperateType}}\",\r\n\t\t    \"ReceiveAddr\":\"{{ReceiveAddr}}\",\r\n\t\t    \"Reason\":\"{{Reason}}\"\t\r\n\t    \t}\r\n\t     ]\r\n\t}\r\n}"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

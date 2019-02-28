@@ -1,0 +1,13 @@
+[
+	{
+		"Port":":10007",
+		"---Teaching_class_student---":"",
+		"teaching_class_student_URL":"/teaching_class_student",
+		"URI_teaching_class":"/teaching_class",
+		"area_code_sy":"a6741cecdd1b4a879a3512hekedakeda",
+		"URL_Stduent":"/student?t=0",
+		"---Result---":"",
+		"success":"true",
+		"Re_State":200
+	}
+]

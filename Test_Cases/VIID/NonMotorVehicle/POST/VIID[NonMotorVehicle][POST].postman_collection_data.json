@@ -1,0 +1,30 @@
+[
+{
+	"需要输入参数":">>",
+	"Inter_Url":"10.85.7.62:8081",
+	"Inter_st1":"/VIID/NonMotorVehicles",
+	"Inter_st2":"210000000013200000040220180507163630275700227077",
+	
+	"NonMotorVehicleID": "210000000013200000040220180507163630275700227077",
+	"InfoKind": 1,
+	"SourceID": "21000000001320000004022018050716363027570",
+	"LeftTopX":2,
+	"LeftTopY":4,
+	"RightBtmX":50,
+	"RightBtmY":80,
+	"MarkTime":"20180508164026",
+	"AppearTime":"20180508164024",
+	"DisappearTime":"20180508164027",
+	"HasPlate":1,
+	"PlateClass":"",
+	"PlateColor":"02",
+	"PlateNo":"苏A0000",
+	"VehicleColor":"03",
+	
+	"需要验证参数":">>",
+	"StatusCode":0,
+	"Re_State":200,
+	"StatusString":""
+}
+]
+

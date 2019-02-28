@@ -1,0 +1,47 @@
+[{
+	"需要输入参数":">>",
+	"Interfac_url":"172.16.120.33",
+	"Interface_st":"/cui/cui.fcgi",
+	"username":"admin@kadacom",
+	"password":"kedacom123",
+	"cusdkVersion":"2.0",
+	"clientType":"cuver",
+	"isSupportNA":false,
+
+
+	"userId":"59e298b385fa4c2893cc097608ea55a1@kadacom",
+	"beginIndex":0,
+	"num":20,
+
+	
+	"name1":"mm",
+	"creator":"59e298b385fa4c2893cc097608ea55a1@kadacom",
+	"userType":"cusdk:Admin",
+	"userPri1":"cusdk:PriUserCMSRecStart",
+	"userPri2":"cusdk:PriUserCMSRecPlay",
+	"userPri3":"cusdk:PriUserCMSRecDownload",
+	"userPri4":"cusdk:PriUserLocalRec",
+	"userPri5":"cusdk:PriUserPUCall",
+	"userPri6":"cusdk:PriUserAlarmLog",
+	"maxStreamNumEnable":"false",
+	"maxStreamNum":0,
+	"waterMarkSupported":"true",
+	"waterMarkEnabled":"false",
+	"waterMarkFont":"......#C:\\WINDOWS\\Fonts\\simhei.ttf",
+	"waterMarkFontSize":3,
+	"waterMarkRotationAngle":30,
+	"waterMarkColor":16711680,
+	"waterMarkTransparent":30,
+	"waterMarkTiled":"true",
+	
+	"id":"1b71903d5c2a473fa8db056a1bd8f72d@kadacom",
+	"name2":"ii",
+
+
+
+
+	"需要检验参数":">>",
+	"Re_State":200,
+	"errorCode":0
+}
+]

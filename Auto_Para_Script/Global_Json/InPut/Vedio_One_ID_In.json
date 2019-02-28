@@ -1,0 +1,94 @@
+{
+	"Vedio_One_Data_Get_In": [
+    {
+      "Interface_Url":"10.85.7.62:8083",
+      "Interface_st":"/VIID/VideoSlices/",
+      "VideoID":"31000000001320000064012018061219030201062",
+      "Data":"/Data"
+    }],
+    "Vedio_One_Data_Post_In": [
+    {
+      "Interface_Url":"10.85.7.62:8081",
+    "Interface_st":"/VIID/VideoSlices/",
+    "VideoID":"31000000001320000064012018061216162201217",
+    "Data":"/Data",
+    "DeviceID": "31000000001320000064",
+            "CollectorID": "340023",
+            "StoragePath": "http://10.85.7.62:80/video_31000000001320000064_2018061413_c7gd42.mp4",
+            "FileHash": "9974750c276eaf5ecc7c06158760400c",
+            "FileFormat": "mp4",
+            "Title": "20180612190302971.mp4",
+            "BeginTime": "20180612190302",
+            "EndTime": "20180612190603",
+            "EntryTime": "20180614132016",
+            "InfoKind": -1,
+            "IsAbstractVideo": 0,
+            "EventSort": 0,
+            "AudioFlag": 0,
+            "VideoLen": -1,
+            "FileSize": 45091541,
+            "TimeErr": -1,
+            "Width": -1,
+            "Height": -1,
+            "VideoProcFlag": 0,
+            "KDExpiredDate": "20190614132016",
+            "DeviceType": "DSJ-U2",
+            "DeviceSNNo": "6D99259",
+            "ImeiSn": "867081030036240",
+            "ShotPlaceLongitude": 120.518691,
+            "ShotPlaceLatitude": 0
+    }],
+    "Vedio_One_Info_Delete_In": [
+    {
+     "Interface_Url":"10.85.7.62:8081",
+	"Interface_st":"/VIID/VideoSlices/31000000001320000064012018061217014901022",
+	"Interface_Info": "/Info"
+    }],
+     "Vedio_One_Info_Get_In": [
+    {
+     "Interface_Url":"10.85.7.62:8083",
+      "Interface_st":"/VIID/VideoSlices/",
+      "VideoID":"31000000001320000064012018061219030201062",
+      "Interface_Info": "/Info"
+    }],
+      "Vedio_One_Info_Put_In": [
+    {
+    "Interface_Url":"10.85.7.62:8081",
+	"Interface_st":"/VIID/VideoSlices/31000000001320000064012018061217014901022",
+    "Interface_Info": "/Info",
+	"ImageID":"31000000001320000064012018061217014901022",
+	"DeviceID": "31000000001320000064",
+    "VideoID": "31000000001320000064012018061217014901022",
+    "CollectorID": "340023",
+    "StoragePath": "http://10.85.7.62:80/video_31000000001320000064_2018061412_jny9pa.mp4",
+    "FileHash": "4748266495ac716ffc7675eb33ab6709",
+    "FileFormat": "mp4",
+    "Title": "20180612143018240.mp4",
+    "BeginTime": "20180612143018",
+    "EndTime": "20180612143319",
+    "EntryTime": "20180614122951",
+    "InfoKind": -1,
+    "IsAbstractVideo": 0,
+    "EventSort": 0,
+    "AudioFlag": 0,
+    "VideoLen": -1,
+    "FileSize": 44743799,
+    "TimeErr": -1,
+    "Width": -1,
+    "Height": -1,
+    "VideoProcFlag": 0,
+    "KDExpiredDate": "20190614122953",
+    "DeviceType": "DSJ-U2",
+    "DeviceSNNo": "6D99259",
+    "ImeiSn": "867081030036240",
+    "ShotPlaceLongitude": 120.518751,
+    "ShotPlaceLatitude": 0
+    }]
+
+
+
+
+
+
+
+}

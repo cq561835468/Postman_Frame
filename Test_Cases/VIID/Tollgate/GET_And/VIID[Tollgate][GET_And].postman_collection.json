@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "cf77a87c-391f-46a8-87d3-07b24e79bcf9",
+		"name": "VIID[Tollgate][GET_And]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "a50e548b-f1b1-4a32-a7e6-bae3e98eb996",
+			"name": "VIID[Tollgate][GET_And]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2b0bfa6f-0261-46b4-8c1d-852d2098a0a5",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"var datas=jsonData.TollgateListObject.TollgateObject",
+							"for(var key in datas){",
+							"    for(var keyy in datas[key]){",
+							"        if(keyy==data.Search_Field1)",
+							"        {",
+							"            var data1=datas[key][keyy]",
+							"        }",
+							"        if(keyy==data.Search_Field2)",
+							"        {",
+							"            var data2=datas[key][keyy]",
+							"        }",
+							"    }",
+							"    pm.test(\"当前数值1为：\"+data1+\" 返回的验证值应为:\"+data.Value1+\" 当前数值1为：\"+data2+\" 返回的验证值应为:\"+data.Value2,function(){",
+							"        pm.expect(data1).to.eql(data.Value1)&&pm.expect(data2).to.eql(data.Value2)",
+							"    })",
+							"}             "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

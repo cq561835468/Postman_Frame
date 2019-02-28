@@ -1,0 +1,419 @@
+{
+	"info": {
+		"_postman_id": "6d38c583-7a17-47b0-a5ca-6f8313f5cbc9",
+		"name": "CU[获取用户所有设备][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login[获取]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c717e6c2-27fa-4984-bb35-c7337ffe464d",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"pm.test(\"当前状态码为: \"+responseCode.code+\"应当为:\"+data.Re_State, function () {",
+							"    pm.expect(responseCode.code).to.eql(data.Re_State);",
+							"    });",
+							"",
+							"tests[\"cmsVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cmsVersion\"];",
+							"tests[\"cuVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuVersion\"];",
+							"tests[\"cuUpdateUrl: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:cuUpdateUrl\"];",
+							"tests[\"serverDataVersion: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:serverDataVersion\"];",
+							"tests[\"ip: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:ip\"];",
+							"tests[\"port: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:stunInfo\"][\"cusdk:port\"];",
+							"tests[\"session: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							"",
+							"pm.environment.set(\"session1\", jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:LoginRsp\"][\"cusdk:session\"]);",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:Login>\r\n\t\t\t<cusdk:loginReq>\r\n\t\t\t\t<cusdk:userName>{{userName}}</cusdk:userName>\r\n\t\t\t\t<cusdk:password>{{password}}</cusdk:password>\r\n\t\t\t\t<cusdk:cusdkVersion>{{cusdkVersion}}</cusdk:cusdkVersion>\r\n\t\t\t\t<cusdk:clientType>{{clientType}}</cusdk:clientType>\r\n\t\t\t\t<cusdk:isSupportNA>{{isSupportNA}}</cusdk:isSupportNA>\r\n\t\t\t\t<cusdk:webCUClientAddr>\r\n\t\t\t\t</cusdk:webCUClientAddr>\r\n\t\t\t</cusdk:loginReq>\r\n\t\t</cusdk:Login>\r\n\t</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserDev",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "704d35c6-d5b9-4cfb-a090-927228ae060d",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"//console.log(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserDevRsp\"][\"cusdk:devList\"])",
+							"var  datas= jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserDevRsp\"][\"cusdk:devList\"]",
+							"var lang = datas.length",
+							"console.log(datas)",
+							"console.log(lang)",
+							"for (key in datas) {",
+							"    //console.log (key)",
+							"    for (keyy in datas[key]){",
+							"       //console.log(keyy)",
+							"       if (keyy ==  \"cusdk:deviceId\"){",
+							"           pm.test(\"当前deviceId为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            });",
+							"           ",
+							"       }",
+							"            else if (keyy == \"cusdk:domainId\"){",
+							"                 pm.test(\"当前domainId为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:name\"){",
+							"                 pm.test(\"当前name为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:deviceAlias\"){",
+							"                 pm.test(\"当前deviceAlias为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:deviceIP\"){",
+							"                 pm.test(\"当前deviceIP为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:deviceType\"){",
+							"                 pm.test(\"当前deviceType为: \"+datas[key][keyy]+\"||deviceType应为：\"+data.deviceType, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.deviceType);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:deviceModel\"){",
+							"                 pm.test(\"当前deviceModel为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:manufacturer\"){",
+							"                 pm.test(\"当前manufacturer为: \"+datas[key][keyy]+\"||manufacturer应为：\"+data.manufacturer, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.manufacturer);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:creatorType\"){",
+							"                 pm.test(\"当前creatorType为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:description\"){",
+							"                 pm.test(\"当前description为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            ",
+							"            else if (keyy == \"cusdk:videoSrcList\")",
+							"            {",
+							"                for(keyyy in datas[key][keyy]){",
+							"                    if (keyyy ==\"cusdk:name\"){",
+							"                      pm.test(\"当前cusdk:name为: \"+datas[key][keyy][keyyy], function () {",
+							"                pm.expect(datas[key][keyy][keyyy] !== 0).to.eql(true);",
+							"            });   ",
+							"                    }",
+							"            ",
+							"                }",
+							"            }",
+							"            else if (keyy == \"cusdk:videoSrcNum\"){",
+							"                 pm.test(\"当前videoSrcNum为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:encodeChnNum\"){",
+							"                 pm.test(\"当前encodeChnNum为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:decodeChnNum\"){",
+							"                 pm.test(\"当前decodeChnNum为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:alarmInputNum\"){",
+							"                 pm.test(\"当前alarmInputNum为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:videoOutputChnNum\"){",
+							"                 pm.test(\"当前videoOutputChnNum为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:deviceExtInfo\"){",
+							"                 pm.test(\"当前deviceExtInfo为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"        }",
+							"        ",
+							"}",
+							"tests[\"totalNum为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserDevRsp\"][\"cusdk:totalNum\"]+\"|totalNum应该为\"+ lang] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserDevRsp\"][\"cusdk:totalNum\"] == lang;",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserDevRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserDevRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserDevRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+ data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetUserDevRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:GetUserDev>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:GetUserDev\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:userId>{{userId}}</cusdk:userId>\r\n\t\t\t\t<cusdk:beginIndex>{{beginIndex}}</cusdk:beginIndex>\r\n\t\t\t\t<cusdk:num>{{num}}</cusdk:num>\r\n\t\t\t\t<cusdk:devTreeId></cusdk:devTreeId>\r\n</cusdk:req>\r\n</cusdk:GetUserDev>\r\n</SOAP-ENV:Body>\r\n</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDomainList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4295e63b-9f86-4302-bf1d-43086f18f556",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"var  datas= jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDomainListRsp\"]",
+							"//var lang = datas.length",
+							"console.log(datas)",
+							"for (key in datas) {",
+							"    //console.log (key)",
+							"    for (keyy in datas[key]){",
+							"       //console.log(keyy)",
+							"       if (keyy ==  \"cusdk:domainId\"){",
+							"           pm.test(\"当前domainId为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            });",
+							"           }",
+							"           if (keyy ==  \"cusdk:domainName\"){",
+							"           pm.test(\"当前domainName为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            });",
+							"           }",
+							"           if (keyy ==  \"cusdk:parentDomainId\"){",
+							"           pm.test(\"当前parentDomainId为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            });",
+							"           }",
+							"    }",
+							"}",
+							"tests[\"session: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDomainListRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDomainListRsp\"][\"cusdk:session\"]",
+							"tests[\"errorCode为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDomainListRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDomainListRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:GetDomainList>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:GetDomainListReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t</cusdk:req>\r\n\t\t\t\t</cusdk:GetDomainList>\r\n\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetUserDevByDomain",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1cca59d7-dc14-4619-98f7-d2e4f25112e5",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = xml2Json(responseBody);",
+							"//console.log(jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDevByDomainRsp\"][\"cusdk:devList\"])",
+							"var  datas= jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDevByDomainRsp\"][\"cusdk:devList\"]",
+							"var lang = datas.length",
+							"console.log(datas)",
+							"console.log(lang)",
+							"for (key in datas) {",
+							"    //console.log (key)",
+							"    for (keyy in datas[key]){",
+							"       //console.log(keyy)",
+							"       if (keyy ==  \"cusdk:deviceId\"){",
+							"           pm.test(\"当前deviceId为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            });",
+							"           ",
+							"       }",
+							"            else if (keyy == \"cusdk:domainId\"){",
+							"                 pm.test(\"当前domainId为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:name\"){",
+							"                 pm.test(\"当前name为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:deviceAlias\"){",
+							"                 pm.test(\"当前deviceAlias为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:deviceIP\"){",
+							"                 pm.test(\"当前deviceIP为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:deviceType\"){",
+							"                 pm.test(\"当前deviceType为: \"+datas[key][keyy]+\"||deviceType应为：\"+data.deviceType, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.deviceType);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:deviceModel\"){",
+							"                 pm.test(\"当前deviceModel为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:manufacturer\"){",
+							"                 pm.test(\"当前manufacturer为: \"+datas[key][keyy]+\"||manufacturer应为：\"+data.manufacturer, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.manufacturer);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:creatorType\"){",
+							"                 pm.test(\"当前creatorType为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:description\"){",
+							"                 pm.test(\"当前description为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            ",
+							"            else if (keyy == \"cusdk:videoSrcList\")",
+							"            {",
+							"                for(keyyy in datas[key][keyy]){",
+							"                    if (keyyy ==\"cusdk:name\"){",
+							"                      pm.test(\"当前cusdk:name为: \"+datas[key][keyy][keyyy], function () {",
+							"                pm.expect(datas[key][keyy][keyyy] !== 0).to.eql(true);",
+							"            });   ",
+							"                    }",
+							"            ",
+							"                }",
+							"            }",
+							"            else if (keyy == \"cusdk:videoSrcNum\"){",
+							"                 pm.test(\"当前videoSrcNum为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:encodeChnNum\"){",
+							"                 pm.test(\"当前encodeChnNum为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:decodeChnNum\"){",
+							"                 pm.test(\"当前decodeChnNum为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:alarmInputNum\"){",
+							"                 pm.test(\"当前alarmInputNum为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:videoOutputChnNum\"){",
+							"                 pm.test(\"当前videoOutputChnNum为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"            else if (keyy == \"cusdk:deviceExtInfo\"){",
+							"                 pm.test(\"当前deviceExtInfo为: \"+datas[key][keyy], function () {",
+							"                pm.expect(datas[key][keyy] !== \"\").to.eql(true);",
+							"            }); ",
+							"            }",
+							"        }",
+							"        ",
+							"}",
+							"tests[\"totalNum为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDevByDomainRsp\"][\"cusdk:totalNum\"]+\"|totalNum应该为\"+ lang] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDevByDomainRsp\"][\"cusdk:totalNum\"] == lang;",
+							"tests[\"session为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDevByDomainRsp\"][\"cusdk:session\"]] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDevByDomainRsp\"][\"cusdk:session\"];",
+							"tests[\"errorCode为: \"+jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDevByDomainRsp\"][\"cusdk:errorCode\"]+\"|errorCode应该为\"+ data.errorCode] = jsonData[\"SOAP-ENV:Envelope\"][\"SOAP-ENV:Body\"][\"cusdk:GetDevByDomainRsp\"][\"cusdk:errorCode\"] == data.errorCode;",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" \r\nxmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" \r\nxmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\nxmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" \r\nxmlns:cusdk=\"urn:cusdk\">\r\n\t<SOAP-ENV:Body>\r\n\t\t<cusdk:GetUserDevByDomain>\r\n\t\t\t<cusdk:req xsi:type=\"cusdk:GetUserDevByDomainReq\">\r\n\t\t\t\t<cusdk:session>{{session1}}</cusdk:session>\r\n\t\t\t\t<cusdk:domainId>{{domainId}}</cusdk:domainId>\r\n\t\t\t    <cusdk:userId>{{userId}}</cusdk:userId>\r\n\t\t\t\t<cusdk:beginIndex>{{beginIndex}}</cusdk:beginIndex>\r\n\t\t\t\t<cusdk:num>{{num}}</cusdk:num>\r\n\t\t\t\t</cusdk:req>\r\n\t\t\t\t</cusdk:GetUserDevByDomain>\r\n\t\t\t\t</SOAP-ENV:Body>\r\n\t\t\t\t</SOAP-ENV:Envelope>"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

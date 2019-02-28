@@ -1,0 +1,50 @@
+{
+	"info": {
+		"_postman_id": "8ede1263-f983-4032-a616-b395b5736ae2",
+		"name": "VIID[keepalive][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "14a66cbb-3267-40a7-ba73-22dc53ba42d9",
+			"name": "keepalive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fcb85518-5d81-4a55-9b16-72971ba5e58e",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusObject.RequestURL+\"|RequestURL应为:\"+data.Request_Url] = jsonData.ResponseStatusObject.RequestURL == data.Request_Url;",
+							"tests[\" StatusCode: \"+jsonData.ResponseStatusObject.StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusObject.StatusCode == data.StatusCode;",
+							"tests[\" StatusString: \"+jsonData.ResponseStatusObject.StatusString+\"|StatusCode应为:\"+data.StatusString] = jsonData.ResponseStatusObject.StatusString == data.StatusString;",
+							"tests[\"Id: \"+jsonData.ResponseStatusObject.Id+\"|Id应为:\"+data.DeviceID] = jsonData.ResponseStatusObject.Id == data.DeviceID;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"KeepaliveObject\": {\r\n    \"DeviceID\": \"{{DeviceID}}\"\r\n  }\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{Vcol_Url}}{{Interface}}",
+					"host": [
+						"{{Vcol_Url}}{{Interface}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

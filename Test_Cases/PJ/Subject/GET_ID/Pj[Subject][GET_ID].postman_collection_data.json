@@ -1,0 +1,20 @@
+[
+	{
+		"Port":":10007",
+		"URI":"/subject",
+		"URI_A":"/subject?t=0",
+		"subj_code": "kedaenglish", 
+		"subj_name": "科达keda语数外综合",
+		"order_by": "subj_name", 
+		"sort": "asc",
+		"---Discipline---":"",
+		"URI_G":"/discipline?t=0",
+		"area_code":"a6741cecdd1b4a879a3512hekedakeda",
+		"disc_code": "kedazswuli", 
+		"disc_name": "科达keda神经物理学",
+		"order_by2": "disc_name",
+		"---Result---":"",
+		"success":"true",
+		"Re_State":200
+	}
+]

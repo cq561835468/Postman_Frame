@@ -1,0 +1,64 @@
+{
+	"info": {
+		"_postman_id": "f2db9c6b-812f-4b1f-838e-fd575485c18f",
+		"name": "VIID[VideoLabels_Many][DEL]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[VideoLabels_Many][DEL]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1f5709bc-707f-4794-9436-81e17de9f190",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\" 状态码应为: \"+data.Re_State] = responseCode.code == data.Re_State",
+							"",
+							"for (var key in datas){",
+							"\tfor (var keyy in datas[key]){",
+							"\t\tif (keyy == \"RequestURL\"){",
+							"\t\t\tpm.test(\"当前RequestURL为: \"+datas[key][keyy]+ \"应当为: \"+data.AnalysisRule_st1, function () {",
+							"\t\t\t    pm.expect(datas[key][keyy]).to.eql(data.AnalysisRule_st1)",
+							"\t\t\t\t\t\t",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusCode\"){",
+							"\t\t    pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusCode, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode)",
+							"\t\t\t})",
+							"\t\t}",
+							"\t\telse if (keyy == \"StatusString\"){",
+							"\t\t\tpm.test(\"当前StatusString为: \"+datas[key][keyy]+\" 应当为: \"+data.StatusString, function () {",
+							"\t\t\t\tpm.expect(datas[key][keyy]).to.eql(data.StatusString)",
+							"\t\t\t })",
+							"\t\t}",
+							"\t}",
+							"}",
+							"\t",
+							"\t\t\t\t",
+							"\t",
+							"\t\t\t\t"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{AnalysisRule_Url}}{{AnalysisRule_st1}}{{AnalysisRule_st2}}",
+					"host": [
+						"{{AnalysisRule_Url}}{{AnalysisRule_st1}}{{AnalysisRule_st2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

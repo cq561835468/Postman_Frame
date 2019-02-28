@@ -1,0 +1,34 @@
+{
+	"FList_FObj_In":[{
+
+
+                         "FList_FObj_InfoKind":1,
+	"FList_FObj_LeftTopX":913,
+	"FList_FObj_LeftTopY":700,
+	"FList_FObj_RightBtmX":1072,
+	"FList_FObj_RightBtmY":859,
+	"FList_FObj_LocationMarkTime":"20180628105626",
+	"FList_FObj_FaceAppearTime":"20180628105626",
+	"FList_FObj_FaceDisAppearTime":"20180628105628",
+	"FList_FObj_IDTyoe":111,
+	"FList_FObj_IDNumber":"310102033003030303",
+	"FList_FObj_Name":"postman",
+	"FList_FObj_UsedName":"postman_new",
+	"FList_FObj_Alias":"test_one",
+	"FList_FObj_GenderCode":"0",
+	"FList_FObj_AgeUpLimit":"80",
+	"FList_FObj_AgeLowerLimit":"87",
+	"FList_FObj_EthicCode":"Sui",
+	"FList_FObj_NationalityCodeType":"AR",
+	"FList_FObj_IsDriver":2,
+	"FList_FObj_IsForeigner":2,
+	"FList_FObj_IsSuspectedTerrorist":2,
+	"FList_FObj_IsCriminalInvolved":2,
+	"FList_FObj_IsDetainees":2,
+	"FList_FObj_IsVictim":2,
+	"FList_FObj_IsSuspiciousPerson":2
+
+
+
+	}]
+}

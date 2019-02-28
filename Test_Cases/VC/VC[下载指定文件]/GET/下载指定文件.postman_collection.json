@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "db8e1df0-7259-499b-b258-ab8aa1a757f1",
+		"name": "下载指定文件",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "下载指定文件",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0da6034-f8bb-4e12-91b7-7ba927b87b5b",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Url}}{{fileType}}{{catalog}}{{fileName}}",
+					"host": [
+						"{{Url}}{{fileType}}{{catalog}}{{fileName}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

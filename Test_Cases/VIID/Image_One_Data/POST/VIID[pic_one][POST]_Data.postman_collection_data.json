@@ -1,0 +1,29 @@
+[
+    {
+        "CollectorName":"kedacom",
+        "ContentDescription":"picture",
+        "Data":"/Data",
+        "DeviceID":"31000000001320000039",
+        "EventSort":2,
+        "FileFormat":"Jpeg",
+        "FileHash":"",
+        "FileSize":129700,
+        "Height":668,
+        "ImageID":"31000000001320000039022018061314321500948",
+        "ImageSource":"19",
+        "ImgProcFlag":0,
+        "InfoKind":1,
+        "Interface_Url":"10.85.7.62:8081",
+        "Interface_st":"/VIID/Images/",
+        "KDExpiredDate":"20180606060607",
+        "Re_State":"200",
+        "SecurityLevel":"5",
+        "ShotPlaceCode":"",
+        "ShotTime":"20180613143215",
+        "StatusCode":"0",
+        "StatusString":"",
+        "StoragePath":"http://10.85.7.62:80/accessrecord_31000000001320000039_2018061314_reih6y.Jpeg",
+        "Title":"cap.jpeg",
+        "Width":764
+    }
+]

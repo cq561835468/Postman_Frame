@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "2a539629-40b7-4ccf-821d-45f86c1e3cd3",
+		"name": "PJ[student_year][GET_include_school_year]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Query_School_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "03e451ef-a732-41be-911f-bfaab998b9c4",
+						"exec": [
+							"var js = pm.response.json();",
+							"for(var x in js.list){",
+							"    var listid =js.list[x].id;",
+							"}",
+							"pm.environment.set(\"scye_id\", listid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"scye_begin_year\": 2017, \r\n  \"scye_state\": 0, \r\n  \"scye_stage\": 1, \r\n  \"scye_code\": \"科达kedacom2018级编号111\", \r\n  \"scye_name\": \"科达keda2018级\", \r\n  \"order_by\": \"scye_begin_year\", \r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_school_year}}?t=0&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_school_year}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create_Student_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "78475f00-fcfa-41ca-851f-d5adf0281364",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"id\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"scye_id\":{{scye_id}}, \r\n  \"stye_begin_year\": {{stye_begin_year}}, \r\n  \"stye_code\": \"{{stye_code}}\", \r\n  \"stye_name\": \"{{stye_name}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_student_year}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_student_year}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query_Student_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13eda2de-287c-4082-a89a-821760d4d2a9",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"",
+							"for (var x in js.list){",
+							"    pm.test(\"当前数值为: \"+js.list[x].scye_name +\" 返回验证值应为: \"+data.scye_name, function () {",
+							"                pm.expect(js.list[x].scye_name).to.eql(data.scye_name);",
+							"            });",
+							"}",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"scye_id\": {{scye_id}}, \r\n  \"area_code\": \"a6741cecdd1b4a879a3512hekedakeda\", \r\n  \"stye_begin_year\": {{stye_begin_year}}, \r\n  \"stye_code\": \"{{stye_code}}\",\r\n  \"order_by\": \"stye_name\", \r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_student_year}}?t=1&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_student_year}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "1"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_Student_Year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "97242750-fd3e-4efd-a826-c0c552b6c4c6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_student_year}}/{{id}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_student_year}}"
+					],
+					"path": [
+						"{{id}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,26 @@
+[
+	{
+		"Port":":10007",
+		"---Create_Building---":"",
+		"URI_Building":"/building/",
+		"area_code":"a6741cecdd1b4a879a3512hekedakeda",
+		"area_name":"李强测试第一小学",
+		"buil_code":"jiaoxueloulq1",
+		"buil_name":"李强第一教学楼",
+		"buil_floor_count":9, 
+		"buil_first_floor_num":3,
+		"---Create_classroom---":"",
+		"URI":"/classroom/",
+		"clro_code":"jiaoshi1",
+		"clro_code2":"jiaoshi2",
+		"clro_name":"第一教室",
+		"clro_building_floor_num":10,
+		"clro_seat_count":60,
+    	"page_index": 1, 
+    	"page_size": 5,
+		"order_by": "clro_name", 
+		"---checking---":"",
+		"success":"true",
+		"Re_State":200
+	}
+]

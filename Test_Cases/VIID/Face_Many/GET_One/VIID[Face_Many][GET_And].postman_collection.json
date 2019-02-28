@@ -1,0 +1,22 @@
+{
+	"info": {
+		"_postman_id": "cca83cf0-a652-4394-bdf8-e505e10800dd",
+		"name": "VIID[Face_Many][GET_And]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "e2012f1a-2efc-4768-aa6c-a01a5c676f7e",
+			"name": "faces_many_get_and",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}

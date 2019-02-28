@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "c6bb391d-337f-4549-8d25-f43a25f3ad93",
+		"name": "VIID_Register.postman_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "注册",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7dda4685-861a-4f4c-9404-86429893af41",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusObject.RequestURL+\"|RequestURL应为:\"+data.Request_Url] = jsonData.ResponseStatusObject.RequestURL == data.Request_Url;",
+							"tests[\" StatusCode: \"+jsonData.ResponseStatusObject.StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusObject.StatusCode == data.StatusCode;",
+							"tests[\" StatusString: \"+jsonData.ResponseStatusObject.StatusString+\"|StatusCode应为:\"+data.StatusString] = jsonData.ResponseStatusObject.StatusString == data.StatusString;",
+							"tests[\"Id: \"+jsonData.ResponseStatusObject.Id+\"|Id应为:\"+data.DeviceID] = jsonData.ResponseStatusObject.Id == data.DeviceID;"
+						]
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b8bac71c-9eb6-46c1-ae43-0fb64117dc9c",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"RegisterObject\":{\"DeviceID\":\"{{DeviceID}}\"}}"
+				},
+				"url": {
+					"raw": "{{Vcol_Url}}{{Interface}}",
+					"host": [
+						"{{Vcol_Url}}{{Interface}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "66850456-8f11-44d3-b8f1-4c4a6923ceb6",
+					"name": "注册-兼容性",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"DeviceID\":\"34020000001120000052\"}"
+						},
+						"url": {
+							"raw": "{{vcol_host}}/VIID/System/Register",
+							"host": [
+								"{{vcol_host}}"
+							],
+							"path": [
+								"VIID",
+								"System",
+								"Register"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6bc0d164-7cd6-4f06-9a00-a14c601583d3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "8a2d581a-03b2-46da-a551-2b26fa923029",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

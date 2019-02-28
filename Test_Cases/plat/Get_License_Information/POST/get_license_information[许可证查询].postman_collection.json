@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "e6fd7342-2145-4964-a9b0-68259a69d61b",
+		"name": "get_license_information[许可证查询]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "tasLicenseGet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b439ac1-fa0b-4c5d-aa19-25be890ed8e1",
+						"exec": [
+							"var jsonData = xml2Json(responseBody)",
+							"var licenseGetRsp = jsonData[\"CPmcSMsg\"][\"msg\"]",
+							"var CData = xml2Json(licenseGetRsp)",
+							"",
+							"tests[\"errorCode: \" + CData[\"CLicenseGetRsp\"][\"errorCode\"]] = CData[\"CLicenseGetRsp\"][\"errorCode\"] == \"0\"",
+							"tests[\"licenseId: \" + CData[\"CLicenseGetRsp\"][\"licenseId\"]] = CData[\"CLicenseGetRsp\"][\"licenseId\"] != \" \"",
+							"tests[\"hostId: \" + CData[\"CLicenseGetRsp\"][\"hostId\"]] = CData[\"CLicenseGetRsp\"][\"hostId\"] != \" \"",
+							"tests[\"licenseVer: \" + CData[\"CLicenseGetRsp\"][\"licenseVer\"]] = CData[\"CLicenseGetRsp\"][\"licenseVer\"] == \"KDMAAA2.0\"",
+							"tests[\"expireDate: \" + CData[\"CLicenseGetRsp\"][\"expireDate\"]] = CData[\"CLicenseGetRsp\"][\"expireDate\"] != \" \"",
+							"",
+							"// 删除本用例新增的环境变量",
+							"pm.environment.unset(\"session\");",
+							"pm.environment.unset(\"targetUri\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<CPmcSMsg>\r\n  <event>TAS_LICENSE_GET_REQ</event>\r\n  <targetUri>3as@ShangHai_Test</targetUri>\r\n  <!--<session>{{session}}</session>-->\r\n  <seqNum>758</seqNum>\r\n  <msg>&lt;CLicenseGetReq&gt;&lt;event&gt;TAS_LICENSE_GET_REQ&lt;/event&gt;&lt;seqNum&gt;758&lt;/seqNum&gt;&lt;session&gt;111&lt;/session&gt;&lt;/CLicenseGetReq&gt;</msg>\r\n</CPmcSMsg>\r\n "
+				},
+				"url": {
+					"raw": "http://{{plat_IP}}/pmc-bin/pmc_fcgi?msg=TAS_LICENSE_GET_REQ&debug=0",
+					"protocol": "http",
+					"host": [
+						"{{plat_IP}}"
+					],
+					"path": [
+						"pmc-bin",
+						"pmc_fcgi"
+					],
+					"query": [
+						{
+							"key": "msg",
+							"value": "TAS_LICENSE_GET_REQ"
+						},
+						{
+							"key": "debug",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

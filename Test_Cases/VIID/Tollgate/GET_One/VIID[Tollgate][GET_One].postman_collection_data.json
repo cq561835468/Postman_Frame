@@ -1,0 +1,13 @@
+[
+{
+    "需要输入的参数：":">>",
+	"Interface_Url":"10.85.7.62/8083",
+	"Interface_st":"/VIID/Tollgates/",
+	"Search_Express":"?(Tollgate.TollgateID=123456789)",
+	
+	"需要验证的参数：":">>",
+	"Re_State":"200",
+	"Search_Field":"TollgateID",
+	"Value":"123456789"
+	}
+	]

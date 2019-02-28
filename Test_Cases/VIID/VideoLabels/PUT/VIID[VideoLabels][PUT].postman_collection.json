@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "9272c38e-46f3-46e6-8a7c-b857b73a23d1",
+		"name": "VIID[VideoLabels][PUT]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "d481a1af-e1bb-41c7-ac19-ea496a1c0e1e",
+			"name": "VIID[VideoLabels][PUT]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "14b4be63-5bdd-44c0-90d5-8c882e18bfe9",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"console.log(jsonData)",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusObject.RequestURL+\"|RequestURL应为:\"+data.Interface_st+data.VideoLabelID] = jsonData.ResponseStatusObject.RequestURL == data.Interface_st+data.VideoLabelID; ",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusObject.StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusObject.StatusCode == data.StatusCode; ",
+							"tests[\" StatusString: \"+jsonData.ResponseStatusObject.StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusObject.StatusString == data.StatusString !==0;",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"VideoLabelListObject\": {\r\n\"VideoLabelObject\": [{\t\r\n\t\"VideoLabelID\":\"{{VideoLabelID}}\",\r\n        \"EventSort\":\"{{EventSort}}\",\r\n        \"IVADeviceID\":\"{{IVADeviceID}}\",\r\n        \"CreateTimeAbs\":\"{{CreateTimeAbs}}\",\r\n        \"CreateTimeRlt\":\"{{CreateTimeRlt}}\",\r\n        \"TargetColor\":\"{{TargetColor}}\",\r\n        \"ColorCount\":{{ColorCount}},\r\n        \"AreaPosX\":{{AreaPosX}},\r\n        \"AreaPosY\":{{AreaPosY}},\r\n        \"AreaWidth\":{{AreaWidth}},\r\n        \"AreaHeight\":{{AreaHeight}},\r\n        \"EventLevel\":{{EventLevel}}\r\n}\r\n\t]\r\n}\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

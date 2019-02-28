@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "a1f6d90e-1aa9-496f-ba6f-7f4832cc3a9e",
+		"name": "VIID[Face_many_mes][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Face_post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "725e8626-322d-4b60-91eb-c1b98b4198ab",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"var datas = jsonData.ResponseStatusListObject.ResponseStatusObject",
+							"// 状态码检查点",
+							"",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State",
+							"// 长度检查点",
+							"//var JsPer = jsonData.PersonListObject.PersonObject",
+							"//var lang = jsonData.PersonListObject.PersonObject.length",
+							"//tests[\"当前返回数量为: \"+lang] = lang;",
+							"//console.log(jsonData.ResponseStatusListObject.ResponseStatusObject)",
+							"for (var key in datas){",
+							"    console.log(key)",
+							"    for (var keyy in datas[key]){",
+							"        if (keyy == \"Id\"){",
+							"            pm.test(\"当前ID为: \"+datas[key][keyy], function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.be.oneOf([data.FaceID1,data.FaceID2]);",
+							"            });",
+							"        }",
+							"        else if (keyy == \"RequestURL\"){",
+							"            pm.test(\"当前RequestURL为: \"+datas[key][keyy]+\"应当为:\"+data.Interface_st, function () {",
+							"                pm.expect(datas[key][keyy]).to.eql(data.Interface_st);",
+							"                ",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusCode\"){",
+							"            pm.test(\"当前StatusCode为: \"+datas[key][keyy]+\"应当为:\"+data.StatusCode, function () {",
+							"                //pm.response.to.have.status(200);",
+							"                pm.expect(datas[key][keyy]).to.eql(data.StatusCode);",
+							"            });",
+							"        }",
+							"        else if (keyy == \"StatusString\"){",
+							"            pm.test(\"当前StatusString为: \"+datas[key][keyy]+\"应当为:\"+data.StatusString, function () {",
+							"                //pm.response.to.have.status(200);",
+							"               pm.expect(datas[key][keyy]).to.eql(data.StatusString);",
+							"            });",
+							"        }",
+							"    }",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"FaceListObject\": {\r\n\"FaceObject\": [\r\n\t{\r\n\t\"DeviceID\": \"{{DeviceID}}\",\r\n\t\"SourceID\": \"{{SourceID}}\",\r\n\t\"FaceID\": \"{{FaceID1}}\",\r\n\t\"Name\": \"{{Name}}\",\r\n\t\"LocationMarkTime\": \"{{LocationMarkTime}}\",\r\n\t\"FaceAppearTime\": \"{{FaceAppearTime}}\",\r\n\t\"FaceDisAppearTime\": \"{{FaceDisAppearTime}}\",\r\n\t\"NationalityCode\": \"{{NationalityCode}}\",\r\n\t\"NativeCityCode\": \"{{NativeCityCode}}\",\r\n\t\"ResidenceAdminDivision\": \"{{ResidenceAdminDivision}}\",\r\n\t\"ChineseAccentCode\": \"{{ChineseAccentCode}}\",\r\n\t\"AccompanyNumber\": {{AccompanyNumber}},\r\n\t\"PhysicalFeature\": \"{{PhysicalFeature}}\",\r\n\t\"RespiratorColor\": \"{{RespiratorColor}}\",\r\n\t\"ImmigrantTypeCode\": \"{{ImmigrantTypeCode}}\",\r\n\t\"IsSuspectedTerrorist\": {{IsSuspectedTerrorist}},\r\n\t\"SuspectedTerroristNumber\": \"{{SuspectedTerroristNumber}}\",\r\n\t\"IsCriminalInvolved\": {{IsCriminalInvolved}},\r\n\t\"BodySpeciallMark\": \"{{BodySpeciallMark}}\",\r\n\t\"CrimeCharacterCode\": \"{{CrimeCharacterCode}}\",\r\n\t\"EscapedCriminalNumber\": \"{{EscapedCriminalNumber}}\",\r\n\t\"DetentionHouseCode\": \"{{DetentionHouseCode}}\",\r\n\t\"DetaineesIdentity\": \"{{DetaineesIdentity}}\",\r\n\t\"DetaineesSpecialIdentity\": \"{{DetaineesSpecialIdentity}}\",\r\n\t\"MemberTypeCode\": \"{{MemberTypeCode}}\",\r\n\t\"CorpseConditionCode\": \"{{CorpseConditionCode}}\",\r\n\t\"IsSuspiciousPerson\": {{IsSuspiciousPerson}},\r\n\t\"Similaritydegree\": {{Similaritydegree}},\r\n\t\"FreckleBirthmark\": \"{{FreckleBirthmark}}\",\r\n\t\"InfoKind\": {{InfoKind}},\r\n\t\"LeftTopX\": {{LeftTopX}},\r\n\t\"LeftTopY\": {{LeftTopY}},\r\n\t\"RightBtmX\": {{RightBtmX}},\r\n\t\"RightBtmY\": {{RightBtmY}},\r\n\t\"IsDriver\": {{IsDriver}},\r\n\t\"IsForeigner\": {{IsForeigner}},\r\n\t\"PassportType\": \"{{PassportType}}\",\r\n\t\"CrimeMethod\": \"{{CrimeMethod}}\",\r\n\t\"IsDetainees\": {{IsDetainees}},\r\n\t\"IsVictim\": {{IsVictim}},\r\n\t\"VictimType\": \"{{VictimType}}\",\r\n\t\"InjuredDegree\": \"{{InjuredDegree}}\",\r\n\t\"Attitude\": {{Attitude}},\r\n\t\"EyebrowStyle\": \"{{EyebrowStyle}}\",\r\n\t\"NoseStyle\": \"{{NoseStyle}}\",\r\n\t\"MustacheStyle\": \"{{MustacheStyle}}\",\r\n\t\"LipStyle\": \"{{LipStyle}}\",\r\n\t\"WrinklePouch\": \"{{WrinklePouch}}\",\r\n\t\"AcneStain\": \"{{AcneStain}}\",\r\n\t\"ScarDimple\": \"{{ScarDimple}}\",\r\n\t\"OtherFeature\": \"{{OtherFeature}}\"\r\n\r\n},\r\n\t\r\n{\r\n\r\n\t\"DeviceID\": \"{{DeviceID}}\",\r\n\t\"SourceID\": \"{{SourceID}}\",\r\n\t\"FaceID\": \"{{FaceID2}}\",\r\n\t\"Name\": \"{{Name}}\",\r\n\t\"LocationMarkTime\": \"{{LocationMarkTime}}\",\r\n\t\"FaceAppearTime\": \"{{FaceAppearTime}}\",\r\n\t\"FaceDisAppearTime\": \"{{FaceDisAppearTime}}\",\r\n\t\"NationalityCode\": \"{{NationalityCode}}\",\r\n\t\"NativeCityCode\": \"{{NativeCityCode}}\",\r\n\t\"ResidenceAdminDivision\": \"{{ResidenceAdminDivision}}\",\r\n\t\"ChineseAccentCode\": \"{{ChineseAccentCode}}\",\r\n\t\"AccompanyNumber\": {{AccompanyNumber}},\r\n\t\"PhysicalFeature\": \"{{PhysicalFeature}}\",\r\n\t\"RespiratorColor\": \"{{RespiratorColor}}\",\r\n\t\"ImmigrantTypeCode\": \"{{ImmigrantTypeCode}}\",\r\n\t\"IsSuspectedTerrorist\": {{IsSuspectedTerrorist}},\r\n\t\"SuspectedTerroristNumber\": \"{{SuspectedTerroristNumber}}\",\r\n\t\"IsCriminalInvolved\": {{IsCriminalInvolved}},\r\n\t\"BodySpeciallMark\": \"{{BodySpeciallMark}}\",\r\n\t\"CrimeCharacterCode\": \"{{CrimeCharacterCode}}\",\r\n\t\"EscapedCriminalNumber\": \"{{EscapedCriminalNumber}}\",\r\n\t\"DetentionHouseCode\": \"{{DetentionHouseCode}}\",\r\n\t\"DetaineesIdentity\": \"{{DetaineesIdentity}}\",\r\n\t\"DetaineesSpecialIdentity\": \"{{DetaineesSpecialIdentity}}\",\r\n\t\"MemberTypeCode\": \"{{MemberTypeCode}}\",\r\n\t\"CorpseConditionCode\": \"{{CorpseConditionCode}}\",\r\n\t\"IsSuspiciousPerson\": {{IsSuspiciousPerson}},\r\n\t\"Similaritydegree\": {{Similaritydegree}},\r\n\t\"FreckleBirthmark\": \"{{FreckleBirthmark}}\",\r\n\t\"InfoKind\": {{InfoKind}},\r\n\t\"LeftTopX\": {{LeftTopX}},\r\n\t\"LeftTopY\": {{LeftTopY}},\r\n\t\"RightBtmX\": {{RightBtmX}},\r\n\t\"RightBtmY\": {{RightBtmY}},\r\n\t\"IsDriver\": {{IsDriver}},\r\n\t\"IsForeigner\": {{IsForeigner}},\r\n\t\"PassportType\": \"{{PassportType}}\",\r\n\t\"CrimeMethod\": \"{{CrimeMethod}}\",\r\n\t\"IsDetainees\": {{IsDetainees}},\r\n\t\"IsVictim\": {{IsVictim}},\r\n\t\"VictimType\": \"{{VictimType}}\",\r\n\t\"InjuredDegree\": \"{{InjuredDegree}}\",\r\n\t\"Attitude\": {{Attitude}},\r\n\t\"EyebrowStyle\": \"{{EyebrowStyle}}\",\r\n\t\"NoseStyle\": \"{{NoseStyle}}\",\r\n\t\"MustacheStyle\": \"{{MustacheStyle}}\",\r\n\t\"LipStyle\": \"{{LipStyle}}\",\r\n\t\"WrinklePouch\": \"{{WrinklePouch}}\",\r\n\t\"AcneStain\": \"{{AcneStain}}\",\r\n\t\"ScarDimple\": \"{{ScarDimple}}\",\r\n\t\"OtherFeature\": \"{{OtherFeature}}\"\r\n\r\n\t\r\n\t}]\r\n\t}\r\n}\r\n\r\n"
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

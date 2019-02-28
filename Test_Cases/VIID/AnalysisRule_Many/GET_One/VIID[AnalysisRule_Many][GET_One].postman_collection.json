@@ -1,0 +1,67 @@
+{
+	"info": {
+		"_postman_id": "57c04ecb-447a-41c8-8f4f-788500bfb0e9",
+		"name": "VIID[AnalysisRule_Many][GET_One]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[AnalysisRules_Many][GET_One]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d71571db-47fa-4925-b344-9e13a68ae7c9",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json()//获取返回体",
+							"var JsPer = jsonData.AnalysisRulesListObject.AnalysisRulesObject  //定义变量",
+							"console.log(JsPer)//打印",
+							"",
+							"//状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+ \" | 状态码应为: \"+data.Re_state] = responseCode.code == data.Re_state",
+							"",
+							"for (var key in JsPer){",
+							"    for (var keyy in JsPer[key]){",
+							"        if (keyy == data.Search_Field){",
+							"            var data1 = JsPer[key][keyy]",
+							"        }",
+							"    pm.test(\"当前数值为: \"+data1+ \" | 返回验证值应为: \"+data.Value,function(){",
+							"                pm.expect(data1).to.eql(data.Value)",
+							"            })",
+							"    }",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "10.85.7.62:8083/VIID/AnalysisRules?(AnalysisRule.Width=20)",
+					"host": [
+						"10",
+						"85",
+						"7",
+						"62"
+					],
+					"port": "8083",
+					"path": [
+						"VIID",
+						"AnalysisRules"
+					],
+					"query": [
+						{
+							"key": "(AnalysisRule.Width",
+							"value": "20)"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

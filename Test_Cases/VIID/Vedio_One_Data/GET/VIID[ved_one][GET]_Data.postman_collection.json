@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "2163ff8d-f7b9-4531-b8f1-ce0fdd88d717",
+		"name": "VIID[ved_one][GET]_Data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "VIID[ved_one][GET]_Data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "448ba2ea-7dea-413b-ab15-3f2ea5884c25",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"//状态码请求",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"console.log(jsonData)",
+							"//DeviceID检查点",
+							"tests[\"DeviceID: \"+jsonData.VideoSliceObject.VideoSliceInfo.DeviceID+\"|DeviceID应为:\"+data.DeviceID] = jsonData.VideoSliceObject.VideoSliceInfo.DeviceID == data.DeviceID;",
+							"//VideoID检查点",
+							"tests[\"VideoID: \"+jsonData.VideoSliceObject.VideoSliceInfo.VideoID+\"|VideoID应为:\"+data.VideoID] = jsonData.VideoSliceObject.VideoSliceInfo.VideoID == data.VideoID;",
+							"//CollectorID检查点",
+							"tests[\"CollectorID:\"+jsonData.VideoSliceObject.VideoSliceInfo.CollectorID+\"|CollectorID应为:\"+data.CollectorID] = jsonData.VideoSliceObject.VideoSliceInfo.CollectorID == data.CollectorID;",
+							"//StoragePath检查点",
+							"tests[\"StoragePath:\"+jsonData.VideoSliceObject.VideoSliceInfo.StoragePath+\"|StoragePath应为:\"+data.StoragePath] = jsonData.VideoSliceObject.VideoSliceInfo.StoragePath == data.StoragePath;",
+							"//FileHash检查点（非空即可）",
+							"tests[\"FileHash: \"+jsonData.VideoSliceObject.VideoSliceInfo.FileHash] = jsonData.VideoSliceObject.VideoSliceInfo.FileHash",
+							"//FileFormat检查点",
+							"tests[\"FileFormat:\"+jsonData.VideoSliceObject.VideoSliceInfo.FileFormat+\"|FileFormat应为:\"+data.FileFormat] = jsonData.VideoSliceObject.VideoSliceInfo.FileFormat == data.FileFormat;",
+							"//Title检查点",
+							"tests[\"Title:\"+jsonData.VideoSliceObject.VideoSliceInfo.Title] = jsonData.VideoSliceObject.VideoSliceInfo.Title",
+							"//BeginTime检查点",
+							"tests[\"BeginTime:\"+jsonData.VideoSliceObject.VideoSliceInfo.BeginTime] = jsonData.VideoSliceObject.VideoSliceInfo.BeginTime ",
+							"//EndTime检查点",
+							"tests[\"EndTime:\"+jsonData.VideoSliceObject.VideoSliceInfo.EndTime] = jsonData.VideoSliceObject.VideoSliceInfo.EndTime",
+							"tests[\"EntryTime:\"+jsonData.VideoSliceObject.VideoSliceInfo.EntryTime] = jsonData.VideoSliceObject.VideoSliceInfo.EntryTime ",
+							"//InfoKind检查点",
+							"var InfoKind_sp = data.InfoKind.split('|')",
+							"tests[\"InfoKind: \"+jsonData.VideoSliceObject.VideoSliceInfo.InfoKind+\"|InfoKind应为:\"+data.InfoKind] = InfoKind_sp.indexOf(jsonData.VideoSliceObject.VideoSliceInfo.InfoKind+\"\") != -1",
+							"console.log(InfoKind_sp)",
+							"console.log(data.InfoKind)",
+							"//IsAbstractVideo检查点",
+							"//tests[\"IsAbstractVideo:\"+jsonData.VideoSliceObject.VideoSliceInfo.IsAbstractVideo+\"|IsAbstractVideo应为:\"+data.IsAbstractVideo] = jsonData.VideoSliceObject.VideoSliceInfo.IsAbstractVideo == data.IsAbstractVideo;",
+							"//EventSort检查点",
+							"var EventSort_sp = data.EventSort.split('|')",
+							"tests[\"EventSort: \"+jsonData.VideoSliceObject.VideoSliceInfo.EventSort+\"|EventSort应为:\"+data.EventSort] = EventSort_sp.indexOf(jsonData.VideoSliceObject.VideoSliceInfo.EventSort)",
+							"//AudioFlag检查点",
+							"var AudioFlag_sp = data.AudioFlag.split('|')",
+							"tests[\"AudioFlag: \"+jsonData.VideoSliceObject.VideoSliceInfo.AudioFlag+\"|AudioFlag应为:\"+data.AudioFlag] = InfoKind_sp.indexOf(jsonData.VideoSliceObject.VideoSliceInfo.AudioFlag)",
+							"//VideoLen检查点",
+							"tests[\"VideoLen:\"+jsonData.VideoSliceObject.VideoSliceInfo.VideoLen] = jsonData.VideoSliceObject.VideoSliceInfo.VideoLen >0;",
+							"//FileSize检查点",
+							"tests[\"FileSize:\"+jsonData.VideoSliceObject.VideoSliceInfo.FileSize] = jsonData.VideoSliceObject.VideoSliceInfo.FileSize >0;",
+							"// TimeErr检查点",
+							"tests[\"TimeErr: \"+jsonData.VideoSliceObject.VideoSliceInfo.TimeErr] = jsonData.VideoSliceObject.VideoSliceInfo.TimeErr",
+							"//Width检查点",
+							"tests[\"Width为: \"+jsonData.VideoSliceObject.VideoSliceInfo.Width] = jsonData.VideoSliceObject.VideoSliceInfo.Width > 0;",
+							"// Height检查点",
+							"tests[\"Height: \"+jsonData.VideoSliceObject.VideoSliceInfo.Height] = jsonData.VideoSliceObject.VideoSliceInfo.Height > 0;",
+							"//VideoProcFlag检查点（可选）",
+							"tests[\"VideoProcFlag:\"+jsonData.VideoSliceObject.VideoSliceInfo.VideoProcFlag+\"|VideoProcFlag应为:\"+data.VideoProcFlag] = jsonData.VideoSliceObject.VideoSliceInfo.VideoProcFlag == data.VideoProcFlag;",
+							"tests[\"KDExpiredDate:\"+jsonData.VideoSliceObject.VideoSliceInfo.KDExpiredDate] = jsonData.VideoSliceObject.VideoSliceInfo.KDExpiredDate ",
+							"tests[\"DeviceType: \"+jsonData.VideoSliceObject.VideoSliceInfo.DeviceType+\"|DeviceType应为:\"+data.DeviceType] = jsonData.VideoSliceObject.VideoSliceInfo.DeviceType == data.DeviceType;",
+							"tests[\"DeviceSNNo:\"+jsonData.VideoSliceObject.VideoSliceInfo.DeviceSNNo] = jsonData.VideoSliceObject.VideoSliceInfo.DeviceSNNo",
+							"tests[\"ImeiSn:\"+jsonData.VideoSliceObject.VideoSliceInfo.ImeiSn] = jsonData.VideoSliceObject.VideoSliceInfo.ImeiSn",
+							"tests[\"ShotPlaceLongitude:\"+jsonData.VideoSliceObject.VideoSliceInfo.ShotPlaceLongitude] = jsonData.VideoSliceObject.VideoSliceInfo.ShotPlaceLongitude",
+							"tests[\"ShotPlaceLatitude:\"+jsonData.VideoSliceObject.VideoSliceInfo.ShotPlaceLatitude] = jsonData.VideoSliceObject.VideoSliceInfo.ShotPlaceLatitude ",
+							"if (jsonData.VideoSliceObject.VideoSliceInfo.InfoKind == 2) {",
+							"    // ShotPlaceCode检查点",
+							"    tests[\"ShotPlaceCode: \"+jsonData.VideoSliceObject.VideoSliceInfo.ShotPlaceCode] = jsonData.VideoSliceObject.VideoSliceInfo.ShotPlaceFullAdress",
+							"    tests[\"CollectorName: \"+jsonData.VideoSliceObject.VideoSliceInfo.CollectorName] = jsonData.VideoSliceObject.VideoSliceInfo.CollectorName",
+							"    tests[\"CollectorOrg: \"+jsonData.VideoSliceObject.VideoSliceInfo.CollectorOrg] = jsonData.VideoSliceObject.VideoSliceInfo.CollectorOrg",
+							"    tests[\"EntryClerk: \"+jsonData.VideoSliceObject.VideoSliceInfo.EntryClerk] = jsonData.VideoSliceObject.VideoSliceInfo.EntryClerk",
+							"    tests[\"EntryClerkOrg: \"+jsonData.VideoSliceObject.VideoSliceInfo.EntryClerkOrg] = jsonData.VideoSliceObject.VideoSliceInfo.EntryClerkOrg",
+							"}",
+							"",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{VideoID}}{{Data}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{VideoID}}{{Data}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

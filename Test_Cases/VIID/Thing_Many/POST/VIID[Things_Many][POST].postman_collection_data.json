@@ -1,0 +1,26 @@
+[
+{
+	"需要输入参数":">>",
+	"Inter_Url":"10.85.7.62:8081",
+	"Inter_st":"/VIID/Things",
+	"ThingID1":"123456789",
+	"ThingID2":"234567890",
+    "InfoKind":0,
+	"SourceID1":"567",
+	"SourceID2":"789",
+	"Name1":"10",
+	"Name2":"11",
+	"Shape":"01",
+	"Color":"05",
+	
+	"需要验证参数":">>",
+	"StatusCode":0,
+	"Re_State":200,
+	"StatusString":""
+}
+]
+
+
+
+
+	

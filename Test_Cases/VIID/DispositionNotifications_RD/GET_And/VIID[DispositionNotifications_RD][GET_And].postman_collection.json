@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "68219f82-7779-4f34-a6e9-72f246dcc52c",
+		"name": "VIID[DispositionNotifications_RD][GET_And]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "301c7f96-5423-41f7-ab26-cc0e954dffca",
+			"name": "VIID[DispositionNotifications_RD][GET_And]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5dd73884-7542-4c73-a558-675c89810e89",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// 长度检查点",
+							"var JsPer = jsonData.DispositionNotificationListObject.DispositionNotificationObject",
+							"var lang = jsonData.DispositionNotificationListObject.DispositionNotificationObject.length",
+							"tests[\"当前返回数量为: \"+lang] = lang;",
+							"",
+							"",
+							"//循环判断key",
+							"for (var key in JsPer){",
+							"",
+							"    for(var keyy in JsPer[key]){",
+							"        if (keyy == data.Search_Field){",
+							"            var data1 = JsPer[key][keyy]",
+							"        }",
+							"        else if (keyy == data.Search_Field2){",
+							"            var data2 = JsPer[key][keyy]",
+							"        }",
+							"        ",
+							"    }",
+							"    //tests[\"当前数值1为: \"+data1+\"|返回验证值应为:\"+data.Value+\"当前数值2为: \"+data2+\"|返回验证值应为:\"+data.Value2] = data1 == data.Value && data2 == data.Value2;",
+							"   pm.test(\"当前数值1为: \"+data1+\"|返回验证值应为:\"+data.Value+\"当前数值2为: \"+data2+\"|返回验证值应为:\"+data.Value2, function () {",
+							"        pm.expect(data1).to.eql(data.Value);",
+							"        pm.expect(data2).to.eql(data.Value2);",
+							"        }); ",
+							"}",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

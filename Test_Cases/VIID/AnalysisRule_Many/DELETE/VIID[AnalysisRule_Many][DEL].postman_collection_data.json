@@ -1,0 +1,14 @@
+[
+{
+	"需要输入参数":">>",
+	"AnalysisRule_Url":"10.85.7.62:8081",
+	"AnalysisRule_st1":"/VIID/AnalysisRules",
+	"AnalysisRule_st2":"?IDList=123456789,234567890",
+	
+	"需要验证参数":">>",
+	"StatusCode":0,
+	"Re_State":200,
+	"StatusString":""
+}
+]
+

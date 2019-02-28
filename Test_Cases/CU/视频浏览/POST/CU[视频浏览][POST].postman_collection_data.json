@@ -1,0 +1,43 @@
+[{
+	"需要输入参数":">>",
+	"Interfac_url":"172.16.120.33",
+	"Interface_st":"/cui/cui.fcgi",
+	"username":"admin@kadacom",
+	"password":"kedacom123",
+	"cusdkVersion":"2.0",
+	"clientType":"cuver",
+	"isSupportNA":false,
+	"webCUClientAddr":"",
+
+	"playId":107762401,
+	"devId":"15ff4473414e439f834e7ff740b405da@kadacom",
+	"devChnId":0,
+	"transMode":"cusdk:TransModeUDP",
+	"mediaType":"cusdk:MediaTypeVideo",
+	"transChannelType":"cusdk:TransChannelTypeRTP",
+	"ip":"10.255.252.182",
+	"port1":52156,
+	"port2":52157,
+	"port3":52158,
+	"port4":52159,
+	"needTranscode":"false",
+	"dstVideoFormat":"cusdk:VF-Invalid",
+	"dstSolution":"cusdk:VS-Invalid",
+	"dstFrameRate":0,
+	"dstBitRate":0,
+	"dstAudioFormat":"cusdk:AF-Invalid",
+	"directTrans":"false",
+	"directTransFromDeviceDomain":"false",
+
+	"playId1":31175569,
+
+	"encoderChannelId":0,
+
+	"playId2":127670273,
+
+
+	"需要检验参数":">>",
+	"Re_State":200,
+	"errorCode":0
+}
+]

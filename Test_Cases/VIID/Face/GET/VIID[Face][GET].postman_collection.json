@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "2783572e-0379-4990-afcd-4a5f58869334",
+		"name": "VIID[Face][GET]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "29852b7b-d18d-4b38-9227-9817a2e18342",
+			"name": "VIID[Face][GET]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f07d11a-c19f-483c-b655-2c8fdc31eba7",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+data.Re_State]=responseCode.code==data.Re_State",
+							"tests[\"FaceID为: \"+jsonData.FaceObject.FaceID+\" FaceID应为:\"+data.Value]=jsonData.FaceObject.FaceID==data.Value"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

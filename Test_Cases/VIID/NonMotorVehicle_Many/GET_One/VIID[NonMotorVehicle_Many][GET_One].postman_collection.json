@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "6163b737-a14a-47df-ab89-d1f2d3ea8be5",
+		"name": "VIID[NonMotorVehicle_Many][GET_One]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[NonMotorVehicles_Many][GET_One]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6235e225-844f-4c66-941d-6400209f943c",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json()//获取返回体",
+							"var JsPer = jsonData.NonMotorVehiclesListObject.NonMotorVehiclesObject  //定义变量",
+							"console.log(JsPer)//打印",
+							"",
+							"//状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+ \" | 状态码应为: \"+data.Re_state] = responseCode.code == data.Re_state",
+							"",
+							"for (var key in JsPer){",
+							"    for (var keyy in JsPer[key]){",
+							"        if (keyy == data.Search_Field){",
+							"            var data1 = JsPer[key][keyy]",
+							"        }",
+							"    pm.test(\"当前数值为: \"+data1+ \" | 返回验证值应为: \"+data.Value,function(){",
+							"                pm.expect(data1).to.eql(data.Value)",
+							"            })",
+							"    }",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{NonMotorVehicle_Url}}{{NonMotorVehicle_st}}{{Search_Express}}",
+					"host": [
+						"{{NonMotorVehicle_Url}}{{NonMotorVehicle_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

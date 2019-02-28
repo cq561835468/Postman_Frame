@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "ed50624e-b6ca-449e-834a-0f9b00bd2d1d",
+		"name": "城管移动执法上传接口",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "城管移动执法上传接口",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a4a5fd3-686b-4d27-877a-7fc50553dd8a",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData=pm.response.json()",
+							"tests[\"当前状态码为：\"+pm.response.code+\" 状态码应为：\"+ data.Re_State]=responseCode.code==data.Re_State"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Url}}{{Url_st}}",
+					"host": [
+						"{{Url}}{{Url_st}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

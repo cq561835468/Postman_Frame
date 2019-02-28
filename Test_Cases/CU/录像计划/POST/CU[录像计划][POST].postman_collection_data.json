@@ -1,0 +1,27 @@
+[{
+	"需要输入参数":">>",
+	"Interfac_url":"172.16.120.33",
+	"Interface_st":"/cui/cui.fcgi",
+	"username":"admin@kadacom",
+	"password":"kedacom123",
+	"cusdkVersion":"2.0",
+	"clientType":"cuver",
+	"isSupportNA":false,
+	"webCUClientAddr":"",
+
+	"devChnId":0,
+	
+	"prerecordDuration":0,
+	"recordMode":"cusdk:RS-RECMODE-ALL",
+	"recordDurationAfterAlarm":60,
+	"recStorageDuration":0,
+	"recDuraionEnabled":"false",
+	"supportSetRecDuration":"true",
+
+
+
+	"需要检验参数":">>",
+	"Re_State":200,
+	"errorCode":0
+}
+]

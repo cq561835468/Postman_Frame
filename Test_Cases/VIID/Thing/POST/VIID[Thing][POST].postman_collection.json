@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "b7bdfc9a-ed57-4b53-ab46-892bbf5814a5",
+		"name": "VIID[Thing][POST]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Thing][POST]参数化",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8c476ce7-f70a-4463-b52c-6b145fbcad4b",
+						"type": "text/javascript",
+						"exec": [
+							"var x = pm.response.json()",
+							"",
+							"tests[\"当前状态码为: \"+pm.response.code+\" 状态码应为: \"+data.Re_State]=responseCode.code==data.Re_State",
+							"",
+							"tests[\"RequestURL: \"+x.ResponseStatusObject.RequestURL+\" RequestURL应为: \"+data.Inter_st1] = x.ResponseStatusObject.RequestURL==data.Inter_st1",
+							"",
+							"tests[\"StatusCode: \"+x.ResponseStatusObject.StatusCode+\" StatusCode应为: \"+data.StatusCode] = x.ResponseStatusObject.StatusCode==data.StatusCode",
+							"",
+							"tests[\"StatusString: \"+x.ResponseStatusObject.StatusString+\" StatusString应为: \"+data.StatusString] = x.ResponseStatusObject.StatusString==data.StatusString"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\"ThingObject\":\n\t\t{\n\t\t\t\"ThingID\":\"{{ThingID}}\",\n\t\t\t\"InfoKind\":{{InfoKind}},\n\t\t\t\"SourceID\":\"{{SourceID}}\",\n\t\t    \"Name\":\"{{Name}}\",\n\t\t\t\"Shape\":\"{{Shape}}\",\n\t\t\t\"Color\":\"{{Color}}\"\n\t\t}\n\t   \n}"
+				},
+				"url": {
+					"raw": "{{Inter_Url}}{{Inter_st1}}{{ThingID}}",
+					"host": [
+						"{{Inter_Url}}{{Inter_st1}}{{ThingID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

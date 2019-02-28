@@ -1,0 +1,519 @@
+{
+	"info": {
+		"_postman_id": "4e5a3f6f-d7cd-4ad2-9173-4e6ecb85a92b",
+		"name": "Pj-Teacher_Class-GET-list",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Get_adcl_id---",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"adcl_id\", js.list[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"adcl_code\": \"{{adcl_code}}\",\r\n  \"adcl_name\": \"{{adcl_name}}\",\r\n  \"order_by\": \"adcl_name\",\r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_administration_class}}?t=0&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_administration_class}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]school_year_id_GET",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"school_year_id\", js.list[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"area_code\": \"{{area_code_sy}}\", \r\n  \"scye_begin_year\": {{scye_begin_year_sy}},\r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_school_year}}?t=0&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_school_year}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]student_year_id_GET---",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13eda2de-287c-4082-a89a-821760d4d2a9",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"stye_id\", js.list[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"scye_id\": {{school_year_id}}, \r\n  \"area_code\": \"{{area_code_sy}}\", \r\n  \"stye_begin_year\": {{stye_begin_year}}, \r\n  \"stye_code\": \"{{stye_code}}\",\r\n  \"order_by\": \"stye_name\", \r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_student_year}}?t=0&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_student_year}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Discipline_id_GET",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13eda2de-287c-4082-a89a-821760d4d2a9",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"disc_id\", js.list[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"area_code\": \"{{area_code_sy}}\", \r\n  \"order_by\": \"{{order_by_dis}}\", \r\n  \"sort\": \"{{sort_dis}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_G}}&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_G}}&_method=GET"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Subject_id_GET---",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13eda2de-287c-4082-a89a-821760d4d2a9",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"subj_id\", js.list[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"area_code\": \"{{area_code_sy}}\", \r\n  \"disc_id\": {{disc_id}}, \r\n  \"subj_name\": \"{{subj_name}}\", \r\n  \"subj_code\": \"{{subj_code}}\", \r\n  \"order_by\": \"{{order_by_Sub}}\", \r\n  \"sort\": \"{{sort}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_A}}&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_A}}&_method=GET"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Get_Academic_Year_ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"Academic_Year_ID\", js.list[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"area_code\": \"{{area_code_AY}}\",\r\n  \"order_by\": \"{{order_by_AY}}\", \r\n  \"sort\": \"{{sort}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_A_G}}&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_A_G}}&_method=GET"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Get_Academic_Term_ID---",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"acte_id\", js.list[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"acte_name\": \"{{acte_name_AT}}\",\r\n  \"order_by\": \"{{order_by_AT}}\", \r\n  \"sort\": \"{{sort_AT}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_AT}}&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_AT}}&_method=GET"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Get_Teachelist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"teac_id\", js.list[0].id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\r\n  \"page\": {\r\n    \"page_index\": 1, \r\n    \"page_size\": 5\r\n  }, \r\n  \"area_code\": \"a6741cecdd1b4a879a3512hekedakeda\", \r\n  \"order_by\": \"user_name\", \r\n  \"sort\": \"asc\"\r\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_Teacher}}&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_Teacher}}&_method=GET"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Post_TC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"TC_ID\", js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n  \"tecl_code\": \"{{tecl_code}}\", \n  \"tecl_name\": \"{{tecl_name}}\", \n  \"tecl_type\": {{tecl_type}}, \n  \"adcl_id\": {{adcl_id}}, \n  \"stye_id\": {{stye_id}}, \n  \"subj_id\": {{subj_id}}, \n  \"acte_id\": {{acte_id}}, \n  \"teac_id_list\": [\n    {{teac_id}}\n  ], \n  \"stud_id_list\": [\n  ]\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_teaching_class}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI_teaching_class}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Get_TC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"for (var x in js.list){",
+							"    pm.test(\"当area_code值为: \"+js.list[x].area_code +\"返回area_code值应为: \"+data.area_code_sy, function () {",
+							"                pm.expect(js.list[x].area_code).to.eql(data.area_code_sy);",
+							"            });",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n  \"page\": {\n    \"page_index\": 1, \n    \"page_size\": 5\n  }, \n  \"area_code\": \"{{area_code_sy}}\", \n  \"order_by\": \"tecl_name\", \n  \"sort\": \"asc\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_teaching_class}}?t=0&_method=GET",
+					"host": [
+						"{{IP}}{{Port}}{{URI_teaching_class}}"
+					],
+					"query": [
+						{
+							"key": "t",
+							"value": "0"
+						},
+						{
+							"key": "_method",
+							"value": "GET"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_TC",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadb1497-2bd5-4355-a9f3-c945a680f411",
+						"exec": [
+							"// var js = pm.response.json()",
+							"// var id2 = pm.environment.get(\"id2\");",
+							"// tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// tests[\"当前success为: \"+js.success+\"|success值应为\"+data.success] = js.success= data.success;",
+							"// tests[\"当前id为: \"+js.id+\"|id值应为\"+id2] = js.id= id2;",
+							"// tests[\"当前area_code为: \"+js.area_code+\"|success值应为\"+data.area_code] = js.area_code= data.area_code;",
+							"// tests[\"当前subj_code为: \"+js.subj_code+\"|success值应为\"+data.subj_code] = js.area_code= data.subj_code;",
+							"// tests[\"当前subj_name为: \"+js.subj_name+\"|success值应为\"+data.subj_name] = js.area_code= data.subj_name;"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "552a2140-592f-47a7-a664-332b2fec154e",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n  \"tecl_code\": \"{{tecl_code}}\", \n  \"tecl_name\": \"{{tecl_name}}\", \n  \"tecl_type\": {{tecl_type}}, \n  \"adcl_id\": {{adcl_id}}, \n  \"stye_id\": {{stye_id}}, \n  \"subj_id\": {{subj_id}}, \n  \"acte_id\": {{acte_id}}, \n  \"teac_id_list\": [\n    {{teac_id}}\n  ], \n  \"stud_id_list\": [\n  ]\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI_teaching_class}}/{{TC_ID}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI_teaching_class}}"
+					],
+					"path": [
+						"{{TC_ID}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8ea2cc9e-eaad-406e-b6f8-d48c5f7f9121",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "1da92719-9008-4fa8-a1cf-512d6d517af0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

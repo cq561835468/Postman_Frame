@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "d183c2eb-17b2-4ecd-9551-08eb88028809",
+		"name": "Pj-Lesson_time_DELETE_Id_List",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "[Forward]Create_Lesson_time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc91c978-9cc9-4e5d-a218-289f67f377bb",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"leti_id\",js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\t\"area_code\":\"{{area_code}}\",\n\t\"leti_number\":{{leti_number}},\n\t\"leti_type\":\"{{leti_type}}\",\n\t\"leti_begin_time\":\"{{leti_begin_time}}\",\n\t\"leti_end_time\":\"{{leti_end_time}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Create_Lesson_time Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc91c978-9cc9-4e5d-a218-289f67f377bb",
+						"exec": [
+							"var js = pm.response.json()",
+							"pm.environment.set(\"leti_id2\",js.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\t\"area_code\":\"{{area_code}}\",\n\t\"leti_number\":{{leti_number2}},\n\t\"leti_type\":\"{{leti_type}}\",\n\t\"leti_begin_time\":\"{{leti_begin_time2}}\",\n\t\"leti_end_time\":\"{{leti_end_time2}}\"\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[Forward]Delete_Id_List_Lesson_time",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6cc7a15e-c83b-46d9-b8be-dc267adecf4c",
+						"exec": [
+							"var js = pm.response.json()",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"tests[\"当前成功值为: \"+js.success+\"|成功值应为:\"+data.success] = js.success+\"\" == data.success;",
+							"pm.globals.get(\"variable_key\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "params={\n\t\"id_list\":[{{leti_id}},{{leti_id2}}]\n}"
+				},
+				"url": {
+					"raw": "{{IP}}{{Port}}{{URI}}?_method=DELETE",
+					"host": [
+						"{{IP}}{{Port}}{{URI}}"
+					],
+					"query": [
+						{
+							"key": "_method",
+							"value": "DELETE"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "ad90f8e5-2a9e-4c14-8a86-881f86d50d4a",
+		"name": "VIID[MotorVehicles_Many][GET][ONE]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "83716cc1-26b4-4c57-a5b0-2462d48c14cf",
+			"name": "VIID[MotorVehicles_Many][GET][ONE]",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "beaae284-ae57-4250-91b5-2b43341d5cb7",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// 长度检查点",
+							"var JsPer = jsonData.MotorVehicleListObject.MotorVehicleObject;",
+							"var lang = jsonData.MotorVehicleListObject.MotorVehicleObject.length;",
+							"tests[\"当前返回数量为: \"+lang] = lang;",
+							"",
+							"//循环判断key",
+							"for (var key in JsPer){",
+							"    for(var keyy in JsPer[key]){",
+							"        if (keyy == data.Search_Field){",
+							"            var data1 = JsPer[key][keyy];",
+							"        }",
+							"        ",
+							"    }",
+							"      pm.test(\"当前数值1为: \"+data1+\"|返回验证值应为:\"+data.Value, function () {",
+							"  pm.expect(data1).to.eql(data.Value);",
+							"",
+							"});",
+							"",
+							"",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{Search_Express}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{Search_Express}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

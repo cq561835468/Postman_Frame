@@ -1,0 +1,53 @@
+{
+	"info": {
+		"_postman_id": "d9d9a259-da17-41ed-a493-d447b9f60111",
+		"name": "MotorVehicle_DEL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "0081c451-688a-47e2-88af-5b4ced7b3393",
+			"name": "单个机动车删除",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6772149a-b251-465f-aa2a-87b8ab526ba4",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = pm.response.json(); //获取返回体",
+							"// 状态码检查点",
+							"tests[\"当前状态码为: \"+pm.response.code+\"|状态码应为:\"+data.Re_State] = responseCode.code == data.Re_State;",
+							"// StatusCode检查点",
+							"var a =data.Interface_st+data.MotorVehicleID;",
+							"tests[\"RequestURL: \"+jsonData.ResponseStatusObject.RequestURL+\"|RequestURL应为:\"+a] = jsonData.ResponseStatusObject.RequestURL == a;",
+							"tests[\"StatusCode: \"+jsonData.ResponseStatusObject.StatusCode+\"|StatusCode应为:\"+data.StatusCode] = jsonData.ResponseStatusObject.StatusCode == data.StatusCode; ",
+							"tests[\"StatusString: \"+jsonData.ResponseStatusObject.StatusString+\"|StatusString应为:\"+data.StatusString] = jsonData.ResponseStatusObject.StatusString == data.StatusString; ",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Interface_Url}}{{Interface_st}}{{MotorVehicleID}}",
+					"host": [
+						"{{Interface_Url}}{{Interface_st}}{{MotorVehicleID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

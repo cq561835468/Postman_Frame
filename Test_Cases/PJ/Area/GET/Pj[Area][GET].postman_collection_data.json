@@ -1,0 +1,12 @@
+[
+	{
+		"Port":":10007",
+		"URI":"/area?t=0",
+		"DURI":"/area",
+		"area_name":"科达中心小学keda",
+		"order_by": "area_name", 
+		"area_status": 1,
+		"sort": "asc",
+		"Re_State":200
+	}
+]

@@ -1,0 +1,17 @@
+[{
+	"需要输入参数：":">>",
+	"Url1":"http://172.16.249.130:9900",
+	"Url_st1":"/ptt/pttLogin/pttForcedLogin",
+	"userCode": "admin",
+    "userPassword": "admin",
+	"Url":"172.16.249.130:",
+	"Port":9900,
+	"Url_st":"/ptt/service/listService?uid=",
+	
+	"需要检验参数：":">>",
+	"Re_State":200,
+	"resultCode":200,
+	"resultMsg":"成功",
+	"ip":"172.16.249.130"
+}
+]

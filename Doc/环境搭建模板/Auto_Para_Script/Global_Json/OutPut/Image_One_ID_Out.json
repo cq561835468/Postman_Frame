@@ -1,0 +1,34 @@
+{
+	
+    "Image_One_Data_Post_Out": [
+    {
+      "StatusCode":"0",
+    "Re_State":"200",
+    "StatusString":""
+    }],
+    "Image_One_Info_Delete_Out": [
+    {
+      "StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+    }],
+    "Image_One_Info_Get_Out": [
+    {
+     
+	"ImageID":"31000000001320000004022018050608201519174"
+    }],
+     "Image_One_Info_Put_Out": [
+    {
+     "StatusCode":"0",
+	"Re_State":"200",
+	"StatusString":""
+    }]
+
+
+
+
+
+
+
+
+}
